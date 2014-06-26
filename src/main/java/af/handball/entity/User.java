@@ -1,15 +1,19 @@
 package af.handball.entity;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table (name="app_user")
 public class User {
 
 	@Id
 	@GeneratedValue
-	private int userId;
+	private BigDecimal user_id;
 	
 	private String email;
 	
@@ -21,22 +25,13 @@ public class User {
 		this.email = email;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	private String password;
 	
 
-	public int getId() {
-		return userId;
+	public BigDecimal getId() {
+		return user_id;
 	}
 
-	public void setId(int userId) {
-		this.userId = userId;
+	public void setId(BigDecimal userId) {
+		this.user_id = userId;
 	}
 }

@@ -20,7 +20,7 @@
 
 
 
-			<form action="try.jsp" class="navbar-form navbar-right">
+			<form action="dbtest.html" class="navbar-form navbar-right">
 				<button type="submit" class="btn btn-success">Sign in</button>
 				<div class="form-group">
 					<input type="text" placeholder="Email" class="form-control">

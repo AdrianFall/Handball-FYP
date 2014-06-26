@@ -1,53 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jee="http://www.springframework.org/schema/jee"
 	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
-	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
+	xsi:schemaLocation="http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
-	<context:component-scan base-package="af.handball">
-		<context:exclude-filter type="annotation"
-			expression="org.springframework.stereotype.Controller" />
-	</context:component-scan>
 
-	<!-- CREATES DATA SOURCE -->
-	<jdbc:embedded-database type="HSQL" id="dataSource" />
+
+	<jee:jndi-lookup jndi-name="jdbc/postgresql" id="dataSource"
+		expected-type="javax.sql.DataSource"></jee:jndi-lookup>
 
 	<bean
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
 		id="emf">
-		<!-- Entities location -->
-		<property name="packagesToScan" value="af.handball.entity"></property>
+		<property name="packagesToScan" value="af.handball.entity" />
 		<property name="dataSource" ref="dataSource" />
-		<property name="persistenceUnitName" value="handball-game"/>
-		<property name="jpaProperties">
-			<props>
-				<!-- DEBUGS THE SQL CONSOLE -->
-				<prop key="hibernate.show_sql">true</prop>
-				<!-- CREATES DATABASE THROUGH THE ENTITIES OBTAINED BY PROPERTY packagesToScan -->
-				<prop key="hibernate.hbm2ddl.auto">create</prop>
-				
-				<!-- <prop key="hibernate.connection.driver_class">org.hsqldb.jdbcDriver</prop>
-				 <prop key="hibernate.connection.url">hsql://localhost/</prop>
-				 <prop key="hibernate.connection.username">sa</prop>  -->
-			</props>
-		</property>
-		<property name="persistenceProvider">
-			<bean class="org.hibernate.jpa.HibernatePersistenceProvider"></bean>
+		<property name="persistenceUnitName" value="handball-game" />
+		<property name="jpaPropertyMap">
+			<map>
+				<entry key="eclipselink.weaving" value="false" />
+			</map>
 		</property>
 	</bean>
 
-	<tx:annotation-driven transaction-manager="transactionManager" />
+	<!-- NEW APPROACH -->
+	<!-- <jee:jndi-lookup jndi-name="jdbc/postgresql" id ="dataSource" expected-type="javax.sql.DataSource"></jee:jndi-lookup> 
+		<jpa:repositories base-package="af.handball.repository" /> <bean class="org.springframework.orm.jpa.JpaTransactionManager" 
+		id="transactionManager"> <property name="dataSource" ref="dataSource" /> 
+		</bean> <bean class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" 
+		id="emf"> Entities location <property name="packagesToScan" value="af.handball.entity"></property> 
+		<property name="dataSource" ref="dataSource" /> <property name="jpaProperties"> 
+		<props> <prop key="hibernate.show_sql">false</prop> <prop key="hibernate.hbm2ddl.auto">update</prop> 
+		<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop> 
+		</props> </property> <property name="jtaTransactionManager" ref="transactionManager" 
+		/> <property name="hibernateProperties"> <props> <prop key="hibernate.transaction.jta.platform">org.hibernate.service.jta.platform.internal.WeblogicJtaPlatform 
+		</prop> <prop key="hibernate.hbm2ddl.auto">update</prop> <prop key="hibernate.dialect">org.hibernate.dialect.Oracle12cDialect</prop> 
+		<prop key="hibernate.driverClassName">javax.sql.DataSource</prop> <prop key="hibernate.show_sql">true</prop> 
+		<prop key="hibernate.format_sql">true</prop> <prop key="hibernate.use_sql_comments">true</prop> 
+		</props> </property> <property name="persistenceProvider"> <bean class="org.hibernate.jpa.HibernatePersistenceProvider" 
+		/> </property> </bean> -->
 
+	<!-- END OF NEW APPROACH -->
+	<!-- <tx:annotation-driven transaction-manager="transactionManager" />
 	<bean class="org.springframework.orm.jpa.JpaTransactionManager"
 		id="transactionManager">
 		<property name="dataSource" ref="dataSource" />
-	</bean>
+	</bean> -->
+	<jpa:repositories base-package="af.handball.repository" />
+	
+	
 
-	<!-- REPOSITORIES -->
-	<!-- <jpa:repositories base-package="af.handball.repository"/> -->
+
+
+
+	<!-- <beans profile="prod"> <import resource="database-prod.xml"/> </beans> -->
+
+	<context:component-scan base-package="cz.jiripinkas.jba">
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+
 </beans>
