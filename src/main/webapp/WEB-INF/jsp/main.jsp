@@ -27,6 +27,8 @@
 		src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.js"></script>
 
+	<tiles:insertAttribute name="modalRegistration"></tiles:insertAttribute>
+
 	<tiles:insertAttribute name="header" />
 
 
@@ -75,14 +77,18 @@
 	</div>
 	<!-- /container -->
 
+	<!-- <form class="navbar-form navbar-left">
+		<button type="button" data-toggle="modal" data-target="#myModal"
+			class="btn btn-primary">Register</button>
+	</form> -->
 
 
 	<br>
 	<br>
 
 	<tiles:insertAttribute name="footer" />
-	
-	<tiles:insertAttribute name="modalRegistration"></tiles:insertAttribute>
+
+
 
 </body>
 </html>

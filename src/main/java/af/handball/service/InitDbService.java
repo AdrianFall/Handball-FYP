@@ -1,4 +1,4 @@
-package af.handball.service;
+/*package af.handball.service;
 
 import java.math.BigDecimal;
 
@@ -6,6 +6,9 @@ import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+
+
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,5 +35,7 @@ public class InitDbService {
 		userRepos.save(user);
 		
 		
+		
 	}
 }
+*/

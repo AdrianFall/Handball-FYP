@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jee="http://www.springframework.org/schema/jee"
 	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xsi:schemaLocation="http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -27,6 +25,18 @@
 				<entry key="eclipselink.weaving" value="false" />
 			</map>
 		</property>
+
+		<!-- TRIAL1 -->
+
+		<!-- <property name="jpaProperties">
+			<props>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property> -->
+
+		<!-- END OF TRIAL 1 -->
+
 	</bean>
 
 	<!-- NEW APPROACH -->
@@ -47,21 +57,19 @@
 		/> </property> </bean> -->
 
 	<!-- END OF NEW APPROACH -->
-	<!-- <tx:annotation-driven transaction-manager="transactionManager" />
+
+
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
 	<bean class="org.springframework.orm.jpa.JpaTransactionManager"
 		id="transactionManager">
 		<property name="dataSource" ref="dataSource" />
-	</bean> -->
+	</bean>
 	<jpa:repositories base-package="af.handball.repository" />
-	
-	
-
-
-
 
 	<!-- <beans profile="prod"> <import resource="database-prod.xml"/> </beans> -->
 
-	<context:component-scan base-package="cz.jiripinkas.jba">
+	<context:component-scan base-package="af.handball">
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>

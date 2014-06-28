@@ -1,22 +1,33 @@
 package af.handball.entity;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table (name="app_user")
-public class User {
+@NamedQuery(name="Category.findAll", query="SELECT u FROM User u")
+public class User implements Serializable {
 
 	@Id
 	@GeneratedValue
-	private BigDecimal user_id;
-	
 	private String email;
 	
+	private String password;
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -27,11 +38,5 @@ public class User {
 
 	
 
-	public BigDecimal getId() {
-		return user_id;
-	}
-
-	public void setId(BigDecimal userId) {
-		this.user_id = userId;
-	}
+	
 }

@@ -13,25 +13,36 @@
 		</div>
 		<div class="navbar-collapse collapse">
 
-			<form class="navbar-form navbar-left">
-				<button type="submit" data-toggle="modal" data-target="#myModal"
+			<form class="navbar-form navbar-right">
+				<button type="button" data-toggle="modal" data-target="#myModal"
 					class="btn btn-primary">Register</button>
 			</form>
 
 
 
-			<form action="dbtest.html" class="navbar-form navbar-right">
-				<button type="submit" class="btn btn-success">Sign in</button>
+			<form action="dbtest.html" class="navbar-form navbar-left">
+
 				<div class="form-group">
 					<input type="text" placeholder="Email" class="form-control">
 				</div>
-				
+
 				<div class="form-group">
 					<input type="password" placeholder="Password" class="form-control">
-					
+
 				</div>
-				<p class="text-right"><font color="#000EEE">Forgot pw?</font></p>
 				
+				
+				
+
+				<div class="form-group">
+					<button type="submit" class="btn btn-success">Sign in</button>
+				</div>
+				
+		
+				
+
+				
+
 			</form>
 
 
