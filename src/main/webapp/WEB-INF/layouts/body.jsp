@@ -3,13 +3,10 @@
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
 	<div class="container">
-		<h1>Hello, world!</h1>
-		<p>This is a template for a simple marketing or informational
-			website. It includes a large callout called a jumbotron and three
-			supporting pieces of content. Use it as a starting point to create
-			something more unique.</p>
+		<h1>v0.02!</h1>
+		<p>Shit starts to get better. Registration works.</p>
 		<p>
-			<a class="btn btn-primary btn-lg" role="button">Learn more
+			<a href="http://img.joemonster.org/i/2014/06/drugastrona_01.jpg" class="btn btn-primary btn-lg" role="button">Learn more
 				&raquo;</a>
 		</p>
 	</div>

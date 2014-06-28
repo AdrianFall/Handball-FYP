@@ -17,7 +17,19 @@ public class RegistrationService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	public List<User> findAll() {
+	/*public List<User> findAll() {
 		return userRepository.findAll();
+	}*/
+	
+	public boolean emailExists(final String email) {
+		boolean emailExists = userRepository.emailExists(email);
+		
+		return emailExists;
+	}
+	
+	public boolean newUser(final String email, final String password) {
+		boolean userCreated = userRepository.newUser(email, password);
+		
+		return userCreated;
 	}
 }

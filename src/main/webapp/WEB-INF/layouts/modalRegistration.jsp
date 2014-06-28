@@ -20,6 +20,9 @@
 
 						<!-- form stuff goes here -->
 						<div id="emailError" class="form-group">
+						<div class="col-xs-8">
+						<font color="#C11B17"> <p id="emailErrorP">&nbsp;</p></font>
+						</div>
 							<div class="col-xs-8">
 								<input type="text" class="form-control" name="email" id="email"
 									value="" placeholder="Email" /> <span id="emailErrorSpan"></span>
@@ -27,6 +30,7 @@
 						</div>
 
 						<div id="passwordError" class="form-group">
+						
 							<div class="col-xs-8">
 								<input type="password" class="form-control" id="password"
 									name="password" value="" placeholder="Password" /> <span
@@ -45,10 +49,12 @@
 				</div>
 
 				<div class="col-md-5">
-					<font size="1%"><p>Password Policy: <br> At least 6
-					chars <br> Contains at least one digit <br> Contains at
-					least one lower alpha char <br> Does not contain space, tab,
-					etc.</p></font>
+				<p>&nbsp;</p>
+					<font id="passwordPolicyFont" size="1%"><p>
+							Password Policy: <br> At least 6 chars <br> Contains at
+							least one digit <br> Contains at least one lower alpha char
+							<br> Does not contain space, tab, etc.
+						</p></font>
 				</div>
 
 
@@ -78,7 +84,7 @@
 					// We don't want this to act as a link so cancel the link action
 					e.preventDefault();
 
-					alert("button clicked");
+					
 
 					// Find form and submit it
 					$('#registrationForm').submit();
@@ -91,7 +97,6 @@
 						.on(
 								'submit',
 								function() {
-									alert("posting the form");
 									//Serialize the form and post it to the server
 
 									$
@@ -119,6 +124,7 @@
 																		.getElementById("passwordError").className = "form-group";
 																document
 																		.getElementById("passwordErrorSpan").className = "";
+																$("p#emailErrorP").text('Wrong email format.');
 															} else if (failReason == "passwordRegex") {
 
 																/* Set the email field as successfuly validated */
@@ -133,10 +139,27 @@
 																		.getElementById("passwordError").className += " has-error has-feedback";
 																document
 																		.getElementById("passwordErrorSpan").className = "glyphicon glyphicon-remove form-control-feedback";
+																$("p#emailErrorP").html('&nbsp;');
+																document.getElementById("passwordPolicyFont").color = "red";															} else if (failReason == "emailExists") {
+																document
+																		.getElementById("emailError").className = "form-group has-error has-feedback";
+																document
+																		.getElementById("emailErrorSpan").className = "glyphicon glyphicon-remove form-control-feedback";
+
+																/* Set the password field as not validated yet */
+																document
+																		.getElementById("passwordError").className = "form-group";
+																document
+																		.getElementById("passwordErrorSpan").className = "";
+																 $("p#emailErrorP").text('Email Already Taken.');
 															}
+														} else { // Success
+															alert('SUCCESS!');
+															// Hide the modal
+															 $("#myModal").modal(
+																	'hide');
 														}
-														alert("success = "
-																+ success);
+														
 
 														/* document
 																.getElementById("email").value = parsedJSON.text; */

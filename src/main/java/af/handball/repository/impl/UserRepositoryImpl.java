@@ -29,7 +29,7 @@ public class UserRepositoryImpl implements UserRepository {
 		System.out.println("Registering user.");
 	}*/
 
-	@Override
+/*	@Override
 	public void deleteAllInBatch() {
 		// TODO Auto-generated method stub
 		
@@ -137,6 +137,42 @@ public class UserRepositoryImpl implements UserRepository {
 	public <S extends User> S save(S arg0) {
 		// TODO Auto-generated method stub
 		return null;
+	}*/
+
+	@Override
+	public boolean emailExists(String email) {
+		/*TypedQuery<String> emailExistsQuery = emgr.createNamedQuery("User.emailExists", User.class);
+		emailExistsQuery.setParameter("email", email);
+		String emailObtained = (String) emailExistsQuery.getSingleResult();
+		System.out.println(" useremail = " + user.getEmail());*/
+		boolean emailExists = false;
+		User user = emgr.find(User.class, email);
+		if (user == null) {
+			System.out.println("User object is null");
+		} else {
+			System.out.println("User object exists.");
+			emailExists = true;
+		}
+		return emailExists;
 	}
+
+	@Override
+	public boolean newUser(String email, String password) {
+		boolean userCreated = false;
+		User user = new User();
+		user.setEmail(email);
+		user.setPassword(password);
+		try {
+		emgr.persist(user);
+		System.out.println("Persisted new user.");
+		userCreated = true;
+		} catch (Exception e) {
+			System.out.println("Exception when persisting new user... " + e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+		return userCreated;
+	}
+	
+	
 
 }

@@ -6,20 +6,25 @@ import java.math.BigDecimal;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table (name="app_user")
-@NamedQuery(name="Category.findAll", query="SELECT u FROM User u")
+@Table(name = "app_user")
+@NamedQueries({ 
+	@NamedQuery(name = "Category.findAll", query = "SELECT u FROM User u"),
+	@NamedQuery(name ="User.emailExists", query = "SELECT u.email FROM User u WHERE u.email = :email")
+
+})
 public class User implements Serializable {
 
 	@Id
 	@GeneratedValue
 	private String email;
-	
+
 	private String password;
-	
+
 	public String getPassword() {
 		return password;
 	}
@@ -36,7 +41,4 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
-	
-
-	
 }
