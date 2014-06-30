@@ -3,15 +3,23 @@
        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
-  <definition name="main" template="/WEB-INF/jsp/main.jsp">
-    <put-attribute name="title" value="Handball Manager" />
-    <put-attribute name="header" value="/WEB-INF/layouts/header.jsp"/>
-    <put-attribute name="body" value="/WEB-INF/layouts/body.jsp" />
-    <put-attribute name="footer" value="/WEB-INF/layouts/footer.jsp" />
-    <put-attribute name="modalRegistration" value="/WEB-INF/layouts/modalRegistration.jsp" />
-    
-   
-  </definition>
+	<definition name="main" template="/WEB-INF/jsp/main.jsp">
+		<put-attribute name="title" value="Handball Manager" />
+		<put-attribute name="header" value="/WEB-INF/layouts/index/header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/layouts/index/body.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/layouts/index/footer.jsp" />
+		<put-attribute name="modalRegistration"
+			value="/WEB-INF/layouts/modalRegistration.jsp" />
 
-  
+
+	</definition>
+
+	<definition name="game" template="/WEB-INF/jsp/game.jsp">
+		<put-attribute name="title" value="Handball Manager" />
+		<put-attribute name="header" value="/WEB-INF/layouts/game/header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/layouts/game/body.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/layouts/game/footer.jsp" />
+		<put-attribute name="createNewTeamModal" value="/WEB-INF/layouts/game/createNewTeamModal.jsp"/>
+	</definition>
+
 </tiles-definitions>

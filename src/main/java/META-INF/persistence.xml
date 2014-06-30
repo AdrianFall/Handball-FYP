@@ -9,6 +9,7 @@
 
 
 		<class>af.handball.entity.User</class>
+		<class>af.handball.entity.Team</class>
 		
 		
 		<!-- <properties>

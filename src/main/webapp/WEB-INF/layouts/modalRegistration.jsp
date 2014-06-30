@@ -20,9 +20,11 @@
 
 						<!-- form stuff goes here -->
 						<div id="emailError" class="form-group">
-						<div class="col-xs-8">
-						<font color="#C11B17"> <p id="emailErrorP">&nbsp;</p></font>
-						</div>
+							<div class="col-xs-8">
+								<font color="#C11B17">
+									<p id="emailErrorP">&nbsp;</p>
+								</font>
+							</div>
 							<div class="col-xs-8">
 								<input type="text" class="form-control" name="email" id="email"
 									value="" placeholder="Email" /> <span id="emailErrorSpan"></span>
@@ -30,7 +32,7 @@
 						</div>
 
 						<div id="passwordError" class="form-group">
-						
+
 							<div class="col-xs-8">
 								<input type="password" class="form-control" id="password"
 									name="password" value="" placeholder="Password" /> <span
@@ -49,7 +51,7 @@
 				</div>
 
 				<div class="col-md-5">
-				<p>&nbsp;</p>
+					<p>&nbsp;</p>
 					<font id="passwordPolicyFont" size="1%"><p>
 							Password Policy: <br> At least 6 chars <br> Contains at
 							least one digit <br> Contains at least one lower alpha char
@@ -83,8 +85,6 @@
 				$('#submitRegistration').on('click', function(e) {
 					// We don't want this to act as a link so cancel the link action
 					e.preventDefault();
-
-					
 
 					// Find form and submit it
 					$('#registrationForm').submit();
@@ -124,7 +124,10 @@
 																		.getElementById("passwordError").className = "form-group";
 																document
 																		.getElementById("passwordErrorSpan").className = "";
-																$("p#emailErrorP").text('Wrong email format.');
+																$(
+																		"p#emailErrorP")
+																		.text(
+																				'Wrong email format.');
 															} else if (failReason == "passwordRegex") {
 
 																/* Set the email field as successfuly validated */
@@ -139,8 +142,13 @@
 																		.getElementById("passwordError").className += " has-error has-feedback";
 																document
 																		.getElementById("passwordErrorSpan").className = "glyphicon glyphicon-remove form-control-feedback";
-																$("p#emailErrorP").html('&nbsp;');
-																document.getElementById("passwordPolicyFont").color = "red";															} else if (failReason == "emailExists") {
+																$(
+																		"p#emailErrorP")
+																		.html(
+																				'&nbsp;');
+																document
+																		.getElementById("passwordPolicyFont").color = "red";
+															} else if (failReason == "emailExists") {
 																document
 																		.getElementById("emailError").className = "form-group has-error has-feedback";
 																document
@@ -151,24 +159,89 @@
 																		.getElementById("passwordError").className = "form-group";
 																document
 																		.getElementById("passwordErrorSpan").className = "";
-																 $("p#emailErrorP").text('Email Already Taken.');
+																$(
+																		"p#emailErrorP")
+																		.text(
+																				'Email Already Taken.');
 															}
 														} else { // Success
 															alert('SUCCESS!');
+															var email = document
+																	.getElementById("email").value;
 															// Hide the modal
-															 $("#myModal").modal(
-																	'hide');
+															$("#myModal")
+																	.modal(
+																			'hide');
+															/* setTimeout(
+																	function() {
+																		window.location.href = 'game.html';
+																	}, 200); */
+
+															var jsonObj = JSON
+																	.stringify({
+																		"email" : email,
+																		"forwardedFrom" : "registration"
+																	});
+															
+																	 setTimeout(
+																				function() {
+																					var url = "game.html"; 
+																					window.location.href = url;
+																				}, 20); 
+															
+														/* 	$
+															.post(
+																	"userRegistration.html",
+																	$(this).serialize(),  {
+																		
+																	}); */
+				
+															/*  $
+																	.ajax({
+																		type : "POST",
+																		url : "createNewTeam.html",
+																		data : JSON
+																		.stringify({
+																			"email" : email,
+																			"forwardedFrom" : "registration"
+																		}),
+																		contentType: "application/json; charset=UTF-8",
+																		success : function(
+																				data) {
+																			alert('Data: ' + data);
+																			var parsedDataJSON = $
+																			.parseJSON(data);
+																			if (parsedDataJSON.status == "OK")
+																				alert('Person has been added');
+																			else
+																				alert('Failed adding person: '
+																						+ parsedDataJSON.status
+																						+ ', '
+																						+ parsedDataJSON.errorMessage);
+																		},
+																		error : function() {
+																			alert('Error occurs!');
+																		}
+																	});  */
+
+															/* $
+															.post("game.html",
+																	$(jsonObj).serialize(),
+																	function(text) {
+																 setTimeout(
+																			function() {
+																				var url = "game.html"; 
+																				window.location.href = url;
+																			}, 200); 
+																
+															}); */
+
 														}
-														
 
 														/* document
 																.getElementById("email").value = parsedJSON.text; */
 
-														alert('parsedJson email = '
-																+ parsedJSON.text);
-
 														// When this executes, we know the form was submitted
-
 														// To give some time for the animation, 
 														// let's add a delay of 200 ms before the redirect
 														/* var delay = 200;

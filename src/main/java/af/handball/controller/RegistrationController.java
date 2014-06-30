@@ -5,11 +5,15 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import af.handball.helper.EmailValidator;
 import af.handball.helper.PasswordValidator;
@@ -27,7 +31,7 @@ public class RegistrationController {
 	
 	@RequestMapping("/userRegistration.html")
 	public void registration(HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response, HttpSession session) {
 		System.out.println("Index Controller: registration() method");
 		
 		
@@ -63,6 +67,9 @@ public class RegistrationController {
 		try {
 			PrintWriter out = response.getWriter();
 			jsonObj.put("success", success);
+			session.setAttribute("email", email);
+			request.setAttribute("forwardedFrom", "registration");
+			
 			if (failReason != null) jsonObj.put("failReason", failReason);
 			out.print(jsonObj);
 			/*out.print("{\"success\": true, \"text\":\"Test\"}");*/
@@ -73,6 +80,8 @@ public class RegistrationController {
 		}
 		
 	} // End of registration
+	
+	
 
 	private void postValidationRegistration(final String email, final String password) {
 		boolean emailExists = registrationService.emailExists(email);
@@ -82,6 +91,7 @@ public class RegistrationController {
 			if (userCreated) {
 				System.out.println("NEW USER CREATED!!!!!!");
 				success = "success";
+				
 			} else {
 				System.out.println("USER WASNT CREATED :((((((((");
 				/*jsonObj.put("success", "fail");
