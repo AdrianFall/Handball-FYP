@@ -55,8 +55,6 @@ public class NewTeamController {
 		
 		if (email == null) {
 			jsonObj.put("status", "sessionExpired");
-			//XXX remove syso
-			System.out.println("Session Expired");
 		} else {
 			
 			
@@ -74,8 +72,14 @@ public class NewTeamController {
 				jsonObj.put("teamNameError", "The team name must be longer than 3 characters.");
 			} else {
 				jsonObj.put("status", "OK");
+				// Create the new team
+				boolean teamCreated = newTeamService.newTeam(email, teamName);
 				
-				
+				if (teamCreated) { 
+					session.setAttribute("teamName", teamName);
+					jsonObj.put("teamCreated", "true");
+				}
+				else jsonObj.put("teamCreated", "false");
 			}
 			
 			

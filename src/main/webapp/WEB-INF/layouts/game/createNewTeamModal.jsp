@@ -79,6 +79,16 @@
 															.parseJSON(data);
 													if (parsedDataJSON.status == "OK") {
 														alert('status OK');
+														
+														if (parsedDataJSON.teamCreated == "true") {
+															alert ('TEAM PERSISTED');
+															// Hide the modal
+															$("#createNewTeamModal")
+																	.modal(
+																			'hide');
+														} else {
+															alert ('ERROR WHEN CREATING NEW TEAM');
+														}
 
 													} else if (parsedDataJSON.status == "sessionExpired") {
 														alert('Session Expired');

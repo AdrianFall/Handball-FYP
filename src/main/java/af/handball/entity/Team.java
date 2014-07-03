@@ -23,7 +23,16 @@ public class Team implements Serializable {
 	private int team_id;
 	private String team_name;
 	private String email;
+	private Integer team_level;
 	
+	public Integer getTeam_level() {
+		return team_level;
+	}
+
+	public void setTeam_level(Integer team_level) {
+		this.team_level = team_level;
+	}
+
 	public String getEmail() {
 		return email;
 	}

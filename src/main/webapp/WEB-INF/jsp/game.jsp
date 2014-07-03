@@ -13,7 +13,10 @@
 
 <!-- Optional theme -->
 <link rel="stylesheet"
-	href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+	href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css"> 
+
+<link rel="stylesheet" href="/hb/css/img-fix.css">
+<link rel="stylesheet" href="/hb/css/metro-title.css">
 
 
 
@@ -81,7 +84,7 @@
 	<tiles:insertAttribute name="body" />
 
 
-	<div class="container">
+	<%-- <div class="container">
 		<!-- Example row of columns -->
 		<div class="row">
 			<div class="col-md-4">
@@ -123,7 +126,7 @@
 		</div>
 
 		<hr>
-	</div>
+	</div> --%>
 	<!-- /container -->
 
 	<!-- <form class="navbar-form navbar-left">

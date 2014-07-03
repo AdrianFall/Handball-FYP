@@ -11,6 +11,8 @@ public interface UserRepository /*extends JpaRepository<User, Integer>*/
 	boolean newUser(String email, String password);
 	
 	boolean emailExists(String email);
+
+	boolean authenticateUser(String email, String password);
 	
 	
 

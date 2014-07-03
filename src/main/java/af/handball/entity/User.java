@@ -14,7 +14,8 @@ import javax.persistence.Table;
 @Table(name = "app_user")
 @NamedQueries({ 
 	@NamedQuery(name = "Category.findAll", query = "SELECT u FROM User u"),
-	@NamedQuery(name ="User.emailExists", query = "SELECT u.email FROM User u WHERE u.email = :email")
+	@NamedQuery(name ="User.emailExists", query = "SELECT u.email FROM User u WHERE u.email = :email"),
+	@NamedQuery(name = "User.authenticateUser", query = "SELECT u FROM User u WHERE u.email = :email AND u.password = :password")
 
 })
 public class User implements Serializable {
