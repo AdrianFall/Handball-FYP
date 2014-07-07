@@ -10,6 +10,11 @@
 
 		<class>af.handball.entity.User</class>
 		<class>af.handball.entity.Team</class>
+		<class>af.handball.entity.League</class>
+		<class>af.handball.entity.Player</class>
+		<class>af.handball.entity.Contract</class>
+		<class>af.handball.entity.GkSkills</class>
+		<class>af.handball.entity.FieldPlayerSkills</class>
 		
 		
 		<!-- <properties>

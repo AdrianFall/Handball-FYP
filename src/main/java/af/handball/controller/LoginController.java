@@ -12,14 +12,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import af.handball.service.LoginService;
+import af.handball.service.TeamService;
 
 
 
 @Controller
 public class LoginController {
 	
+		
 		@Autowired
 		private LoginService loginService;
+		@Autowired
+		private TeamService teamService;
 	
 
 		@RequestMapping(value = "/login")
@@ -36,9 +40,14 @@ public class LoginController {
 			boolean userAuthenticated = loginService.authenticateUser(email, obtainedJsonObj.getString("password"));
 			
 			if (userAuthenticated) {
-				jsonObj.put("status", "OK");
+				String status = "OK";
+				
 				jsonObj.put("authenticated", "true");
 				session.setAttribute("email", email);
+				jsonObj.put("status", status);
+				// Obtain the team name
+				String teamName = teamService.getTeamName(email);
+				session.setAttribute("teamName", teamName);
 				
 			} else {
 				jsonObj.put("status", "false");

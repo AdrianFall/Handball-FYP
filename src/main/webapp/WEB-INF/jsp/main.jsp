@@ -28,6 +28,8 @@
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.js"></script>
 
 	<tiles:insertAttribute name="modalRegistration"></tiles:insertAttribute>
+	
+	<tiles:insertAttribute name="createNewTeamModal"/>
 
 	<tiles:insertAttribute name="header" />
 

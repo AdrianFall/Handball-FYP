@@ -33,20 +33,20 @@
 		src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.js"></script>
 
-	<tiles:insertAttribute name="createNewTeamModal"/>
+	
 
 	<%! /* Session attributes */
 		private String email;%>
 
 	<% email = (String) session.getAttribute("email");
-		
-	  
-	  %>
+		if (email == null) { %>
+	  		<tiles:insertAttribute name="modalSessionExpired"/>
+	  	<% }%>
 	  
 	<%-- <tiles:insertAttribute  name="postRegistrationModal"/>   	 --%>
 
 	<!-- Ajax call to check whether an user has already chosen a team name  -->
-	<script>
+	<!-- <script>
 		$.ajax({
 			type : "POST",
 			url : "hasTeam.html",
@@ -74,7 +74,7 @@
 				alert('Error occured when calling hasTeam POST!');
 			}
 		});
-	</script>
+	</script> -->
 
 
 

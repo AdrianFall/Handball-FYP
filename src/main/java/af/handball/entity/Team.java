@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="team")
 @NamedQueries({ 
-	@NamedQuery(name = "Team.userTeamExists", query = "SELECT t FROM Team t WHERE t.email = :email")
+	@NamedQuery(name = "Team.getTeamByEmail", query = "SELECT t FROM Team t WHERE t.email = :email")
 
 })
 public class Team implements Serializable {
@@ -24,7 +24,34 @@ public class Team implements Serializable {
 	private String team_name;
 	private String email;
 	private Integer team_level;
+	private Integer money;
+	private Integer fans;
+	private int league_id;
 	
+	public int getLeague_id() {
+		return league_id;
+	}
+
+	public void setLeague_id(int league_id) {
+		this.league_id = league_id;
+	}
+
+	public Integer getMoney() {
+		return money;
+	}
+
+	public void setMoney(Integer money) {
+		this.money = money;
+	}
+
+	public Integer getFans() {
+		return fans;
+	}
+
+	public void setFans(Integer fans) {
+		this.fans = fans;
+	}
+
 	public Integer getTeam_level() {
 		return team_level;
 	}

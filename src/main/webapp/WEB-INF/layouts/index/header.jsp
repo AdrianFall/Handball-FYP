@@ -50,6 +50,7 @@
 
 			</form>
 
+			<!-- Ajax call to check whether an user has already chosen a team name  -->
 
 
 			<script>
@@ -91,11 +92,48 @@
 													var parsedDataJSON = $
 															.parseJSON(data);
 													if (parsedDataJSON.status == "OK") {
-														alert('OK');
-														setTimeout(
+														alert('CREDENTIALS OK');
+														
+														
+														
+														$.ajax({
+															type : "POST",
+															url : "hasTeam.html",
+															data : "",
+															contentType : "application/json; charset=UTF-8",
+															success : function(data) {
+																alert('Data: ' + data);
+																var parsedDataJSON = $.parseJSON(data);
+																if (parsedDataJSON.status == "OK") {
+																	alert('status OK');
+																	if (parsedDataJSON.hasTeam == "true") { 
+																		alert ('User already has a team.');
+																		setTimeout(
+																				function() {
+																					window.location.href = 'game.html';
+																				}, 20);
+																	}
+																	else {
+																		alert('User does not have a team yet');
+																		
+																		/* TODO show a modal with team name registration and post it as ajax request  */
+																		$("#createNewTeamModal")
+																		.modal(
+																				'show');
+																		
+																	}
+																} else if (parsedDataJSON.status == "sessionExpired")
+																	alert('Session Expired');
+															},
+															error : function() {
+																alert('Error occured when calling hasTeam POST!');
+															}
+														});
+													
+														/* setTimeout(
 																function() {
 																	window.location.href = 'game.html';
-																}, 20);
+																}, 20); */
 
 													} else
 														alert('Wrong credentials.');

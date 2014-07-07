@@ -1,8 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
-<%! private String teamName; %>
-<% teamName = (String) session.getAttribute("teamName"); %>
+<%! private String teamName; 
+	private String email;%>
+
+<% email = (String) session.getAttribute("email"); 
+   teamName = (String) session.getAttribute("teamName"); 
+   if (email == null) { %>
+		   
+	<script>
+	$("#modalSessionExpired").modal('show');
+	</script>
+ 	<%} else {%>
+   }
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
 	<br> <br>
@@ -32,7 +42,7 @@
 			<table class="table">
 				<thead>
 					<tr class="warning">
-						<th><% if (teamName != null) out.print(teamName); %></th>
+						<th>Team: <% if (teamName != null) out.print(teamName); %></th>
 						<th>Next Match</th>
 						<th>League</th>
 					</tr>
@@ -61,3 +71,4 @@
 	</div>
 
 </div>
+<% } %>

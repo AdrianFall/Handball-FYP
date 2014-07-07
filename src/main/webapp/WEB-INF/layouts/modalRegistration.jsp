@@ -165,7 +165,7 @@
 																				'Email Already Taken.');
 															}
 														} else { // Success
-															alert('SUCCESS!');
+															alert('Account Created.');
 															var email = document
 																	.getElementById("email").value;
 															// Hide the modal
@@ -183,11 +183,13 @@
 																		"forwardedFrom" : "registration"
 																	});
 															
-																	 setTimeout(
+																	$("#createNewTeamModal").modal('show');
+																	
+																	/*  setTimeout(
 																				function() {
 																					var url = "game.html"; 
 																					window.location.href = url;
-																				}, 20); 
+																				}, 20);  */
 															
 														/* 	$
 															.post(

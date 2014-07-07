@@ -9,11 +9,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import af.handball.entity.Team;
-import af.handball.repository.NewTeamRepository;
+import af.handball.repository.TeamRepository;
 
-@Component("NewTeamRepository")
+@Component("TeamRepository")
 @Repository
-public class NewTeamRepositoryImpl implements NewTeamRepository {
+public class TeamRepositoryImpl implements TeamRepository {
 
 	@PersistenceContext
 	EntityManager emgr;
@@ -45,8 +45,8 @@ public class NewTeamRepositoryImpl implements NewTeamRepository {
 	public boolean teamExists(String email) {
 		boolean hasTeam = false;
 
-		TypedQuery teamExistsQuery = emgr.createNamedQuery(
-				"Team.userTeamExists", Team.class);
+		TypedQuery<Team> teamExistsQuery = emgr.createNamedQuery(
+				"Team.getTeamByEmail", Team.class);
 		teamExistsQuery.setParameter("email", email);
 		try {
 			Team team = (Team) teamExistsQuery.getSingleResult();
@@ -62,6 +62,30 @@ public class NewTeamRepositoryImpl implements NewTeamRepository {
 		}
 
 		return hasTeam;
+	}
+
+	@Override
+	public String getTeam(String email) {
+		
+		String teamName = "default";
+		
+		TypedQuery<Team> teamQuery = emgr.createNamedQuery(
+				"Team.getTeamByEmail", Team.class);
+		teamQuery.setParameter("email", email);
+		try {
+			Team team = (Team) teamQuery.getSingleResult();
+
+			if (team != null) {
+				System.out.println("Team exists for user " + email);
+				teamName = team.getTeam_name();
+			}
+
+		} catch (NoResultException nre) {
+			// User doesn't have a team yet.
+			teamName = "error";
+			System.out.println("Team does not exist for user " + email);
+		}
+		return teamName;
 	}
 
 }

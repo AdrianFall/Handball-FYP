@@ -12,13 +12,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import af.handball.service.NewTeamService;
+import af.handball.service.LeagueService;
+import af.handball.service.TeamService;
+
 
 @Controller
-public class NewTeamController {
+public class TeamController {
 	
 	@Autowired
-	private NewTeamService newTeamService;
+	private TeamService teamService;
+	
+	@Autowired
+	private LeagueService leagueService;
 	
 	@RequestMapping(value = "/hasTeam", method = RequestMethod.POST, headers = { "Content-type=application/json" }, produces="application/json")
 	@ResponseBody
@@ -33,7 +38,7 @@ public class NewTeamController {
 		if (email == null) {
 			jsonObj.put("status", "sessionExpired");
 		} else {
-			boolean hasTeam = newTeamService.hasTeam(email);
+			boolean hasTeam = teamService.hasTeam(email);
 			if (!hasTeam) {
 				jsonObj.put("status", "OK");
 				jsonObj.put("hasTeam", "false");
@@ -73,11 +78,14 @@ public class NewTeamController {
 			} else {
 				jsonObj.put("status", "OK");
 				// Create the new team
-				boolean teamCreated = newTeamService.newTeam(email, teamName);
+				boolean teamCreated = teamService.newTeam(email, teamName);
 				
 				if (teamCreated) { 
 					session.setAttribute("teamName", teamName);
 					jsonObj.put("teamCreated", "true");
+					// TODO Allocate a randomly pre-generated team.
+					System.out.println("Calling league service to allocate a team.");
+					leagueService.allocateTeamInLeague(email, teamName, 1);
 				}
 				else jsonObj.put("teamCreated", "false");
 			}

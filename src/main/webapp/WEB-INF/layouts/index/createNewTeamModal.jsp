@@ -86,6 +86,10 @@
 															$("#createNewTeamModal")
 																	.modal(
 																			'hide');
+															setTimeout(
+																	function() {
+																		window.location.href = 'game.html';
+																	}, 20);
 														} else {
 															alert ('ERROR WHEN CREATING NEW TEAM');
 														}
