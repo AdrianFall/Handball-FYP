@@ -10,10 +10,9 @@ import java.util.Map;
 import java.util.Random;
 
 import af.handball.entity.FieldPlayerSkills;
-import af.handball.entity.GkSkills;
 import af.handball.entity.Player;
 
-public class RWGenerator {
+public class BackGenerator {
 	
 	public static final int AGE_TYPE_YOUNG = 1;
 	public static final int AGE_YOUNG_MIN = 18;
@@ -24,42 +23,44 @@ public class RWGenerator {
 	public static final int AGE_TYPE_OLD = 3;
 	public static final int AGE_OLD_MIN = 31;
 	public static final int AGE_OLD_MAX = 34;
-	public static final int HEIGHT_MAX = 195;
-	public static final int HEIGHT_MIN = 178;
-	public static final int WEIGHT_MAX = 88;
-	public static final int WEIGHT_MIN = 70;
-	public static final String POSITION_RW_LABEL = "RW";
+	public static final int HEIGHT_MAX = 200;
+	public static final int HEIGHT_MIN = 185;
+	public static final int WEIGHT_MAX = 100;
+	public static final int WEIGHT_MIN = 82;
+	public static final String POSITION_LB_LABEL = "LB";
+	public static final String POSITION_RB_LABEL = "RB";
+	public static final String POSITION_CB_LABEL = "CB";
 	public static final String SPECIAL_ABILITY_NONE = "none";
-	public static final String SPECIAL_ABILITY_ONE_ON_ONE_SHOOT = "one_on_one_shoot";
-	public static final String SPECIAL_ABILITY_WING_SHOOT = "wing_shoot";
-	public static final String SPECIAL_ABILITY_LONG_SHOOT = "long_shoot";
+	public static final String SPECIAL_ABILITY_DEFENSIVE_WALL = "defensive_wall";
 	public static final String SPECIAL_ABILITY_PASSING = "passing";
+	public static final String SPECIAL_ABILITY_LONG_SHOOT = "long_shoot";
+	public static final String SPECIAL_ABILITY_COUNTER_ATTACK = "counter_attack";
 	public static final String MAP_PLAYER = "player";
-	public static final String MAP_RW_SKILLS = "rwskills";
-	public static final int SKILL_BLOCKING_MIN = 80;
-	public static final int SKILL_BLOCKING_MAX = 99;
-	public static final int SKILL_POSITIONING_MIN = 80;
+	public static final String MAP_BACK_SKILLS = "back_skills";
+	public static final int SKILL_BLOCKING_MIN = 100;
+	public static final int SKILL_BLOCKING_MAX = 119;
+	public static final int SKILL_POSITIONING_MIN = 90;
 	public static final int SKILL_POSITIONING_MAX = 109;
 	public static final int SKILL_HANDLING_MIN = 80;
-	public static final int SKILL_HANDLING_MAX = 99;
-	public static final int SKILL_MARKING_MIN = 80;
-	public static final int SKILL_MARKING_MAX = 89;
-	public static final int SKILL_PASSING_MIN = 100;
-	public static final int SKILL_PASSING_MAX = 119;
+	public static final int SKILL_HANDLING_MAX = 109;
+	public static final int SKILL_MARKING_MIN = 90;
+	public static final int SKILL_MARKING_MAX = 109;
+	public static final int SKILL_PASSING_MIN = 80;
+	public static final int SKILL_PASSING_MAX = 109;
 	public static final int SKILL_ONE_ON_ONE_MIN = 80;
 	public static final int SKILL_ONE_ON_ONE_MAX = 99;
 	public static final int SKILL_SEVEN_M_SHOOT_MIN = 80;
 	public static final int SKILL_SEVEN_M_SHOOT_MAX = 99;
-	public static final int SKILL_NINE_M_SHOOT_MIN = 90;
+	public static final int SKILL_NINE_M_SHOOT_MIN = 80;
 	public static final int SKILL_NINE_M_SHOOT_MAX = 109;
-	public static final int SKILL_WING_SHOOT_MIN = 100;
-	public static final int SKILL_WING_SHOOT_MAX = 119;
+	public static final int SKILL_WING_SHOOT_MIN = 80;
+	public static final int SKILL_WING_SHOOT_MAX = 89;
 	public static final int SKILL_FITNESS_MIN = 90;
 	public static final int SKILL_FITNESS_MAX = 109;
 	public static final int SKILL_CREATIVITY_MIN = 80;
-	public static final int SKILL_CREATIVITY_MAX = 99;
-	public static final int SKILL_SPEED_MIN = 100;
-	public static final int SKILL_SPEED_MAX = 119;
+	public static final int SKILL_CREATIVITY_MAX = 109;
+	public static final int SKILL_SPEED_MIN = 80;
+	public static final int SKILL_SPEED_MAX = 109;
 	public static final int SKILL_STRENGTH_MIN = 90;
 	public static final int SKILL_STRENGTH_MAX = 109;
  	public static final int SKILL_AGGRESSION_MIN = 80;
@@ -68,37 +69,36 @@ public class RWGenerator {
 	private BufferedReader br;
 	private ArrayList<String> generatedRandomNumbersList;
 	private String rightWingNames;
-	private String[] separatedRightWingNames;
-	private int numberOfRightWingNames;
+	private String[] separatedBackNames;
+	private int numberOfWingerNames;
 	private Random randomGenerator;
-	private int amountOfFieldPlayerSkills = 14;
 
-	public RWGenerator(int leagueLevel) {
+	public BackGenerator(int leagueLevel, String positionLabel) {
 		this.leagueLevel = leagueLevel;
-		// Obtain the text file with the GK names
+		// Obtain the text file with the Right Wing player names
 
 		try {
 
 			br = new BufferedReader(new FileReader(
-					"C://Users//Adrian//Desktop//handball//polish-RW.txt"));
-			System.out.println("Obtained the GK text file");
+					"C://Users//Adrian//Desktop//handball//polish-" + positionLabel + ".txt"));
+			System.out.println("Obtained the " + positionLabel + " text file");
 			rightWingNames = br.readLine();
-			separatedRightWingNames = rightWingNames.split(",");
-			numberOfRightWingNames = separatedRightWingNames.length;
+			separatedBackNames = rightWingNames.split(",");
+			numberOfWingerNames = separatedBackNames.length;
 			randomGenerator = new Random();
 
 		} catch (FileNotFoundException e) {
-			System.out.println("Couldn't obtain the file with RW names.");
+			System.out.println("Couldn't obtain the file with " + positionLabel + " names.");
 			e.printStackTrace();
 		} catch (IOException e) {
-			System.out.println("Error when reading line in the RW text file");
+			System.out.println("Error when reading line in the " + positionLabel + " text file");
 			e.printStackTrace();
 		}
 
 	}
 
-	public Map<String, Object> generateRightWing(int qualityType, int ageType,
-			int teamLevel) {
+	public Map<String, Object> generateBack(int qualityType, int ageType,
+			int teamLevel, String positionLabel) {
 		// Declare & Instantiate the entity beans
 		Player player = new Player();
 		FieldPlayerSkills fieldPlayerSkills = new FieldPlayerSkills();
@@ -106,12 +106,11 @@ public class RWGenerator {
 		// (method) the above entity beans
 		Map<String, Object> entityBeansMap = new HashMap<String, Object>();
 
-		// Obtain a random player name from the list of players positioned as
-		// right wing
-		String name = separatedRightWingNames[randomGenerator
-				.nextInt(numberOfRightWingNames)];
+		// Obtain a random player name from the list of players
+		String name = separatedBackNames[randomGenerator
+				.nextInt(numberOfWingerNames)];
 		player.setName(name);
-		System.out.println("Right Wing player set to: " + name);
+		System.out.println(positionLabel + " player set to: " + name);
 
 		// Obtain an age through calling a method to generate random age
 		// within the bounds of the inputed ageType (i.e. the min and max)
@@ -122,22 +121,35 @@ public class RWGenerator {
 		player.setCondition(100);
 		// Set the form of the player to 0 by default
 		player.setForm(0);
+		
+		// Generate the central backs as .... handed
+		// left back as .... handed
+		// right back as .... handed
+		if (positionLabel.equals(POSITION_CB_LABEL)) { 
+			// Generate random number either 1 (for right hand) or 2 (left hand) or
+			// 3 (both handed)
+			int handed = randomGenerator.nextInt(2) + 1;
+			
+			switch (handed) {
+			case 1: // right hand
+				player.setHanded(Player.PLAYER_HAND_RIGHT);
+				break;
+			case 2: // left hand
+				player.setHanded(Player.PLAYER_HAND_LEFT);
+				break;
+			case 3: // both hands
+				player.setHanded(Player.PLAYER_HAND_BOTH);
+				break;
+			} // End of switch (hand generation)
+		}
+		else if (positionLabel.equals(POSITION_LB_LABEL)) player.setHanded(Player.PLAYER_HAND_RIGHT);
+		else if (positionLabel.equals(POSITION_RB_LABEL)) player.setHanded(Player.PLAYER_HAND_LEFT);
+		
+		
 
-		// Generate random number either 1 (for right hand) or 2 (left hand) or
-		// 3 (both handed)
-		int handed = randomGenerator.nextInt(2) + 1;
-		switch (handed) {
-		case 1: // right hand
-			player.setHanded(Player.PLAYER_HAND_RIGHT);
-			break;
-		case 2: // left hand
-			player.setHanded(Player.PLAYER_HAND_LEFT);
-			break;
-		case 3: // both hands
-			player.setHanded(Player.PLAYER_HAND_BOTH);
-			break;
-		} // End of switch (hand generation)
-
+		/*
+		
+		 */
 		player.setHeight(randomGenerator.nextInt((HEIGHT_MAX - HEIGHT_MIN) + 1)
 				+ HEIGHT_MIN);
 
@@ -159,11 +171,11 @@ public class RWGenerator {
 		else if (randomAge == 19 || randomAge == 20)
 			specialAbility = generateRandomAbility(10);
 		else if (randomAge >= 21 && randomAge <= 24)
-			specialAbility = generateRandomAbility(30);
+			specialAbility = generateRandomAbility(20);
 		else if (randomAge >= 25 && randomAge <= 33)
-			specialAbility = generateRandomAbility(50);
+			specialAbility = generateRandomAbility(35);
 		else if (randomAge == 34 || randomAge == 35)
-			specialAbility = generateRandomAbility(95);
+			specialAbility = generateRandomAbility(85);
 		// END special ability creator
 		// Set the random generated special ability
 		player.setSpecial_ability(specialAbility);
@@ -182,20 +194,20 @@ public class RWGenerator {
 		// TODO
 		player.setNationality("TO_BE_DONE!");
 		// Set the player position
-		player.setPlay_position(POSITION_RW_LABEL);
+		player.setPlay_position(positionLabel);
 		// Generate random weight
 		player.setWeight(randomGenerator.nextInt((WEIGHT_MAX - WEIGHT_MIN) + 1) + WEIGHT_MIN);
 		// Put the player object to the entity beans map
 		entityBeansMap.put(MAP_PLAYER, player);
 		
-		// Generate right winger's skills
-		fieldPlayerSkills = generateRightWingSkills(quality, fieldPlayerSkills);
-		entityBeansMap.put(MAP_RW_SKILLS, fieldPlayerSkills);
+		// Generate winger's skills
+		fieldPlayerSkills = generateBackSkills(quality, fieldPlayerSkills);
+		entityBeansMap.put(MAP_BACK_SKILLS, fieldPlayerSkills);
 
 		return entityBeansMap;
 	}
 	
-	private FieldPlayerSkills generateRightWingSkills(double quality, FieldPlayerSkills fieldPlayerSkills) {
+	private FieldPlayerSkills generateBackSkills(double quality, FieldPlayerSkills fieldPlayerSkills) {
 		// The remaining/expended quality points (due to random quality generation)
 		double offset = 0;
 		// Roll for each of the field player's skills
@@ -232,7 +244,7 @@ public class RWGenerator {
 		
 		
 		if (offset > 0 || offset < 0) {
-			double averageOffSet = offset / amountOfFieldPlayerSkills;
+			double averageOffSet = offset / FieldPlayerSkills.NUMBER_OF_FIELD_PLAYER_SKILLS;
 			System.out.println("Average off set = " + averageOffSet);
 			blockSkill += averageOffSet;
 			
@@ -268,7 +280,7 @@ public class RWGenerator {
 		fieldPlayerSkills.setAggression(aggressionSkill);
 		
 		return fieldPlayerSkills;
-	} // END of Generate Right Wing Skills
+	} // END of Generate Back Skills
 
 	private int generateAge(int ageType) {
 		int age = -1;
@@ -322,13 +334,13 @@ public class RWGenerator {
 			int randomAbilityRoll = randomGenerator.nextInt(3) + 1;
 			switch (randomAbilityRoll) {
 			case 1:
-				specialAbility = SPECIAL_ABILITY_WING_SHOOT;
+				specialAbility = SPECIAL_ABILITY_DEFENSIVE_WALL;
 				break;
 			case 2:
 				specialAbility = SPECIAL_ABILITY_PASSING;
 				break;
 			case 3:
-				specialAbility = SPECIAL_ABILITY_ONE_ON_ONE_SHOOT;
+				specialAbility = SPECIAL_ABILITY_COUNTER_ATTACK;
 				break;
 			case 4: 
 				specialAbility = SPECIAL_ABILITY_LONG_SHOOT;

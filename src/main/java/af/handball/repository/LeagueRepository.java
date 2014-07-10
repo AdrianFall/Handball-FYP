@@ -4,7 +4,7 @@ package af.handball.repository;
 public interface LeagueRepository
 {
 
-	boolean allocateTeamInLeague(String email, String teamName, int teamLevel);
+	int allocateTeamInLeague(String email, String teamName, int teamLevel);
 	
 	
 	

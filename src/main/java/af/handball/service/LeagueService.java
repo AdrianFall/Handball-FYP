@@ -19,9 +19,12 @@ public class LeagueService {
 	@Autowired
 	private LeagueRepository leagueRepository;
 
-	public void allocateTeamInLeague(String email, String teamName, int teamLevel) {
+	public int allocateTeamInLeague(String email, String teamName, int teamLevel) {
 		// TODO Auto-generated method stub
-		boolean allocated = leagueRepository.allocateTeamInLeague(email, teamName, teamLevel);
+		int teamId = -1;
+		teamId = leagueRepository.allocateTeamInLeague(email, teamName, teamLevel);
+		
+		return teamId;
 	}
 	
 	/*public List<User> findAll() {

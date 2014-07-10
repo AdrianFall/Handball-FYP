@@ -78,16 +78,21 @@ public class TeamController {
 			} else {
 				jsonObj.put("status", "OK");
 				// Create the new team
-				boolean teamCreated = teamService.newTeam(email, teamName);
+				int teamId = teamService.preGenerateTeam(email, teamName);
 				
-				if (teamCreated) { 
-					session.setAttribute("teamName", teamName);
-					jsonObj.put("teamCreated", "true");
-					// TODO Allocate a randomly pre-generated team.
-					System.out.println("Calling league service to allocate a team.");
-					leagueService.allocateTeamInLeague(email, teamName, 1);
-				}
-				else jsonObj.put("teamCreated", "false");
+				
+				if (teamId != -1) { 
+					
+					
+					/*System.out.println("Calling league service to allocate a team.");*/
+					/*leagueService.allocateTeamInLeague(email, teamName, 1);*/
+					// Allocate the pre-generated team.
+					boolean assigned = teamService.assignTeam(teamId, email, teamName);
+					if (assigned) {
+						session.setAttribute("teamName", teamName);
+						jsonObj.put("teamCreated", "true");
+					} else jsonObj.put("teamCreated", "false");
+				} else jsonObj.put("teamCreated", "false");
 			}
 			
 			

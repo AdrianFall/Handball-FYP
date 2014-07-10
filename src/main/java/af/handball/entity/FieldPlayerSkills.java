@@ -14,13 +14,13 @@ import javax.persistence.Table;
 @Table(name="field_player_skills")
 @NamedQueries({ 
 	/*@NamedQuery(name = "Team.getTeamByEmail", query = "SELECT t FROM Team t WHERE t.email = :email")*/
-	@NamedQuery(name = "League.getAvailableLeagueByLevel", query = "SELECT l FROM League l WHERE l.league_level = :league_level AND l.available_slots > 0 AND l.locked = false")
 })
 public class FieldPlayerSkills implements Serializable {
 
 	/**
 	 * 
 	 */
+	public static final int NUMBER_OF_FIELD_PLAYER_SKILLS = 14;
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

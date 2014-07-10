@@ -23,13 +23,21 @@ public class TeamService {
 	
 	
 	
-	public boolean newTeam(final String email, final String team_name) {
+	public int preGenerateTeam(final String email, final String team_name) {
 		/*boolean teamCreated = teamRepository.newTeam(email, team_name);*/
 		
-		// FIXME At the moment teamCreated will only fetch false;
-		boolean teamCreated = leagueRepository.allocateTeamInLeague(email, team_name, 1);
+		int teamId = -1;
+		teamId = leagueRepository.allocateTeamInLeague(email, team_name, 1);
 		
-		return teamCreated;
+		return teamId;
+	}
+	
+	public boolean assignTeam(final int teamId, final String email, final String team_name) {
+		boolean assigned = false;
+		
+		assigned = teamRepository.assignTeam(teamId, email, team_name);
+		
+		return assigned;
 	}
 	
 	public boolean hasTeam(final String email) {

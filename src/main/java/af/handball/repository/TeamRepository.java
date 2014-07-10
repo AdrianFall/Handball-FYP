@@ -10,6 +10,8 @@ public interface TeamRepository
 	
 	boolean newTeam(String email, String teamName);
 	
+	boolean assignTeam(int teamId, String email, String teamName);
+	
 	boolean teamExists(String email);
 
 	String getTeam(String email);
