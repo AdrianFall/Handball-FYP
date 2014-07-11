@@ -14,16 +14,18 @@
  	<%} else {%>
    }
 <!-- Main jumbotron for a primary marketing message or call to action -->
-<div class="jumbotron">
+<div class="jumbotron" style="margin-top: -5%">
 	<br> <br>
-	<div class="container">
+	<div class="container" id="container">
 		<!-- NAVIGATION ROW -->
 		<div class="row">
 
 			<a href="#"> <img class="img-fix" alt="manager"
 				src="/hb/img/manager.png">
-
-
+			
+			<a href="#" id="squadHref"> <img class="img-fix" alt="squad"
+				src="/hb/img/player.png">
+			
 
 			</a> <a href="#"><img class="img-fix" alt="transfer"
 				src="/hb/img/transfer.png"> </a> <a href="#"> <img
@@ -63,10 +65,27 @@
 				</tbody>
 			</table>
 
-			<!-- END OF TABLE ROW  -->
+		<!-- END OF TABLE ROW  -->
 		</div>
-
-
+		<div class="row">
+		<div class="container-fluid" id="dynamicContainer" style="margin-left: 0px;">
+			
+		</div>
+		</div>
+		<!--  -->
+		<script>
+		
+		
+		 $('#squadHref').click( function() {
+			
+			alert('Looks like squad was clicked.');
+			
+			$('#dynamicContainer').load("squad.html");
+			
+			return false;
+		 }); 
+		
+		</script>
 		<!-- End of container -->
 	</div>
 

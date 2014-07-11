@@ -65,7 +65,7 @@ public class GkGenerator {
 
 	}
 
-	public Map<String, Object> generateGoalKeeper(int qualityType, int ageType, int teamLevel) {
+	public Map<String, Object> generateGoalKeeper(int qualityType, int ageType, int teamLevel, int playerNumber) {
 		// Declare & Instantiate the entity beans
 		Player player = new Player();
 		GkSkills gkSkills = new GkSkills();
@@ -79,6 +79,9 @@ public class GkGenerator {
 		player.setName(randomName);
 		System.out.println("Goal Keeper name has been set to: " + randomName);
 
+		// Set the player number
+		player.setNumber(playerNumber);
+		
 		// Obtain an age through calling a method to generate random age
 		// within the bounds of the inputed ageType (i.e. the min and max)
 		int randomAge = generateAge(ageType);

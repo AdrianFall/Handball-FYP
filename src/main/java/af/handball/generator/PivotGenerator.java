@@ -98,7 +98,7 @@ public class PivotGenerator {
 	}
 
 	public Map<String, Object> generatePivot(int qualityType, int ageType,
-			int teamLevel) {
+			int teamLevel, int playerNumber) {
 		// Declare & Instantiate the entity beans
 		Player player = new Player();
 		FieldPlayerSkills fieldPlayerSkills = new FieldPlayerSkills();
@@ -116,6 +116,9 @@ public class PivotGenerator {
 		// within the bounds of the inputed ageType (i.e. the min and max)
 		int randomAge = generateAge(ageType);
 		player.setAge(randomAge);
+		
+		// Set the player number
+		player.setNumber(playerNumber);
 
 		// Set the condition of the player to be 100% by default
 		player.setCondition(100);

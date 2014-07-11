@@ -97,7 +97,7 @@ public class WingGenerator {
 	}
 
 	public Map<String, Object> generateWinger(int qualityType, int ageType,
-			int teamLevel, String positionLabel) {
+			int teamLevel, String positionLabel, int playerNumber) {
 		// Declare & Instantiate the entity beans
 		Player player = new Player();
 		FieldPlayerSkills fieldPlayerSkills = new FieldPlayerSkills();
@@ -112,6 +112,9 @@ public class WingGenerator {
 		player.setName(name);
 		System.out.println(positionLabel + " player set to: " + name);
 
+		// Set the player number
+		player.setNumber(playerNumber);
+		
 		// Obtain an age through calling a method to generate random age
 		// within the bounds of the inputed ageType (i.e. the min and max)
 		int randomAge = generateAge(ageType);

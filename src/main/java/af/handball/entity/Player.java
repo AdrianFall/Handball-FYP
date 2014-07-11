@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "player")
 @NamedQueries({
-
+	@NamedQuery(name = "Player.getUsersPlayers", query = "SELECT p FROM Player p, Contract c WHERE p.player_id = c.player_id AND c.team_id = (SELECT t.team_id FROM Team t WHERE t.email = :email)")
 })
 public class Player implements Serializable {
 
@@ -30,6 +30,16 @@ public class Player implements Serializable {
 	private int form;
 
 	private int age;
+	
+	private int number;
+
+	public int getNumber() {
+		return number;
+	}
+
+	public void setNumber(int number) {
+		this.number = number;
+	}
 
 	private String play_position;
 
