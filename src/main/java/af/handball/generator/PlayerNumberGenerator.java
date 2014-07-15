@@ -48,6 +48,7 @@ public class PlayerNumberGenerator {
 				temporaryRandomNumber = random.nextInt((50 - 2) + 1) + 2;
 			}
 			numbersList.add(temporaryRandomNumber);
+			usedNumberList.add(temporaryRandomNumber);
 		} // End for loop (12 players number generation)
 		
 		// Add the first RW

@@ -41,8 +41,6 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 	@Override
 	public int allocateTeamInLeague(String email, String teamName,
 			int teamLevel) {
-		boolean allocated = false;
-
 		// Query to check for a league with available slots and on the same
 		// teamLevel
 
@@ -133,7 +131,7 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 						boolean generateAsOld = (countOfPlayersCreated == firstOldPlayer || countOfPlayersCreated == secondOldPlayer);
 
 						Map<String, Object> playerNumberMap = PlayerNumberGenerator.generateRandomNumbers();
-						
+						System.out.println("Player Number Map = " + playerNumberMap);
 						// GENERATE 2 goal keepers
 						GkGenerator gkGenerator = new GkGenerator(
 								teamLevel);

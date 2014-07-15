@@ -75,13 +75,15 @@
 				}
 			}%>
 
+			<!-- LOOP for first squad players -->
 			<% 
 			for (int i = 0; i < countFirstSquadPlayers; i++) { %>
 			<tr class="success" id="fsqp_tr<%=i%>">
-
+				
 				<td id="fsqp_td<%=i%>" class="td"
 					style="padding-top: 4px; padding-bottom: 4px;">
-					<div id="number<%=i%>" style='display: none;' class="center"><%=firstSquadPlayersList.get(i).getNumber()%></div>
+					<div id="fsqp_number<%=i%>" style='display: none;' class="center"><div id="fsqp_pn<%=firstSquadPlayersList.get(i).getNumber()%>"><%=firstSquadPlayersList.get(i).getNumber()%></div></div>
+					
 				</td>
 
 				<td id="fsqp_td<%=i%>" class="td"
@@ -120,7 +122,7 @@
 
 				<td id="bp_td<%=i%>" class="td"
 					style="padding-top: 4px; padding-bottom: 4px;">
-					<div id="number<%=i%>" style='display: none;' class="center"><%=benchPlayersList.get(i).getNumber()%></div>
+					<div id="bp_number<%=i%>" style='display: none;' class="center"><div id="bp_pn<%=benchPlayersList.get(i).getNumber()%>"><%=benchPlayersList.get(i).getNumber()%></div></div>
 				</td>
 
 				<td id="bp_td<%=i%>" class="td"
@@ -205,7 +207,7 @@
 			style="background-image: url('/hb/img/handball_playfield.png'); background-size: 100% 100%; background-repeat: no-repeat; border-bottom: none;">
 			
 			<tr height="45">
-				<td>
+				<td class="droppable" id="LW">
 					<div style="position: relative;">
 						<img style="position: absolute; left: 5px;"
 							src="/hb/img/field_player_back_shirt.png" height="42" width="28">
@@ -214,9 +216,9 @@
 						<% if(firstSquadPlayersList.get(n).getPlay_position().equals("LW")) {
 									 int playerNumber = firstSquadPlayersList.get(n).getNumber();
 									 if (String.valueOf(playerNumber).length() > 1) {
-										 out.println("<h3 style='position: absolute; color: white; font-size: 72%; bottom: -24px; left: 13px;'>" + playerNumber + "</h3>"); 
+										 out.println("<h3 id='h3" + playerNumber + "' style='position: absolute; color: white; font-size: 72%; bottom: -24px; left: 13px;'>" + playerNumber + "</h3>"); 
 									 } else {
-										 out.println("<h3 style='position: absolute; color: white; font-size: 72%; bottom: -24px; left: 16px;'>" + playerNumber + "</h3>"); 
+										 out.println("<h3 id='h3" + playerNumber + "' style='position: absolute; color: white; font-size: 72%; bottom: -24px; left: 16px;'>" + playerNumber + "</h3>"); 
 									 }
 									
 								 }
@@ -227,7 +229,7 @@
 
 				</td>
 				<td></td>
-				<td width="50">
+				<td class="droppable" id="PV" width="50">
 					<div style="position: relative;">
 						<img style="position: absolute; left: 7px;"
 							src="/hb/img/field_player_back_shirt.png" height="42" width="28">
@@ -236,9 +238,9 @@
 						<% if(firstSquadPlayersList.get(n).getPlay_position().equals("PV")) {
 									 int playerNumber = firstSquadPlayersList.get(n).getNumber();
 									 if (String.valueOf(playerNumber).length() > 1) {
-										 out.println("<h3 style='position: absolute; color: white; font-size: 72%; bottom: -24px; left: 15px;'>" + playerNumber + "</h3>"); 
+										 out.println("<h3 id='h3" + playerNumber + "' style='position: absolute; color: white; font-size: 72%; bottom: -24px; left: 15px;'>" + playerNumber + "</h3>"); 
 									 } else {
-										 out.println("<h3 style='position: absolute; color: white; font-size: 72%; bottom: -24px; left: 18px;'>" + playerNumber + "</h3>"); 
+										 out.println("<h3 id='h3" + playerNumber + "' style='position: absolute; color: white; font-size: 72%; bottom: -24px; left: 18px;'>" + playerNumber + "</h3>"); 
 									 }
 									
 								 }
@@ -248,7 +250,7 @@
 					</div>
 				</td>
 				<td></td>
-				<td>
+				<td class="droppable" id="RW">
 					<div style="position: relative; left: 20px;">
 						<img style="position: absolute;"
 							src="/hb/img/field_player_back_shirt.png" height="42" width="28">
@@ -257,9 +259,9 @@
 						<% if(firstSquadPlayersList.get(n).getPlay_position().equals("RW")) {
 									 int playerNumber = firstSquadPlayersList.get(n).getNumber();
 									 if (String.valueOf(playerNumber).length() > 1) {
-										 out.println("<h3 style='position: absolute; color: white; font-size: 72%; bottom: -24px; left: 8px;'>" + playerNumber + "</h3>"); 
+										 out.println("<h3 id='h3" + playerNumber + "' style='position: absolute; color: white; font-size: 72%; bottom: -24px; left: 8px;'>" + playerNumber + "</h3>"); 
 									 } else {
-										 out.println("<h3 style='position: absolute; color: white; font-size: 72%; bottom: -24px; left: 11px;'>" + playerNumber + "</h3>"); 
+										 out.println("<h3 id='h3" + playerNumber + "' style='position: absolute; color: white; font-size: 72%; bottom: -24px; left: 11px;'>" + playerNumber + "</h3>"); 
 									 }
 									
 								 }
@@ -274,7 +276,7 @@
 
 			<tr height="35">
 				<td></td>
-				<td><div style="position: relative;">
+				<td class="droppable" id="LB"><div style="position: relative;">
 						<img style="position: absolute; top: -10px; left: 5px;" src="/hb/img/field_player_back_shirt.png"
 							height="42" width="28">
 						
@@ -282,9 +284,9 @@
 								 <% if(firstSquadPlayersList.get(n).getPlay_position().equals("LB")) {
 									 int playerNumber = firstSquadPlayersList.get(n).getNumber();
 									 if (String.valueOf(playerNumber).length() > 1) {
-										 out.println("<h3 style='position: absolute; color: white; font-size: 72%; bottom: -14px; left: 13px;'>" + playerNumber + "</h3>"); 
+										 out.println("<h3 id='h3" + playerNumber + "' style='position: absolute; color: white; font-size: 72%; bottom: -14px; left: 13px;'>" + playerNumber + "</h3>"); 
 									 } else {
-										 out.println("<h3 style='position: absolute; color: white; font-size: 72%; bottom: -14px; left: 16px;'>" + playerNumber + "</h3>"); 
+										 out.println("<h3 id='h3" + playerNumber + "' style='position: absolute; color: white; font-size: 72%; bottom: -14px; left: 16px;'>" + playerNumber + "</h3>"); 
 									 }
 									
 								 }
@@ -292,7 +294,7 @@
 							} %>
 						
 					</div></td>
-				<td>	<div style="position: relative;">
+				<td class="droppable" id="CB"><div style="position: relative;">
 						<img style="position: absolute; top: -10px; left: 7px;" src="/hb/img/field_player_back_shirt.png"
 							height="42" width="28">
 						
@@ -300,9 +302,9 @@
 								 <% if(firstSquadPlayersList.get(n).getPlay_position().equals("CB")) {
 									 int playerNumber = firstSquadPlayersList.get(n).getNumber();
 									 if (String.valueOf(playerNumber).length() > 1) {
-										 out.println("<h3 style='position: absolute; color: white; font-size: 72%; bottom: -14px; left: 15px;'>" + playerNumber + "</h3>"); 
+										 out.println("<h3 id='h3" + playerNumber + "' style='position: absolute; color: white; font-size: 72%; bottom: -14px; left: 15px;'>" + playerNumber + "</h3>"); 
 									 } else {
-										 out.println("<h3 style='position: absolute; color: white; font-size: 72%; bottom: -14px; left: 18px;'>" + playerNumber + "</h3>"); 
+										 out.println("<h3 id='h3" + playerNumber + "' style='position: absolute; color: white; font-size: 72%; bottom: -14px; left: 18px;'>" + playerNumber + "</h3>"); 
 									 }
 									
 								 }
@@ -310,7 +312,7 @@
 							} %>
 						
 					</div></td>
-				<td>	<div style="position: relative;">
+				<td class="droppable" id="RB">	<div style="position: relative;">
 						<img style="position: absolute; top: -10px; left: 20px;" src="/hb/img/field_player_back_shirt.png"
 							height="42" width="28">
 						
@@ -318,9 +320,9 @@
 								 <% if(firstSquadPlayersList.get(n).getPlay_position().equals("RB")) {
 									 int playerNumber = firstSquadPlayersList.get(n).getNumber();
 									 if (String.valueOf(playerNumber).length() > 1) {
-										 out.println("<h3 style='position: absolute; color: white; font-size: 72%; bottom: -14px; left: 28px;'>" + playerNumber + "</h3>"); 
+										 out.println("<h3 id='h3" + playerNumber + "' style='position: absolute; color: white; font-size: 72%; bottom: -14px; left: 28px;'>" + playerNumber + "</h3>"); 
 									 } else {
-										 out.println("<h3 style='position: absolute; color: white; font-size: 72%; bottom: -14px; left: 31px;'>" + playerNumber + "</h3>"); 
+										 out.println("<h3 id='h3" + playerNumber + "' style='position: absolute; color: white; font-size: 72%; bottom: -14px; left: 31px;'>" + playerNumber + "</h3>"); 
 									 }
 									
 								 }
@@ -343,7 +345,7 @@
 			<tr height="34">
 				<td></td>
 				<td></td>
-				<td id="droppable"><div style="position: relative;">
+				<td class="droppable" id="GK"><div style="position: relative;">
 						<img style="position: absolute; left: 7px; top: -4px;" src="/hb/img/gk_back_shirt.png"
 							height="42" width="28">
 
@@ -351,9 +353,9 @@
 						<% if(firstSquadPlayersList.get(n).getPlay_position().equals("GK")) {
 									 int playerNumber = firstSquadPlayersList.get(n).getNumber();
 									 if (String.valueOf(playerNumber).length() > 1) {
-										 out.println("<h3 style='position: absolute; color: white; font-size: 72%; bottom: -20px; left: 15px;'>" + playerNumber + "</h3>"); 
+										 out.println("<h3 id='h3" + playerNumber + "' style='position: absolute; color: white; font-size: 72%; bottom: -20px; left: 15px;'>" + playerNumber + "</h3>"); 
 									 } else {
-										 out.println("<h3 style='position: absolute; color: white; font-size: 72%; bottom: -20px; left: 18px;'>" + playerNumber + "</h3>"); 
+										 out.println("<h3 id='h3" + playerNumber + "' style='position: absolute; color: white; font-size: 72%; bottom: -20px; left: 18px;'>" + playerNumber + "</h3>"); 
 									 }
 									
 								 }
@@ -440,7 +442,7 @@ $("#test1").draggable({
 	  $('#bp_td<%=i%> div').slideDown(
 			<%=(400 * (i+firstSquadPlayersList.size()+(1-(i+firstSquadPlayersList.size())*0.2)))%>
 			);
-  	  var playerNumber = $("#bp_tr<%=i%> td number<%=i%>");
+  	  var playerNumber = $("#bp_tr<%=i%> td bp_number<%=i%>");
   	  
 	  $("#bp_tr<%=i%>").draggable({
 	         helper: function(event) {
@@ -504,15 +506,96 @@ $("#test1").draggable({
 </script>
 
 <script>
-	$('#droppable').droppable({
-		drop : handleDropEvent
+	/* START droppable */
+	$('.droppable').droppable({
+		drop : handleUIDropEvent
 	});
 
-	function handleDropEvent(event, ui) {
+	function handleUIDropEvent(event, ui) {
+		alert(this.id);
 		var draggable = ui.draggable;
-		alert('The square with ID "' + draggable.attr('id')
-				+ '" was dropped onto me!');
+		var draggableAttribute = draggable.attr('id');
+		var splitDraggableAttribute = draggableAttribute.split("tr");
+		var draggableAttributeType = splitDraggableAttribute[0];
+		var draggableAttributeIndex = splitDraggableAttribute[1];
+		
+		var fieldPlayerNumber = document.getElementById(this.id).innerText;
+		
+		// Obtain the player number and figure out which table tr/td holds the player number record
+		var trNode = $('#fsqp_pn' + fieldPlayerNumber).parent().parent().parent();
+		
+		/* var fsqp = document.getElementById('fsqp_pn' + fieldPlayerNumber); */
+		
+		
+		 var splitTrNode = trNode.attr('id').split("tr"); 
+		 var trType = splitTrNode[0];
+		var trIndex = splitTrNode[1];
+		alert(splitTrNode);
+
+		
+		// Animate the slide up of the interchanged rows
+		 $('#' + draggableAttributeType + 'td' + draggableAttributeIndex + ' div').slideUp('slow');
+		 $('#' + trType + 'td' + trIndex + ' div').slideUp('slow');
+	
+
+ 		// Obtain the current values of first squad/dragged players
+ 		var firstSquadPlayerNumber = document.getElementById(trType + 'number' + trIndex).innerText;
+		var draggedPlayerNumber = document.getElementById(draggableAttributeType + 'number' + draggableAttributeIndex).innerText;
+		// END obtaining the current values of first squad/dragged players
+		
+		// Swap the values of each record on the table, as well as the number on the shirt (pitch representation of team)
+		
+		// Obtain the players to be swapped
+		var swapFirstSquadPlayer = $('#fsqp_pn' + fieldPlayerNumber);
+		var swapDraggedPlayer = $('#' + draggableAttributeType + 'pn' + draggedPlayerNumber);
+		swapFirstSquadPlayer.parent().html("<div id='fsqp_pn" + $.trim(draggedPlayerNumber)+"'>" + $.trim(draggedPlayerNumber)+"</div>");
+		
+		
+		 swapDraggedPlayer.parent().html("<div id='" + draggableAttributeType + "pn" + $.trim(firstSquadPlayerNumber) + "'>" + firstSquadPlayerNumber + "</div>");  
+		
+			
+		
+	 	
+		//determine whether the dragged player is in first squad, if so do double swap of numbers
+		if (new String(draggableAttributeType).valueOf() == new String("fsqp_").valueOf()) {
+			var tempFirstSquadPlayerNumber = firstSquadPlayerNumber;
+			var tempDraggedPlayerNumber = draggedPlayerNumber;
+			
+			$('#h3' + $.trim(tempFirstSquadPlayerNumber)).text($.trim(tempDraggedPlayerNumber));
+			
+			$('#h3' + $.trim(tempDraggedPlayerNumber)).text($.trim(tempFirstSquadPlayerNumber)); 
+			 
+			
+			alert($('#h3' + $.trim(tempFirstSquadPlayerNumber)).attr("id"));
+			var h3DraggedPlayer = $('#h3' + $.trim(tempDraggedPlayerNumber));
+			var h3FirstSquadPlayer = $('#h3' + $.trim(tempFirstSquadPlayerNumber));
+			h3DraggedPlayer.attr( "id",  "h3" + $.trim(tempFirstSquadPlayerNumber));
+			h3FirstSquadPlayer.attr( "id",  "h3" + $.trim(tempDraggedPlayerNumber));
+		
+		} else {
+		
+		
+		$('#h3' + $.trim(firstSquadPlayerNumber)).text($.trim(draggedPlayerNumber));
+		
+		
+		/* $('#h3' + $.trim(draggedPlayerNumber)).text($.trim(firstSquadPlayerNumber)); */
+		$('#h3' + $.trim(firstSquadPlayerNumber)).attr( "id",  "h3" + $.trim(draggedPlayerNumber));
+		alert($("#h3" + $.trim(firstSquadPlayerNumber)).attr("id"));
+		/* $('#h3' + $.trim(draggedPlayerNumber)).attr( "id",  "h3" + $.trim(firstSquadPlayerNumber));
+		alert($('#h3' + $.trim(draggedPlayerNumber)).attr("id")); */
+		}
+	
+		// END of swaping values for each record and shirt values
+		
+		$('#' + draggableAttributeType + 'td' + draggableAttributeIndex + ' div').slideDown('slow');
+		$('#' + trType + 'td' + trIndex + ' div').slideDown('slow');
+		/* document.getElementById('fsqp_number' + index).value = 'Test'; */
+		/* alert('The square with ID "' + draggable.attr('id')
+				+ '" was dropped onto me!'); */
 	}
+	/* END droppable */
+	
+	
 </script>
 
 
