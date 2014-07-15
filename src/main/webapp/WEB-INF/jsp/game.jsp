@@ -20,10 +20,12 @@
 <link rel="stylesheet" href="/hb/css/img-fix.css">
 <link rel="stylesheet" href="/hb/css/metro-title.css">
 <link rel="stylesheet" href="/hb/css/fonts.css">
+<link rel="stylesheet" href="/hb/css/tables.css">
 
 
 
-
+<script type="text/javascript" src="//code.jquery.com/jquery-2.0.2.js"></script>
+<script type="text/javascript" src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><tiles:getAsString name="title"></tiles:getAsString></title>
@@ -31,11 +33,9 @@
 <body id="theBody">
 	<!-- Latest compiled and minified JavaScript -->
 
-	<script src="https://code.jquery.com/jquery-2.1.0.min.js"></script>
 	<script
 		src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.js"></script>
-
 	
 
 	<%! /* Session attributes */
@@ -127,23 +127,14 @@
 				</p>
 			</div>
 		</div>
-
 		<hr>
 	</div> --%>
 	<!-- /container -->
-
 	<!-- <form class="navbar-form navbar-left">
 		<button type="button" data-toggle="modal" data-target="#myModal"
 			class="btn btn-primary">Register</button>
 	</form> -->
-
-
-	<br>
-	<br>
-
-	<tiles:insertAttribute name="footer" />
-
-
+	<%-- <tiles:insertAttribute name="footer" /> --%>
 
 </body>
 </html>

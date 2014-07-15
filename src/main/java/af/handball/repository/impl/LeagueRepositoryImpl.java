@@ -172,6 +172,9 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 							Player player = (Player) mappedObjects.get(GkGenerator.MAP_PLAYER);
 							GkSkills gkSkills = (GkSkills) mappedObjects.get(GkGenerator.MAP_GK_SKILLS);
 							
+							// Persist the first generated goal keeper's formation as first squad
+							if (j == 0) player.setFormation(Player.FORMATION_FIRST_SQUAD);
+							else player.setFormation(Player.FORMATION_BENCH);
 							
 							
 							try { // Try persist 
@@ -234,6 +237,11 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 							Player player = (Player) mappedObjects.get(WingGenerator.MAP_PLAYER);
 							FieldPlayerSkills fieldPlayerSkills = (FieldPlayerSkills) mappedObjects.get(WingGenerator.MAP_WINGER_SKILLS);
 							
+							// Persist the first generated right winger's formation as first squad
+							if (rw == 0) player.setFormation(Player.FORMATION_FIRST_SQUAD);
+							else player.setFormation(Player.FORMATION_BENCH);
+							
+							
 							try { // Try persist 
 								emgr.persist(player);
 								emgr.flush();
@@ -294,6 +302,10 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 							
 							Player player = (Player) mappedObjects.get(WingGenerator.MAP_PLAYER);
 							FieldPlayerSkills fieldPlayerSkills = (FieldPlayerSkills) mappedObjects.get(WingGenerator.MAP_WINGER_SKILLS);
+							
+							// Persist the first generated left winger's formation as first squad
+							if (lw == 0) player.setFormation(Player.FORMATION_FIRST_SQUAD);
+							else player.setFormation(Player.FORMATION_BENCH);
 							
 							try { // Try persist 
 								emgr.persist(player);
@@ -361,6 +373,10 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 							Player player = (Player) mappedObjects.get(BackGenerator.MAP_PLAYER);
 							FieldPlayerSkills fieldPlayerSkills = (FieldPlayerSkills) mappedObjects.get(BackGenerator.MAP_BACK_SKILLS);
 							
+							// Persist the first generated central back's formation as first squad
+							if (cb == 0) player.setFormation(Player.FORMATION_FIRST_SQUAD);
+							else player.setFormation(Player.FORMATION_BENCH);
+							
 							try { // Try persist 
 								emgr.persist(player);
 								emgr.flush();
@@ -421,6 +437,10 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 							
 							Player player = (Player) mappedObjects.get(BackGenerator.MAP_PLAYER);
 							FieldPlayerSkills fieldPlayerSkills = (FieldPlayerSkills) mappedObjects.get(BackGenerator.MAP_BACK_SKILLS);
+							
+							// Persist the first generated right back's formation as first squad
+							if (rb == 0) player.setFormation(Player.FORMATION_FIRST_SQUAD);
+							else player.setFormation(Player.FORMATION_BENCH);
 							
 							try { // Try persist 
 								emgr.persist(player);
@@ -483,6 +503,10 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 							Player player = (Player) mappedObjects.get(BackGenerator.MAP_PLAYER);
 							FieldPlayerSkills fieldPlayerSkills = (FieldPlayerSkills) mappedObjects.get(BackGenerator.MAP_BACK_SKILLS);
 							
+							// Persist the first generated left back's formation as first squad
+							if (lb == 0) player.setFormation(Player.FORMATION_FIRST_SQUAD);
+							else player.setFormation(Player.FORMATION_BENCH);
+							
 							try { // Try persist 
 								emgr.persist(player);
 								emgr.flush();
@@ -543,6 +567,10 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 							
 							Player player = (Player) mappedObjects.get(PivotGenerator.MAP_PLAYER);
 							FieldPlayerSkills fieldPlayerSkills = (FieldPlayerSkills) mappedObjects.get(PivotGenerator.MAP_WINGER_SKILLS);
+							
+							// Persist the first generated pivot's formation as first squad
+							if (pv == 0) player.setFormation(Player.FORMATION_FIRST_SQUAD);
+							else player.setFormation(Player.FORMATION_BENCH);
 							
 							try { // Try persist 
 								emgr.persist(player);

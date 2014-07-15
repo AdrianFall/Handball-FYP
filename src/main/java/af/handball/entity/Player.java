@@ -20,6 +20,9 @@ public class Player implements Serializable {
 	public static final int PLAYER_HAND_RIGHT = 1;
 	public static final int PLAYER_HAND_LEFT = 2;
 	public static final int PLAYER_HAND_BOTH = 3;
+	public static final String FORMATION_FIRST_SQUAD = "1st_squad";
+	public static final String FORMATION_BENCH = "bench";
+	public static final String FORMATION_RESERVES = "reserves";
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,11 +63,21 @@ public class Player implements Serializable {
 	private int morale;
 
 	private int condition;
+	
+	private String formation;
 
 	private int injury_days;
 
 	private String injury_cause;
 
+	public String getFormation() {
+		return formation;
+	}
+
+	public void setFormation(String formation) {
+		this.formation = formation;
+	}
+	
 	public int getPlayer_id() {
 		return player_id;
 	}

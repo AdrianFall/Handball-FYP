@@ -1,10 +1,6 @@
 .th {
 	font-family: "Palatino Linotype";
 	font-size: 75%;
+	text-align: center;
 }
 
-.td {
-	font-family: "Palatino Linotype";
-	font-size: 65%;
-	height: 0px;
-}
