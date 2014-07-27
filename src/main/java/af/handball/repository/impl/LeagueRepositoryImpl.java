@@ -14,10 +14,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import af.handball.entity.Contract;
-import af.handball.entity.FieldPlayerSkills;
-import af.handball.entity.GkSkills;
 import af.handball.entity.League;
 import af.handball.entity.Player;
+import af.handball.entity.Skill;
 import af.handball.entity.Team;
 import af.handball.generator.BackGenerator;
 import af.handball.generator.GkGenerator;
@@ -61,11 +60,19 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 			emgr.flush();
 			teamId = team.getTeam_id();
 			
+			// TODO Concurrency handling
+			int leagueAvailableSlots = league.getAvailable_slots() - 1;
+			league.setAvailable_slots(leagueAvailableSlots);
+			if (leagueAvailableSlots == 0) {
+				league.setLocked(true);
+			}
+			emgr.persist(league);
+			
 		} catch (NoResultException nre) {
 			System.out
 					.println("No League available was found.. Generating new league with level: "
 							+ teamLevel);
-			// TODO generate a new league, teams and players..
+			// generate a new league, teams and players..
 			League league = new League();
 			league.setAvailable_slots(12);
 			league.setLeague_level(teamLevel);
@@ -102,7 +109,7 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 						teamId = team.getTeam_id();
 						System.out.println("Persisted team number " + (i + 1)
 								+ ". Now generating the players.");
-						// TODO generate the players for the team (INCLUDES 3
+						// generate the players for the team (INCLUDES 3
 						// year contract generation for each player
 						// and season wage depending on the generated players:
 						// age, skills, etc.
@@ -168,7 +175,7 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 							}
 							
 							Player player = (Player) mappedObjects.get(GkGenerator.MAP_PLAYER);
-							GkSkills gkSkills = (GkSkills) mappedObjects.get(GkGenerator.MAP_GK_SKILLS);
+							Skill gkSkills = (Skill) mappedObjects.get(GkGenerator.MAP_GK_SKILLS);
 							
 							// Persist the first generated goal keeper's formation as first squad
 							if (j == 0) player.setFormation(Player.FORMATION_FIRST_SQUAD);
@@ -233,7 +240,7 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 							}
 							
 							Player player = (Player) mappedObjects.get(WingGenerator.MAP_PLAYER);
-							FieldPlayerSkills fieldPlayerSkills = (FieldPlayerSkills) mappedObjects.get(WingGenerator.MAP_WINGER_SKILLS);
+							Skill fieldPlayerSkills = (Skill) mappedObjects.get(WingGenerator.MAP_WINGER_SKILLS);
 							
 							// Persist the first generated right winger's formation as first squad
 							if (rw == 0) player.setFormation(Player.FORMATION_FIRST_SQUAD);
@@ -299,7 +306,7 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 							}
 							
 							Player player = (Player) mappedObjects.get(WingGenerator.MAP_PLAYER);
-							FieldPlayerSkills fieldPlayerSkills = (FieldPlayerSkills) mappedObjects.get(WingGenerator.MAP_WINGER_SKILLS);
+							Skill fieldPlayerSkills = (Skill) mappedObjects.get(WingGenerator.MAP_WINGER_SKILLS);
 							
 							// Persist the first generated left winger's formation as first squad
 							if (lw == 0) player.setFormation(Player.FORMATION_FIRST_SQUAD);
@@ -369,7 +376,7 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 							}
 							
 							Player player = (Player) mappedObjects.get(BackGenerator.MAP_PLAYER);
-							FieldPlayerSkills fieldPlayerSkills = (FieldPlayerSkills) mappedObjects.get(BackGenerator.MAP_BACK_SKILLS);
+							Skill fieldPlayerSkills = (Skill) mappedObjects.get(BackGenerator.MAP_BACK_SKILLS);
 							
 							// Persist the first generated central back's formation as first squad
 							if (cb == 0) player.setFormation(Player.FORMATION_FIRST_SQUAD);
@@ -434,7 +441,7 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 							}
 							
 							Player player = (Player) mappedObjects.get(BackGenerator.MAP_PLAYER);
-							FieldPlayerSkills fieldPlayerSkills = (FieldPlayerSkills) mappedObjects.get(BackGenerator.MAP_BACK_SKILLS);
+							Skill fieldPlayerSkills = (Skill) mappedObjects.get(BackGenerator.MAP_BACK_SKILLS);
 							
 							// Persist the first generated right back's formation as first squad
 							if (rb == 0) player.setFormation(Player.FORMATION_FIRST_SQUAD);
@@ -499,7 +506,7 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 							}
 							
 							Player player = (Player) mappedObjects.get(BackGenerator.MAP_PLAYER);
-							FieldPlayerSkills fieldPlayerSkills = (FieldPlayerSkills) mappedObjects.get(BackGenerator.MAP_BACK_SKILLS);
+							Skill fieldPlayerSkills = (Skill) mappedObjects.get(BackGenerator.MAP_BACK_SKILLS);
 							
 							// Persist the first generated left back's formation as first squad
 							if (lb == 0) player.setFormation(Player.FORMATION_FIRST_SQUAD);
@@ -564,7 +571,7 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 							}
 							
 							Player player = (Player) mappedObjects.get(PivotGenerator.MAP_PLAYER);
-							FieldPlayerSkills fieldPlayerSkills = (FieldPlayerSkills) mappedObjects.get(PivotGenerator.MAP_WINGER_SKILLS);
+							Skill fieldPlayerSkills = (Skill) mappedObjects.get(PivotGenerator.MAP_WINGER_SKILLS);
 							
 							// Persist the first generated pivot's formation as first squad
 							if (pv == 0) player.setFormation(Player.FORMATION_FIRST_SQUAD);
@@ -598,13 +605,18 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 
 					} catch (Exception e) {
 						System.out
-								.println("Error when persisting one of the 12 teams.");
+								.println("Error when persisting one of the 12 teams. Exception = " + e.getLocalizedMessage());
+						e.printStackTrace();
+						
 					}
 				} // END of loop (for 12 teams)
 				
-				// Set the league as not locked
+			
 				try {
+					// Set the league as not locked
 					league.setLocked(false);
+					// Decrement the league available slots
+					league.setAvailable_slots(11);
 					emgr.persist(league);
 				} catch (Exception e) {
 					System.out.println("Error when persisting (updating) league lock. Exception - " + e.getLocalizedMessage());

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import af.handball.entity.Skill;
+import af.handball.service.GameService;
 import af.handball.service.LeagueService;
 import af.handball.service.TeamService;
 
@@ -21,6 +23,9 @@ public class TeamController {
 	
 	@Autowired
 	private TeamService teamService;
+	
+	@Autowired
+	private GameService gameService;
 	
 	@Autowired
 	private LeagueService leagueService;
@@ -48,6 +53,89 @@ public class TeamController {
 			}
 		}
 		
+		return jsonObj.toString();
+	}
+	
+	@RequestMapping(value = "/getPlayerSkills", method = RequestMethod.POST, headers = { "Content-type=application/json" }, produces="application/json")
+	@ResponseBody
+	public String getPlayerSkills(@RequestBody String jsonMsg, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		
+		JSONObject jsonObj = new JSONObject();
+		String email = (String) session.getAttribute("email");
+		
+		if (email == null) { // Session expired
+			jsonObj.put("status", "sessionExpired");
+		} else { // Session active
+			
+			
+			// Obtain the JSON message
+			JSONObject obtainedJSONObj = new JSONObject(jsonMsg);
+			
+			String playerId = (String) obtainedJSONObj.get("playerId");
+			System.out.println("Obtained player id = " + playerId);
+			if (playerId.trim().equals("") || playerId == null) jsonObj.put("status", "error");
+			else {
+				try {
+					// START Obtain the Skill object and allocate its data in the jsonObj.
+					Skill skill = gameService.getPlayerSkills(Integer.parseInt(playerId));
+					System.out.println("Skill = " + skill);
+					/* Physical Skills */
+					jsonObj.put("acceleration", skill.getAcceleration());
+					jsonObj.put("sprint_speed", skill.getSprint_speed());
+					jsonObj.put("jumping", skill.getJumping());
+					jsonObj.put("balance", skill.getBalance());
+					jsonObj.put("agility", skill.getAgility());
+					jsonObj.put("stamina", skill.getStamina());
+					jsonObj.put("strength", skill.getStrength());
+					jsonObj.put("reactions", skill.getReactions());
+					jsonObj.put("blocking", skill.getBlocking());
+					jsonObj.put("fitness", skill.getFitness());
+					/* Mental Skills */
+					jsonObj.put("aggression", skill.getAggression());
+					jsonObj.put("interceptions", skill.getInterceptions());
+					jsonObj.put("attack_position", skill.getAttack_position());
+					jsonObj.put("vision", skill.getVision());
+					jsonObj.put("creativity", skill.getCreativity());
+					/* Goal Keeping Skills */
+					jsonObj.put("reflexes", skill.getReflexes());
+					jsonObj.put("handling", skill.getHandling());
+					jsonObj.put("positioning", skill.getPositioning());
+					jsonObj.put("leg_saves", skill.getLeg_saves());
+					jsonObj.put("penalty_saves", skill.getPenalty_saves());
+					jsonObj.put("six_m_saves", skill.getSix_m_saves());
+					jsonObj.put("nine_m_saves", skill.getNine_m_saves());
+					jsonObj.put("communication", skill.getCommunication());
+					jsonObj.put("angles", skill.getAngles());
+					jsonObj.put("catching", skill.getCatching());
+					/* Technical Skills */
+					jsonObj.put("ball_control", skill.getBall_control());
+					jsonObj.put("long_shots", skill.getLong_shots());
+					jsonObj.put("fk_accuracy", skill.getFk_accuracy());
+					jsonObj.put("shot_power", skill.getShot_power());
+					jsonObj.put("dribbling", skill.getDribbling());
+					jsonObj.put("short_passing", skill.getShort_passing());
+					jsonObj.put("long_passing", skill.getLong_passing());
+					jsonObj.put("stand_tackles", skill.getStand_tackles());
+					jsonObj.put("marking", skill.getMarking());
+					jsonObj.put("penalties", skill.getPenalties());
+					jsonObj.put("curve", skill.getCurve());
+					jsonObj.put("finishing", skill.getFinishing());
+					jsonObj.put("six_m_shots", skill.getSix_m_shots());
+					jsonObj.put("nine_m_shots", skill.getNine_m_shots());
+					jsonObj.put("lob_shots", skill.getLob_shots());
+					// END Fetch the data and allocate in jsonObj.
+					
+					// Add status to the jsonObj
+					jsonObj.put("status", "OK");
+					
+				} catch (Exception e) {
+					System.out.println("Exception when parsing player id to obtain his skills. Exception - " + e.getLocalizedMessage());
+					jsonObj.put("status", "error");
+				}
+			}
+		}
+		
+		//TODO
 		return jsonObj.toString();
 	}
 	

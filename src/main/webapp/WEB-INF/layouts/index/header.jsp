@@ -116,7 +116,7 @@
 																	else {
 																		alert('User does not have a team yet');
 																		
-																		/* TODO show a modal with team name registration and post it as ajax request  */
+																		/* Show a modal with team name registration and post it as ajax request  */
 																		$("#createNewTeamModal")
 																		.modal(
 																				'show');

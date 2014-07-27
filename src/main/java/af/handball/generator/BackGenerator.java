@@ -11,9 +11,11 @@ import java.util.Random;
 
 import af.handball.entity.FieldPlayerSkills;
 import af.handball.entity.Player;
+import af.handball.entity.Skill;
+import af.handball.helper.SkillGeneratorHelper;
 
 public class BackGenerator {
-	
+
 	public static final int AGE_TYPE_YOUNG = 1;
 	public static final int AGE_YOUNG_MIN = 18;
 	public static final int AGE_YOUNG_MAX = 22;
@@ -37,34 +39,70 @@ public class BackGenerator {
 	public static final String SPECIAL_ABILITY_COUNTER_ATTACK = "counter_attack";
 	public static final String MAP_PLAYER = "player";
 	public static final String MAP_BACK_SKILLS = "back_skills";
+
+	public static final int NUMBER_OF_FIELD_PLAYER_SKILLS = 30;
+
+	public static final int SKILL_ACCELERATION_MIN = 80;
+	public static final int SKILL_ACCELERATION_MAX = 100;
+	public static final int SKILL_SPRINT_SPEED_MIN = 80;
+	public static final int SKILL_SPRINT_SPEED_MAX = 110;
+	public static final int SKILL_JUMPING_MIN = 80;
+	public static final int SKILL_JUMPING_MAX = 110;
+	public static final int SKILL_BALANCE_MIN = 100;
+	public static final int SKILL_BALANCE_MAX = 120;
+	public static final int SKILL_AGILITY_MIN = 90;
+	public static final int SKILL_AGILITY_MAX = 120;
+	public static final int SKILL_STAMINA_MIN = 80;
+	public static final int SKILL_STAMINA_MAX = 110;
+	public static final int SKILL_STRENGTH_MIN = 80;
+	public static final int SKILL_STRENGTH_MAX = 110;
+	public static final int SKILL_REACTIONS_MIN = 90;
+	public static final int SKILL_REACTIONS_MAX = 120;
 	public static final int SKILL_BLOCKING_MIN = 100;
-	public static final int SKILL_BLOCKING_MAX = 119;
-	public static final int SKILL_POSITIONING_MIN = 90;
-	public static final int SKILL_POSITIONING_MAX = 109;
-	public static final int SKILL_HANDLING_MIN = 80;
-	public static final int SKILL_HANDLING_MAX = 109;
-	public static final int SKILL_MARKING_MIN = 90;
-	public static final int SKILL_MARKING_MAX = 109;
-	public static final int SKILL_PASSING_MIN = 80;
-	public static final int SKILL_PASSING_MAX = 109;
-	public static final int SKILL_ONE_ON_ONE_MIN = 80;
-	public static final int SKILL_ONE_ON_ONE_MAX = 99;
-	public static final int SKILL_SEVEN_M_SHOOT_MIN = 80;
-	public static final int SKILL_SEVEN_M_SHOOT_MAX = 99;
-	public static final int SKILL_NINE_M_SHOOT_MIN = 80;
-	public static final int SKILL_NINE_M_SHOOT_MAX = 109;
-	public static final int SKILL_WING_SHOOT_MIN = 80;
-	public static final int SKILL_WING_SHOOT_MAX = 89;
-	public static final int SKILL_FITNESS_MIN = 90;
-	public static final int SKILL_FITNESS_MAX = 109;
+	public static final int SKILL_BLOCKING_MAX = 130;
+	public static final int SKILL_FITNESS_MIN = 80;
+	public static final int SKILL_FITNESS_MAX = 110;
+	public static final int SKILL_AGGRESSION_MIN = 90;
+	public static final int SKILL_AGGRESSION_MAX = 120;
+	public static final int SKILL_INTERCEPTIONS_MIN = 90;
+	public static final int SKILL_INTERCEPTIONS_MAX = 120;
+	public static final int SKILL_ATTACK_POSITION_MIN = 90;
+	public static final int SKILL_ATTACK_POSITION_MAX = 120;
+	public static final int SKILL_VISION_MIN = 90;
+	public static final int SKILL_VISION_MAX = 120;
 	public static final int SKILL_CREATIVITY_MIN = 80;
-	public static final int SKILL_CREATIVITY_MAX = 109;
-	public static final int SKILL_SPEED_MIN = 80;
-	public static final int SKILL_SPEED_MAX = 109;
-	public static final int SKILL_STRENGTH_MIN = 90;
-	public static final int SKILL_STRENGTH_MAX = 109;
- 	public static final int SKILL_AGGRESSION_MIN = 80;
-	public static final int SKILL_AGGRESSION_MAX = 99;
+	public static final int SKILL_CREATIVITY_MAX = 120;
+	public static final int SKILL_BALL_CONTROL_MIN = 90;
+	public static final int SKILL_BALL_CONTROL_MAX = 120;
+	public static final int SKILL_LONG_SHOTS_MIN = 80;
+	public static final int SKILL_LONG_SHOTS_MAX = 100;
+	public static final int SKILL_FK_ACCURACY_MIN = 90;
+	public static final int SKILL_FK_ACCURACY_MAX = 110;
+	public static final int SKILL_SHOT_POWER_MIN = 80;
+	public static final int SKILL_SHOT_POWER_MAX = 120;
+	public static final int SKILL_DRIBBLING_MIN = 90;
+	public static final int SKILL_DRIBBLING_MAX = 120;
+	public static final int SKILL_SHORT_PASSING_MIN = 90;
+	public static final int SKILL_SHORT_PASSING_MAX = 120;
+	public static final int SKILL_LONG_PASSING_MIN = 90;
+	public static final int SKILL_LONG_PASSING_MAX = 120;
+	public static final int SKILL_STAND_TACKLES_MIN = 90;
+	public static final int SKILL_STAND_TACKLES_MAX = 120;
+	public static final int SKILL_MARKING_MIN = 90;
+	public static final int SKILL_MARKING_MAX = 120;
+	public static final int SKILL_PENALTIES_MIN = 80;
+	public static final int SKILL_PENALTIES_MAX = 110;
+	public static final int SKILL_CURVE_MIN = 80;
+	public static final int SKILL_CURVE_MAX = 100;
+	public static final int SKILL_FINISHING_MIN = 80;
+	public static final int SKILL_FINISHING_MAX = 110;
+	public static final int SKILL_SIX_M_SHOTS_MIN = 90;
+	public static final int SKILL_SIX_M_SHOTS_MAX = 110;
+	public static final int SKILL_NINE_M_SHOTS_MIN = 80;
+	public static final int SKILL_NINE_M_SHOTS_MAX = 120;
+	public static final int SKILL_LOB_SHOTS_MIN = 90;
+	public static final int SKILL_LOB_SHOTS_MAX = 110;
+	
 	private int leagueLevel;
 	private BufferedReader br;
 	private ArrayList<String> generatedRandomNumbersList;
@@ -80,7 +118,8 @@ public class BackGenerator {
 		try {
 
 			br = new BufferedReader(new FileReader(
-					"C://Users//Adrian//Desktop//handball//polish-" + positionLabel + ".txt"));
+					"C://Users//Adrian//Desktop//handball//polish-"
+							+ positionLabel + ".txt"));
 			System.out.println("Obtained the " + positionLabel + " text file");
 			rightWingNames = br.readLine();
 			separatedBackNames = rightWingNames.split(",");
@@ -88,10 +127,12 @@ public class BackGenerator {
 			randomGenerator = new Random();
 
 		} catch (FileNotFoundException e) {
-			System.out.println("Couldn't obtain the file with " + positionLabel + " names.");
+			System.out.println("Couldn't obtain the file with " + positionLabel
+					+ " names.");
 			e.printStackTrace();
 		} catch (IOException e) {
-			System.out.println("Error when reading line in the " + positionLabel + " text file");
+			System.out.println("Error when reading line in the "
+					+ positionLabel + " text file");
 			e.printStackTrace();
 		}
 
@@ -101,7 +142,6 @@ public class BackGenerator {
 			int teamLevel, String positionLabel, int playerNumber) {
 		// Declare & Instantiate the entity beans
 		Player player = new Player();
-		FieldPlayerSkills fieldPlayerSkills = new FieldPlayerSkills();
 		// Declare & Instantiate a HashMap, which will be used for returning
 		// (method) the above entity beans
 		Map<String, Object> entityBeansMap = new HashMap<String, Object>();
@@ -114,7 +154,7 @@ public class BackGenerator {
 
 		// Set the player number
 		player.setNumber(playerNumber);
-		
+
 		// Obtain an age through calling a method to generate random age
 		// within the bounds of the inputed ageType (i.e. the min and max)
 		int randomAge = generateAge(ageType);
@@ -124,15 +164,16 @@ public class BackGenerator {
 		player.setCondition(100);
 		// Set the form of the player to 0 by default
 		player.setForm(0);
-		
+
 		// Generate the central backs as .... handed
 		// left back as .... handed
 		// right back as .... handed
-		if (positionLabel.equals(POSITION_CB_LABEL)) { 
-			// Generate random number either 1 (for right hand) or 2 (left hand) or
+		if (positionLabel.equals(POSITION_CB_LABEL)) {
+			// Generate random number either 1 (for right hand) or 2 (left hand)
+			// or
 			// 3 (both handed)
 			int handed = randomGenerator.nextInt(2) + 1;
-			
+
 			switch (handed) {
 			case 1: // right hand
 				player.setHanded(Player.PLAYER_HAND_RIGHT);
@@ -144,11 +185,10 @@ public class BackGenerator {
 				player.setHanded(Player.PLAYER_HAND_BOTH);
 				break;
 			} // End of switch (hand generation)
-		}
-		else if (positionLabel.equals(POSITION_LB_LABEL)) player.setHanded(Player.PLAYER_HAND_RIGHT);
-		else if (positionLabel.equals(POSITION_RB_LABEL)) player.setHanded(Player.PLAYER_HAND_LEFT);
-		
-		
+		} else if (positionLabel.equals(POSITION_LB_LABEL))
+			player.setHanded(Player.PLAYER_HAND_RIGHT);
+		else if (positionLabel.equals(POSITION_RB_LABEL))
+			player.setHanded(Player.PLAYER_HAND_LEFT);
 
 		/*
 		
@@ -160,14 +200,23 @@ public class BackGenerator {
 
 		player.setInjury_days(0);
 
+		// Set the percentage/offset of skill by default to 0
+		player.setSkill_gain(0);
+
+		// Set the skill points by default to 0
+		player.setSkill_points(0);
+
+		// Set the player intensity to half by default
+		player.setIntensity(50);
+
 		// Special ability creator
-		 // Rules:
-		  // 1 - players aged 18 are not entitled to obtain a special ability
-		   // 2 - players aged 19 and 20 have 10% chance to obtain a special
-		    // ability
-		     // 3 - players aged 21-24 have 30% chance for a special ability
-		      // 4 - players aged 25-33 have 50% chance
-		       // 5 - players aged 34-35 have 95% chance
+		// Rules:
+		// 1 - players aged 18 are not entitled to obtain a special ability
+		// 2 - players aged 19 and 20 have 10% chance to obtain a special
+		// ability
+		// 3 - players aged 21-24 have 30% chance for a special ability
+		// 4 - players aged 25-33 have 50% chance
+		// 5 - players aged 34-35 have 95% chance
 		String specialAbility = SPECIAL_ABILITY_NONE;
 		if (randomAge == 18)
 			specialAbility = SPECIAL_ABILITY_NONE;
@@ -182,14 +231,18 @@ public class BackGenerator {
 		// END special ability creator
 		// Set the random generated special ability
 		player.setSpecial_ability(specialAbility);
-		
-		int minQuality = QualityGenerator.generateMinQuality(qualityType, teamLevel);
-		int maxQuality = QualityGenerator.generateMaxQuality(qualityType, teamLevel);
-		double quality = QualityGenerator.generateRandomQuality(minQuality, maxQuality);
+
+		int minQuality = QualityGenerator.generateMinQuality(qualityType,
+				teamLevel);
+		int maxQuality = QualityGenerator.generateMaxQuality(qualityType,
+				teamLevel);
+		double quality = QualityGenerator.generateRandomQuality(minQuality,
+				maxQuality);
 		player.setPlayer_quality(quality);
-		
+
 		// Generate the market value
-		int marketValue = generateMarketValue(quality, randomAge, specialAbility);
+		int marketValue = generateMarketValue(quality, randomAge,
+				specialAbility);
 		// Set the obtained market value
 		player.setMarket_value(marketValue);
 		// Set the morale of the player to be 100% by default
@@ -199,90 +252,242 @@ public class BackGenerator {
 		// Set the player position
 		player.setPlay_position(positionLabel);
 		// Generate random weight
-		player.setWeight(randomGenerator.nextInt((WEIGHT_MAX - WEIGHT_MIN) + 1) + WEIGHT_MIN);
+		player.setWeight(randomGenerator.nextInt((WEIGHT_MAX - WEIGHT_MIN) + 1)
+				+ WEIGHT_MIN);
 		// Put the player object to the entity beans map
 		entityBeansMap.put(MAP_PLAYER, player);
-		
+
 		// Generate winger's skills
-		fieldPlayerSkills = generateBackSkills(quality, fieldPlayerSkills);
-		entityBeansMap.put(MAP_BACK_SKILLS, fieldPlayerSkills);
+		Skill skills = generateBackSkills(quality);
+		entityBeansMap.put(MAP_BACK_SKILLS, skills);
 
 		return entityBeansMap;
 	}
-	
-	private FieldPlayerSkills generateBackSkills(double quality, FieldPlayerSkills fieldPlayerSkills) {
-		// The remaining/expended quality points (due to random quality generation)
+
+	private Skill generateBackSkills(double quality) {
+		Skill skills = new Skill();
+		// The remaining/expended quality points (due to random quality
+		// generation)
 		double offset = 0;
-		// Roll for each of the field player's skills
-		double blockSkill = (double)(quality * (randomGenerator.nextInt((SKILL_BLOCKING_MAX - SKILL_BLOCKING_MIN) + 1) + SKILL_BLOCKING_MIN) / 100);	
-		double positioningSkill = (double)(quality * (randomGenerator.nextInt((SKILL_POSITIONING_MAX - SKILL_POSITIONING_MIN) + 1) + SKILL_POSITIONING_MIN) / 100);	
-		double handlingSkill = (double)(quality * (randomGenerator.nextInt((SKILL_HANDLING_MAX - SKILL_HANDLING_MIN) + 1) + SKILL_HANDLING_MIN) / 100);
-		double markingSkill = (double)(quality * (randomGenerator.nextInt((SKILL_MARKING_MAX - SKILL_MARKING_MIN) + 1) + SKILL_MARKING_MIN) / 100);
-		double passingSkill = (double)(quality * (randomGenerator.nextInt((SKILL_PASSING_MAX - SKILL_PASSING_MIN) + 1) + SKILL_PASSING_MIN) / 100);
-		double oneOnOneSkill = (double)(quality * (randomGenerator.nextInt((SKILL_ONE_ON_ONE_MAX - SKILL_ONE_ON_ONE_MIN) + 1) + SKILL_ONE_ON_ONE_MIN) / 100);
-		double sevenMShootSkill = (double)(quality * (randomGenerator.nextInt((SKILL_SEVEN_M_SHOOT_MAX - SKILL_SEVEN_M_SHOOT_MIN) + 1) + SKILL_SEVEN_M_SHOOT_MIN) / 100);
-		double nineMShootSkill = (double)(quality * (randomGenerator.nextInt((SKILL_NINE_M_SHOOT_MAX - SKILL_NINE_M_SHOOT_MIN) + 1) + SKILL_NINE_M_SHOOT_MIN) / 100);
-		double wingShootSkill = (double)(quality * (randomGenerator.nextInt((SKILL_WING_SHOOT_MAX - SKILL_WING_SHOOT_MIN) + 1) + SKILL_WING_SHOOT_MIN) / 100);	
-		double fitnessSkill = (double)(quality * (randomGenerator.nextInt((SKILL_FITNESS_MAX - SKILL_FITNESS_MIN) + 1) + SKILL_FITNESS_MIN) / 100);
-		double creativitySkill = (double)(quality * (randomGenerator.nextInt((SKILL_CREATIVITY_MAX - SKILL_CREATIVITY_MIN) + 1) + SKILL_CREATIVITY_MIN) / 100);
-		double speedSkill = (double)(quality * (randomGenerator.nextInt((SKILL_SPEED_MAX - SKILL_SPEED_MIN) + 1) + SKILL_SPEED_MIN) / 100);
-		double strengthSkill = (double)(quality * (randomGenerator.nextInt((SKILL_STRENGTH_MAX - SKILL_STRENGTH_MIN) + 1) + SKILL_STRENGTH_MIN) / 100);
-		double aggressionSkill = (double)(quality * (randomGenerator.nextInt((SKILL_AGGRESSION_MAX - SKILL_AGGRESSION_MIN) + 1) + SKILL_AGGRESSION_MIN) / 100);
-		
-		// Increment the current offset with each offset generated by skill.
-		offset += quality - blockSkill;
-		offset += quality - positioningSkill;
-		offset += quality - handlingSkill;
-		offset += quality - markingSkill;
-		offset += quality - passingSkill;
-		offset += quality - oneOnOneSkill;
-		offset += quality - sevenMShootSkill;
-		offset += quality - nineMShootSkill;
-		offset += quality - wingShootSkill;
-		offset += quality - fitnessSkill;
-		offset += quality - creativitySkill;
-		offset += quality - speedSkill;
-		offset += quality - strengthSkill;
-		offset += quality - aggressionSkill;
-		
-		
+
+		// Generate skills in the Mental area
+		double aggression = (SkillGeneratorHelper.generateRandomSkillQuality(
+				SKILL_AGGRESSION_MAX, SKILL_AGGRESSION_MIN, quality));
+
+		double interceptions = (SkillGeneratorHelper
+				.generateRandomSkillQuality(SKILL_INTERCEPTIONS_MAX,
+						SKILL_INTERCEPTIONS_MIN, quality));
+
+		double attackPosition = (SkillGeneratorHelper
+				.generateRandomSkillQuality(SKILL_ATTACK_POSITION_MAX,
+						SKILL_ATTACK_POSITION_MIN, quality));
+
+		double vision = (SkillGeneratorHelper.generateRandomSkillQuality(
+				SKILL_VISION_MAX, SKILL_VISION_MIN, quality));
+
+		double creativity = (SkillGeneratorHelper.generateRandomSkillQuality(
+				SKILL_CREATIVITY_MAX, SKILL_CREATIVITY_MIN, quality));
+		// END of generating skills in the mental area
+
+		// Generate skills in the Physical area
+		double acceleration = (SkillGeneratorHelper.generateRandomSkillQuality(
+				SKILL_ACCELERATION_MAX, SKILL_ACCELERATION_MIN, quality));
+		double sprintSpeed = (SkillGeneratorHelper.generateRandomSkillQuality(
+				SKILL_SPRINT_SPEED_MAX, SKILL_SPRINT_SPEED_MIN, quality));
+		double jumping = (SkillGeneratorHelper.generateRandomSkillQuality(
+				SKILL_JUMPING_MAX, SKILL_JUMPING_MIN, quality));
+		double balance = (SkillGeneratorHelper.generateRandomSkillQuality(
+				SKILL_BALANCE_MAX, SKILL_BALANCE_MIN, quality));
+		double agility = (SkillGeneratorHelper.generateRandomSkillQuality(
+				SKILL_AGILITY_MAX, SKILL_AGILITY_MIN, quality));
+		double stamina = (SkillGeneratorHelper.generateRandomSkillQuality(
+				SKILL_STAMINA_MAX, SKILL_STAMINA_MIN, quality));
+		double strength = (SkillGeneratorHelper.generateRandomSkillQuality(
+				SKILL_STRENGTH_MAX, SKILL_STRENGTH_MIN, quality));
+		double reactions = (SkillGeneratorHelper.generateRandomSkillQuality(
+				SKILL_REACTIONS_MAX, SKILL_REACTIONS_MIN, quality));
+		double blocking = (SkillGeneratorHelper.generateRandomSkillQuality(
+				SKILL_BLOCKING_MAX, SKILL_BLOCKING_MIN, quality));
+		double fitness = (SkillGeneratorHelper.generateRandomSkillQuality(
+				SKILL_FITNESS_MAX, SKILL_FITNESS_MIN, quality));
+		// END of generating skills in the physical area
+
+		// Generate skills in the Technical area
+		double ballControl = (SkillGeneratorHelper.generateRandomSkillQuality(
+				SKILL_BALL_CONTROL_MAX, SKILL_BALL_CONTROL_MIN, quality));
+		double longShots = (SkillGeneratorHelper.generateRandomSkillQuality(
+				SKILL_LONG_SHOTS_MAX, SKILL_LONG_SHOTS_MIN, quality));
+		double fkAccuracy = (SkillGeneratorHelper.generateRandomSkillQuality(
+				SKILL_FK_ACCURACY_MAX, SKILL_FK_ACCURACY_MIN, quality));
+		double shotPower = (SkillGeneratorHelper.generateRandomSkillQuality(
+				SKILL_SHOT_POWER_MAX, SKILL_SHOT_POWER_MIN, quality));
+		double dribbling = (SkillGeneratorHelper.generateRandomSkillQuality(
+				SKILL_DRIBBLING_MAX, SKILL_DRIBBLING_MIN, quality));
+		double shortPassing = (SkillGeneratorHelper.generateRandomSkillQuality(
+				SKILL_SHORT_PASSING_MAX, SKILL_SHORT_PASSING_MIN, quality));
+		double longPassing = (SkillGeneratorHelper.generateRandomSkillQuality(
+				SKILL_LONG_PASSING_MAX, SKILL_LONG_PASSING_MIN, quality));
+		double standTackles = (SkillGeneratorHelper.generateRandomSkillQuality(
+				SKILL_STAND_TACKLES_MAX, SKILL_STAND_TACKLES_MIN, quality));
+		double marking = (SkillGeneratorHelper.generateRandomSkillQuality(
+				SKILL_MARKING_MAX, SKILL_MARKING_MIN, quality));
+		double penalties = (SkillGeneratorHelper.generateRandomSkillQuality(
+				SKILL_PENALTIES_MAX, SKILL_PENALTIES_MIN, quality));
+		double curve = (SkillGeneratorHelper.generateRandomSkillQuality(
+				SKILL_CURVE_MAX, SKILL_CURVE_MIN, quality));
+		double finishing = (SkillGeneratorHelper.generateRandomSkillQuality(
+				SKILL_FINISHING_MAX, SKILL_FINISHING_MIN, quality));
+		double sixMShots = (SkillGeneratorHelper.generateRandomSkillQuality(
+				SKILL_SIX_M_SHOTS_MAX, SKILL_SIX_M_SHOTS_MIN, quality));
+		double nineMShots = (SkillGeneratorHelper.generateRandomSkillQuality(
+				SKILL_NINE_M_SHOTS_MAX, SKILL_NINE_M_SHOTS_MIN, quality));
+		double lobShots = (SkillGeneratorHelper.generateRandomSkillQuality(
+				SKILL_LOB_SHOTS_MAX, SKILL_LOB_SHOTS_MIN, quality));
+		// END of generating skills in the technical area
+
+		// Increment the current offset with each offset generated by mental
+		// area skills.
+		offset += quality - aggression;
+		offset += quality - interceptions;
+		offset += quality - attackPosition;
+		offset += quality - vision;
+		offset += quality - creativity;
+		// END Increment offset by mental area skills
+
+		// Increment the current offset with each offset generated by physical
+		// area
+		offset += quality - acceleration;
+		offset += quality - sprintSpeed;
+		offset += quality - jumping;
+		offset += quality - balance;
+		offset += quality - agility;
+		offset += quality - stamina;
+		offset += quality - strength;
+		offset += quality - reactions;
+		offset += quality - blocking;
+		offset += quality - fitness;
+		// End Increment offset by physical area skills
+
+		// Increment the current offset with each offset generated by technical
+		// area
+		offset += quality - ballControl;
+		offset += quality - longShots;
+		offset += quality - fkAccuracy;
+		offset += quality - shotPower;
+		offset += quality - dribbling;
+		offset += quality - shortPassing;
+		offset += quality - longPassing;
+		offset += quality - standTackles;
+		offset += quality - marking;
+		offset += quality - penalties;
+		offset += quality - curve;
+		offset += quality - finishing;
+		offset += quality - sixMShots;
+		offset += quality - nineMShots;
+		offset += quality - lobShots;
+		// End Increment offset by technical area
+
 		if (offset > 0 || offset < 0) {
-			double averageOffSet = offset / FieldPlayerSkills.NUMBER_OF_FIELD_PLAYER_SKILLS;
-			System.out.println("Average off set = " + averageOffSet);
-			blockSkill += averageOffSet;
-			
-			
-			positioningSkill += averageOffSet;
-			handlingSkill += averageOffSet;
-			markingSkill += averageOffSet;
-			passingSkill += averageOffSet;
-			oneOnOneSkill += averageOffSet;
-			sevenMShootSkill += averageOffSet;
-			nineMShootSkill += averageOffSet;
-			wingShootSkill += averageOffSet;
-			fitnessSkill += averageOffSet;
-			creativitySkill += averageOffSet;
-			speedSkill += averageOffSet;
-			strengthSkill += averageOffSet;
-			aggressionSkill += averageOffSet;
-			
-		} 
-		fieldPlayerSkills.setBlocking(blockSkill);
-		fieldPlayerSkills.setPositioning(positioningSkill);
-		fieldPlayerSkills.setHandling(handlingSkill);
-		fieldPlayerSkills.setMarking(markingSkill);
-		fieldPlayerSkills.setPassing(passingSkill);
-		fieldPlayerSkills.setOne_on_one(oneOnOneSkill);
-		fieldPlayerSkills.setSeven_m_shoot(sevenMShootSkill);
-		fieldPlayerSkills.setNine_m_shoot(nineMShootSkill);
-		fieldPlayerSkills.setWing_shoot(wingShootSkill);
-		fieldPlayerSkills.setFitness(fitnessSkill);
-		fieldPlayerSkills.setCreativity(creativitySkill);
-		fieldPlayerSkills.setSpeed(speedSkill);
-		fieldPlayerSkills.setStrength(strengthSkill);
-		fieldPlayerSkills.setAggression(aggressionSkill);
-		
-		return fieldPlayerSkills;
+			double averageOffSet = offset / NUMBER_OF_FIELD_PLAYER_SKILLS;
+			/* Add the offset to mental area skills */
+			aggression += averageOffSet;
+			interceptions += averageOffSet;
+			attackPosition += averageOffSet;
+			vision += averageOffSet;
+			creativity += averageOffSet;
+			/* END adding offset to mental area skills */
+
+			/* Add the offset to physical area skills */
+			acceleration += averageOffSet;
+			sprintSpeed += averageOffSet;
+			jumping += averageOffSet;
+			balance += averageOffSet;
+			agility += averageOffSet;
+			stamina += averageOffSet;
+			strength += averageOffSet;
+			reactions += averageOffSet;
+			blocking += averageOffSet;
+			fitness += averageOffSet;
+			/* END adding offset to physical area skills */
+
+			/* Add the offset to technical area skills */
+			ballControl += averageOffSet;
+			longShots += averageOffSet;
+			fkAccuracy += averageOffSet;
+			shotPower += averageOffSet;
+			dribbling += averageOffSet;
+			shortPassing += averageOffSet;
+			longPassing += averageOffSet;
+			standTackles += averageOffSet;
+			marking += averageOffSet;
+			penalties += averageOffSet;
+			curve += averageOffSet;
+			finishing += averageOffSet;
+			sixMShots += averageOffSet;
+			nineMShots += averageOffSet;
+			lobShots += averageOffSet;
+			/* END adding the offset to technical area skills */
+
+		} // END if (offset bigger or less than 0)
+
+		// Add the skills to the Skill entity bean
+		skills.setAggression(aggression);
+		skills.setInterceptions(interceptions);
+		skills.setAttack_position(attackPosition);
+		skills.setVision(vision);
+		skills.setCreativity(creativity);
+
+		skills.setAcceleration(acceleration);
+		skills.setSprint_speed(sprintSpeed);
+		skills.setJumping(jumping);
+		skills.setBalance(balance);
+		skills.setAgility(agility);
+		skills.setStamina(stamina);
+		skills.setStrength(strength);
+		skills.setReactions(reactions);
+		skills.setBlocking(blocking);
+		skills.setFitness(fitness);
+
+		skills.setBall_control(ballControl);
+		skills.setLong_shots(longShots);
+		skills.setFk_accuracy(fkAccuracy);
+		skills.setShot_power(shotPower);
+		skills.setDribbling(dribbling);
+		skills.setShort_passing(shortPassing);
+		skills.setLong_passing(longPassing);
+		skills.setStand_tackles(standTackles);
+		skills.setMarking(marking);
+		skills.setPenalties(penalties);
+		skills.setCurve(curve);
+		skills.setFinishing(finishing);
+		skills.setSix_m_shots(sixMShots);
+		skills.setNine_m_shots(nineMShots);
+		skills.setLob_shots(lobShots);
+
+		// Add low amount of GK skills to entity bean
+		skills.setReflexes(SkillGeneratorHelper.generateRandomSkillQuality(3,
+				1, quality));
+		skills.setHandling(SkillGeneratorHelper.generateRandomSkillQuality(3,
+				1, quality));
+		skills.setPositioning(SkillGeneratorHelper.generateRandomSkillQuality(
+				4, 2, quality));
+		skills.setLeg_saves(SkillGeneratorHelper.generateRandomSkillQuality(2,
+				1, quality));
+		skills.setPenalty_saves(SkillGeneratorHelper
+				.generateRandomSkillQuality(4, 1, quality));
+		skills.setSix_m_saves(SkillGeneratorHelper.generateRandomSkillQuality(
+				3, 1, quality));
+		skills.setNine_m_saves(SkillGeneratorHelper.generateRandomSkillQuality(
+				2, 1, quality));
+		skills.setCommunication(SkillGeneratorHelper
+				.generateRandomSkillQuality(8, 4, quality));
+		skills.setAngles(SkillGeneratorHelper.generateRandomSkillQuality(2, 1,
+				quality));
+		skills.setCatching(SkillGeneratorHelper.generateRandomSkillQuality(9,
+				5, quality));
+		// END adding skills to Skill entity bean
+
+		return skills;
 	} // END of Generate Back Skills
 
 	private int generateAge(int ageType) {
@@ -305,8 +510,6 @@ public class BackGenerator {
 
 		return age;
 	}
-
-
 
 	private int generateMarketValue(double quality, int age,
 			String specialAbility) {
@@ -345,7 +548,7 @@ public class BackGenerator {
 			case 3:
 				specialAbility = SPECIAL_ABILITY_COUNTER_ATTACK;
 				break;
-			case 4: 
+			case 4:
 				specialAbility = SPECIAL_ABILITY_LONG_SHOOT;
 				break;
 			}

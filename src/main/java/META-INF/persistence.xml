@@ -15,6 +15,7 @@
 		<class>af.handball.entity.Contract</class>
 		<class>af.handball.entity.GkSkills</class>
 		<class>af.handball.entity.FieldPlayerSkills</class>
+		<class>af.handball.entity.Skill</class>
 		
 		
 		<!-- <properties>

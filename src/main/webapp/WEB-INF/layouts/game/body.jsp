@@ -12,11 +12,11 @@
 	$("#modalSessionExpired").modal('show');
 	</script>
  	<%} else {%>
-   }
+   
 <!-- Main jumbotron for a primary marketing message or call to action -->
-<div class="jumbotron" style="margin-top: -5%">
-	<br> <br>
-	<div class="container" id="container">
+
+	
+	<div style="padding-left: 10%; padding-right: 10%" id="container">
 		<!-- NAVIGATION ROW -->
 		<div class="row">
 
@@ -89,5 +89,4 @@
 		<!-- End of container -->
 	</div>
 
-</div>
 <% } %>

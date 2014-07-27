@@ -53,6 +53,12 @@ public class Player implements Serializable {
 	private int weight;
 
 	private int handed;
+	
+	private int skill_gain;
+	
+	private int skill_points;
+	
+	private int intensity;
 
 	private String nationality;
 
@@ -206,4 +212,29 @@ public class Player implements Serializable {
 		this.name = name;
 	}
 
+	public int getSkill_gain() {
+		return skill_gain;
+	}
+
+	public void setSkill_gain(int skill_gain) {
+		this.skill_gain = skill_gain;
+	}
+
+	public int getSkill_points() {
+		return skill_points;
+	}
+
+	public void setSkill_points(int skill_points) {
+		this.skill_points = skill_points;
+	}
+
+	public int getIntensity() {
+		return intensity;
+	}
+
+	public void setIntensity(int intensity) {
+		this.intensity = intensity;
+	}
+
+	
 }

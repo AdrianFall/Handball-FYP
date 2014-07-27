@@ -7,25 +7,27 @@
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
-	href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	href="/hb/css/bootstrap.min.css">
 
 <link rel="stylesheet" href="/hb/css/center.css">
 
 <!-- Optional theme -->
 <link rel="stylesheet"
-	href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css"> 
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css">
+	href="/hb/css/bootstrap-theme.min.css"> 
+<!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css"> -->
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css">
 
-<link rel="stylesheet" href="/hb/css/img-fix.css">
-<link rel="stylesheet" href="/hb/css/metro-title.css">
-<link rel="stylesheet" href="/hb/css/fonts.css">
-<link rel="stylesheet" href="/hb/css/tables.css">
-
+<link rel="stylesheet" href="/hb/css/img-fix.css"/>
+<link rel="stylesheet" href="/hb/css/metro-title.css"/>
+<link rel="stylesheet" href="/hb/css/fonts.css"/>
+<link rel="stylesheet" href="/hb/css/tables.css"/>
+<link rel="stylesheet" href="/hb/css/jquery.animateDialog.css"/>
+<link rel="stylesheet" href="/hb/css/jquery.animateDialog.junk.css" />
+<link rel="stylesheet" href="/hb/css/test.css"/>
 
 
 <script type="text/javascript" src="//code.jquery.com/jquery-2.0.2.js"></script>
-<script type="text/javascript" src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script type="text/javascript" src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><tiles:getAsString name="title"></tiles:getAsString></title>
@@ -36,7 +38,7 @@
 	<script
 		src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.js"></script>
-	
+	<script src="/hb/scripts/jquery.animateDialog.js"></script>
 
 	<%! /* Session attributes */
 		private String email;%>
@@ -79,8 +81,9 @@
 		});
 	</script> -->
 
+	<%-- <tiles:insertAttribute name="modalPlayerDetails"/> --%>
 
-
+<br><br>
 	<tiles:insertAttribute name="header" />
 
 
@@ -135,6 +138,8 @@
 			class="btn btn-primary">Register</button>
 	</form> -->
 	<%-- <tiles:insertAttribute name="footer" /> --%>
+	
+	
 
 </body>
 </html>

@@ -1,6 +1,7 @@
 package af.handball.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.transaction.Transactional;
 
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import af.handball.entity.Player;
+import af.handball.entity.Skill;
 import af.handball.repository.GameRepository;
 
 @Service
@@ -20,6 +22,18 @@ public class GameService {
 	public List<Player> getUsersPlayers(String email) {
 		return gameRepository.getUserTeam(email);
 	}
+	
+	public Map<String, Skill> getAllPlayersSkills(List<Player> listOfPlayers) {
+		
+		return gameRepository.getAllPlayersSkills(listOfPlayers);
+	}
+
+	public Skill getPlayerSkills(int playerId) {
+		return gameRepository.getPlayerSkills(playerId);
+	}
+	
+	
+	
 	
 	/*public List<User> findAll() {
 		return userRepository.findAll();
