@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Table(name="team")
 @NamedQueries({ 
 	@NamedQuery(name = "Team.getTeamByEmail", query = "SELECT t FROM Team t WHERE t.email = :email"),
-	@NamedQuery(name = "Team.getAvailableTeams", query = "SELECT t FROM Team t WHERE t.email IS NULL AND t.league_id = :league_id")
+	@NamedQuery(name = "Team.getAvailableTeams", query = "SELECT t FROM Team t WHERE t.email IS NULL AND t.league_id = :league_id"),
 })
 public class Team implements Serializable {
 

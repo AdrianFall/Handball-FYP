@@ -51,6 +51,9 @@ public class TeamService {
 		
 		String teamName = teamRepository.getTeam(email);
 		return teamName;
-		
+	}
+	
+	public int getTeamLevel(final String email) {
+		return teamRepository.getTeamLevel(email);
 	}
 }

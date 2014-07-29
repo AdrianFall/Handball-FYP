@@ -2,6 +2,12 @@
 	pageEncoding="UTF-8"
 	import="af.handball.entity.Player,java.util.List,java.util.ArrayList,java.util.HashMap,af.handball.entity.Skill,java.util.Map"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<html>
+<head><script type="text/javascript" src="/hb/scripts/jquery.knob.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.1.1/angular.min.js"></script>
+<script type="text/javascript" src="/hb/scripts/jquery.easy-pie-chart.js"></script>
+</head>
+<body>
 <%!private String teamName;
 	private String email;
 	private List<Player> playerList;
@@ -482,7 +488,7 @@ $('#fsqp_td<%=i%> div').slideUp(
 	     });
 		// Register the click listener on each row of first squad players
 		  $("#fsqp_tr<%=i%>").click(function() {
-			  alert( "Implementing." );
+			  
 			  var player = {
   		            teamName: "<%=teamName%>",
   		            playerName: $("#fsqp_name<%=i%>").text(),
@@ -500,15 +506,13 @@ $('#fsqp_td<%=i%> div').slideUp(
 		    	$('#clubName').text(player.teamName);
 			  	$('#playerName').text(player.playerName);
 			  	$('#playerQuality').text(player.playerQuality);
-			  	alert('player pos ' + player.playerPosition);
 			  	$('#playerPosition').text(player.playerPosition);
 			  	$('#playerAge').text(player.playerAge);
 			  	$('#playerMarketValue').text('$' + player.playerMarketValue);
 			  	$('#playerForm').text(player.playerForm);
 			  
-			  	alert(player.playerId);
 			  	
-				showPlayerDetailsModal(player.playerId);
+				showPlayerDetailsModal(player.playerId, player.playerPosition);
 			  		
 			  	
 			});
@@ -736,9 +740,11 @@ $('#fsqp_td<%=i%> div').slideUp(
 </script>
 
 <!-- Player Details Modal -->
+ 
 <div class="modal fade" id="modalPlayerDetails" tabindex="-1"
 	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
 	style="padding-left: 10px; padding-right: 10px;">
+	
 	<div class="modal-dialog"
 		style="width: 100%; height: 100%; position: relative; padding-top: 0%;">
 		<div class="modal-content"
@@ -750,7 +756,7 @@ $('#fsqp_td<%=i%> div').slideUp(
 				<!-- Close x button on top-right -->
 				<div style="margin-right: 1.5%;">
 					<button type="button"
-						style="position: absolute; margin-left: 97.5%; background: red;"
+						style="position: absolute; margin-left: 97.5%; margin-top: 9px; background: red;"
 						class="close" data-dismiss="modal">
 						<span "aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 					</button>
@@ -760,7 +766,8 @@ $('#fsqp_td<%=i%> div').slideUp(
 				<!-- START the player details -->
 
 				<!-- Club name display -->
-
+				
+				<!-- START Positioning the Player Report  -->
 				<div id="clubName"
 					style="position: absolute; margin-left: 12%; margin-top: 50px; font-size: 100%"></div>
 				<div id="playerName"
@@ -786,190 +793,89 @@ $('#fsqp_td<%=i%> div').slideUp(
 					style="position: absolute; margin-left: 9.5%; margin-top: 154px; font-size: 75%; font-family: 'Comic Sans MS', cursive, sans-serif; color: white;">Form</div>
 				<div id="playerForm"
 					style="position: absolute; margin-left: 20.5%; margin-top: 154px; font-size: 75%; font-family: 'Comic Sans MS', cursive, sans-serif; color: #D1FF75;"></div>
+				<!-- END Positioning the Player Report -->
+				
+				
+				<!-- Spinners for the duration of ajax post  -->
+				<div id="physicalSectionSpinner" style="position: absolute; z-index: 2; margin-left: 75%; margin-top: 160px;"></div>
+				<script>var opts = {
+						  lines: 11, // The number of lines to draw
+						  length: 18, // The length of each line
+						  width: 10, // The line thickness
+						  radius: 30, // The radius of the inner circle
+						  corners: 1, // Corner roundness (0..1)
+						  rotate: 0, // The rotation offset
+						  direction: 1, // 1: clockwise, -1: counterclockwise
+						  color: '#000', // #rgb or #rrggbb or array of colors
+						  speed: 0.8, // Rounds per second
+						  trail: 60, // Afterglow percentage
+						  shadow: true, // Whether to render a shadow
+						  hwaccel: false, // Whether to use hardware acceleration
+						  className: 'spinner', // The CSS class to assign to the spinner
+						  zIndex: 1000, // The z-index (defaults to 2000000000)
+						  top: '50%', // Top position relative to parent
+						  left: '50%' // Left position relative to parent
+						};
+						var target = document.getElementById('physicalSectionSpinner');
+						var spinner = new Spinner(opts).spin(target);</script>
+				
+				<!-- END Spinners -->
+				
+				<!-- START Positioning the Player Skills -->
+				
+				<div id="physicalSectionLabel" style="display: none; position: absolute; margin-left: 52%; margin-top: 15px; font-size: 90%; font-style: bold;">Physical</div>
+				<hr id="physicalLine" style="display:none; position: absolute; background-color: green; margin-left: 52%; margin-top: 32px; height:1px; width: 330px;">
+				
+				 <div id="accelerationLabel" style="position: absolute; display:none; margin-left: 53%; margin-top: 34px; font-size: 90%; display: none;">Acceleration</div>
+				
+				<!-- <div id="accelerationBlock" style="position: absolute; border: 1px; margin-left: 69%; margin-top: 35px; width:22px; height: 17px; background: red;"><div style="margin-top: -1px; margin-left: 3px;"><font color="white" size="2" style="margin-bottom: 11px;">14</font></div></div></div> -->
+				<div id="accelerationBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 35px;"><div id="accelerationText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+
+				<div id="sprintSpeedLabel" style="position: absolute; margin-left: 74%; margin-top: 34px; font-size: 90%; display: none;">Sprint Speed</div>
+				<div id="sprintSpeedBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 34px;"><div id="sprintSpeedText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+				
+				<div id="jumpingLabel" style="position: absolute; margin-left: 52.9%; margin-top: 55px; font-size: 90%; display: none;">Jumping</div>
+				<div id="jumpingBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 55px;"><div id="jumpingText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+				
+				<div id="balanceLabel" style="position: absolute; margin-left: 74%; margin-top: 55px; font-size: 90%; display: none;">Balance</div>
+				<div id="balanceBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 55px;"><div id="balanceText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+				
+				<div id="agilityLabel" style="position: absolute; margin-left: 53%; margin-top: 76px; font-size: 90%; display: none;">Agility</div>
+				<div id="agilityBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 76px;"><div id="agilityText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+				
+				<div id="staminaLabel" style="position: absolute; margin-left: 74%; margin-top: 76px; font-size: 90%; display: none;">Stamina</div>
+				<div id="staminaBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 76px;"><div id="staminaText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+				
+				<div id="strengthLabel" style="position: absolute; margin-left: 52.9%; margin-top: 97px; font-size: 90%; display: none;">Strength</div>
+				<div id="strengthBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 97px;"><div id="strengthText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+				
+				<div id="reactionsLabel" style="position: absolute; margin-left: 74%; margin-top: 97px; font-size: 90%; display: none;">Reactions</div>
+				<div id="reactionsBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 97px;"><div id="reactionsText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+				
+				<div id="blockingLabel" style="position: absolute; margin-left: 52.9%; margin-top: 118px; font-size: 90%; display: none;">Blocking</div>
+				<div id="blockingBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 118px;"><div id="blockingText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+				
+				<div id="fitnessLabel" style="position: absolute; margin-left: 74%; margin-top: 118px; font-size: 90%; display: none;">Fitness</div>
+				<div id="fitnessBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 118px;"><div id="fitnessText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
 				<% //TODO %>
+		
+			
 
-				<script>
-    	
-    	</script>
-				<%-- 	<div id="what" style="position: absolute; margin-left: 12%; margin-top: 4.5%; width: 15%; height: 5%;">
-    	<span id="spanBold"><%=teamName%></span>
-    	
-    	</div>
-    	<div id="message" style="float: right"> Hello</div> --%>
-
-
-				<!-- <script>
-    	function sendMessage(msg){
-    		 //   var Message += " " +msg;
-    		    $("#message").html(msg);
-    		}
-    		function toConsole(msg){
-    		    var dNow = new Date();
-    		     console.info(dNow.getHours() + ":" + dNow.getMinutes()+":" + dNow.getSeconds()+" : "+msg);
-    		}
-    		$(document).ready(function(){
-    		    $(window).resize(function(){sendMessage("width: "+$("#what").width()+" height: "+$("#what").height()); $('#what').textFit({alignVert: false});});
-    		});
-    		// jQuery.textFit v1.0
-    		// 9/2012 by STRML (strml.github.com)
-    		// MIT License
-    		// Adapted from jquery.boxfit(https://github.com/michikono/boxfit)
-    		// To use: $('#target-div').textFit()
-    		// Will make the *text* content inside a container scale to fit the container
-    		// The container is required to have a set width and height
-    		// Uses binary search, min size, max size
-
-    		(function($) {
-    		    $.fn.textFit = function(options) {
-    		        var settings = {
-    		            alignVert: true, // if true, textFit will align vertically using css tables
-    		            alignHoriz: true, // if true, textFit will set text-align: center
-    		            multiLine: true, // if true, textFit will not set white-space: no-wrap
-    		            detectMultiLine: false, // disable to turn off automatic multi-line sensing
-    		            minFontSize: 20,
-    		            maxFontSize: 20,
-    		            reProcess: true, // if true, textFit will re-process already-fit nodes. Leave to 'false' for better performance
-    		            widthOnly: false // if true, textFit will fit text to element width, regardless of text height
-    		        };
-    		        $.extend(settings, options);
-
-    		        return this.each(function(){
-
-    		            if (this.length === 0 || (!settings.reProcess && $(this).data('boxfitted'))) {
-    		                return $(this);
-    		            }
-    		            if(!settings.reProcess){
-    		                $(this).data('boxfitted', 1);
-    		            }
-    		            var innerSpan, originalHeight, originalText, originalWidth;
-    		            var low, mid, high;
-    		           // if($(".textfitted:first-child").length())
-    		                
-    		            var cnt = $(".textfitted", this).html(); toConsole(cnt);
-    		            $(".textfitted", this).replaceWith(cnt);
-    		            originalText = $(this).html();
-    		            $(this).html("");
-    		            originalWidth = Math.round($(this).width());
-    		            originalHeight = Math.round($(this).height());
-
-    		            // Don't process if we can't find box dimensions
-    		            if (!originalWidth || (!settings.widthOnly && !originalHeight)) {
-    		                if (window.console != null) {
-    		                    if(!settings.widthOnly)
-    		                        console.info('Set a static height and width on the target element' + this.outerHTML +
-    		                            ' before using textFit!');
-    		                    else
-    		                        console.info('Set a static width on the target element' + this.outerHTML +
-    		                            ' before using textFit!');
-    		                }
-    		                return $(this).html(originalText);
-    		            } else {
-    		                // Add textfitted span
-    		                if (originalText.indexOf('textfitted') === -1) {
-    		                    innerSpan = $("<span></span>").addClass("textfitted").html(originalText);
-    		                    $(this).html(innerSpan);
-    		                } else {
-    		                    $(this).html(originalText);
-    		                    innerSpan = $(originalText).find('span.textfitted');
-    		                }
-
-    		                // Prepare & set alignment
-    		                if (settings.alignVert) {
-    		                    $(this).css("display", "table");
-    		                    innerSpan.css("display", "table-cell");
-    		                    innerSpan.css("vertical-align", "middle");
-    		                }
-    		                if (settings.alignHoriz) {
-    		                    $(this).css("text-align", "center");
-    		                    innerSpan.css("text-align", "center");
-    		                }
-
-    		                // Check if this string is multiple lines
-    		                // Not guaranteed to always work if you use wonky line-heights
-    		                if (settings.detectMultiLine && !settings.multiLine &&
-    		                      innerSpan.height() >= parseInt(innerSpan.css('font-size'), 10) * 2){
-    		                    settings.multiLine = true;
-    		                }
-    		                if (!settings.multiLine) {
-    		                    $(this).css('white-space', 'nowrap');
-    		                }
-
-    		                low = settings.minFontSize + 1;
-    		                high = settings.maxFontSize + 1;
-
-    		                // Binary search for best fit
-    		                while ( low <= high) {
-    		                    mid = parseInt((low + high) / 2, 10);
-    		                    innerSpan.css('font-size', mid);
-    		                    if(innerSpan.width() <= originalWidth && (settings.widthOnly || innerSpan.height() <= originalHeight)){
-    		                        low = mid + 1;
-    		                    } else {
-    		                        high = mid - 1;
-    		                    }
-    		                }
-    		                // Sub 1
-    		                innerSpan.css('font-size', mid - 1);
-    		            }
-    		        });
-    		    };
-    		})(jQuery);
-    	</script> -->
-				<!-- END Club name display -->
-
-				<!-- END the player details -->
-
-				<%-- <div style="width: 50%; float:left; background-color:#C6C6C6;">
-    	Report
-    	<br>
-    	<%=playerList.get(0).getNumber() %>
-    	</div>
-      
-      
-      <div style="width: 50%; float:right; background-color:#CCCCCC;">
-      <p style="text-align: center; margin-bottom: 0;"><font face="Impact" size="4">Skills</font></p>
-      <p style="margin-bottom: 0;"><font face="Roman" size="3">Physical</font>
-      <hr style="margin-top: 0; border-color: #809980">
-      </div> --%>
 			</div>
 
 		</div>
 	</div>
 </div>
 
-<script>
-//Ajax POST to obtain the skills of the player
-	function showPlayerDetailsModal(playerId) {
-		alert('funct test, player id = ' + playerId);
-	//Serialize the form and post it to the server
-   	
 
+<script type="text/javascript" src="/hb/scripts/ajax.getPlayerSkills.js">
 
-	$.ajax({
-			type : "POST",
-			url : "getPlayerSkills.html",
-			data : JSON.stringify({
-			"playerId" : playerId
-			}),
-			contentType : "application/json; charset=UTF-8",
-			success : function(data) {
-			
-			var parsedDataJSON = $.parseJSON(data);
-			if (parsedDataJSON.status == "OK") {
-				alert('status OK');
-										
-				
-			} else if (parsedDataJSON.status == "sessionExpired") alert('Session Expired');
-			  else if (parsedDataJSON.status == "error") alert('error.');
-			
-			},
-			error : function() {
-				alert('Error occured when calling hasTeam POST!');
-			}
-	});
-	}	
 </script>
+
 <!-- END Player Details Modal -->
 
 <%
 	} // END Else (user is logged in)
 %>
+</body>
+</html>

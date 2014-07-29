@@ -38,6 +38,36 @@ public class QualityGenerator {
 
 		return quality;
 	} // END of generateMinQuality method
+	
+	public static int getQualityAsPercentage(double quality, int level) {
+	
+		int worldClassMax = generateMaxQuality(QUALITY_TYPE_WORLD_STAR, level);
+		System.out.println("world class max = " + worldClassMax);
+		int qualityInt = (int) quality;
+		System.out.println("quality int = " + qualityInt);
+		double percentageDouble = (quality / worldClassMax) * 100;
+		int percentage = (int) percentageDouble;
+		return percentage;
+	}
+	
+	public static int getQualityType(double quality, int level) {
+		int qualityType = -1;
+		
+		if (quality <= generateMaxQuality(QUALITY_TYPE_DECENT, level)) {
+			qualityType = QUALITY_TYPE_DECENT;
+		} else if (quality > generateMaxQuality(QUALITY_TYPE_DECENT, level) && quality <= generateMaxQuality(QUALITY_TYPE_GOOD, level)) {
+			qualityType = QUALITY_TYPE_GOOD;
+		} else if (quality > generateMaxQuality(QUALITY_TYPE_GOOD, level) && quality <= generateMaxQuality(QUALITY_TYPE_VERY_GOOD, level)) {
+			qualityType = QUALITY_TYPE_VERY_GOOD;
+		} else if (quality > generateMaxQuality(QUALITY_TYPE_VERY_GOOD, level) && quality <= generateMaxQuality(QUALITY_TYPE_EXCELLENT, level)) {
+			qualityType = QUALITY_TYPE_EXCELLENT;
+		} else if (quality > generateMaxQuality(QUALITY_TYPE_EXCELLENT, level)) {
+			qualityType = QUALITY_TYPE_WORLD_STAR;
+		}
+		
+		return qualityType;
+	}
+	
 
 	/*
 	 * Recurisve method to generate a maximum quality based on the input quality

@@ -24,10 +24,12 @@
 <link rel="stylesheet" href="/hb/css/jquery.animateDialog.css"/>
 <link rel="stylesheet" href="/hb/css/jquery.animateDialog.junk.css" />
 <link rel="stylesheet" href="/hb/css/test.css"/>
+<link rel="stylesheet" href="/hb/css/fade.css"/>
 
 
-<script type="text/javascript" src="//code.jquery.com/jquery-2.0.2.js"></script>
-<script type="text/javascript" src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+
+
+
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><tiles:getAsString name="title"></tiles:getAsString></title>
@@ -35,10 +37,15 @@
 <body id="theBody">
 	<!-- Latest compiled and minified JavaScript -->
 
+<script type="text/javascript" src="//code.jquery.com/jquery-2.0.2.js"></script>
+<script type="text/javascript" src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+<script type="text/javascript" src="/hb/scripts/jquery.color.2.1.2.js"></script>
+
 	<script
 		src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.js"></script>
 	<script src="/hb/scripts/jquery.animateDialog.js"></script>
+	
 
 	<%! /* Session attributes */
 		private String email;%>
@@ -138,8 +145,15 @@
 			class="btn btn-primary">Register</button>
 	</form> -->
 	<%-- <tiles:insertAttribute name="footer" /> --%>
-	
-	
 
+	
+	
+	<script src="/hb/scripts/jquery.knob.js"></script>
+	<script src="/hb/scripts/spin.js"></script>
+	<script src="/hb/scripts/spin.min.js"></script>
+	
+	
+	
+	
 </body>
 </html>

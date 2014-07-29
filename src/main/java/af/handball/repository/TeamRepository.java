@@ -15,6 +15,8 @@ public interface TeamRepository
 	boolean teamExists(String email);
 
 	String getTeam(String email);
+
+	int getTeamLevel(String email);
 	
 	
 

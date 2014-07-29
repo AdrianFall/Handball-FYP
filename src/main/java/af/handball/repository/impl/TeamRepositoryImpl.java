@@ -107,4 +107,15 @@ public class TeamRepositoryImpl implements TeamRepository {
 		return assigned;
 	}
 
+	@Override
+	public int getTeamLevel(String email) {
+		TypedQuery<Team> teamQuery = emgr.createNamedQuery(
+				"Team.getTeamByEmail", Team.class);
+		teamQuery.setParameter("email", email);
+		
+		Team team = teamQuery.getSingleResult();
+		int teamLevel = team.getTeam_level();
+		return teamLevel;
+	}
+
 }

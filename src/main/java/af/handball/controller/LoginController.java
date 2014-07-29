@@ -45,9 +45,11 @@ public class LoginController {
 				jsonObj.put("authenticated", "true");
 				session.setAttribute("email", email);
 				jsonObj.put("status", status);
-				// Obtain the team name
-				String teamName = teamService.getTeamName(email);
-				session.setAttribute("teamName", teamName);
+				
+
+				// Set the session attributes
+				session.setAttribute("teamName", teamService.getTeamName(email));
+				session.setAttribute("teamLevel", teamService.getTeamLevel(email));
 				
 			} else {
 				jsonObj.put("status", "false");
