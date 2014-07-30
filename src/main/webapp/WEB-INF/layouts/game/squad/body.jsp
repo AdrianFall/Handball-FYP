@@ -2,12 +2,7 @@
 	pageEncoding="UTF-8"
 	import="af.handball.entity.Player,java.util.List,java.util.ArrayList,java.util.HashMap,af.handball.entity.Skill,java.util.Map"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
-<html>
-<head><script type="text/javascript" src="/hb/scripts/jquery.knob.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.1.1/angular.min.js"></script>
-<script type="text/javascript" src="/hb/scripts/jquery.easy-pie-chart.js"></script>
-</head>
-<body>
+
 <%!private String teamName;
 	private String email;
 	private List<Player> playerList;
@@ -499,9 +494,12 @@ $('#fsqp_td<%=i%> div').slideUp(
   		            playerForm: $('#fsqp_form<%=i%>').text(),
   		            playerId: $('#fsqp_id<%=i%>').text()
   		        };
+			  
+			 
 			  $("#modalPlayerDetails")
 				.modal(
 						'show');
+			  
 			  
 		    	$('#clubName').text(player.teamName);
 			  	$('#playerName').text(player.playerName);
@@ -512,9 +510,9 @@ $('#fsqp_td<%=i%> div').slideUp(
 			  	$('#playerForm').text(player.playerForm);
 			  
 			  	
-				showPlayerDetailsModal(player.playerId, player.playerPosition);
+				showPlayerDetailsOnModal(player.playerId, player.playerPosition);
 			  		
-			  	
+			
 			});
 		
 		
@@ -737,6 +735,7 @@ $('#fsqp_td<%=i%> div').slideUp(
 	/* setTimeout(function() { test(); }, 2000); */
 	 
 	
+	
 </script>
 
 <!-- Player Details Modal -->
@@ -744,7 +743,7 @@ $('#fsqp_td<%=i%> div').slideUp(
 <div class="modal fade" id="modalPlayerDetails" tabindex="-1"
 	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
 	style="padding-left: 10px; padding-right: 10px;">
-	
+
 	<div class="modal-dialog"
 		style="width: 100%; height: 100%; position: relative; padding-top: 0%;">
 		<div class="modal-content"
@@ -757,8 +756,8 @@ $('#fsqp_td<%=i%> div').slideUp(
 				<div style="margin-right: 1.5%;">
 					<button type="button"
 						style="position: absolute; margin-left: 97.5%; margin-top: 9px; background: red;"
-						class="close" data-dismiss="modal">
-						<span "aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+						class="close" data-dismiss="modal" data-target="#modalPlayerDetails">
+						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 					</button>
 				</div>
 				<!-- END Close x button on top-right -->
@@ -768,6 +767,7 @@ $('#fsqp_td<%=i%> div').slideUp(
 				<!-- Club name display -->
 				
 				<!-- START Positioning the Player Report  -->
+				
 				<div id="clubName"
 					style="position: absolute; margin-left: 12%; margin-top: 50px; font-size: 100%"></div>
 				<div id="playerName"
@@ -823,42 +823,120 @@ $('#fsqp_td<%=i%> div').slideUp(
 				
 				<!-- START Positioning the Player Skills -->
 				
-				<div id="physicalSectionLabel" style="display: none; position: absolute; margin-left: 52%; margin-top: 15px; font-size: 90%; font-style: bold;">Physical</div>
-				<hr id="physicalLine" style="display:none; position: absolute; background-color: green; margin-left: 52%; margin-top: 32px; height:1px; width: 330px;">
+				<!-- Physical Skills -->
+				<div id="physicalSectionLabel" style="display: none; position: absolute; margin-left: 70%; margin-top: 7px; font-size: 90%; font-style: bold;">Physical</div>
+				<hr id="physicalLine" style="display:none; position: absolute; background-color: green; margin-left: 52%; margin-top: 21px; height:1px; width: 330px;">
 				
-				 <div id="accelerationLabel" style="position: absolute; display:none; margin-left: 53%; margin-top: 34px; font-size: 90%; display: none;">Acceleration</div>
+				 <div id="accelerationLabel" style="position: absolute; display:none; margin-left: 53%; margin-top: 26px; font-size: 90%; display: none;">Acceleration</div>
 				
 				<!-- <div id="accelerationBlock" style="position: absolute; border: 1px; margin-left: 69%; margin-top: 35px; width:22px; height: 17px; background: red;"><div style="margin-top: -1px; margin-left: 3px;"><font color="white" size="2" style="margin-bottom: 11px;">14</font></div></div></div> -->
-				<div id="accelerationBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 35px;"><div id="accelerationText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+				<div id="accelerationBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 26px;"><div id="accelerationText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
 
-				<div id="sprintSpeedLabel" style="position: absolute; margin-left: 74%; margin-top: 34px; font-size: 90%; display: none;">Sprint Speed</div>
-				<div id="sprintSpeedBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 34px;"><div id="sprintSpeedText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+				<div id="sprintSpeedLabel" style="position: absolute; margin-left: 74%; margin-top: 26px; font-size: 90%; display: none;">Sprint Speed</div>
+				<div id="sprintSpeedBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 26px;"><div id="sprintSpeedText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
 				
-				<div id="jumpingLabel" style="position: absolute; margin-left: 52.9%; margin-top: 55px; font-size: 90%; display: none;">Jumping</div>
-				<div id="jumpingBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 55px;"><div id="jumpingText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+				<div id="jumpingLabel" style="position: absolute; margin-left: 52.9%; margin-top: 47px; font-size: 90%; display: none;">Jumping</div>
+				<div id="jumpingBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 47px;"><div id="jumpingText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
 				
-				<div id="balanceLabel" style="position: absolute; margin-left: 74%; margin-top: 55px; font-size: 90%; display: none;">Balance</div>
-				<div id="balanceBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 55px;"><div id="balanceText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+				<div id="balanceLabel" style="position: absolute; margin-left: 74%; margin-top: 47px; font-size: 90%; display: none;">Balance</div>
+				<div id="balanceBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 47px;"><div id="balanceText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
 				
-				<div id="agilityLabel" style="position: absolute; margin-left: 53%; margin-top: 76px; font-size: 90%; display: none;">Agility</div>
-				<div id="agilityBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 76px;"><div id="agilityText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+				<div id="agilityLabel" style="position: absolute; margin-left: 53%; margin-top: 68px; font-size: 90%; display: none;">Agility</div>
+				<div id="agilityBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 68px;"><div id="agilityText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
 				
-				<div id="staminaLabel" style="position: absolute; margin-left: 74%; margin-top: 76px; font-size: 90%; display: none;">Stamina</div>
-				<div id="staminaBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 76px;"><div id="staminaText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+				<div id="staminaLabel" style="position: absolute; margin-left: 74%; margin-top: 68px; font-size: 90%; display: none;">Stamina</div>
+				<div id="staminaBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 68px;"><div id="staminaText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
 				
-				<div id="strengthLabel" style="position: absolute; margin-left: 52.9%; margin-top: 97px; font-size: 90%; display: none;">Strength</div>
-				<div id="strengthBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 97px;"><div id="strengthText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+				<div id="strengthLabel" style="position: absolute; margin-left: 52.9%; margin-top: 89px; font-size: 90%; display: none;">Strength</div>
+				<div id="strengthBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 89px;"><div id="strengthText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
 				
-				<div id="reactionsLabel" style="position: absolute; margin-left: 74%; margin-top: 97px; font-size: 90%; display: none;">Reactions</div>
-				<div id="reactionsBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 97px;"><div id="reactionsText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+				<div id="reactionsLabel" style="position: absolute; margin-left: 74%; margin-top: 89px; font-size: 90%; display: none;">Reactions</div>
+				<div id="reactionsBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 89px;"><div id="reactionsText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
 				
-				<div id="blockingLabel" style="position: absolute; margin-left: 52.9%; margin-top: 118px; font-size: 90%; display: none;">Blocking</div>
-				<div id="blockingBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 118px;"><div id="blockingText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+				<div id="blockingLabel" style="position: absolute; margin-left: 52.9%; margin-top: 110px; font-size: 90%; display: none;">Blocking</div>
+				<div id="blockingBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 110px;"><div id="blockingText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
 				
-				<div id="fitnessLabel" style="position: absolute; margin-left: 74%; margin-top: 118px; font-size: 90%; display: none;">Fitness</div>
-				<div id="fitnessBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 118px;"><div id="fitnessText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
-				<% //TODO %>
-		
+				<div id="fitnessLabel" style="position: absolute; margin-left: 74%; margin-top: 110px; font-size: 90%; display: none;">Fitness</div>
+				<div id="fitnessBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 110px;"><div id="fitnessText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+			
+			    <!-- END Physical Skills -->
+			
+				<!-- Mental Skills -->
+				<div style="margin-top: -2px;">
+				<div id="mentalSectionLabel" style="display: none; position: absolute; margin-left: 70%; margin-top: 128px; font-size: 90%; font-style: bold;">Mental</div>
+				<hr id="mentalLine" style="display:none; position: absolute; background-color: blue; margin-left: 52%; margin-top: 143px; height:1px; width: 330px;">
+				
+				<div id="aggressionLabel" style="position: absolute; margin-left: 52.9%; margin-top: 148px; font-size: 90%; display: none;">Aggression</div>
+				<div id="aggressionBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 148px;"><div id="aggressionText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+				
+				<div id="interceptionsLabel" style="position: absolute; margin-left: 74%; margin-top: 148px; font-size: 90%; display: none;">Interceptions</div>
+				<div id="interceptionsBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 148px;"><div id="interceptionsText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+				
+				<div id="attack_positionLabel" style="position: absolute; margin-left: 52.9%; margin-top: 169px; font-size: 90%; display: none;">Attack Positioning</div>
+				<div id="attack_positionBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 169px;"><div id="attack_positionText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+				
+				<div id="visionLabel" style="position: absolute; margin-left: 74%; margin-top: 169px; font-size: 90%; display: none;">Vision</div>
+				<div id="visionBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 169px;"><div id="visionText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+				
+				<div id="creativityLabel" style="position: absolute; margin-left: 52.9%; margin-top: 190px; font-size: 90%; display: none;">Creativity</div>
+				<div id="creativityBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 190px;"><div id="creativityText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+				<!-- END Mental Skills -->
+				
+				<!-- Technical Skills -->
+				<div style="margin-top: -3px">
+				<div id="technicalSectionLabel" style="display: none; position: absolute; margin-left: 70%; margin-top: 208px; font-size: 90%; font-style: bold;">Technical</div>
+				<hr id="technicalLine" style="display:none; position: absolute; background-color: red; margin-left: 52%; margin-top: 223px; height:1px; width: 330px;">
+				
+				<div id="ball_controlLabel" style="position: absolute; margin-left: 52.9%; margin-top: 228px; font-size: 90%; display: none;">Ball Control</div>
+				<div id="ball_controlBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 228px;"><div id="ball_controlText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+				
+				<div id="long_shotsLabel" style="position: absolute; margin-left: 74%; margin-top: 228px; font-size: 90%; display: none;">Long Shots</div>
+				<div id="long_shotsBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 228px;"><div id="long_shotsText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+				
+				<div id="fk_accuracyLabel" style="position: absolute; margin-left: 52.9%; margin-top: 249px; font-size: 90%; display: none;">Free Kick Accuracy</div>
+				<div id="fk_accuracyBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 249px;"><div id="fk_accuracyText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+				
+				<div id="shot_powerLabel" style="position: absolute; margin-left: 74%; margin-top: 249px; font-size: 90%; display: none;">Shot Power</div>
+				<div id="shot_powerBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 249px;"><div id="shot_powerText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+				
+				<div id="dribblingLabel" style="position: absolute; margin-left: 52.9%; margin-top: 270px; font-size: 90%; display: none;">Dribbling</div>
+				<div id="dribblingBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 270px;"><div id="dribblingText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+				
+				<div id="short_passingLabel" style="position: absolute; margin-left: 74%; margin-top: 270px; font-size: 90%; display: none;">Short Passing</div>
+				<div id="short_passingBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 270px;"><div id="short_passingText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+				
+				<div id="long_passingLabel" style="position: absolute; margin-left: 52.9%; margin-top: 291px; font-size: 90%; display: none;">Long Passing</div>
+				<div id="long_passingBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 291px;"><div id="long_passingText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+				
+				<div id="stand_tacklesLabel" style="position: absolute; margin-left: 74%; margin-top: 291px; font-size: 90%; display: none;">Stand Tackles</div>
+				<div id="stand_tacklesBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 291px;"><div id="stand_tacklesText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+				
+				
+				<div id="markingLabel" style="position: absolute; margin-left: 52.9%; margin-top: 312px; font-size: 90%; display: none;">Marking</div>
+				<div id="markingBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 312px;"><div id="markingText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+				
+				<div id="penaltiesLabel" style="position: absolute; margin-left: 74%; margin-top: 312px; font-size: 90%; display: none;">Penalty Shots</div>
+				<div id="penaltiesBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 312px;"><div id="penaltiesText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+				
+				<div id="curveLabel" style="position: absolute; margin-left: 52.9%; margin-top: 333px; font-size: 90%; display: none;">Curve</div>
+				<div id="curveBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 333px;"><div id="curveText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+				
+				<div id="finishingLabel" style="position: absolute; margin-left: 74%; margin-top: 333px; font-size: 90%; display: none;">Finishing</div>
+				<div id="finishingBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 333px;"><div id="finishingText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+				
+				<div id="six_m_shotsLabel" style="position: absolute; margin-left: 52.9%; margin-top: 354px; font-size: 90%; display: none;">Six Meter Shots</div>
+				<div id="six_m_shotsBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 354px;"><div id="six_m_shotsText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+				
+				<div id="lob_shotsLabel" style="position: absolute; margin-left: 74%; margin-top: 354px; font-size: 90%; display: none;">Lob Shots</div>
+				<div id="lob_shotsBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 354px;"><div id="lob_shotsText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+				
+				<div id="nine_m_shotsLabel" style="position: absolute; margin-left: 52.9%; margin-top: 375px; font-size: 90%; display: none;">Nine Meter Shots</div>
+				<div id="nine_m_shotsBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 375px;"><div id="nine_m_shotsText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+				</div>
+				</div>
+				<!-- END Technical Skills -->
+			
+	
 			
 
 			</div>
@@ -866,6 +944,10 @@ $('#fsqp_td<%=i%> div').slideUp(
 		</div>
 	</div>
 </div>
+
+
+	
+   
 
 
 <script type="text/javascript" src="/hb/scripts/ajax.getPlayerSkills.js">
@@ -877,5 +959,11 @@ $('#fsqp_td<%=i%> div').slideUp(
 <%
 	} // END Else (user is logged in)
 %>
-</body>
-</html>
+
+<script>
+	
+	
+	
+	
+
+ </script>
