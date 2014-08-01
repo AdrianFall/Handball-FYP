@@ -108,7 +108,7 @@ public class TeamRepositoryImpl implements TeamRepository {
 	}
 
 	@Override
-	public int getTeamLevel(String email) {
+	public int getTeamLevel(String email) throws NoResultException {
 		TypedQuery<Team> teamQuery = emgr.createNamedQuery(
 				"Team.getTeamByEmail", Team.class);
 		teamQuery.setParameter("email", email);

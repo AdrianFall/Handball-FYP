@@ -74,16 +74,62 @@
 		</div>
 		<!--  -->
 		<script>
+		/* Deprecated */
+		/* $('#dynamicContainer').load("squad.html"); */
 		
+		/* function load_home() {
+			alert('loadhome');
+    var mygetrequest = new ajaxRequest()
+    if (mygetrequest.overrideMimeType) mygetrequest.overrideMimeType('text/html')
+    mygetrequest.onreadystatechange = function () {
+        if (mygetrequest.readyState == 4) {
+            if (mygetrequest.status == 200 || window.location.href.indexOf("http") == -1) {
+                var data = mygetrequest.responseText;
+                document.getElementById("dynamicContainer").innerHTML = data;
+            } else {
+                alert("An error has occured making the request");
+            }
+        }
+    }
+
+    mygetrequest.open("GET", "squad.html", true);
+    mygetrequest.send(null);
+    return false;
+}
 		
-		 $('#squadHref').click( function() {
+		function ajaxRequest() {
+		    var activexmodes = ["Msxml2.XMLHTTP", "Microsoft.XMLHTTP"]
+		    if (window.ActiveXObject) {
+		        for (var i = 0; i < activexmodes.length; i++) {
+		            try {
+		                return new ActiveXObject(activexmodes[i])
+		            } catch (e) {
+
+		            }
+		        }
+		    } else if (window.XMLHttpRequest) return new XMLHttpRequest()
+		    else return false;
+		} */
+		
+		/* function test() {
+			alert('test');
+			$(document).ready(function() {
+			    $.get('squad.html')
+			             .success(function(data) {
+			                 $('#dynamicContainer').html(data);
+			             });
+			    });
+		} */
+		
+		  $('#squadHref').click( function() {
 			
-			alert('Looks like squad was clicked.');
-			
-			$('#dynamicContainer').load("squad.html");
-			
-			return false;
-		 }); 
+			 $(document).ready(function() {
+				    $.get('squad.html')
+				             .success(function(data) {
+				                 $('#dynamicContainer').html(data);
+				             });
+				    });
+		 });  
 		
 		</script>
 		<!-- End of container -->

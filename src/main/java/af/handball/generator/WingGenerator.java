@@ -38,7 +38,7 @@ public class WingGenerator {
 	public static final String MAP_PLAYER = "player";
 	public static final String MAP_WINGER_SKILLS = "winger_skills";
 	
-	public static final int NUMBER_OF_FIELD_PLAYER_SKILLS = 30;
+	public static final int NUMBER_OF_FIELD_PLAYER_SKILLS = 19;
 
 	public static final int SKILL_ACCELERATION_MIN = 80;
 	public static final int SKILL_ACCELERATION_MAX = 110;
@@ -70,8 +70,8 @@ public class WingGenerator {
 	public static final int SKILL_VISION_MAX = 110;
 	public static final int SKILL_CREATIVITY_MIN = 80;
 	public static final int SKILL_CREATIVITY_MAX = 110;
-	public static final int SKILL_BALL_CONTROL_MIN = 90;
-	public static final int SKILL_BALL_CONTROL_MAX = 120;
+	public static final int SKILL_CATCHING_MIN = 90;
+	public static final int SKILL_CATCHING_MAX = 120;
 	public static final int SKILL_LONG_SHOTS_MIN = 90;
 	public static final int SKILL_LONG_SHOTS_MAX = 120;
 	public static final int SKILL_FK_ACCURACY_MIN = 90;
@@ -80,8 +80,8 @@ public class WingGenerator {
 	public static final int SKILL_SHOT_POWER_MAX = 120;
 	public static final int SKILL_DRIBBLING_MIN = 90;
 	public static final int SKILL_DRIBBLING_MAX = 110;
-	public static final int SKILL_SHORT_PASSING_MIN = 90;
-	public static final int SKILL_SHORT_PASSING_MAX = 120;
+	public static final int SKILL_PASSING_MIN = 90;
+	public static final int SKILL_PASSING_MAX = 120;
 	public static final int SKILL_LONG_PASSING_MIN = 90;
 	public static final int SKILL_LONG_PASSING_MAX = 110;
 	public static final int SKILL_STAND_TACKLES_MIN = 80;
@@ -262,10 +262,6 @@ public class WingGenerator {
 		double aggression = (SkillGeneratorHelper.generateRandomSkillQuality(
 				SKILL_AGGRESSION_MAX, SKILL_AGGRESSION_MIN, quality));
 
-		double interceptions = (SkillGeneratorHelper
-				.generateRandomSkillQuality(SKILL_INTERCEPTIONS_MAX,
-						SKILL_INTERCEPTIONS_MIN, quality));
-
 		double attackPosition = (SkillGeneratorHelper
 				.generateRandomSkillQuality(SKILL_ATTACK_POSITION_MAX,
 						SKILL_ATTACK_POSITION_MIN, quality));
@@ -278,47 +274,29 @@ public class WingGenerator {
 		// END of generating skills in the mental area
 
 		// Generate skills in the Physical area
-		double acceleration = (SkillGeneratorHelper.generateRandomSkillQuality(
-				SKILL_ACCELERATION_MAX, SKILL_ACCELERATION_MIN, quality));
 		double sprintSpeed = (SkillGeneratorHelper.generateRandomSkillQuality(
 				SKILL_SPRINT_SPEED_MAX, SKILL_SPRINT_SPEED_MIN, quality));
 		double jumping = (SkillGeneratorHelper.generateRandomSkillQuality(
 				SKILL_JUMPING_MAX, SKILL_JUMPING_MIN, quality));
 		double balance = (SkillGeneratorHelper.generateRandomSkillQuality(
 				SKILL_BALANCE_MAX, SKILL_BALANCE_MIN, quality));
-		double agility = (SkillGeneratorHelper.generateRandomSkillQuality(
-				SKILL_AGILITY_MAX, SKILL_AGILITY_MIN, quality));
 		double stamina = (SkillGeneratorHelper.generateRandomSkillQuality(
 				SKILL_STAMINA_MAX, SKILL_STAMINA_MIN, quality));
 		double strength = (SkillGeneratorHelper.generateRandomSkillQuality(
 				SKILL_STRENGTH_MAX, SKILL_STRENGTH_MIN, quality));
-		double reactions = (SkillGeneratorHelper.generateRandomSkillQuality(
-				SKILL_REACTIONS_MAX, SKILL_REACTIONS_MIN, quality));
 		double blocking = (SkillGeneratorHelper.generateRandomSkillQuality(
 				SKILL_BLOCKING_MAX, SKILL_BLOCKING_MIN, quality));
-		double fitness = (SkillGeneratorHelper.generateRandomSkillQuality(
-				SKILL_FITNESS_MAX, SKILL_FITNESS_MIN, quality));
 		// END of generating skills in the physical area
 
 		// Generate skills in the Technical area
-		double ballControl = (SkillGeneratorHelper.generateRandomSkillQuality(
-				SKILL_BALL_CONTROL_MAX, SKILL_BALL_CONTROL_MIN, quality));
-		double longShots = (SkillGeneratorHelper.generateRandomSkillQuality(
-				SKILL_LONG_SHOTS_MAX, SKILL_LONG_SHOTS_MIN, quality));
-		double fkAccuracy = (SkillGeneratorHelper.generateRandomSkillQuality(
-				SKILL_FK_ACCURACY_MAX, SKILL_FK_ACCURACY_MIN, quality));
+		double catching = (SkillGeneratorHelper.generateRandomSkillQuality(
+				SKILL_CATCHING_MAX, SKILL_CATCHING_MIN, quality));
 		double shotPower = (SkillGeneratorHelper.generateRandomSkillQuality(
 				SKILL_SHOT_POWER_MAX, SKILL_SHOT_POWER_MIN, quality));
 		double dribbling = (SkillGeneratorHelper.generateRandomSkillQuality(
 				SKILL_DRIBBLING_MAX, SKILL_DRIBBLING_MIN, quality));
-		double shortPassing = (SkillGeneratorHelper.generateRandomSkillQuality(
-				SKILL_SHORT_PASSING_MAX, SKILL_SHORT_PASSING_MIN, quality));
-		double longPassing = (SkillGeneratorHelper.generateRandomSkillQuality(
-				SKILL_LONG_PASSING_MAX, SKILL_LONG_PASSING_MIN, quality));
-		double standTackles = (SkillGeneratorHelper.generateRandomSkillQuality(
-				SKILL_STAND_TACKLES_MAX, SKILL_STAND_TACKLES_MIN, quality));
-		double marking = (SkillGeneratorHelper.generateRandomSkillQuality(
-				SKILL_MARKING_MAX, SKILL_MARKING_MIN, quality));
+		double passing = (SkillGeneratorHelper.generateRandomSkillQuality(
+				SKILL_PASSING_MAX, SKILL_PASSING_MIN, quality));
 		double penalties = (SkillGeneratorHelper.generateRandomSkillQuality(
 				SKILL_PENALTIES_MAX, SKILL_PENALTIES_MIN, quality));
 		double curve = (SkillGeneratorHelper.generateRandomSkillQuality(
@@ -329,14 +307,11 @@ public class WingGenerator {
 				SKILL_SIX_M_SHOTS_MAX, SKILL_SIX_M_SHOTS_MIN, quality));
 		double nineMShots = (SkillGeneratorHelper.generateRandomSkillQuality(
 				SKILL_NINE_M_SHOTS_MAX, SKILL_NINE_M_SHOTS_MIN, quality));
-		double lobShots = (SkillGeneratorHelper.generateRandomSkillQuality(
-				SKILL_LOB_SHOTS_MAX, SKILL_LOB_SHOTS_MIN, quality));
 		// END of generating skills in the technical area
 
 		// Increment the current offset with each offset generated by mental
 		// area skills.
 		offset += quality - aggression;
-		offset += quality - interceptions;
 		offset += quality - attackPosition;
 		offset += quality - vision;
 		offset += quality - creativity;
@@ -344,118 +319,84 @@ public class WingGenerator {
 
 		// Increment the current offset with each offset generated by physical
 		// area
-		offset += quality - acceleration;
 		offset += quality - sprintSpeed;
 		offset += quality - jumping;
 		offset += quality - balance;
-		offset += quality - agility;
 		offset += quality - stamina;
 		offset += quality - strength;
-		offset += quality - reactions;
 		offset += quality - blocking;
-		offset += quality - fitness;
 		// End Increment offset by physical area skills
 
 		// Increment the current offset with each offset generated by technical
 		// area
-		offset += quality - ballControl;
-		offset += quality - longShots;
-		offset += quality - fkAccuracy;
+		offset += quality - catching;
 		offset += quality - shotPower;
 		offset += quality - dribbling;
-		offset += quality - shortPassing;
-		offset += quality - longPassing;
-		offset += quality - standTackles;
-		offset += quality - marking;
+		offset += quality - passing;
 		offset += quality - penalties;
 		offset += quality - curve;
 		offset += quality - finishing;
 		offset += quality - sixMShots;
 		offset += quality - nineMShots;
-		offset += quality - lobShots;
 		// End Increment offset by technical area
 
 		if (offset > 0 || offset < 0) {
 			double averageOffSet = offset / NUMBER_OF_FIELD_PLAYER_SKILLS;
 			/* Add the offset to mental area skills */
 			aggression += averageOffSet;
-			interceptions += averageOffSet;
 			attackPosition += averageOffSet;
 			vision += averageOffSet;
 			creativity += averageOffSet;
 			/* END adding offset to mental area skills */
 
 			/* Add the offset to physical area skills */
-			acceleration += averageOffSet;
 			sprintSpeed += averageOffSet;
 			jumping += averageOffSet;
 			balance += averageOffSet;
-			agility += averageOffSet;
 			stamina += averageOffSet;
 			strength += averageOffSet;
-			reactions += averageOffSet;
 			blocking += averageOffSet;
-			fitness += averageOffSet;
 			/* END adding offset to physical area skills */
 
 			/* Add the offset to technical area skills */
-			ballControl += averageOffSet;
-			longShots += averageOffSet;
-			fkAccuracy += averageOffSet;
+			catching += averageOffSet;
 			shotPower += averageOffSet;
 			dribbling += averageOffSet;
-			shortPassing += averageOffSet;
-			longPassing += averageOffSet;
-			standTackles += averageOffSet;
-			marking += averageOffSet;
+			passing += averageOffSet;
 			penalties += averageOffSet;
 			curve += averageOffSet;
 			finishing += averageOffSet;
 			sixMShots += averageOffSet;
 			nineMShots += averageOffSet;
-			lobShots += averageOffSet;
 			/* END adding the offset to technical area skills */
 
 		} // END if (offset bigger or less than 0)
 
 		// Add the skills to the Skill entity bean
 		skills.setAggression(aggression);
-		skills.setInterceptions(interceptions);
 		skills.setAttack_position(attackPosition);
 		skills.setVision(vision);
 		skills.setCreativity(creativity);
 
-		skills.setAcceleration(acceleration);
 		skills.setSprint_speed(sprintSpeed);
 		skills.setJumping(jumping);
 		skills.setBalance(balance);
-		skills.setAgility(agility);
 		skills.setStamina(stamina);
 		skills.setStrength(strength);
-		skills.setReactions(reactions);
 		skills.setBlocking(blocking);
-		skills.setFitness(fitness);
 
-		skills.setBall_control(ballControl);
-		skills.setLong_shots(longShots);
-		skills.setFk_accuracy(fkAccuracy);
+		skills.setCatching(catching);
 		skills.setShot_power(shotPower);
 		skills.setDribbling(dribbling);
-		skills.setShort_passing(shortPassing);
-		skills.setLong_passing(longPassing);
-		skills.setStand_tackles(standTackles);
-		skills.setMarking(marking);
+		skills.setPassing(passing);
 		skills.setPenalties(penalties);
 		skills.setCurve(curve);
 		skills.setFinishing(finishing);
 		skills.setSix_m_shots(sixMShots);
 		skills.setNine_m_shots(nineMShots);
-		skills.setLob_shots(lobShots);
 
 		// Add low amount of GK skills to entity bean
 		skills.setReflexes(SkillGeneratorHelper.generateRandomSkillQuality(3,
-				1, quality));
-		skills.setHandling(SkillGeneratorHelper.generateRandomSkillQuality(3,
 				1, quality));
 		skills.setPositioning(SkillGeneratorHelper.generateRandomSkillQuality(
 				4, 2, quality));
@@ -467,12 +408,6 @@ public class WingGenerator {
 				3, 1, quality));
 		skills.setNine_m_saves(SkillGeneratorHelper.generateRandomSkillQuality(
 				2, 1, quality));
-		skills.setCommunication(SkillGeneratorHelper
-				.generateRandomSkillQuality(8, 4, quality));
-		skills.setAngles(SkillGeneratorHelper.generateRandomSkillQuality(2, 1,
-				quality));
-		skills.setCatching(SkillGeneratorHelper.generateRandomSkillQuality(9,
-				5, quality));
 		// END adding skills to Skill entity bean
 
 		return skills;

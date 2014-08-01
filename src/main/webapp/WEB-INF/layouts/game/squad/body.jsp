@@ -89,7 +89,7 @@
 			<% 
 			for (int i = 0; i < countFirstSquadPlayers; i++) { %>
 
-			<tr class="success" id="fsqp_tr<%=i%>">
+			<tr class="success droppableSquadTable" id="fsqp_tr<%=i%>">
 
 				<td id="fsqp_td<%=i%>" class="td"
 					style="padding-top: 4px; padding-bottom: 4px;">
@@ -130,17 +130,20 @@
 					<div id="fsqp_quality<%=i%>" style='display: none;' class="center"><%=firstSquadPlayersList.get(i).getPlayer_quality() %></div>
 				</td>
 
-				<td id="fsqp_td<%=i%>" class="td" style="display: none;">
+				<td id="fsqp_td<%=i%>" class="td"
+					style="display: none;">
 					<div id="fsqp_marketValue<%=i%>" style="display: none;"><%= firstSquadPlayersList.get(i).getMarket_value()%></div>
 				</td>
 
-				<td id="fsqp_td<%=i%>" class="td" style="display: none;">
+				<td id="fsqp_td<%=i%>" class="td"
+					style="display: none;">
 					<div id="fsqp_form<%=i%>" style="display: none;">
 						<% if(firstSquadPlayersList.get(i).getForm() == 0) out.print("N/A"); else out.print(firstSquadPlayersList.get(i).getForm());%>
 					</div>
 				</td>
 
-				<td id="fsqp_td<%=i%>" class="td" style="display: none;">
+				<td id="fsqp_td<%=i%>" class="td"
+					style="display: none;">
 					<div id="fsqp_id<%=i%>" style="display: none;"><%= firstSquadPlayersList.get(i).getPlayer_id()%></div>
 				</td>
 			</tr>
@@ -149,7 +152,7 @@
 
 			<% 
 			for (int i = 0; i < countBenchPlayers; i++) { %>
-			<tr class="warning" id="bp_tr<%=i%>">
+			<tr class="warning droppableSquadTable" id="bp_tr<%=i%>">
 
 				<td class="td" id="bp_td<%=i%>"
 					style="padding-top: 4px; padding-bottom: 4px;">
@@ -256,7 +259,7 @@
 		style="background-image: url('/hb/img/handball_playfield.png'); height: 10%; width: 30%; background-size: 100% 100%; background-repeat: no-repeat; border-bottom: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -o-user-select: none; user-select: none; cursor: default; position: fixed; right: 10%;">
 
 		<tr height="45">
-			<td class="droppable" id="LW" width="20%">
+			<td class="droppablePitchTable" id="LW" width="20%">
 				<div style="position: relative;">
 					<img style="position: absolute; top: -11px; left: 5px;"
 						src="/hb/img/field_player_back_shirt.png" height="30" width="28">
@@ -278,7 +281,7 @@
 
 			</td>
 			<td></td>
-			<td class="droppable" id="PV" width="15%">
+			<td class="droppablePitchTable" id="PV" width="15%">
 				<div style="position: relative;">
 					<img style="position: absolute; top: -11px; left: 7px;"
 						src="/hb/img/field_player_back_shirt.png" height="30" width="28">
@@ -299,7 +302,7 @@
 				</div>
 			</td>
 			<td></td>
-			<td class="droppable" id="RW" width="10%">
+			<td class="droppablePitchTable" id="RW" width="10%">
 				<div style="position: relative; top: -11px;">
 					<img style="position: absolute;"
 						src="/hb/img/field_player_back_shirt.png" height="30" width="28">
@@ -325,7 +328,7 @@
 
 		<tr height="35">
 			<td></td>
-			<td class="droppable" width="15%" id="LB"><div
+			<td class="droppablePitchTable" width="15%" id="LB"><div
 					style="position: relative;">
 					<img style="position: absolute; top: -10px; left: 5px;"
 						src="/hb/img/field_player_back_shirt.png" height="30" width="28">
@@ -344,7 +347,8 @@
 							} %>
 
 				</div></td>
-			<td class="droppable" id="CB"><div style="position: relative;">
+			<td class="droppablePitchTable" id="CB"><div
+					style="position: relative;">
 					<img style="position: absolute; top: -10px; left: 7px;"
 						src="/hb/img/field_player_back_shirt.png" height="30" width="28">
 
@@ -362,7 +366,7 @@
 							} %>
 
 				</div></td>
-			<td class="droppable" width="15%" id="RB">
+			<td class="droppablePitchTable" width="15%" id="RB">
 				<div style="position: relative;">
 					<img style="position: absolute; top: -10px; left: 20px;"
 						src="/hb/img/field_player_back_shirt.png" height="30" width="28">
@@ -397,7 +401,8 @@
 		<tr height="42">
 			<td></td>
 			<td></td>
-			<td class="droppable" id="GK"><div style="position: relative;">
+			<td class="droppablePitchTable" id="GK"><div
+					style="position: relative;">
 					<img style="position: absolute; left: 7px; top: -8px;"
 						src="/hb/img/gk_back_shirt.png" height="30" width="28">
 
@@ -438,6 +443,7 @@
 
 /* Animate the first squad players */
 <% for (int i = 0; i < firstSquadPlayersList.size(); i++)  { %>
+
 $('#fsqp_td<%=i%> div').slideUp(
 		<%=(100 * (i+(1-i*0.2)))%>
 		);
@@ -456,15 +462,24 @@ $('#fsqp_td<%=i%> div').slideUp(
 		<%-- $("#fsqp_tr<%=i%>").draggable( "destroy" ); --%>
 		/* var refresh = $('#refresh');
 		refresh.html(xmlhttp.responseText); */
+		
+		<%-- if ($('#fsqp_tr<%=i%>').data('.uiDraggable')) {
+			alert('destryoing draggable!');
+			$('#fsqp_tr<%=i%>').draggable("destroy");
+		}  --%>
+		/* $('.draggable').draggable('destroy');  */
+		
+	
 		$('#fsqp_tr<%=i%>').draggable({
 			  containment: 'holder',
 	         helper: function(event) {
 	        	 var d = document.getElementById("pitchTable");
+	        	 
 				d.className = "table-bordered";
 	        	 var fsqp_position = document.getElementById ( "fsqp_position<%=i%>" ).innerText;
 	        	 var dragged_number = $('#fsqp_td<%=i%>').text();
 	             var shirtStyle = $('<div style="position: absolute; margin:0;">' + '<img src="/hb/img/field_player_back_shirt.png" height="38" width="42" style="position:relative; margin:0; z-index:1;">' + '<h3 style="position: relative; margin-top: -30px; margin-left:8px; font-size: 16px; color:white; z-index:2; ">' + dragged_number + '</h3></div>');
-	             if (new String("GK").valueOf() == new String(fsqp_position).valueOf()) shirtStyle = $('<div style="position: absolute; margin: 0;">' + '<img src="/hb/img/gk_back_shirt.png" height="38" width="42" style="position:relative; margin: 0px; z-index:1;">' + '<h3 style="position:relative; margin-top: -30px; margin-left: 8px; font-size:16px; color:white; z-index:2;">' + 'y' + dragged_number + '</h3></img></div>');
+	             if (new String("GK").valueOf() == new String(fsqp_position).valueOf()) shirtStyle = $('<div style="position: absolute; margin: 0;">' + '<img src="/hb/img/gk_back_shirt.png" height="38" width="42" style="position:relative; margin: 0px; z-index:1;">' + '<h3 style="position:relative; margin-top: -30px; margin-left: 8px; font-size:16px; color:white; z-index:2;">' + dragged_number + '</h3></img></div>');
 	             
 	            	 return shirtStyle
 	             /* return $('<div class="drag-row"><table></table></div>') */
@@ -514,8 +529,6 @@ $('#fsqp_td<%=i%> div').slideUp(
 			  		
 			
 			});
-		
-		
 		 
 <% } %>
 /* END Animate the first squad players */
@@ -558,9 +571,41 @@ $('#fsqp_td<%=i%> div').slideUp(
 	  
 	  // Register the click listener on each row of bench squad players
 	  $("#bp_tr<%=i%>").click(function() {
-		  alert( "Implementing." );
+		  
+		  var bp_player = {
+		            teamName: "<%=teamName%>",
+		            playerName: $("#bp_name<%=i%>").text(),
+		            playerQuality: $("#bp_quality<%=i%>").text(),
+		            playerPosition: $("#bp_position<%=i%>").text(),
+		            playerAge: $("#bp_age<%=i%>").text(),
+		            playerMarketValue: $('#bp_marketValue<%=i%>').text(),
+		            playerForm: $('#bp_form<%=i%>').text(),
+		            playerId: $('#bp_id<%=i%>').text()
+		        };
+			  
+			 
+			  $("#modalPlayerDetails")
+				.modal(
+						'show');
+			  
+			  
+		    	$('#clubName').text(bp_player.teamName);
+			  	$('#playerName').text(bp_player.playerName);
+			  	$('#playerQuality').text(bp_player.playerQuality);
+			  	$('#playerPosition').text(bp_player.playerPosition);
+			  	$('#playerAge').text(bp_player.playerAge);
+			  	$('#playerMarketValue').text('$' + bp_player.playerMarketValue);
+			  	$('#playerForm').text(bp_player.playerForm);
+			  
+			  	
+				showPlayerDetailsOnModal(bp_player.playerId, bp_player.playerPosition);
+			  		
+			
+			
+		  
 		});
   <% } %>
+
 /* END Animate the bench squad players */
 
 </script>
@@ -570,11 +615,119 @@ $('#fsqp_td<%=i%> div').slideUp(
 
 <script>
 	/* START droppable */
-	$('.droppable').droppable({
-		drop : handleUIDropEvent
+	$('.droppablePitchTable').droppable({
+		drop : handlePitchTableUIDropEvent
 	});
+	
+	$('.droppableSquadTable').droppable({
+		drop : handleSquadTableUIDropEvent
+	});
+	
+	function handleSquadTableUIDropEvent(event, ui) {
+		alert(this.id);
+		var splitDroppableId = this.id.split("tr");
+		var droppableAttributeType = splitDroppableId[0];
+		var droppableAttributeIndex = splitDroppableId[1];
+		
+		var draggable = ui.draggable;
+		var draggableAttribute = draggable.attr('id');
+		var splitDraggableAttribute = draggableAttribute.split("tr");
+		var draggableAttributeType = splitDraggableAttribute[0];
+		var draggableAttributeIndex = splitDraggableAttribute[1];
+		
+		// Animate the slide up of the interchanged rows
+	     $('#' + draggableAttributeType + 'td' + draggableAttributeIndex + ' div').slideUp('slow');
+		 $('#' + droppableAttributeType + 'td' + droppableAttributeIndex + ' div').slideUp('slow'); 
+		 
+		swapPlayerDetailsOnSquadTableCells('number', droppableAttributeType, droppableAttributeIndex, draggableAttributeType, draggableAttributeIndex);
+		swapPlayerDetailsOnSquadTableCells('position', droppableAttributeType, droppableAttributeIndex, draggableAttributeType, draggableAttributeIndex);
+		swapPlayerDetailsOnSquadTableCells('name', droppableAttributeType, droppableAttributeIndex, draggableAttributeType, draggableAttributeIndex);
+		swapPlayerDetailsOnSquadTableCells('marketValue', droppableAttributeType, droppableAttributeIndex, draggableAttributeType, draggableAttributeIndex);
+		swapPlayerDetailsOnSquadTableCells('age', droppableAttributeType, droppableAttributeIndex, draggableAttributeType, draggableAttributeIndex);
+		swapPlayerDetailsOnSquadTableCells('form', droppableAttributeType, droppableAttributeIndex, draggableAttributeType, draggableAttributeIndex);
+		swapPlayerDetailsOnSquadTableCells('id', droppableAttributeType, droppableAttributeIndex, draggableAttributeType, draggableAttributeIndex);
+		swapPlayerDetailsOnSquadTableCells('quality', droppableAttributeType, droppableAttributeIndex, draggableAttributeType, draggableAttributeIndex);
+		
+		// Call method to perform changes (if needed) to the pitch table 
+		performPitchTableChangeOnShirtNumbers('h3', draggableAttributeType, draggableAttributeIndex, droppableAttributeType, droppableAttributeIndex);
+		
+		
+		
+		
+		// Animate the slide down of the interchanged rows
+		$('#' + draggableAttributeType + 'td' + draggableAttributeIndex + ' div').slideDown('slow');
+		 $('#' + droppableAttributeType + 'td' + droppableAttributeIndex + ' div').slideDown('slow'); 
+	}
+	
+	// Performs (if needed) a swap in the shirt numbers on the pitch table
+	function performPitchTableChangeOnShirtNumbers(textElementIdentifier, draggableAttributeType, draggableAttributeIndex, droppableAttributeType, droppableAttributeIndex) {
+		
+		var droppablePlayerNumber = $('#' + droppableAttributeType + 'number' + droppableAttributeIndex).text();
+		var draggablePlayerNumber = $('#' + draggableAttributeType + 'number' + draggableAttributeIndex).text();
+		
+		if (new String(draggableAttributeType).valueOf() == new String("fsqp_").valueOf() 
+				&& new String(droppableAttributeType).valueOf() == new String("fsqp_").valueOf()) {
+		
+			// Add fade out animation, swap the text and fade in the droppable player number
+			$('#' + textElementIdentifier + $.trim(droppablePlayerNumber)).fadeOut(10);
+			$('#' + textElementIdentifier + $.trim(droppablePlayerNumber)).text($.trim(draggablePlayerNumber)); 
+			$('#' + textElementIdentifier + $.trim(droppablePlayerNumber)).fadeIn(700);
+			
+			// Add fade out animation, swap the text and fade in the draggable player number
+			$('#' + textElementIdentifier + $.trim(draggablePlayerNumber)).fadeOut(10);
+			$('#' + textElementIdentifier + $.trim(draggablePlayerNumber)).text($.trim(droppablePlayerNumber)); 
+			$('#' + textElementIdentifier + $.trim(draggablePlayerNumber)).fadeIn(700);
+			
+			
+			// Swap the elements' identifiers. To perform a change, set the ids of the elements
+			// to a temporary ids, to address them uniquely and make a successful swap.
+			var id1 = 'changer1';
+			var id2 = 'changer2';
+			$('#' + textElementIdentifier + $.trim(droppablePlayerNumber)).attr('id', id1);
+			$('#' + textElementIdentifier + $.trim(draggablePlayerNumber)).attr('id', id2);
+			
+			// swap.
+			$('#' + id1).attr('id', textElementIdentifier + $.trim(draggablePlayerNumber));
+			$('#' + id2).attr('id', textElementIdentifier + $.trim(droppablePlayerNumber));
+			
+			
+		} else if (new String(draggableAttributeType).valueOf() == new String("fsqp_").valueOf()) { // Draggable is first squad player, but droppable not. Therefore droppable becomes the fsqp now
+			// Fade out animation
+			$('#' + textElementIdentifier + $.trim(droppablePlayerNumber)).fadeOut(10);
+			// Swap the text
+			$('#' + textElementIdentifier + $.trim(droppablePlayerNumber)).text($.trim(draggablePlayerNumber)); 
+			// Fade in animation
+			$('#' + textElementIdentifier + $.trim(droppablePlayerNumber)).fadeIn(700);
+			// Swap the elements' identifiers
+			$('#' + textElementIdentifier + $.trim(droppablePlayerNumber)).attr('id', textElementIdentifier + $.trim(draggablePlayerNumber));
+			
+			
+		
+			} else if (new String(droppableAttributeType).valueOf() == new String("fsqp_").valueOf()) { // Droppable is first squad player. Therefore draggable becomes the fsqp.
+				// Fade out animation
+				$('#' + textElementIdentifier + $.trim(draggablePlayerNumber)).fadeOut(10);
+				// Swap the text
+				$('#' + textElementIdentifier + $.trim(draggablePlayerNumber)).text($.trim(droppablePlayerNumber)); 
+				// Fade in animation
+				$('#' + textElementIdentifier + $.trim(draggablePlayerNumber)).fadeIn(700);
+				// Swap the elements' identifiers
+				$('#' + textElementIdentifier + $.trim(draggablePlayerNumber)).attr('id', textElementIdentifier + $.trim(droppablePlayerNumber));
+			} 
+		// Otherwise no change needed on the pitch table
+	}
+	
+	function swapPlayerDetailsOnSquadTableCells(cellIdentifier, droppableAttributeType, droppableAttributeIndex, draggableAttributeType, draggableAttributeIndex) {
 
-	function handleUIDropEvent(event, ui) {
+		var swapDroppablePlayer = $('#' + $.trim(droppableAttributeType)  + cellIdentifier + $.trim(droppableAttributeIndex));
+		var tempDroppablePlayerHTML = swapDroppablePlayer.html();
+		var swapDraggedPlayer = $('#' + $.trim(draggableAttributeType) + cellIdentifier + $.trim(draggableAttributeIndex));
+		var tempDraggedPlayerHTML = swapDraggedPlayer.html();
+		// Swap the _numbers
+		swapDroppablePlayer.html($.trim(tempDraggedPlayerHTML));
+		swapDraggedPlayer.html($.trim(tempDroppablePlayerHTML));
+	}
+
+	function handlePitchTableUIDropEvent(event, ui) {
 		
 		alert(this.id);
 		var draggable = ui.draggable;
@@ -584,15 +737,33 @@ $('#fsqp_td<%=i%> div').slideUp(
 		var draggableAttributeIndex = splitDraggableAttribute[1];
 		
 		var fieldPlayerNumber = $('#' + this.id).text();
-		alert (fieldPlayerNumber);
 		
 		// Obtain the player number and figure out which table tr/td holds the player number record
-		var trNode = $('#fsqp_pn' + $.trim(fieldPlayerNumber)).parent().parent().parent();
+		
+		var trNode;
+		var splitTrNode;
+		
+		try {
+			// Try obtaining the trNode from first squad player row
+			trNode = $('#fsqp_pn' + $.trim(fieldPlayerNumber)).parent().parent().parent();
+			splitTrNode = trNode.attr('id').split("tr");
+		} catch (e) {
+			
+			try {
+				trNode = $('#bp_pn' + $.trim(fieldPlayerNumber)).parent().parent().parent();
+				splitTrNode = trNode.attr('id').split("tr");
+			} catch (e) {
+				
+				trNode = $('#rp_pn' + $.trim(fieldPlayerNumber)).parent().parent().parent();
+				splitTrNode = trNode.attr('id').split("tr");
+			}
+		}
+		/* var trNode = $('#fsqp_pn' + $.trim(fieldPlayerNumber)).parent().parent().parent(); */
 		
 		/* var fsqp = document.getElementById('fsqp_pn' + fieldPlayerNumber); */
 		
 		
-		 var splitTrNode = trNode.attr('id').split("tr"); 
+		 /* var splitTrNode = trNode.attr('id').split("tr");  */
 		 var trType = splitTrNode[0];
 		var trIndex = splitTrNode[1];
 		
@@ -602,161 +773,51 @@ $('#fsqp_td<%=i%> div').slideUp(
 		 $('#' + draggableAttributeType + 'td' + draggableAttributeIndex + ' div').slideUp('slow');
 		 $('#' + trType + 'td' + trIndex + ' div').slideUp('slow');
 	
-		 <% // TODO Major issue !! When reserves are implemented change the assumption that a change always leads to getting the dragged player to first squad !!!!! %>
+		 swapPlayerDetailsOnSquadTableCells('number', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
+			swapPlayerDetailsOnSquadTableCells('position', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
+			swapPlayerDetailsOnSquadTableCells('name', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
+			swapPlayerDetailsOnSquadTableCells('marketValue', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
+			swapPlayerDetailsOnSquadTableCells('age', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
+			swapPlayerDetailsOnSquadTableCells('form', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
+			swapPlayerDetailsOnSquadTableCells('id', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
+			swapPlayerDetailsOnSquadTableCells('quality', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
 
- 		// Obtain the current values of first squad/dragged players
- 		var firstSquadPlayerNumber = $('#' + $.trim(trType) + 'number' + $.trim(trIndex)).text(); /* document.getElementById(trType + 'number' + trIndex).innerText; */
-		var draggedPlayerNumber = $('#' + $.trim(draggableAttributeType) + 'number' + $.trim(draggableAttributeIndex)).text(); /* document.getElementById(draggableAttributeType + 'number' + draggableAttributeIndex).innerText; */
-		// END obtaining the current values of first squad/dragged players
-		
-		// Swap the values of each record on the table, as well as the number on the shirt (pitch representation of team)
-		
-		// Obtain the elements corresponding the player numbers
-		var swapFirstSquadPlayerNumber = $('#fsqp_pn' + $.trim(fieldPlayerNumber));
-		var swapDraggedPlayerNumber = $('#' + $.trim(draggableAttributeType) + 'pn' + $.trim(draggedPlayerNumber));
-		// Swap the numbers
-		swapFirstSquadPlayerNumber.parent().html("<div id='fsqp_pn" + $.trim(draggedPlayerNumber)+"'>" + $.trim(draggedPlayerNumber)+"</div>");
-		swapDraggedPlayerNumber.parent().html("<div id='" + $.trim(draggableAttributeType) + "pn" + $.trim(firstSquadPlayerNumber) + "'>" + $.trim(firstSquadPlayerNumber) + "</div>");  
-		 
-		// Obtain the elements corresponding to the player position
-		var swapFirstSquadPlayerPosition = $('#fsqp_position' + $.trim(trIndex));
-		var tempFirstSquadPlayerPosition = swapFirstSquadPlayerPosition.html();
-		var swapDraggedPlayerPosition = $('#' + $.trim(draggableAttributeType) + 'position' + $.trim(draggableAttributeIndex));
-		var tempDraggedPlayerPosition = swapDraggedPlayerPosition.html();
-		// Swap the positions
-		swapFirstSquadPlayerPosition.html($.trim(tempDraggedPlayerPosition));
-		swapDraggedPlayerPosition.html($.trim(tempFirstSquadPlayerPosition));
-		
-		
-		// Obtain the elements corresponding to player names
-		  var swapFirstSquadPlayerName = $('#fsqp_name' + $.trim(trIndex)); 
-		 var tempFirstSquadPlayerName = swapFirstSquadPlayerName.html();
-		 var swapDraggedPlayerName = $('#' + draggableAttributeType + 'name' + draggableAttributeIndex);
-		 var tempDraggedPlayerName = swapDraggedPlayerName.html();
-		 // Swap the names
-		 swapFirstSquadPlayerName.html(tempDraggedPlayerName);
-		 swapDraggedPlayerName.html(tempFirstSquadPlayerName);
-		 
-		 // Obtain the elements corresponding to player market values
-		 var swapFirstSquadPlayerMarketValue = $('#fsqp_marketValue' + $.trim(trIndex));
-		 var tempFirstSquadPlayerMarketValue = swapFirstSquadPlayerMarketValue.html();
-		 var swapDraggedPlayerMarketValue = $('#' + draggableAttributeType + 'marketValue' + draggableAttributeIndex);
-		 var tempDraggedPlayerMarketValue = swapDraggedPlayerMarketValue.html();
-		 // Swap the market values
-		 swapFirstSquadPlayerMarketValue.html(tempDraggedPlayerMarketValue);
-		 swapDraggedPlayerMarketValue.html(tempFirstSquadPlayerMarketValue);
-		 
-		 // Obtain the elements corresponding to the player age
-		 var swapFirstSquadPlayerAge = $('#fsqp_age' + $.trim(trIndex));
-		 var tempFirstSquadPlayerAge = swapFirstSquadPlayerAge.html();
-		 var swapDraggedPlayerAge = $('#' + $.trim(draggableAttributeType) + 'age' + draggableAttributeIndex);
-		 var tempDraggedPlayerAge = swapDraggedPlayerAge.html();
-		 // Swap the ages
-		 swapFirstSquadPlayerAge.html(tempDraggedPlayerAge);
-		 swapDraggedPlayerAge.html(tempFirstSquadPlayerAge);
-		 
-		 // Obtain the elements corresponding to the player form
-		 var swapFirstSquadPlayerForm = $('#fsqp_form' + $.trim(trIndex));
-		 var tempFirstSquadPlayerForm = swapFirstSquadPlayerForm.html();
-		 var swapDraggedPlayerForm = $('#' + $.trim(draggableAttributeType) + 'form' + draggableAttributeIndex);
-		 var tempDraggedPlayerForm = swapDraggedPlayerForm.html();
-		 // Swap the forms
-		 swapFirstSquadPlayerForm.html(swapDraggedPlayerForm);
-		 swapDraggedPlayerForm.html(tempFirstSquadPlayerForm);
-		 
-		 // Obtain the elements corresponding to the player id
-		 var swapFirstSquadPlayerId = $('#fsqp_id' + $.trim(trIndex));
-		 var tempFirstSquadPlayerId = swapFirstSquadPlayerId.html();
-		 var swapDraggedPlayerId = $('#' + $.trim(draggableAttributeType) + 'id' + draggableAttributeIndex);
-		 var tempdraggedPlayerId = swapDraggedPlayerId.html();
-		 // Swap the ids
-		 swapFirstSquadPlayerId.html(tempdraggedPlayerId);
-		 swapDraggedPlayerId.html(tempFirstSquadPlayerId);
-		 
-		<%//TODO%> //Obtain the elements corresponding to status & speciality
-		
-		// Obtain the elements corresponding to player quality
-		var swapFirstSquadPlayerQuality = $('#fsqp_quality' + trIndex); 
-		var tempFirstSquadPlayerQuality = swapFirstSquadPlayerQuality.html();
-		var swapDraggedPlayerQuality = $('#' + draggableAttributeType + 'quality' + draggableAttributeIndex);
-		var tempDraggedPlayerQuality = swapDraggedPlayerQuality.html();
-		// Swap the qualities
-		swapFirstSquadPlayerQuality.html(tempDraggedPlayerQuality);
-		swapDraggedPlayerQuality.html(tempFirstSquadPlayerQuality);
 			
 		
 	 	
-		//determine whether the dragged player is in first squad, if so do double swap of numbers
-		if (new String(draggableAttributeType).valueOf() == new String("fsqp_").valueOf()) {
-			var tempFirstSquadPlayerNumber = firstSquadPlayerNumber;
-			var tempDraggedPlayerNumber = draggedPlayerNumber;
-			
-			
-			$('#h3' + $.trim(tempFirstSquadPlayerNumber)).fadeOut(10);
-			
-				$('#h3' + $.trim(tempFirstSquadPlayerNumber)).text($.trim(tempDraggedPlayerNumber));
-		
-			$('#h3' + $.trim(tempFirstSquadPlayerNumber)).fadeIn(980);
-			
-			$('#h3' + $.trim(tempDraggedPlayerNumber)).fadeOut(10);
-			$('#h3' + $.trim(tempDraggedPlayerNumber)).text($.trim(tempFirstSquadPlayerNumber)); 
-			$('#h3' + $.trim(tempDraggedPlayerNumber)).fadeIn(680);
-			
-		
-			var h3DraggedPlayer = $('#h3' + $.trim(tempDraggedPlayerNumber));
-			var h3FirstSquadPlayer = $('#h3' + $.trim(tempFirstSquadPlayerNumber));
-			h3DraggedPlayer.attr( "id",  "h3" + $.trim(tempFirstSquadPlayerNumber));
-			h3FirstSquadPlayer.attr( "id",  "h3" + $.trim(tempDraggedPlayerNumber));
-		
-		} else {
-		
-			$('#h3' + $.trim(firstSquadPlayerNumber)).fadeOut(10);
-		$('#h3' + $.trim(firstSquadPlayerNumber)).text($.trim(draggedPlayerNumber));
-		$('#h3' + $.trim(firstSquadPlayerNumber)).fadeIn(980);
-		
-		/* $('#h3' + $.trim(draggedPlayerNumber)).text($.trim(firstSquadPlayerNumber)); */
-		$('#h3' + $.trim(firstSquadPlayerNumber)).attr( "id",  "h3" + $.trim(draggedPlayerNumber));
-		
-		/* $('#h3' + $.trim(draggedPlayerNumber)).attr( "id",  "h3" + $.trim(firstSquadPlayerNumber));
-		alert($('#h3' + $.trim(draggedPlayerNumber)).attr("id")); */
-		}
-	
-		// END of swaping values for each record and shirt values
+			performPitchTableChangeOnShirtNumbers('h3', draggableAttributeType, draggableAttributeIndex, trType, trIndex);
 		
 		$('#' + draggableAttributeType + 'td' + draggableAttributeIndex + ' div').slideDown('slow');
 		$('#' + trType + 'td' + trIndex + ' div').slideDown('fast');
 		
-		/* document.getElementById('fsqp_number' + index).value = 'Test'; */
-		/* alert('The square with ID "' + draggable.attr('id')
-				+ '" was dropped onto me!'); */
+		
 		 
-	}
-	/* END droppable */
-	/* setTimeout(function() { test(); }, 2000); */
+	} /* END droppablePitchTable */
 	 
 	
 	
 </script>
 
 <!-- Player Details Modal -->
- 
+
 <div class="modal fade" id="modalPlayerDetails" tabindex="-1"
 	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
-	style="padding-left: 10px; padding-right: 10px;">
+	style="">
 
 	<div class="modal-dialog"
-		style="width: 100%; height: 100%; position: relative; padding-top: 0%;">
+		style="width: 800px; height: 400px; position: relative;">
 		<div class="modal-content"
-			style="width: 830px; height: 400px; padding: 0;">
+			style="width: 800px; height: 400px; padding: 0;">
 
 			<div
-				style="overflow-x: auto; overflow-y: auto; background-image: url('/hb/img/player_details_container_v5.png'); background-repeat: no-repeat; background-size: 830px 400px; padding-left: 0%; padding-right: 0%; position: relative; height: 100%; width: 100%;">
+				style="overflow-x: auto; overflow-y: auto; background-image: url('/hb/img/player_details_container_v5.png'); background-repeat: no-repeat; background-size: 800px 400px; padding-left: 0%; padding-right: 0%; position: relative; height: 100%; width: 100%;">
 				<!--   <div id="what" class = "sandia">Bringing the <span id="spanItalic">cloud</span>, <span id="spanBold">visualization</span> &amp; <span id="spanBold"><span id="spanItalic">cutting edge technology</span></span> to the energy industry</div> -->
 				<!-- Close x button on top-right -->
 				<div style="margin-right: 1.5%;">
 					<button type="button"
 						style="position: absolute; margin-left: 97.5%; margin-top: 9px; background: red;"
-						class="close" data-dismiss="modal" data-target="#modalPlayerDetails">
+						class="close" data-dismiss="modal"
+						data-target="#modalPlayerDetails">
 						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 					</button>
 				</div>
@@ -765,9 +826,9 @@ $('#fsqp_td<%=i%> div').slideUp(
 				<!-- START the player details -->
 
 				<!-- Club name display -->
-				
+
 				<!-- START Positioning the Player Report  -->
-				
+
 				<div id="clubName"
 					style="position: absolute; margin-left: 12%; margin-top: 50px; font-size: 100%"></div>
 				<div id="playerName"
@@ -794,10 +855,11 @@ $('#fsqp_td<%=i%> div').slideUp(
 				<div id="playerForm"
 					style="position: absolute; margin-left: 20.5%; margin-top: 154px; font-size: 75%; font-family: 'Comic Sans MS', cursive, sans-serif; color: #D1FF75;"></div>
 				<!-- END Positioning the Player Report -->
-				
-				
+
+
 				<!-- Spinners for the duration of ajax post  -->
-				<div id="physicalSectionSpinner" style="position: absolute; z-index: 2; margin-left: 75%; margin-top: 160px;"></div>
+				<div id="physicalSectionSpinner"
+					style="position: absolute; z-index: 2; margin-left: 75%; margin-top: 160px;"></div>
 				<script>var opts = {
 						  lines: 11, // The number of lines to draw
 						  length: 18, // The length of each line
@@ -818,127 +880,342 @@ $('#fsqp_td<%=i%> div').slideUp(
 						};
 						var target = document.getElementById('physicalSectionSpinner');
 						var spinner = new Spinner(opts).spin(target);</script>
-				
+
 				<!-- END Spinners -->
-				
+
 				<!-- START Positioning the Player Skills -->
-				
+
 				<!-- Physical Skills -->
-				<div id="physicalSectionLabel" style="display: none; position: absolute; margin-left: 70%; margin-top: 7px; font-size: 90%; font-style: bold;">Physical</div>
-				<hr id="physicalLine" style="display:none; position: absolute; background-color: green; margin-left: 52%; margin-top: 21px; height:1px; width: 330px;">
+				<div id="physicalSectionLabel"
+					style="display: none; position: absolute; margin-left: 70%; margin-top: 7px; font-size: 90%; font-style: bold;">Physical</div>
+				<hr id="physicalLine"
+					style="display: none; position: absolute; background-color: green; margin-left: 52%; margin-top: 21px; height: 1px; width: 330px;">
 				
-				 <div id="accelerationLabel" style="position: absolute; display:none; margin-left: 53%; margin-top: 26px; font-size: 90%; display: none;">Acceleration</div>
-				
-				<!-- <div id="accelerationBlock" style="position: absolute; border: 1px; margin-left: 69%; margin-top: 35px; width:22px; height: 17px; background: red;"><div style="margin-top: -1px; margin-left: 3px;"><font color="white" size="2" style="margin-bottom: 11px;">14</font></div></div></div> -->
-				<div id="accelerationBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 26px;"><div id="accelerationText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
+				<!--  <div id="accelerationLabel" style="position: absolute; display:none; margin-left: 53%; margin-top: 26px; font-size: 90%; display: none;">Acceleration</div>
+				<div id="accelerationBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 26px;"><div id="accelerationText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div> -->
 
-				<div id="sprintSpeedLabel" style="position: absolute; margin-left: 74%; margin-top: 26px; font-size: 90%; display: none;">Sprint Speed</div>
-				<div id="sprintSpeedBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 26px;"><div id="sprintSpeedText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
-				
-				<div id="jumpingLabel" style="position: absolute; margin-left: 52.9%; margin-top: 47px; font-size: 90%; display: none;">Jumping</div>
-				<div id="jumpingBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 47px;"><div id="jumpingText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
-				
-				<div id="balanceLabel" style="position: absolute; margin-left: 74%; margin-top: 47px; font-size: 90%; display: none;">Balance</div>
-				<div id="balanceBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 47px;"><div id="balanceText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
-				
-				<div id="agilityLabel" style="position: absolute; margin-left: 53%; margin-top: 68px; font-size: 90%; display: none;">Agility</div>
-				<div id="agilityBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 68px;"><div id="agilityText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
-				
-				<div id="staminaLabel" style="position: absolute; margin-left: 74%; margin-top: 68px; font-size: 90%; display: none;">Stamina</div>
-				<div id="staminaBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 68px;"><div id="staminaText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
-				
-				<div id="strengthLabel" style="position: absolute; margin-left: 52.9%; margin-top: 89px; font-size: 90%; display: none;">Strength</div>
-				<div id="strengthBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 89px;"><div id="strengthText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
-				
-				<div id="reactionsLabel" style="position: absolute; margin-left: 74%; margin-top: 89px; font-size: 90%; display: none;">Reactions</div>
-				<div id="reactionsBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 89px;"><div id="reactionsText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
-				
-				<div id="blockingLabel" style="position: absolute; margin-left: 52.9%; margin-top: 110px; font-size: 90%; display: none;">Blocking</div>
-				<div id="blockingBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 110px;"><div id="blockingText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
-				
-				<div id="fitnessLabel" style="position: absolute; margin-left: 74%; margin-top: 110px; font-size: 90%; display: none;">Fitness</div>
-				<div id="fitnessBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 110px;"><div id="fitnessText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
-			
-			    <!-- END Physical Skills -->
-			
+				<div id="strengthLabel"
+					style="position: absolute; margin-left: 52.9%; margin-top: 26px; font-size: 90%; display: none;">Strength</div>
+				<div id="strengthBlock" class="fadeable-block"
+					style="margin-left: 69%; margin-top: 26px;">
+					<div id="strengthText"
+						style="display: none; margin-top: -1px; margin-left: 1px;">
+						<font color="white" size="2" style="margin-bottom: 11px;"></font>
+					</div>
+				</div>
+
+				<div id="sprintSpeedLabel"
+					style="position: absolute; margin-left: 74%; margin-top: 26px; font-size: 90%; display: none;">Sprint
+					Speed</div>
+				<div id="sprintSpeedBlock" class="fadeable-block"
+					style="margin-left: 88.2%; margin-top: 26px;">
+					<div id="sprintSpeedText"
+						style="display: none; margin-top: -1px; margin-left: 1px;">
+						<font color="white" size="2" style="margin-bottom: 11px;"></font>
+					</div>
+				</div>
+
+				<div id="jumpingLabel"
+					style="position: absolute; margin-left: 52.9%; margin-top: 47px; font-size: 90%; display: none;">Jumping</div>
+				<div id="jumpingBlock" class="fadeable-block"
+					style="margin-left: 69%; margin-top: 47px;">
+					<div id="jumpingText"
+						style="display: none; margin-top: -1px; margin-left: 1px;">
+						<font color="white" size="2" style="margin-bottom: 11px;"></font>
+					</div>
+				</div>
+
+				<div id="balanceLabel"
+					style="position: absolute; margin-left: 74%; margin-top: 47px; font-size: 90%; display: none;">Balance</div>
+				<div id="balanceBlock" class="fadeable-block"
+					style="margin-left: 88.2%; margin-top: 47px;">
+					<div id="balanceText"
+						style="display: none; margin-top: -1px; margin-left: 1px;">
+						<font color="white" size="2" style="margin-bottom: 11px;"></font>
+					</div>
+				</div>
+
+
+				<div id="blockingLabel"
+					style="position: absolute; margin-left: 52.9%; margin-top: 68px; font-size: 90%; display: none;">Blocking</div>
+				<div id="blockingBlock" class="fadeable-block"
+					style="margin-left: 69%; margin-top: 68px;">
+					<div id="blockingText"
+						style="display: none; margin-top: -1px; margin-left: 1px;">
+						<font color="white" size="2" style="margin-bottom: 11px;"></font>
+					</div>
+				</div>
+				<!-- <div id="agilityLabel" style="position: absolute; margin-left: 53%; margin-top: 68px; font-size: 90%; display: none;">Agility</div>
+				<div id="agilityBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 68px;"><div id="agilityText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div> -->
+
+				<div id="staminaLabel"
+					style="position: absolute; margin-left: 74%; margin-top: 68px; font-size: 90%; display: none;">Stamina</div>
+				<div id="staminaBlock" class="fadeable-block"
+					style="margin-left: 88.2%; margin-top: 68px;">
+					<div id="staminaText"
+						style="display: none; margin-top: -1px; margin-left: 1px;">
+						<font color="white" size="2" style="margin-bottom: 11px;"></font>
+					</div>
+				</div>
+
+
+
+				<!-- <div id="reactionsLabel" style="position: absolute; margin-left: 74%; margin-top: 89px; font-size: 90%; display: none;">Reactions</div>
+				<div id="reactionsBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 89px;"><div id="reactionsText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div> -->
+
+
+
+				<!-- <div id="fitnessLabel" style="position: absolute; margin-left: 74%; margin-top: 110px; font-size: 90%; display: none;">Fitness</div>
+				<div id="fitnessBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 110px;"><div id="fitnessText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div> -->
+
+				<!-- END Physical Skills -->
+
 				<!-- Mental Skills -->
-				<div style="margin-top: -2px;">
-				<div id="mentalSectionLabel" style="display: none; position: absolute; margin-left: 70%; margin-top: 128px; font-size: 90%; font-style: bold;">Mental</div>
-				<hr id="mentalLine" style="display:none; position: absolute; background-color: blue; margin-left: 52%; margin-top: 143px; height:1px; width: 330px;">
-				
-				<div id="aggressionLabel" style="position: absolute; margin-left: 52.9%; margin-top: 148px; font-size: 90%; display: none;">Aggression</div>
-				<div id="aggressionBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 148px;"><div id="aggressionText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
-				
-				<div id="interceptionsLabel" style="position: absolute; margin-left: 74%; margin-top: 148px; font-size: 90%; display: none;">Interceptions</div>
-				<div id="interceptionsBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 148px;"><div id="interceptionsText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
-				
-				<div id="attack_positionLabel" style="position: absolute; margin-left: 52.9%; margin-top: 169px; font-size: 90%; display: none;">Attack Positioning</div>
-				<div id="attack_positionBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 169px;"><div id="attack_positionText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
-				
-				<div id="visionLabel" style="position: absolute; margin-left: 74%; margin-top: 169px; font-size: 90%; display: none;">Vision</div>
-				<div id="visionBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 169px;"><div id="visionText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
-				
-				<div id="creativityLabel" style="position: absolute; margin-left: 52.9%; margin-top: 190px; font-size: 90%; display: none;">Creativity</div>
-				<div id="creativityBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 190px;"><div id="creativityText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
-				<!-- END Mental Skills -->
-				
-				<!-- Technical Skills -->
-				<div style="margin-top: -3px">
-				<div id="technicalSectionLabel" style="display: none; position: absolute; margin-left: 70%; margin-top: 208px; font-size: 90%; font-style: bold;">Technical</div>
-				<hr id="technicalLine" style="display:none; position: absolute; background-color: red; margin-left: 52%; margin-top: 223px; height:1px; width: 330px;">
-				
-				<div id="ball_controlLabel" style="position: absolute; margin-left: 52.9%; margin-top: 228px; font-size: 90%; display: none;">Ball Control</div>
-				<div id="ball_controlBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 228px;"><div id="ball_controlText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
-				
-				<div id="long_shotsLabel" style="position: absolute; margin-left: 74%; margin-top: 228px; font-size: 90%; display: none;">Long Shots</div>
-				<div id="long_shotsBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 228px;"><div id="long_shotsText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
-				
-				<div id="fk_accuracyLabel" style="position: absolute; margin-left: 52.9%; margin-top: 249px; font-size: 90%; display: none;">Free Kick Accuracy</div>
-				<div id="fk_accuracyBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 249px;"><div id="fk_accuracyText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
-				
-				<div id="shot_powerLabel" style="position: absolute; margin-left: 74%; margin-top: 249px; font-size: 90%; display: none;">Shot Power</div>
-				<div id="shot_powerBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 249px;"><div id="shot_powerText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
-				
-				<div id="dribblingLabel" style="position: absolute; margin-left: 52.9%; margin-top: 270px; font-size: 90%; display: none;">Dribbling</div>
-				<div id="dribblingBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 270px;"><div id="dribblingText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
-				
-				<div id="short_passingLabel" style="position: absolute; margin-left: 74%; margin-top: 270px; font-size: 90%; display: none;">Short Passing</div>
-				<div id="short_passingBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 270px;"><div id="short_passingText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
-				
-				<div id="long_passingLabel" style="position: absolute; margin-left: 52.9%; margin-top: 291px; font-size: 90%; display: none;">Long Passing</div>
-				<div id="long_passingBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 291px;"><div id="long_passingText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
-				
-				<div id="stand_tacklesLabel" style="position: absolute; margin-left: 74%; margin-top: 291px; font-size: 90%; display: none;">Stand Tackles</div>
-				<div id="stand_tacklesBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 291px;"><div id="stand_tacklesText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
-				
-				
-				<div id="markingLabel" style="position: absolute; margin-left: 52.9%; margin-top: 312px; font-size: 90%; display: none;">Marking</div>
-				<div id="markingBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 312px;"><div id="markingText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
-				
-				<div id="penaltiesLabel" style="position: absolute; margin-left: 74%; margin-top: 312px; font-size: 90%; display: none;">Penalty Shots</div>
-				<div id="penaltiesBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 312px;"><div id="penaltiesText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
-				
-				<div id="curveLabel" style="position: absolute; margin-left: 52.9%; margin-top: 333px; font-size: 90%; display: none;">Curve</div>
-				<div id="curveBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 333px;"><div id="curveText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
-				
-				<div id="finishingLabel" style="position: absolute; margin-left: 74%; margin-top: 333px; font-size: 90%; display: none;">Finishing</div>
-				<div id="finishingBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 333px;"><div id="finishingText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
-				
-				<div id="six_m_shotsLabel" style="position: absolute; margin-left: 52.9%; margin-top: 354px; font-size: 90%; display: none;">Six Meter Shots</div>
-				<div id="six_m_shotsBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 354px;"><div id="six_m_shotsText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
-				
-				<div id="lob_shotsLabel" style="position: absolute; margin-left: 74%; margin-top: 354px; font-size: 90%; display: none;">Lob Shots</div>
-				<div id="lob_shotsBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 354px;"><div id="lob_shotsText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
-				
-				<div id="nine_m_shotsLabel" style="position: absolute; margin-left: 52.9%; margin-top: 375px; font-size: 90%; display: none;">Nine Meter Shots</div>
-				<div id="nine_m_shotsBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 375px;"><div id="nine_m_shotsText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div>
-				</div>
-				</div>
-				<!-- END Technical Skills -->
-			
-	
-			
 
+				<div id="mentalSectionLabel"
+					style="display: none; position: absolute; margin-left: 70%; margin-top: 88px; font-size: 90%; font-style: bold;">Mental</div>
+				<hr id="mentalLine"
+					style="display: none; position: absolute; background-color: blue; margin-left: 52%; margin-top: 102px; height: 1px; width: 330px;">
+
+				<div id="aggressionLabel"
+					style="position: absolute; margin-left: 52.9%; margin-top: 107px; font-size: 90%; display: none;">Aggression</div>
+				<div id="aggressionBlock" class="fadeable-block"
+					style="margin-left: 69%; margin-top: 107px;">
+					<div id="aggressionText"
+						style="display: none; margin-top: -1px; margin-left: 1px;">
+						<font color="white" size="2" style="margin-bottom: 11px;"></font>
+					</div>
+				</div>
+
+
+				<div id="creativityLabel"
+					style="position: absolute; margin-left: 74%; margin-top: 107px; font-size: 90%; display: none;">Creativity</div>
+				<div id="creativityBlock" class="fadeable-block"
+					style="margin-left: 88.2%; margin-top: 107px;">
+					<div id="creativityText"
+						style="display: none; margin-top: -1px; margin-left: 1px;">
+						<font color="white" size="2" style="margin-bottom: 11px;"></font>
+					</div>
+				</div>
+				<!-- 
+				<div id="interceptionsLabel" style="position: absolute; margin-left: 74%; margin-top: 148px; font-size: 90%; display: none;">Interceptions</div>
+				<div id="interceptionsBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 148px;"><div id="interceptionsText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div> -->
+
+				<div id="attack_positionLabel"
+					style="position: absolute; margin-left: 52.9%; margin-top: 128px; font-size: 90%; display: none;">Attack
+					Positioning</div>
+				<div id="attack_positionBlock" class="fadeable-block"
+					style="margin-left: 69%; margin-top: 128px;">
+					<div id="attack_positionText"
+						style="display: none; margin-top: -1px; margin-left: 1px;">
+						<font color="white" size="2" style="margin-bottom: 11px;"></font>
+					</div>
+				</div>
+
+				<div id="visionLabel"
+					style="position: absolute; margin-left: 74%; margin-top: 128px; font-size: 90%; display: none;">Vision</div>
+				<div id="visionBlock" class="fadeable-block"
+					style="margin-left: 88.2%; margin-top: 128px;">
+					<div id="visionText"
+						style="display: none; margin-top: -1px; margin-left: 1px;">
+						<font color="white" size="2" style="margin-bottom: 11px;"></font>
+					</div>
+				</div>
+
+				<!-- END Mental Skills -->
+
+				<!-- Technical Skills -->
+
+				<div id="technicalSectionLabel"
+					style="display: none; position: absolute; margin-left: 70%; margin-top: 148px; font-size: 90%; font-style: bold;">Technical</div>
+				<hr id="technicalLine"
+					style="display: none; position: absolute; background-color: red; margin-left: 52%; margin-top: 162px; height: 1px; width: 330px;">
+
+				<div id="catchingLabel"
+					style="position: absolute; margin-left: 52.9%; margin-top: 167px; font-size: 90%; display: none;">Catching</div>
+				<div id="catchingBlock" class="fadeable-block"
+					style="margin-left: 69%; margin-top: 167px;">
+					<div id="catchingText"
+						style="display: none; margin-top: -1px; margin-left: 1px;">
+						<font color="white" size="2" style="margin-bottom: 11px;"></font>
+					</div>
+				</div>
+
+				<div id="shot_powerLabel"
+					style="position: absolute; margin-left: 74%; margin-top: 167px; font-size: 90%; display: none;">Shot
+					Power</div>
+				<div id="shot_powerBlock" class="fadeable-block"
+					style="margin-left: 88.2%; margin-top: 167px;">
+					<div id="shot_powerText"
+						style="display: none; margin-top: -1px; margin-left: 1px;">
+						<font color="white" size="2" style="margin-bottom: 11px;"></font>
+					</div>
+				</div>
+
+				<div id="dribblingLabel"
+					style="position: absolute; margin-left: 52.9%; margin-top: 188px; font-size: 90%; display: none;">Dribbling</div>
+				<div id="dribblingBlock" class="fadeable-block"
+					style="margin-left: 69%; margin-top: 188px;">
+					<div id="dribblingText"
+						style="display: none; margin-top: -1px; margin-left: 1px;">
+						<font color="white" size="2" style="margin-bottom: 11px;"></font>
+					</div>
+				</div>
+
+				<div id="passingLabel"
+					style="position: absolute; margin-left: 74%; margin-top: 188px; font-size: 90%; display: none;">Passing</div>
+				<div id="passingBlock" class="fadeable-block"
+					style="margin-left: 88.2%; margin-top: 188px;">
+					<div id="passingText"
+						style="display: none; margin-top: -1px; margin-left: 1px;">
+						<font color="white" size="2" style="margin-bottom: 11px;"></font>
+					</div>
+				</div>
+
+
+
+				<div id="curveLabel"
+					style="position: absolute; margin-left: 52.9%; margin-top: 209px; font-size: 90%; display: none;">Curve</div>
+				<div id="curveBlock" class="fadeable-block"
+					style="margin-left: 69%; margin-top: 209px;">
+					<div id="curveText"
+						style="display: none; margin-top: -1px; margin-left: 1px;">
+						<font color="white" size="2" style="margin-bottom: 11px;"></font>
+					</div>
+				</div>
+
+				<div id="penaltiesLabel"
+					style="position: absolute; margin-left: 74%; margin-top: 209px; font-size: 90%; display: none;">Penalty
+					Shots</div>
+				<div id="penaltiesBlock" class="fadeable-block"
+					style="margin-left: 88.2%; margin-top: 209px;">
+					<div id="penaltiesText"
+						style="display: none; margin-top: -1px; margin-left: 1px;">
+						<font color="white" size="2" style="margin-bottom: 11px;"></font>
+					</div>
+				</div>
+
+
+
+				<div id="six_m_shotsLabel"
+					style="position: absolute; margin-left: 52.9%; margin-top: 230px; font-size: 90%; display: none;">Six
+					Meter Shots</div>
+				<div id="six_m_shotsBlock" class="fadeable-block"
+					style="margin-left: 69%; margin-top: 230px;">
+					<div id="six_m_shotsText"
+						style="display: none; margin-top: -1px; margin-left: 1px;">
+						<font color="white" size="2" style="margin-bottom: 11px;"></font>
+					</div>
+				</div>
+
+				<div id="nine_m_shotsLabel"
+					style="position: absolute; margin-left: 74%; margin-top: 230px; font-size: 90%; display: none;">Nine
+					Meter Shots</div>
+				<div id="nine_m_shotsBlock" class="fadeable-block"
+					style="margin-left: 88.2%; margin-top: 230px;">
+					<div id="nine_m_shotsText"
+						style="display: none; margin-top: -1px; margin-left: 1px;">
+						<font color="white" size="2" style="margin-bottom: 11px;"></font>
+					</div>
+				</div>
+
+				<div id="finishingLabel"
+					style="position: absolute; margin-left: 52.9%; margin-top: 251px; font-size: 90%; display: none;">Finishing</div>
+				<div id="finishingBlock" class="fadeable-block"
+					style="margin-left: 69%; margin-top: 251px;">
+					<div id="finishingText"
+						style="display: none; margin-top: -1px; margin-left: 1px;">
+						<font color="white" size="2" style="margin-bottom: 11px;"></font>
+					</div>
+				</div>
+
+				<!-- END Technical Skills -->
+
+
+
+
+
+
+
+
+				<!-- START Positioning the Goal Keeping Skills -->
+				<div style="margin-top: 25px;">
+					<div id="goalKeepingSectionLabel"
+						style="display: none; position: absolute; margin-left: 70%; margin-top: 2px; font-size: 90%; font-style: bold;">Goal
+						Keeping</div>
+					<hr id="goalKeepingLine"
+						style="display: none; position: absolute; background-color: green; margin-left: 52%; margin-top: 21px; height: 1px; width: 330px;">
+
+					<div id="reflexesLabel"
+						style="position: absolute; display: none; margin-left: 53%; margin-top: 26px; font-size: 90%; display: none;">Reflexes</div>
+					<div id="reflexesBlock" class="fadeable-block"
+						style="margin-left: 69%; margin-top: 26px;">
+						<div id="reflexesText"
+							style="display: none; margin-top: -1px; margin-left: 1px;">
+							<font color="white" size="2" style="margin-bottom: 11px;"></font>
+						</div>
+					</div>
+
+
+					<div id="nine_m_savesLabel"
+						style="position: absolute; margin-left: 74%; margin-top: 26px; font-size: 90%; display: none;">Nine
+						Meter Saves</div>
+					<div id="nine_m_savesBlock" class="fadeable-block"
+						style="margin-left: 88.2%; margin-top: 26px;">
+						<div id="nine_m_savesText"
+							style="display: none; margin-top: -1px; margin-left: 1px;">
+							<font color="white" size="2" style="margin-bottom: 11px;"></font>
+						</div>
+					</div>
+					<!-- <div id="handlingLabel" style="position: absolute; margin-left: 74%; margin-top: 26px; font-size: 90%; display: none;">Handling</div>
+				<div id="handlingBlock" class="fadeable-block" style="margin-left: 88.2%; margin-top: 26px;"><div id="handlingText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div> -->
+
+					<div id="positioningLabel"
+						style="position: absolute; margin-left: 52.9%; margin-top: 47px; font-size: 90%; display: none;">Positioning</div>
+					<div id="positioningBlock" class="fadeable-block"
+						style="margin-left: 69%; margin-top: 47px;">
+						<div id="positioningText"
+							style="display: none; margin-top: -1px; margin-left: 1px;">
+							<font color="white" size="2" style="margin-bottom: 11px;"></font>
+						</div>
+					</div>
+
+					<div id="leg_savesLabel"
+						style="position: absolute; margin-left: 74%; margin-top: 47px; font-size: 90%; display: none;">Leg
+						Saves</div>
+					<div id="leg_savesBlock" class="fadeable-block"
+						style="margin-left: 88.2%; margin-top: 47px;">
+						<div id="leg_savesText"
+							style="display: none; margin-top: -1px; margin-left: 1px;">
+							<font color="white" size="2" style="margin-bottom: 11px;"></font>
+						</div>
+					</div>
+
+					<div id="penalty_savesLabel"
+						style="position: absolute; margin-left: 53%; margin-top: 68px; font-size: 90%; display: none;">Penalty
+						Saves</div>
+					<div id="penalty_savesBlock" class="fadeable-block"
+						style="margin-left: 69%; margin-top: 68px;">
+						<div id="penalty_savesText"
+							style="display: none; margin-top: -1px; margin-left: 1px;">
+							<font color="white" size="2" style="margin-bottom: 11px;"></font>
+						</div>
+					</div>
+
+					<div id="six_m_savesLabel"
+						style="position: absolute; margin-left: 74%; margin-top: 68px; font-size: 90%; display: none;">Six
+						Meter Saves</div>
+					<div id="six_m_savesBlock" class="fadeable-block"
+						style="margin-left: 88.2%; margin-top: 68px;">
+						<div id="six_m_savesText"
+							style="display: none; margin-top: -1px; margin-left: 1px;">
+							<font color="white" size="2" style="margin-bottom: 11px;"></font>
+						</div>
+					</div>
+
+
+				</div>
+				<!-- END Goal Keeping Skills -->
 			</div>
 
 		</div>
@@ -946,8 +1223,8 @@ $('#fsqp_td<%=i%> div').slideUp(
 </div>
 
 
-	
-   
+
+
 
 
 <script type="text/javascript" src="/hb/scripts/ajax.getPlayerSkills.js">
@@ -960,10 +1237,3 @@ $('#fsqp_td<%=i%> div').slideUp(
 	} // END Else (user is logged in)
 %>
 
-<script>
-	
-	
-	
-	
-
- </script>

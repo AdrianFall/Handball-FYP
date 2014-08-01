@@ -1,5 +1,6 @@
 package af.handball.controller;
 
+import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -49,7 +50,13 @@ public class LoginController {
 
 				// Set the session attributes
 				session.setAttribute("teamName", teamService.getTeamName(email));
+				
+				try {
 				session.setAttribute("teamLevel", teamService.getTeamLevel(email));
+				} catch(NoResultException nre) {
+					System.out.println("No Result Exception for team level");
+					nre.printStackTrace();
+				}
 				
 			} else {
 				jsonObj.put("status", "false");

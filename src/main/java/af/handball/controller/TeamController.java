@@ -84,14 +84,8 @@ public class TeamController {
 					System.out.println("Skill = " + skill);
 					
 					int teamLevel = (Integer) session.getAttribute("teamLevel");
-					System.out.println("Team levle = " + teamLevel);
-					System.out.println("acceleration qt  = " + QualityGenerator.getQualityType(skill.getAcceleration(), teamLevel));
-					System.out.println("acceleration as perc = " + QualityGenerator.getQualityAsPercentage(skill.getAcceleration(), teamLevel));
 					
 					/* Physical Skills */
-					jsonObj.put("acceleration", MathRoundHelper.round(skill.getAcceleration(), 1));
-					jsonObj.put("acceleration_quality_type", QualityGenerator.getQualityType(skill.getAcceleration(), teamLevel));
-					jsonObj.put("acceleration_quality_perc", QualityGenerator.getQualityAsPercentage(skill.getAcceleration(), teamLevel));
 					
 					jsonObj.put("sprint_speed",  MathRoundHelper.round(skill.getSprint_speed(), 1));
 					jsonObj.put("sprint_speed_quality_type", QualityGenerator.getQualityType(skill.getSprint_speed(), teamLevel));
@@ -105,10 +99,6 @@ public class TeamController {
 					jsonObj.put("balance_quality_type", QualityGenerator.getQualityType(skill.getBalance(), teamLevel));
 					jsonObj.put("balance_quality_perc", QualityGenerator.getQualityAsPercentage(skill.getBalance(), teamLevel));
 					
-					jsonObj.put("agility", MathRoundHelper.round(skill.getAgility(), 1));
-					jsonObj.put("agility_quality_type", QualityGenerator.getQualityType(skill.getAgility(), teamLevel));
-					jsonObj.put("agility_quality_perc", QualityGenerator.getQualityAsPercentage(skill.getAgility(), teamLevel));
-					
 					jsonObj.put("stamina", MathRoundHelper.round(skill.getStamina(), 1));
 					jsonObj.put("stamina_quality_type", QualityGenerator.getQualityType(skill.getStamina(), teamLevel));
 					jsonObj.put("stamina_quality_perc", QualityGenerator.getQualityAsPercentage(skill.getStamina(), teamLevel));
@@ -117,25 +107,14 @@ public class TeamController {
 					jsonObj.put("strength_quality_type", QualityGenerator.getQualityType(skill.getStrength(), teamLevel));
 					jsonObj.put("strength_quality_perc", QualityGenerator.getQualityAsPercentage(skill.getStrength(), teamLevel));
 					
-					jsonObj.put("reactions", MathRoundHelper.round(skill.getReactions(), 1));
-					jsonObj.put("reactions_quality_type", QualityGenerator.getQualityType(skill.getReactions(), teamLevel));
-					jsonObj.put("reactions_quality_perc", QualityGenerator.getQualityAsPercentage(skill.getReactions(), teamLevel));
-					
 					jsonObj.put("blocking", MathRoundHelper.round(skill.getBlocking(), 1));
 					jsonObj.put("blocking_quality_type", QualityGenerator.getQualityType(skill.getBlocking(), teamLevel));
 					jsonObj.put("blocking_quality_perc", QualityGenerator.getQualityAsPercentage(skill.getBlocking(), teamLevel));
 					
-					jsonObj.put("fitness", MathRoundHelper.round(skill.getFitness(), 1));
-					jsonObj.put("fitness_quality_type", QualityGenerator.getQualityType(skill.getFitness(), teamLevel));
-					jsonObj.put("fitness_quality_perc", QualityGenerator.getQualityAsPercentage(skill.getFitness(), teamLevel));
 					/* Mental Skills */
 					jsonObj.put("aggression", MathRoundHelper.round(skill.getAggression(), 1));
 					jsonObj.put("aggression_quality_type", QualityGenerator.getQualityType(skill.getAggression(), teamLevel));
 					jsonObj.put("aggression_quality_perc", QualityGenerator.getQualityAsPercentage(skill.getAggression(), teamLevel));
-					
-					jsonObj.put("interceptions", MathRoundHelper.round(skill.getInterceptions(), 1));
-					jsonObj.put("interceptions_quality_type", QualityGenerator.getQualityType(skill.getInterceptions(), teamLevel));
-					jsonObj.put("interceptions_quality_perc", QualityGenerator.getQualityAsPercentage(skill.getInterceptions(), teamLevel));
 					
 					jsonObj.put("attack_position", MathRoundHelper.round(skill.getAttack_position(), 1));
 					jsonObj.put("attack_position_quality_type", QualityGenerator.getQualityType(skill.getAttack_position(), teamLevel));
@@ -152,10 +131,6 @@ public class TeamController {
 					jsonObj.put("reflexes", MathRoundHelper.round(skill.getReflexes(), 1));
 					jsonObj.put("reflexes_quality_type", QualityGenerator.getQualityType(skill.getReflexes(), teamLevel));
 					jsonObj.put("reflexes_quality_perc", QualityGenerator.getQualityAsPercentage(skill.getReflexes(), teamLevel));
-					
-					jsonObj.put("handling", MathRoundHelper.round(skill.getHandling(), 1));
-					jsonObj.put("handling_quality_type", QualityGenerator.getQualityType(skill.getHandling(), teamLevel));
-					jsonObj.put("handling_quality_perc", QualityGenerator.getQualityAsPercentage(skill.getHandling(), teamLevel));
 					
 					jsonObj.put("positioning", MathRoundHelper.round(skill.getPositioning(), 1));
 					jsonObj.put("positioning_quality_type", QualityGenerator.getQualityType(skill.getPositioning(), teamLevel));
@@ -177,30 +152,10 @@ public class TeamController {
 					jsonObj.put("nine_m_saves_quality_type", QualityGenerator.getQualityType(skill.getNine_m_saves(), teamLevel));
 					jsonObj.put("nine_m_saves_quality_perc", QualityGenerator.getQualityAsPercentage(skill.getNine_m_saves(), teamLevel));
 					
-					jsonObj.put("communication", MathRoundHelper.round(skill.getCommunication(), 1));
-					jsonObj.put("communication_quality_type", QualityGenerator.getQualityType(skill.getCommunication(), teamLevel));
-					jsonObj.put("communication_quality_perc", QualityGenerator.getQualityAsPercentage(skill.getCommunication(), teamLevel));
-					
-					jsonObj.put("angles", MathRoundHelper.round(skill.getAngles(), 1));
-					jsonObj.put("angles_quality_type", QualityGenerator.getQualityType(skill.getAngles(), teamLevel));
-					jsonObj.put("angles_quality_perc", QualityGenerator.getQualityAsPercentage(skill.getAngles(), teamLevel));
-					
+					/* Technical Skills */
 					jsonObj.put("catching", MathRoundHelper.round(skill.getCatching(), 1));
 					jsonObj.put("catching_quality_type", QualityGenerator.getQualityType(skill.getCatching(), teamLevel));
 					jsonObj.put("catching_quality_perc", QualityGenerator.getQualityAsPercentage(skill.getCatching(), teamLevel));
-					
-					/* Technical Skills */
-					jsonObj.put("ball_control", MathRoundHelper.round(skill.getBall_control(), 1));
-					jsonObj.put("ball_control_quality_type", QualityGenerator.getQualityType(skill.getBall_control(), teamLevel));
-					jsonObj.put("ball_control_quality_perc", QualityGenerator.getQualityAsPercentage(skill.getBall_control(), teamLevel));
-					
-					jsonObj.put("long_shots", MathRoundHelper.round(skill.getLong_shots(), 1));
-					jsonObj.put("long_shots_quality_type", QualityGenerator.getQualityType(skill.getLong_shots(), teamLevel));
-					jsonObj.put("long_shots_quality_perc", QualityGenerator.getQualityAsPercentage(skill.getLong_shots(), teamLevel));
-					
-					jsonObj.put("fk_accuracy", MathRoundHelper.round(skill.getFk_accuracy(), 1));
-					jsonObj.put("fk_accuracy_quality_type", QualityGenerator.getQualityType(skill.getFk_accuracy(), teamLevel));
-					jsonObj.put("fk_accuracy_quality_perc", QualityGenerator.getQualityAsPercentage(skill.getFk_accuracy(), teamLevel));
 					
 					jsonObj.put("shot_power", MathRoundHelper.round(skill.getShot_power(), 1));
 					jsonObj.put("shot_power_quality_type", QualityGenerator.getQualityType(skill.getShot_power(), teamLevel));
@@ -210,21 +165,9 @@ public class TeamController {
 					jsonObj.put("dribbling_quality_type", QualityGenerator.getQualityType(skill.getDribbling(), teamLevel));
 					jsonObj.put("dribbling_quality_perc", QualityGenerator.getQualityAsPercentage(skill.getDribbling(), teamLevel));
 					
-					jsonObj.put("short_passing", MathRoundHelper.round(skill.getShort_passing(), 1));
-					jsonObj.put("short_passing_quality_type", QualityGenerator.getQualityType(skill.getShort_passing(), teamLevel));
-					jsonObj.put("short_passing_quality_perc", QualityGenerator.getQualityAsPercentage(skill.getShort_passing(), teamLevel));
-					
-					jsonObj.put("long_passing", MathRoundHelper.round(skill.getLong_passing(), 1));
-					jsonObj.put("long_passing_quality_type", QualityGenerator.getQualityType(skill.getLong_passing(), teamLevel));
-					jsonObj.put("long_passing_quality_perc", QualityGenerator.getQualityAsPercentage(skill.getLong_passing(), teamLevel));
-					
-					jsonObj.put("stand_tackles", MathRoundHelper.round(skill.getStand_tackles(), 1));
-					jsonObj.put("stand_tackles_quality_type", QualityGenerator.getQualityType(skill.getStand_tackles(), teamLevel));
-					jsonObj.put("stand_tackles_quality_perc", QualityGenerator.getQualityAsPercentage(skill.getStand_tackles(), teamLevel));
-					
-					jsonObj.put("marking", MathRoundHelper.round(skill.getMarking(), 1));
-					jsonObj.put("marking_quality_type", QualityGenerator.getQualityType(skill.getMarking(), teamLevel));
-					jsonObj.put("marking_quality_perc", QualityGenerator.getQualityAsPercentage(skill.getMarking(), teamLevel));
+					jsonObj.put("passing", MathRoundHelper.round(skill.getPassing(), 1));
+					jsonObj.put("passing_quality_type", QualityGenerator.getQualityType(skill.getPassing(), teamLevel));
+					jsonObj.put("passing_quality_perc", QualityGenerator.getQualityAsPercentage(skill.getPassing(), teamLevel));
 					
 					jsonObj.put("penalties", MathRoundHelper.round(skill.getPenalties(), 1));
 					jsonObj.put("penalties_quality_type", QualityGenerator.getQualityType(skill.getPenalties(), teamLevel));
@@ -246,9 +189,6 @@ public class TeamController {
 					jsonObj.put("nine_m_shots_quality_type", QualityGenerator.getQualityType(skill.getNine_m_shots(), teamLevel));
 					jsonObj.put("nine_m_shots_quality_perc", QualityGenerator.getQualityAsPercentage(skill.getNine_m_shots(), teamLevel));
 					
-					jsonObj.put("lob_shots", MathRoundHelper.round(skill.getLob_shots(), 1));
-					jsonObj.put("lob_shots_quality_type", QualityGenerator.getQualityType(skill.getLob_shots(), teamLevel));
-					jsonObj.put("lob_shots_quality_perc", QualityGenerator.getQualityAsPercentage(skill.getLob_shots(), teamLevel));
 					
 					// END Fetch the data and allocate in jsonObj.
 					

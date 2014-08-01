@@ -6,9 +6,7 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 		$('#physicalSectionLabel').css('display', 'none');
 		$('#physicalLine').css('display', 'none');
 
-		$('#accelerationLabel').css('display', 'none');
-		$('#accelerationText').css('display', 'none');
-		$('#accelerationBlock').css('display', 'none');
+	
 
 		$('#sprintSpeedLabel').css('display', 'none');
 		$('#sprintSpeedText').css('display', 'none');
@@ -17,7 +15,6 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 		$('#jumpingLabel').css('display', 'none');
 		$('#jumpingText').css('display', 'none');
 		$('#jumpingBlock').css('display', 'none');
-		
 		
 		$('#balanceLabel').css('display', 'none');
 		$('#balanceText').css('display', 'none');
@@ -35,17 +32,11 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 		$('#strengthText').css('display', 'none');
 		$('#strengthBlock').css('display', 'none');
 		
-		$('#reactionsLabel').css('display', 'none');
-		$('#reactionsText').css('display', 'none');
-		$('#reactionsBlock').css('display', 'none');
+		
 		
 		$('#blockingLabel').css('display', 'none');
 		$('#blockingText').css('display', 'none');
 		$('#blockingBlock').css('display', 'none');
-		
-		$('#fitnessLabel').css('display', 'none');
-		$('#fitnessText').css('display', 'none');
-		$('#fitnessBlock').css('display', 'none');
 		
 		$('#mentalSectionLabel').css('display', 'none');
 		$('#mentalLine').css('display', 'none');
@@ -128,10 +119,57 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 		$('#lob_shotsLabel').css('display', 'none');
 		$('#lob_shotsText').css('display', 'none');
 		$('#lob_shotsBlock').css('display', 'none');
-		
+		  
 		$('#nine_m_shotsLabel').css('display', 'none');
 		$('#nine_m_shotsText').css('display', 'none');
 		$('#nine_m_shotsBlock').css('display', 'none');
+		
+		$('#goalKeepingSectionLabel').css('display', 'none');
+		$('#goalKeepingLine').css('display', 'none');
+
+		$('#reflexesLabel').css('display', 'none');
+		$('#reflexesText').css('display', 'none');
+		$('#reflexesBlock').css('display', 'none');
+		
+		$('#handlingLabel').css('display', 'none');
+		$('#handlingText').css('display', 'none');
+		$('#handlingBlock').css('display', 'none');
+		
+		$('#positioningLabel').css('display', 'none');
+		$('#positioningText').css('display', 'none');
+		$('#positioningBlock').css('display', 'none');
+		
+		$('#leg_savesLabel').css('display', 'none');
+		$('#leg_savesText').css('display', 'none');
+		$('#leg_savesBlock').css('display', 'none');
+		
+		$('#penalty_savesLabel').css('display', 'none');
+		$('#penalty_savesText').css('display', 'none');
+		$('#penalty_savesBlock').css('display', 'none');
+		
+		$('#six_m_savesLabel').css('display', 'none');
+		$('#six_m_savesText').css('display', 'none');
+		$('#six_m_savesBlock').css('display', 'none');
+		
+		$('#nine_m_savesLabel').css('display', 'none');
+		$('#nine_m_savesText').css('display', 'none');
+		$('#nine_m_savesBlock').css('display', 'none');
+		
+		$('#communicationLabel').css('display', 'none');
+		$('#communicationText').css('display', 'none');
+		$('#communicationBlock').css('display', 'none');
+		
+		$('#anglesLabel').css('display', 'none');
+		$('#anglesText').css('display', 'none');
+		$('#anglesBlock').css('display', 'none');
+		
+		$('#catchingLabel').css('display', 'none');
+		$('#catchingText').css('display', 'none');
+		$('#catchingBlock').css('display', 'none');
+
+		$('#passingLabel').css('display', 'none');
+		$('#passingText').css('display', 'none');
+		$('#passingBlock').css('display', 'none');
 	});
 
 	$
@@ -153,19 +191,49 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 							// Set the label divs style to display none, to
 							// properly
 							// animate the fade in
+							
+							
+							$('#physicalSectionLabel').css({
+								'-webkit-animation-duration': '3s',
+								  '-webkit-animation-delay': '0s',
+							'-moz-animation-duration': '3s',
+							  '-moz-animation-delay': '0s',
+							'-ms-animation-duration': '3s',
+							  '-ms-animation-delay': '0s',
+							});
+
+							$('#mentalSectionLabel').css({
+								'-webkit-animation-duration': '3s',
+								  '-webkit-animation-delay': '1s',
+							'-moz-animation-duration': '3s',
+							  '-moz-animation-delay': '1s',
+							'-ms-animation-duration': '3s',
+							  '-ms-animation-delay': '1s',
+							});
+
+							$('#technicalSectionLabel').css({
+								'-webkit-animation-duration': '3s',
+								  '-webkit-animation-delay': '2.2s',
+							'-moz-animation-duration': '3s',
+							  '-moz-animation-delay': '2.2s',
+							'-ms-animation-duration': '3s',
+							  '-ms-animation-delay': '2.2s',
+							});
+							
+							$('#goalKeepingSectionLabel').css({
+								'-webkit-animation-duration': '3s',
+								  '-webkit-animation-delay': '0.2s',
+							'-moz-animation-duration': '3s',
+							  '-moz-animation-delay': '0.2s',
+							'-ms-animation-duration': '3s',
+							  '-ms-animation-delay': '0.2s',
+							});
+
+
 
 							$('#physicalSectionLabel').fadeIn(850);
 							$('#physicalLine').fadeIn(1050);
-
-							var accelerationQuality = parsedDataJSON.acceleration;
-							var accelerationPercentage = parsedDataJSON.acceleration_quality_perc;
-
-							$('#accelerationLabel').fadeIn(1450);
-							$('#accelerationBlock').css('background',
-									obtainColor(accelerationPercentage));
-							$('#accelerationText').html(accelerationQuality);
-							$('#accelerationText').fadeIn(1800);
-							fade('#accelerationBlock', 2200)
+							$('#physicalSectionLabel').addClass('animated bounceIn');
 
 							var sprintSpeedQuality = parsedDataJSON.sprint_speed;
 							var sprintSpeedPercentage = parsedDataJSON.sprint_speed_quality_perc;
@@ -194,14 +262,7 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 							$('#balanceText').fadeIn(2800);
 							fade('#balanceBlock', 3000);
 
-							var agilityQuality = parsedDataJSON.agility;
-							var agilityPercentage = parsedDataJSON.agility_quality_perc;
-							$('#agilityLabel').fadeIn(3000);
-							$('#agilityBlock').css('background',
-									obtainColor(agilityPercentage));
-							$('#agilityText').html(agilityQuality);
-							$('#agilityText').fadeIn(3000);
-							fade('#agilityBlock', 3200);
+							
 
 							var staminaQuality = parsedDataJSON.stamina;
 							var staminaPercentage = parsedDataJSON.stamina_quality_perc;
@@ -221,14 +282,7 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 							$('#strengthText').fadeIn(3400);
 							fade('#strengthBlock', 3600);
 
-							var reactionsQuality = parsedDataJSON.reactions;
-							var reactionsPercentage = parsedDataJSON.reactions_quality_perc;
-							$('#reactionsLabel').fadeIn(3600);
-							$('#reactionsBlock').css('background',
-									obtainColor(reactionsPercentage));
-							$('#reactionsText').html(reactionsQuality);
-							$('#reactionsText').fadeIn(3600);
-							fade('#reactionsBlock', 3800);
+						
 
 							var blockingQuality = parsedDataJSON.blocking;
 							var blockingPercentage = parsedDataJSON.blocking_quality_perc;
@@ -239,17 +293,11 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 							$('#blockingText').fadeIn(4000);
 							fade('#blockingBlock', 4000);
 
-							var fitnessQuality = parsedDataJSON.fitness;
-							var fitnessPercentage = parsedDataJSON.fitness_quality_perc;
-							$('#fitnessLabel').fadeIn(3800);
-							$('#fitnessBlock').css('background',
-									obtainColor(fitnessPercentage));
-							$('#fitnessText').html(fitnessQuality);
-							$('#fitnessText').fadeIn(4000);
-							fade('#fitnessBlock', 4000);
+						
 
 							$('#mentalSectionLabel').fadeIn(4200);
 							$('#mentalLine').fadeIn(4400);
+							$('#mentalSectionLabel').addClass('animated bounceIn');
 							
 							var aggressionQuality = parsedDataJSON.aggression;
 							var aggressionPercentage = parsedDataJSON.aggression_quality_perc;
@@ -260,14 +308,6 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 							$('#aggressionText').fadeIn(4400);
 							fade('#aggressionBlock', 4600);
 							
-							var interceptionsQuality = parsedDataJSON.interceptions;
-							var interceptionsPercentage = parsedDataJSON.interceptions_quality_perc;
-							$('#interceptionsLabel').fadeIn(4600);
-							$('#interceptionsBlock').css('background',
-									obtainColor(interceptionsPercentage));
-							$('#interceptionsText').html(interceptionsQuality);
-							$('#interceptionsText').fadeIn(4600);
-							fade('#interceptionsBlock', 4800);
 							
 							var attack_positionQuality = parsedDataJSON.attack_position;
 							var attack_positionPercentage = parsedDataJSON.attack_position_quality_perc;
@@ -298,33 +338,17 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 							
 							$('#technicalSectionLabel').fadeIn(5400);
 							$('#technicalLine').fadeIn(5600);
+							$('#technicalSectionLabel').addClass('animated bounceIn');
 							
-							var ball_controlQuality = parsedDataJSON.ball_control;
-							var ball_controlPercentage = parsedDataJSON.ball_control_quality_perc;
-							$('#ball_controlLabel').fadeIn(5400);
-							$('#ball_controlBlock').css('background',
-									obtainColor(ball_controlPercentage));
-							$('#ball_controlText').html(ball_controlQuality);
-							$('#ball_controlText').fadeIn(5400);
-							fade('#ball_controlBlock', 5600);
+							var catchingQuality = parsedDataJSON.catching;
+							var catchingPercentage = parsedDataJSON.catching_quality_perc;
+							$('#catchingLabel').fadeIn(5400);
+							$('#catchingBlock').css('background',
+									obtainColor(catchingPercentage));
+							$('#catchingText').html(catchingQuality);
+							$('#catchingText').fadeIn(5400);
+							fade('#catchingBlock', 5600);
 							
-							var long_shotsQuality = parsedDataJSON.long_shots;
-							var long_shotsPercentage = parsedDataJSON.long_shots_quality_perc;
-							$('#long_shotsLabel').fadeIn(5600);
-							$('#long_shotsBlock').css('background',
-									obtainColor(long_shotsPercentage));
-							$('#long_shotsText').html(long_shotsQuality);
-							$('#long_shotsText').fadeIn(5600);
-							fade('#long_shotsBlock', 5800);
-							
-							var fk_accuracyQuality = parsedDataJSON.fk_accuracy;
-							var fk_accuracyPercentage = parsedDataJSON.fk_accuracy_quality_perc;
-							$('#fk_accuracyLabel').fadeIn(5800);
-							$('#fk_accuracyBlock').css('background',
-									obtainColor(fk_accuracyPercentage));
-							$('#fk_accuracyText').html(fk_accuracyQuality);
-							$('#fk_accuracyText').fadeIn(5800);
-							fade('#fk_accuracyBlock', 6000);
 							
 							var shot_powerQuality = parsedDataJSON.shot_power;
 							var shot_powerPercentage = parsedDataJSON.shot_power_quality_perc;
@@ -344,42 +368,14 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 							$('#dribblingText').fadeIn(6200);
 							fade('#dribblingBlock', 6400);
 							
-							var short_passingQuality = parsedDataJSON.short_passing;
-							var short_passingPercentage = parsedDataJSON.short_passing_quality_perc;
-							$('#short_passingLabel').fadeIn(6400);
-							$('#short_passingBlock').css('background',
-									obtainColor(short_passingPercentage));
-							$('#short_passingText').html(short_passingQuality);
-							$('#short_passingText').fadeIn(6400);
-							fade('#short_passingBlock', 6600);
-							
-							var long_passingQuality = parsedDataJSON.long_passing;
-							var long_passingPercentage = parsedDataJSON.long_passing_quality_perc;
-							$('#long_passingLabel').fadeIn(6600);
-							$('#long_passingBlock').css('background',
-									obtainColor(long_passingPercentage));
-							$('#long_passingText').html(long_passingQuality);
-							$('#long_passingText').fadeIn(6600);
-							fade('#long_passingBlock', 6800);
-							
-							var stand_tacklesQuality = parsedDataJSON.stand_tackles;
-							var stand_tacklesPercentage = parsedDataJSON.stand_tackles_quality_perc;
-							$('#stand_tacklesLabel').fadeIn(6800);
-							$('#stand_tacklesBlock').css('background',
-									obtainColor(stand_tacklesPercentage));
-							$('#stand_tacklesText').html(stand_tacklesQuality);
-							$('#stand_tacklesText').fadeIn(6800);
-							fade('#stand_tacklesBlock', 7000);
-							
-							
-							var markingQuality = parsedDataJSON.marking;
-							var markingPercentage = parsedDataJSON.marking_quality_perc;
-							$('#markingLabel').fadeIn(6800);
-							$('#markingBlock').css('background',
-									obtainColor(markingPercentage));
-							$('#markingText').html(markingQuality);
-							$('#markingText').fadeIn(6800);
-							fade('#markingBlock', 7000);
+							var passingQuality = parsedDataJSON.passing;
+							var passingPercentage = parsedDataJSON.passing_quality_perc;
+							$('#passingLabel').fadeIn(6400);
+							$('#passingBlock').css('background',
+									obtainColor(passingPercentage));
+							$('#passingText').html(passingQuality);
+							$('#passingText').fadeIn(6400);
+							fade('#passingBlock', 6600);
 							
 							var penaltiesQuality = parsedDataJSON.penalties;
 							var penaltiesPercentage = parsedDataJSON.penalties_quality_perc;
@@ -417,14 +413,7 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 							$('#six_m_shotsText').fadeIn(6800);
 							fade('#six_m_shotsBlock', 7000);
 							
-							var lob_shotsQuality = parsedDataJSON.lob_shots;
-							var lob_shotsPercentage = parsedDataJSON.lob_shots_quality_perc;
-							$('#lob_shotsLabel').fadeIn(6800);
-							$('#lob_shotsBlock').css('background',
-									obtainColor(lob_shotsPercentage));
-							$('#lob_shotsText').html(lob_shotsQuality);
-							$('#lob_shotsText').fadeIn(6800);
-							fade('#lob_shotsBlock', 7000);
+							
 							
 							var nine_m_shotsQuality = parsedDataJSON.nine_m_shots;
 							var nine_m_shotsPercentage = parsedDataJSON.nine_m_shots_quality_perc;
@@ -435,7 +424,69 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 							$('#nine_m_shotsText').fadeIn(6800);
 							fade('#nine_m_shotsBlock', 7000);
 
-						} // END if playerPosition != GK
+						} else { // playerPosition == GK
+							$('#goalKeepingSectionLabel').fadeIn(850);
+							$('#goalKeepingLine').fadeIn(1050);
+							$('#goalKeepingSectionLabel').addClass('animated rubberBand');
+							
+							var reflexesQuality = parsedDataJSON.reflexes;
+							var reflexesPercentage = parsedDataJSON.reflexes_quality_perc;
+							$('#reflexesLabel').fadeIn(1450);
+							$('#reflexesBlock').css('background',
+									obtainColor(reflexesPercentage));
+							$('#reflexesText').html(reflexesQuality);
+							$('#reflexesText').fadeIn(1800);
+							fade('#reflexesBlock', 2200)
+
+
+							var positioningQuality = parsedDataJSON.positioning;
+							var positioningPercentage = parsedDataJSON.positioning_quality_perc;
+							$('#positioningLabel').fadeIn(2600);
+							$('#positioningBlock').css('background',
+									obtainColor(positioningPercentage));
+							$('#positioningText').html(positioningQuality);
+							$('#positioningText').fadeIn(2800);
+							fade('#positioningBlock', 2800);
+
+							var leg_savesQuality = parsedDataJSON.leg_saves;
+							var leg_savesPercentage = parsedDataJSON.leg_saves_quality_perc;
+							$('#leg_savesLabel').fadeIn(2800);
+							$('#leg_savesBlock').css('background',
+									obtainColor(leg_savesPercentage));
+							$('#leg_savesText').html(leg_savesQuality);
+							$('#leg_savesText').fadeIn(2800);
+							fade('#leg_savesBlock', 3000);
+
+							var penalty_savesQuality = parsedDataJSON.penalty_saves;
+							var penalty_savesPercentage = parsedDataJSON.penalty_saves_quality_perc;
+							$('#penalty_savesLabel').fadeIn(3000);
+							$('#penalty_savesBlock').css('background',
+									obtainColor(penalty_savesPercentage));
+							$('#penalty_savesText').html(penalty_savesQuality);
+							$('#penalty_savesText').fadeIn(3000);
+							fade('#penalty_savesBlock', 3200);
+
+							var six_m_savesQuality = parsedDataJSON.six_m_saves;
+							var six_m_savesPercentage = parsedDataJSON.six_m_saves_quality_perc;
+							$('#six_m_savesLabel').fadeIn(3200);
+							$('#six_m_savesBlock').css('background',
+									obtainColor(six_m_savesPercentage));
+							$('#six_m_savesText').html(six_m_savesQuality);
+							$('#six_m_savesText').fadeIn(3200);
+							fade('#six_m_savesBlock', 3400);
+
+							var nine_m_savesQuality = parsedDataJSON.nine_m_saves;
+							var nine_m_savesPercentage = parsedDataJSON.nine_m_saves_quality_perc;
+							$('#nine_m_savesLabel').fadeIn(3400);
+							$('#nine_m_savesBlock').css('background',
+									obtainColor(nine_m_savesPercentage));
+							$('#nine_m_savesText').html(nine_m_savesQuality);
+							$('#nine_m_savesText').fadeIn(3400);
+							fade('#nine_m_savesBlock', 3600);
+
+							
+						}// END else (playerPosition == GK)
+						
 					} else if (parsedDataJSON.status == "sessionExpired")
 						alert('Session Expired');
 					else if (parsedDataJSON.status == "error")

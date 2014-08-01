@@ -571,7 +571,7 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 							}
 							
 							Player player = (Player) mappedObjects.get(PivotGenerator.MAP_PLAYER);
-							Skill fieldPlayerSkills = (Skill) mappedObjects.get(PivotGenerator.MAP_WINGER_SKILLS);
+							Skill fieldPlayerSkills = (Skill) mappedObjects.get(PivotGenerator.MAP_PIVOT_SKILLS);
 							
 							// Persist the first generated pivot's formation as first squad
 							if (pv == 0) player.setFormation(Player.FORMATION_FIRST_SQUAD);

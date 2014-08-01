@@ -6,25 +6,24 @@
 <head>
 
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="/hb/css/bootstrap.min.css">
+<link rel="stylesheet" href="/hb/css/bootstrap.min.css">
 
 <link rel="stylesheet" href="/hb/css/center.css">
 
 <!-- Optional theme -->
-<link rel="stylesheet"
-	href="/hb/css/bootstrap-theme.min.css"> 
+<link rel="stylesheet" href="/hb/css/bootstrap-theme.min.css">
 <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css"> -->
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css">
+<!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css"> -->
 
-<link rel="stylesheet" href="/hb/css/img-fix.css"/>
-<link rel="stylesheet" href="/hb/css/metro-title.css"/>
-<link rel="stylesheet" href="/hb/css/fonts.css"/>
-<link rel="stylesheet" href="/hb/css/tables.css"/>
-<link rel="stylesheet" href="/hb/css/jquery.animateDialog.css"/>
+<link rel="stylesheet" href="/hb/css/img-fix.css" />
+<link rel="stylesheet" href="/hb/css/metro-title.css" />
+<link rel="stylesheet" href="/hb/css/fonts.css" />
+<link rel="stylesheet" href="/hb/css/tables.css" />
+<link rel="stylesheet" href="/hb/css/jquery.animateDialog.css" />
 <link rel="stylesheet" href="/hb/css/jquery.animateDialog.junk.css" />
-<link rel="stylesheet" href="/hb/css/test.css"/>
-<link rel="stylesheet" href="/hb/css/fade.css"/>
+<link rel="stylesheet" href="/hb/css/test.css" />
+<link rel="stylesheet" href="/hb/css/fade.css" />
+<link rel="stylesheet" href="/hb/css/animate.css" />
 
 
 
@@ -37,24 +36,25 @@
 <body id="theBody">
 	<!-- Latest compiled and minified JavaScript -->
 
-<script type="text/javascript" src="//code.jquery.com/jquery-2.0.2.js"></script>
-<script type="text/javascript" src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
-<script type="text/javascript" src="/hb/scripts/jquery.color.2.1.2.js"></script>
+	<script type="text/javascript" src="//code.jquery.com/jquery-2.0.2.js"></script>
+	<script type="text/javascript"
+		src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+	<script type="text/javascript" src="/hb/scripts/jquery.color.2.1.2.js"></script>
 
 	<script
 		src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.js"></script>
 	<script src="/hb/scripts/jquery.animateDialog.js"></script>
-	
+
 
 	<%! /* Session attributes */
 		private String email;%>
 
 	<% email = (String) session.getAttribute("email");
 		if (email == null) { %>
-	  		<tiles:insertAttribute name="modalSessionExpired"/>
-	  	<% }%>
-	  
+	<tiles:insertAttribute name="modalSessionExpired" />
+	<% }%>
+
 	<%-- <tiles:insertAttribute  name="postRegistrationModal"/>   	 --%>
 
 	<!-- Ajax call to check whether an user has already chosen a team name  -->
@@ -90,7 +90,8 @@
 
 	<%-- <tiles:insertAttribute name="modalPlayerDetails"/> --%>
 
-<br><br>
+	<br>
+	<br>
 	<tiles:insertAttribute name="header" />
 
 
@@ -146,14 +147,60 @@
 	</form> -->
 	<%-- <tiles:insertAttribute name="footer" /> --%>
 
-	
-	
+
+
 	<script src="/hb/scripts/jquery.knob.js"></script>
 	<script src="/hb/scripts/spin.js"></script>
 	<script src="/hb/scripts/spin.min.js"></script>
+
+	<script src="/hb/scripts/Chart.js"></script>
+	<script src="/hb/scripts/doughnutit.js"></script>
+
 	
-	
-	
-	
+<!-- 
+	<script>
+		$("#myDoughnut").doughnutit({
+			// Data for a full doughnut
+			dnData : {
+				value : 100,
+				color : "#819596"
+			},
+			// Size of the doughnut
+			dnSize : 200,
+			// Percentage of the inner cutout
+			dnInnerCutout : 60,
+			// Animate it or not?
+			dnAnimation : true,
+			// Amount of animation steps
+			dnAnimationSteps : 60,
+			// Type of animation
+			dnAnimationEasing : 'linear',
+			// Stroke between the sections of the doughnut
+			dnStroke : false,
+			// Show the text inside the doughnut
+			dnShowText : false,
+			// Text inside the doughnut
+			dnText : '',
+			// Font for the text inside the doughnut
+			dnFontFamily : 'Arial',
+			// Style for the text inside
+			dnFontStyle : 'normal',
+			// Size in px for the text inside
+			dnFontSize : '190px',
+			// Color for the text inside
+			dnFontColor : "#666",
+			// Offset to stay in center
+			dnFontOffset : 35,
+			// Start angle for the first slice of the doughnut
+			dnStartAngle : -90,
+			// Animation in counter clockwise - HAS ISSUES
+			dnCounterClockwise : false,
+			// If an object is passed it generates a right canvas with some text
+			dnRightCanvas : false,
+			// If an object is passed it generates a left canvas with some text
+			dnLeftCanvas : false
+		});
+	</script> -->
+
 </body>
 </html>

@@ -1,5 +1,6 @@
 package af.handball.service;
 
+import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +54,7 @@ public class TeamService {
 		return teamName;
 	}
 	
-	public int getTeamLevel(final String email) {
+	public int getTeamLevel(final String email) throws NoResultException {
 		return teamRepository.getTeamLevel(email);
 	}
 }
