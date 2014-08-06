@@ -30,14 +30,10 @@
 				<prop key="hibernate.show_sql">false</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
 				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+				<prop key="hibernate.connection.autocommit">false</prop>
 			</props>
 		</property>
-		<!-- <property name="jtaTransactionManager" ref="transactionManager" /> -->
-		<!-- <property name="hibernateProperties"> <props> <prop key="hibernate.transaction.jta.platform">org.hibernate.service.jta.platform.internal.WeblogicJtaPlatform 
-			</prop> <prop key="hibernate.hbm2ddl.auto">update</prop> <prop key="hibernate.dialect">org.hibernate.dialect.Oracle12cDialect</prop> 
-			<prop key="hibernate.driverClassName">javax.sql.DataSource</prop> <prop key="hibernate.show_sql">true</prop> 
-			<prop key="hibernate.format_sql">true</prop> <prop key="hibernate.use_sql_comments">true</prop> 
-			</props> </property> -->
+		
 		 <property name="persistenceProvider">
 			<bean class="org.hibernate.jpa.HibernatePersistenceProvider" />
 		</property>  

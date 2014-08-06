@@ -13,10 +13,10 @@
 	</script>
  	<%} else {%>
    
-<!-- Main jumbotron for a primary marketing message or call to action -->
+
 
 	
-	<div style="padding-left: 10%; padding-right: 10%" id="container">
+	<div style="padding-left: 10%; padding-right: 10%; position: relative;" id="container">
 		<!-- NAVIGATION ROW -->
 		<div class="row">
 
@@ -67,10 +67,12 @@
 
 		<!-- END OF TABLE ROW  -->
 		</div>
-		<div class="row">
-		<div class="container-fluid" id="dynamicContainer" style="margin-left: 0px;">
-			
 		</div>
+	
+		
+		<div class="container-fluid" id="dynamicContainer" style="position: absolute; padding-left: 10%; padding-right: 10%;">
+			
+	
 		</div>
 		<!--  -->
 		<script>
@@ -126,6 +128,7 @@
 			 $(document).ready(function() {
 				    $.get('squad.html')
 				             .success(function(data) {
+				            	 $('#dynamicContainer').html('');
 				                 $('#dynamicContainer').html(data);
 				             });
 				    });
@@ -133,6 +136,6 @@
 		
 		</script>
 		<!-- End of container -->
-	</div>
+	
 
 <% } %>

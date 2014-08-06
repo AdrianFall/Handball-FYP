@@ -15,10 +15,13 @@ public class PlayerNumberGenerator {
 	public static final String MAP_LW_SECOND = "2LW";
 	public static final String MAP_CB_FIRST = "1CB";
 	public static final String MAP_CB_SECOND = "2CB";
+	public static final String MAP_CB_THIRD = "3CB";
 	public static final String MAP_RB_FIRST = "1RB";
 	public static final String MAP_RB_SECOND = "2RB";
+	public static final String MAP_RB_THIRD = "3RB";
 	public static final String MAP_LB_FIRST = "1LB";
 	public static final String MAP_LB_SECOND = "2LB";
+	public static final String MAP_LB_THIRD = "3LB";
 	public static final String MAP_PV_FIRST = "1PV";
 	public static final String MAP_PV_SECOND = "2PV";
 	
@@ -40,8 +43,8 @@ public class PlayerNumberGenerator {
 		usedNumberList.add(randomSecondKeeperRoll);
 		
 		ArrayList<Integer> numbersList = new ArrayList<Integer>();
-		// Roll random numbers between 2-50 for the other 12 players 
-		for (int i = 0; i < 12; i++) {
+		// Roll random numbers between 2-50 for the other 15 players 
+		for (int i = 0; i < 15; i++) {
 			int temporaryRandomNumber = random.nextInt((50 - 2) + 1) + 2;
 			while (usedNumberList.contains(temporaryRandomNumber)) {
 				// Re-roll
@@ -63,18 +66,24 @@ public class PlayerNumberGenerator {
 		numberMaps.put(MAP_CB_FIRST, numbersList.get(4));
 		// Add the second CB
 		numberMaps.put(MAP_CB_SECOND, numbersList.get(5));
+		// Add the third CB
+		numberMaps.put(MAP_CB_THIRD, numbersList.get(6));
 		// Add the first LB
-		numberMaps.put(MAP_LB_FIRST, numbersList.get(6));
+		numberMaps.put(MAP_LB_FIRST, numbersList.get(7));
 		// Add the second LB
-		numberMaps.put(MAP_LB_SECOND, numbersList.get(7));
+		numberMaps.put(MAP_LB_SECOND, numbersList.get(8));
+		// Add the third LB
+		numberMaps.put(MAP_LB_THIRD, numbersList.get(9));
 		// Add the first RB
-		numberMaps.put(MAP_RB_FIRST, numbersList.get(8));
+		numberMaps.put(MAP_RB_FIRST, numbersList.get(10));
 		// Add the second RB
-		numberMaps.put(MAP_RB_SECOND, numbersList.get(9));
+		numberMaps.put(MAP_RB_SECOND, numbersList.get(11));
+		// Add the third RB
+		numberMaps.put(MAP_RB_THIRD, numbersList.get(12));
 		// Add the first PV
-		numberMaps.put(MAP_PV_FIRST, numbersList.get(10));
+		numberMaps.put(MAP_PV_FIRST, numbersList.get(13));
 		// Add the second PV
-		numberMaps.put(MAP_PV_SECOND, numbersList.get(11));
+		numberMaps.put(MAP_PV_SECOND, numbersList.get(14));
 		
 		
 		

@@ -24,6 +24,8 @@
 <link rel="stylesheet" href="/hb/css/test.css" />
 <link rel="stylesheet" href="/hb/css/fade.css" />
 <link rel="stylesheet" href="/hb/css/animate.css" />
+<link rel="stylesheet" href="/hb/css/spinner.css" />
+<link rel="stylesheet" href="/hb/css/font-awesome.css" />
 
 
 
@@ -36,9 +38,8 @@
 <body id="theBody">
 	<!-- Latest compiled and minified JavaScript -->
 
-	<script type="text/javascript" src="//code.jquery.com/jquery-2.0.2.js"></script>
-	<script type="text/javascript"
-		src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+	<script type="text/javascript" src="/hb/scripts/jquery-2.1.1.min.js"></script>
+	
 	<script type="text/javascript" src="/hb/scripts/jquery.color.2.1.2.js"></script>
 
 	<script

@@ -1,5 +1,7 @@
 package af.handball.repository;
 
+import java.util.ArrayList;
+
 import af.handball.entity.User;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,6 +19,8 @@ public interface TeamRepository
 	String getTeam(String email);
 
 	int getTeamLevel(String email);
+
+	boolean changeSquad(ArrayList<Integer> playerIdList, String email);
 	
 	
 

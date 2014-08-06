@@ -185,7 +185,7 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 					var parsedDataJSON = $.parseJSON(data);
 					if (parsedDataJSON.status == "OK") {
 
-						spinner.stop();
+						
 						if (new String(playerPosition).valueOf() != new String(
 								"GK").valueOf()) {
 							// Set the label divs style to display none, to
@@ -491,11 +491,11 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 						alert('Session Expired');
 					else if (parsedDataJSON.status == "error")
 						alert('error.');
-					spinner.stop();
+					
 				},
 				error : function() {
 					alert('Error occured when fetching player skills');
-					spinner.stop();
+					
 				}
 			});
 };

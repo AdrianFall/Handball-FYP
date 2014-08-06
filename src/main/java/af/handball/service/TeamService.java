@@ -1,5 +1,7 @@
 package af.handball.service;
 
+import java.util.ArrayList;
+
 import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
 
@@ -56,5 +58,9 @@ public class TeamService {
 	
 	public int getTeamLevel(final String email) throws NoResultException {
 		return teamRepository.getTeamLevel(email);
+	}
+
+	public boolean changeSquad(ArrayList<Integer> playerIdList, String email) {
+		return teamRepository.changeSquad(playerIdList, email);
 	}
 }

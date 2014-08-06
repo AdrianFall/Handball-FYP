@@ -35,6 +35,16 @@ public class Player implements Serializable {
 	private int age;
 	
 	private int number;
+	
+	private String first_squad_play_position;
+
+	public String getFirst_squad_play_position() {
+		return first_squad_play_position;
+	}
+
+	public void setFirst_squad_play_position(String first_squad_play_position) {
+		this.first_squad_play_position = first_squad_play_position;
+	}
 
 	public int getNumber() {
 		return number;
