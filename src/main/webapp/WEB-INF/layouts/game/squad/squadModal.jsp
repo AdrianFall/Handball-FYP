@@ -1,8 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-		<script type="text/javascript" src="/hb/scripts/ajax.getPlayerSkills.js"></script>
+<link rel="stylesheet" href="/hb/css/metro-bootstrap.css">
+<link rel="stylesheet" href="/hb/css/gradients.css">
+<link rel="stylesheet" href="/hb/css/progress-bar.css">
+<script type="text/javascript"
+	src="/hb/scripts/ajax.getPlayerDetails.js"></script>
+<script src="/hb/scripts/metro.min.js"></script>
+<script type="text/javascript" src="/hb/scripts/progress-bar.js"></script>
 <div class="modal fade" id="modalPlayerDetails" tabindex="-1"
 	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
 	style="">
@@ -63,26 +69,29 @@
 				<!-- Spinners for the duration of ajax post  -->
 				<div id="physicalSectionSpinner"
 					style="position: absolute; z-index: 2; margin-left: 75%; margin-top: 160px;"></div>
-				<script>var opts = {
-						  lines: 11, // The number of lines to draw
-						  length: 18, // The length of each line
-						  width: 10, // The line thickness
-						  radius: 30, // The radius of the inner circle
-						  corners: 1, // Corner roundness (0..1)
-						  rotate: 0, // The rotation offset
-						  direction: 1, // 1: clockwise, -1: counterclockwise
-						  color: '#000', // #rgb or #rrggbb or array of colors
-						  speed: 0.8, // Rounds per second
-						  trail: 60, // Afterglow percentage
-						  shadow: true, // Whether to render a shadow
-						  hwaccel: false, // Whether to use hardware acceleration
-						  className: 'spinner', // The CSS class to assign to the spinner
-						  zIndex: 1000, // The z-index (defaults to 2000000000)
-						  top: '50%', // Top position relative to parent
-						  left: '50%' // Left position relative to parent
-						};
-						var target = document.getElementById('physicalSectionSpinner');
-						var spinner = new Spinner(opts).spin(target);</script>
+				<script>
+					var opts = {
+						lines : 11, // The number of lines to draw
+						length : 18, // The length of each line
+						width : 10, // The line thickness
+						radius : 30, // The radius of the inner circle
+						corners : 1, // Corner roundness (0..1)
+						rotate : 0, // The rotation offset
+						direction : 1, // 1: clockwise, -1: counterclockwise
+						color : '#000', // #rgb or #rrggbb or array of colors
+						speed : 0.8, // Rounds per second
+						trail : 60, // Afterglow percentage
+						shadow : true, // Whether to render a shadow
+						hwaccel : false, // Whether to use hardware acceleration
+						className : 'spinner', // The CSS class to assign to the spinner
+						zIndex : 1000, // The z-index (defaults to 2000000000)
+						top : '50%', // Top position relative to parent
+						left : '50%' // Left position relative to parent
+					};
+					var target = document
+							.getElementById('physicalSectionSpinner');
+					var spinner = new Spinner(opts).spin(target);
+				</script>
 
 				<!-- END Spinners -->
 
@@ -93,7 +102,7 @@
 					style="display: none; position: absolute; margin-left: 70%; margin-top: 7px; font-size: 90%; font-style: bold;">Physical</div>
 				<hr id="physicalLine"
 					style="display: none; position: absolute; background-color: green; margin-left: 52%; margin-top: 21px; height: 1px; width: 330px;">
-				
+
 				<!--  <div id="accelerationLabel" style="position: absolute; display:none; margin-left: 53%; margin-top: 26px; font-size: 90%; display: none;">Acceleration</div>
 				<div id="accelerationBlock" class="fadeable-block" style="margin-left: 69%; margin-top: 26px;"><div id="accelerationText" style="display: none; margin-top: -1px; margin-left: 1px;"><font color="white" size="2" style="margin-bottom: 11px;"></font></div></div> -->
 
@@ -419,6 +428,149 @@
 
 				</div>
 				<!-- END Goal Keeping Skills -->
+				<div class="metro"
+					style="width: 48%; height: 10px; margin-left: 15px; margin-top: 175px;">
+					<nav class="navigation-bar dark"> <nav
+						class="navigation-bar-content"> <span
+						style="margin-left: 64px;" class="element-divider"></span> <item
+						class="element">Details</item> <span class="element-divider"></span>
+					<item class="element">Contract</item> <span class="element-divider"></span>
+					<item class="element">Health</item> <span class="element-divider"></span>
+					</nav> </nav>
+				</div>
+
+				<!-- START the details  -->
+				<div id="details" class="grad-blue"
+					style="height: 165px; width: 382px; margin-left: 2%; margin-top: 36px; display: none;">
+					<h3 style="margin-left: 38%;">Details</h3>
+					<div style="margin-left: 28%; margin-top: -10px; font-size: 105%;">In
+						club for:</div>
+					<div id="inClubFor" style="margin-left: 59%; margin-top: -20px;"></div>
+					<div style="margin-left: 28%; margin-top: 1px; font-size: 105%;">Nationality:</div>
+					<div id="nationality" style="margin-left: 59%; margin-top: -20px;"></div>
+					<div style="margin-left: 28%; margin-top: 1px; font-size: 105%;">Height:</div>
+					<div id="height" style="margin-left: 59%; margin-top: -20px;"></div>
+					<div style="margin-left: 28%; margin-top: 1px; font-size: 105%;">Weight:</div>
+					<div id="weight" style="margin-left: 59%; margin-top: -20px;"></div>
+					<div style="margin-left: 28%; margin-top: 1px; font-size: 105%;">Handed:</div>
+					<div id="handed" style="margin-left: 59%; margin-top: -20px;"></div>
+					<div style="margin-left: 28%; margin-top: 1px; font-size: 105%;">Special
+						Ability:</div>
+					<div id="specialAbility"
+						style="margin-left: 59%; margin-top: -20px;">TBD</div>
+				</div>
+				<!-- END the details -->
+
+
+				<!-- Start the contract -->
+				<div id="contract" class="grad-green"
+					style="display: none; height: 165px; width: 382px; margin-left: 2%; margin-top: 36px;">
+					<h3 style="margin-left: 34%;">Contract</h3>
+
+					<div id="seasonWageBox"
+						style="border: 1px solid #B3CC9B; border-top: none; border-left: none; border-right: none; width: 100px; height: 20px; margin-left: 4%;">
+						&nbsp;Season Wage
+						<div style="margin-top: 4%; margin-left: 4%;">$40,000,000</div>
+						<div style="margin-top: 4%; margin-left: 10%; font-size: 80%;">
+							Sell or sack </br> player to free </br> up some space.
+						</div>
+						<div style="margin-top: 4%; margin-left: 20%;">
+							<button type="button"
+								style="height: 25px; font-size: 12px; padding: 0px 8px; font-weight: 0; margin: 0"
+								class="btn btn-danger">Sack</button>
+						</div>
+					</div>
+
+					<div id="marketValueBox"
+						style="border: 1px solid #a5b596; border-top: none; border-left: none; border-right: none; width: 100px; height: 20px; margin-left: 34%; margin-top: -5.20%;">
+						&nbsp;Market Value</div>
+					<div style="height: 20px; margin-top: 1%; margin-left: 34%;">$40,000,000</div>
+					<div
+						style="height: 50px; margin-left: 34%; margin-top: 1%; width: 100px; font-size: 80%;">'player
+						name' is not transfer listed.</div>
+					<div style="height: 25px; margin-left: 40%;">
+						<button type="button"
+							style="height: 25px; font-size: 12px; padding: 0px 8px; font-weight: 0; margin: 0"
+							class="btn btn-success">Sell</button>
+					</div>
+
+					<div id="yearsLeftBox"
+						style="border: 1px solid #a5b596; border-top: none; border-left: none; border-right: none; width: 100px; height: 20px; margin-left: 68%; margin-top: -32.20%;">
+						&nbsp;Years left</div>
+					<div
+						style="height: 74px; width: 110px; margin-top: 1%; margin-left: 68%;">3
+						years left at Arsenal FC Club</div>
+
+					<div style="height: 25px; margin-left: 71%;">
+						<button type="button"
+							style="height: 25px; font-size: 12px; padding: 0px 8px; font-weight: 0; margin: 0"
+							class="btn btn-info">Renew</button>
+					</div>
+
+
+				</div>
+				<!-- END the contract -->
+
+				<!-- START the health -->
+
+				<div id="health" class="grad-red"
+					style="height: 165px; width: 382px; margin-left: 2%; margin-top: 36px;">
+
+
+					<div id="injuryBox"
+						style="border: 1px solid #B3CC9B; border-top: none; border-left: none; border-right: none; width: 100px; height: 20px; margin-left: 4%; text-align: center; margin-top: 0px;">
+						Injury
+						<div style="height: 60px; margin-top: 8%; margin-left: 4%;">
+							<div style="height: 40px; margin-top: -8%; margin-left: 4%;">Ankle
+								injury 12 days off</div>
+
+							<div style="height: 20px; margin-top: 4%; margin-left: 20%;">
+								<button type="button"
+									style="height: 25px; font-size: 12px; padding: 0px 8px; font-weight: 0; margin-left: -20px;"
+									class="btn btn-danger">Hire Doctor</button>
+							</div>
+
+							<div
+								style="height: 40px; width: 100px; margin-top: 12%; margin-left: -4%; font-size: 85%;">
+								Hire a specialist doctor to reduce the player's injury length</div>
+						</div>
+					</div>
+
+					<div id="conditionBox"
+						style="border: 1px solid #B3CC9B; border-top: none; border-left: none; border-right: none; width: 100px; height: 20px; margin-left: 34%; text-align: center; margin-top: -20px;">
+						Condition
+						<div style="height: 60px; margin-top: -40%; margin-left: 4%;">
+							<div style="height: 40px; margin-top: -8%; margin-left: 4%;">
+								<!-- PROGRESS BAR -->
+								<div class="loader" style="margin-left: -5%;">
+									<div class="progress-bar" data-perc="100">
+										<div class="progress-stripes"></div>
+										<div class="percentage">0%</div>
+									</div>
+								</div>
+								
+								
+								<script>
+								
+								</script>
+								<!-- END PROGRESS BAR -->
+							</div>
+
+							<div style="height: 20px; margin-top: -8%; margin-left: 20%;">
+								<button type="button"
+									style="height: 25px; font-size: 12px; padding: 0px 8px; font-weight: 0; margin-left: -20px;"
+									class="btn btn-success">Hire Therapist</button>
+							</div>
+
+							<div
+								style="height: 40px; width: 100px; margin-top: 12%; margin-left: -4%; font-size: 85%;">
+								Hire a physical therapist to improve the player's condition</div>
+						</div>
+					</div>
+
+				</div>
+
+				<!-- END the health -->
 			</div>
 
 		</div>

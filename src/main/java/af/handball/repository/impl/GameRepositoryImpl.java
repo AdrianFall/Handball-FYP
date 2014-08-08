@@ -182,4 +182,10 @@ public class GameRepositoryImpl implements GameRepository {
 				.setParameter("player_id", playerId).getSingleResult();
 	}
 
+	@Override
+	public Player getPlayer(int playerId) {
+		
+		return emgr.find(Player.class, playerId);
+	}
+
 }

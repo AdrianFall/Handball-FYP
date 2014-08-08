@@ -32,6 +32,8 @@
 
 
 
+
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><tiles:getAsString name="title"></tiles:getAsString></title>
 </head>
@@ -46,6 +48,7 @@
 		src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.js"></script>
 	<script src="/hb/scripts/jquery.animateDialog.js"></script>
+	
 
 
 	<%! /* Session attributes */

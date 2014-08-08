@@ -14,6 +14,8 @@ public interface GameRepository
 	Map<String, Skill> getAllPlayersSkills(List<Player> listOfPlayers);
 
 	Skill getPlayerSkills(int playerId);
+
+	Player getPlayer(int playerId);
 	
 
 }

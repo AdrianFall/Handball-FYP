@@ -522,6 +522,11 @@ $('#fsqp_td<%=i%> div').slideUp(
 		// Register the click listener on each row of first squad players
 		  $("#fsqp_tr<%=i%>").click(function() {
 			  
+			  // AJAX post, to obtain the Player entity
+			  
+			  
+			  // AJAX post, to obtain the Contract entity
+			  
 			  var player = {
   		            teamName: "<%=teamName%>",
   		            playerName: $("#fsqp_name<%=i%>").text(),
@@ -610,6 +615,8 @@ $('#fsqp_td<%=i%> div').slideUp(
 			  $("#modalPlayerDetails")
 				.modal(
 						'show');
+			  
+				
 			  
 			  
 		    	$('#clubName').text(bp_player.teamName);

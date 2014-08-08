@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import af.handball.entity.Player;
 import af.handball.entity.Skill;
 import af.handball.generator.QualityGenerator;
 import af.handball.helper.MathRoundHelper;
@@ -112,7 +113,7 @@ public class TeamController {
 		return jsonObj.toString();
 	}
 
-	@RequestMapping(value = "/getPlayerSkills", method = RequestMethod.POST, headers = { "Content-type=application/json" }, produces = "application/json")
+	@RequestMapping(value = "/getPlayerDetails", method = RequestMethod.POST, headers = { "Content-type=application/json" }, produces = "application/json")
 	@ResponseBody
 	public String getPlayerSkills(@RequestBody String jsonMsg,
 			HttpServletRequest request, HttpServletResponse response,
@@ -400,6 +401,15 @@ public class TeamController {
 							"nine_m_shots_quality_perc",
 							QualityGenerator.getQualityAsPercentage(
 									skill.getNine_m_shots(), teamLevel));
+					
+					// Obtain the player entity
+					Player player = gameService.getPlayer(Integer
+							.parseInt(playerId));
+					jsonObj.put("height", player.getHeight());
+					jsonObj.put("weight", player.getWeight());
+					jsonObj.put("handed", player.getHanded());
+					jsonObj.put("special_ability", player.getSpecial_ability());
+					// TODO
 
 					// END Fetch the data and allocate in jsonObj.
 
@@ -415,7 +425,6 @@ public class TeamController {
 			}
 		}
 
-		// TODO
 		return jsonObj.toString();
 	}
 

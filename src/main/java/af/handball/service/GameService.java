@@ -32,6 +32,10 @@ public class GameService {
 		return gameRepository.getPlayerSkills(playerId);
 	}
 	
+	public Player getPlayer(int playerId) {
+		return gameRepository.getPlayer(playerId);
+	}
+	
 	
 	
 	

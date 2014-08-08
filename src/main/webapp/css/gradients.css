@@ -1,0 +1,20 @@
+.grad-blue {
+  background: -webkit-linear-gradient(#005C99, #0099FF); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#005C99, #0099FF); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#005C99, #0099FF); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#005C99, #0099FF); /* Standard syntax */
+}
+
+.grad-red {
+  background: -webkit-linear-gradient(#E67575, #EB9191); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#E67575, #EB9191); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#E67575, #EB9191); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#E67575, #EB9191); /* Standard syntax */
+}
+
+.grad-green {
+  background: -webkit-linear-gradient(#8FA37C, #A5B596); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#8FA37C, #A5B596); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#8FA37C, #A5B596); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#8FA37C, #A5B596); /* Standard syntax */
+}

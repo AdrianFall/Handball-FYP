@@ -1,4 +1,4 @@
-//Ajax POST to obtain the skills of the player
+// Obtain and display the player details on the modal
 function showPlayerDetailsOnModal(playerId, playerPosition) {
 	
 	// Serialize the form and post it to the server
@@ -172,10 +172,13 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 		$('#passingBlock').css('display', 'none');
 	});
 
-	$
-			.ajax({
+
+	
+
+	// AJAX post for player skills
+	$.ajax({ 
 				type : "POST",
-				url : "getPlayerSkills.html",
+				url : "getPlayerDetails.html",
 				data : JSON.stringify({
 					"playerId" : playerId
 				}),
@@ -184,10 +187,22 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 
 					var parsedDataJSON = $.parseJSON(data);
 					if (parsedDataJSON.status == "OK") {
-
+						// Call function to load the progress bar
+						preload();
+						
+						// Call function to animate stripes
+						stripesAnimate();  
 						
 						if (new String(playerPosition).valueOf() != new String(
 								"GK").valueOf()) {
+							// Set the player details
+							$('#height').html(parsedDataJSON.height);
+							$('#weight').html(parsedDataJSON.weight);
+							$('#handed').html(parsedDataJSON.handed);
+							$('#specialAbility').html(parsedDataJSON.special_ability);
+								
+							
+							
 							// Set the label divs style to display none, to
 							// properly
 							// animate the fade in
@@ -485,8 +500,10 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 							fade('#nine_m_savesBlock', 3600);
 
 							
+							
+							
 						}// END else (playerPosition == GK)
-						
+					 
 					} else if (parsedDataJSON.status == "sessionExpired")
 						alert('Session Expired');
 					else if (parsedDataJSON.status == "error")
@@ -497,8 +514,8 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 					alert('Error occured when fetching player skills');
 					
 				}
-			});
-};
+			}); // END AJAX post for player's skills
+}; // END showPlayerDetailsOnModal function
 
 function fade(id, ms) {
 	$(id).css({
