@@ -5,12 +5,17 @@ setSkin(demoColorArray[colorIndex]);
 
 // Stripes interval
 var stripesAnim;
-var calcPercent;
 
-$progress = $('.progress-bar');
-$percent = $('.percentage');
-$stripes = $('.progress-stripes');
-$stripes.text('////////////////////////');
+$conditionProgress = $('#conditionProgressBar');
+$conditionPercent = $('#conditionPercentage');
+$conditionStripes = $('#conditionProgressStripes');
+$conditionStripes.text('////////////////////////');
+
+$moraleProgress = $('#moraleProgressBar');
+$moralePercent = $('#moralePercentage');
+$moraleStripes = $('#moraleProgressStripes');
+$moraleStripes.text('\\\\\\\\\\\\\\\\\\\\\\\\');
+
 
 /* WHEN LOADED */
 $(window).load(function() {
@@ -22,40 +27,53 @@ $(window).load(function() {
 /* LOADING */
 function preload() {
 
-	var perc = $('.progress-bar').data("perc");
-	var increment = 1;
+	var conditionPerc = $('#conditionProgressBar').data("perc");
+	var moralePerc = $('#moraleProgressBar').data("perc");
 
+		if (conditionPerc >= 0)
+			setSkin("red", "condition");
+		if (conditionPerc >= 40 && conditionPerc < 70)
+			setSkin("yellow", "condition");
+		if (conditionPerc > 69)
+			setSkin("green", "condition");
+			
+		if (moralePerc >= 0)
+			setSkin("red", "morale");
+		if (moralePerc >= 40 && moralePerc < 70)
+			setSkin("yellow", "morale");
+		if (moralePerc > 69)
+			setSkin("green", "morale");
+			
 
-
-		if (perc >= 0)
-			setSkin("red");
-		if (perc >= 40 && perc < 70)
-			setSkin("yellow");
-		if (perc > 69)
-			setSkin("green");
-
-		$progress.animate({
-			width : perc + "%"
+		$conditionProgress.animate({
+			width : conditionPerc + "%"
 		}, 800);
 		
-		calcPercent = setInterval(function() {
+		$moraleProgress.animate({
+			width : moralePerc + "%"
+		}, 800);
+		
+		
 
-			// loop through the items
-			$percent.text(Math
-					.floor(($progress.width() / $('.loader').width()) * 100)
-					+ '%');
+		$conditionPercent.text(Math
+				.floor(($conditionProgress.width() / $('#conditionLoader').width()) * 100) + '%');
 
-		});
+		$moralePercent.text(Math
+				.floor(($moraleProgress.width() / $('#moraleLoader').width()) * 100) + '%');
 
 	
 	
 	loaded = true;
-		$progress.animate({
-			width: perc + '%'
-		}, perc, function() {
-			$percent.text( perc + '%');
-			clearInterval(calcPercent);
-			clearInterval(stripesAnim);
+		$conditionProgress.animate({
+			width: conditionPerc + '%'
+		}, conditionPerc, function() {
+			$conditionPercent.text( conditionPerc + '%');
+		});	
+		
+		$moraleProgress.animate({
+			width: moralePerc + '%'
+		}, moralePerc, function() {
+			$moralePercent.text( moralePerc + '%');
 		});	
 } // END preLoad()
 
@@ -66,12 +84,16 @@ function stripesAnimate() {
 }
 
 function animating() {
-	$stripes.animate({
+	$conditionStripes.animate({
 		marginLeft : "-=90px"
 	}, 2000, "linear").append('/');
 }
 
-function setSkin(skin) {
-	$('.loader').attr('class', 'loader ' + skin);
-
+function setSkin(skin, loaderType) {
+	if (new String(loaderType).valueOf() == new String("condition").valueOf()) 
+		$('#conditionLoader').attr('class', 'loader ' + skin);
+	
+	else if (new String(loaderType).valueOf() == new String("morale").valueOf())
+		$('#moraleLoader').attr('class', 'loader ' + skin);
+	
 }

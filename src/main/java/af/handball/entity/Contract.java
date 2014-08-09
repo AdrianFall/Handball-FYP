@@ -12,6 +12,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="contract")
+@NamedQueries({
+	@NamedQuery(name = "Contract.getContractByPlayerId", query = "SELECT c FROM Contract c WHERE c.player_id = :player_id")
+																 
+})
 public class Contract implements Serializable {
 
 	/**

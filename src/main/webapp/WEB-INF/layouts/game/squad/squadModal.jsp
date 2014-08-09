@@ -9,6 +9,8 @@
 	src="/hb/scripts/ajax.getPlayerDetails.js"></script>
 <script src="/hb/scripts/metro.min.js"></script>
 <script type="text/javascript" src="/hb/scripts/progress-bar.js"></script>
+<script type="text/javascript" src="/hb/scripts/playerDetailsNavigation.js">
+</script>
 <div class="modal fade" id="modalPlayerDetails" tabindex="-1"
 	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
 	style="">
@@ -432,28 +434,28 @@
 					style="width: 48%; height: 10px; margin-left: 15px; margin-top: 175px;">
 					<nav class="navigation-bar dark"> <nav
 						class="navigation-bar-content"> <span
-						style="margin-left: 64px;" class="element-divider"></span> <item
-						class="element">Details</item> <span class="element-divider"></span>
-					<item class="element">Contract</item> <span class="element-divider"></span>
-					<item class="element">Health</item> <span class="element-divider"></span>
+						style="margin-left: 64px;" class="element-divider"></span> <a href="#" onclick="showDetails()"
+						class="element">Details</a> <span class="element-divider"></span>
+					<a onclick="showContract()" href="#" class="element">Contract</a> <span class="element-divider"></span>
+					<a href="#" onclick="showHealth()" class="element">Health</a> <span class="element-divider"></span>
 					</nav> </nav>
 				</div>
 
 				<!-- START the details  -->
 				<div id="details" class="grad-blue"
-					style="height: 165px; width: 382px; margin-left: 2%; margin-top: 36px; display: none;">
-					<h3 style="margin-left: 38%;">Details</h3>
+					style="height: 165px; width: 382px; margin-left: 2%; margin-top: 46px; display: none;">
+					
 					<div style="margin-left: 28%; margin-top: -10px; font-size: 105%;">In
 						club for:</div>
-					<div id="inClubFor" style="margin-left: 59%; margin-top: -20px;"></div>
+					<div id="inClubFor" style="margin-left: 59%; margin-top: -20px;">TBD</div>
 					<div style="margin-left: 28%; margin-top: 1px; font-size: 105%;">Nationality:</div>
-					<div id="nationality" style="margin-left: 59%; margin-top: -20px;"></div>
+					<div id="nationality" style="margin-left: 59%; margin-top: -20px;">TBD</div>
 					<div style="margin-left: 28%; margin-top: 1px; font-size: 105%;">Height:</div>
-					<div id="height" style="margin-left: 59%; margin-top: -20px;"></div>
+					<div id="height" style="margin-left: 59%; margin-top: -20px;">TBD</div>
 					<div style="margin-left: 28%; margin-top: 1px; font-size: 105%;">Weight:</div>
-					<div id="weight" style="margin-left: 59%; margin-top: -20px;"></div>
+					<div id="weight" style="margin-left: 59%; margin-top: -20px;">TBD</div>
 					<div style="margin-left: 28%; margin-top: 1px; font-size: 105%;">Handed:</div>
-					<div id="handed" style="margin-left: 59%; margin-top: -20px;"></div>
+					<div id="handed" style="margin-left: 59%; margin-top: -20px;">TBD</div>
 					<div style="margin-left: 28%; margin-top: 1px; font-size: 105%;">Special
 						Ability:</div>
 					<div id="specialAbility"
@@ -465,12 +467,12 @@
 				<!-- Start the contract -->
 				<div id="contract" class="grad-green"
 					style="display: none; height: 165px; width: 382px; margin-left: 2%; margin-top: 36px;">
-					<h3 style="margin-left: 34%;">Contract</h3>
+					
 
 					<div id="seasonWageBox"
 						style="border: 1px solid #B3CC9B; border-top: none; border-left: none; border-right: none; width: 100px; height: 20px; margin-left: 4%;">
 						&nbsp;Season Wage
-						<div style="margin-top: 4%; margin-left: 4%;">$40,000,000</div>
+						<div id="seasonWage" style="margin-top: 4%; margin-left: 4%;">$40,000,000</div>
 						<div style="margin-top: 4%; margin-left: 10%; font-size: 80%;">
 							Sell or sack </br> player to free </br> up some space.
 						</div>
@@ -484,7 +486,7 @@
 					<div id="marketValueBox"
 						style="border: 1px solid #a5b596; border-top: none; border-left: none; border-right: none; width: 100px; height: 20px; margin-left: 34%; margin-top: -5.20%;">
 						&nbsp;Market Value</div>
-					<div style="height: 20px; margin-top: 1%; margin-left: 34%;">$40,000,000</div>
+					<div id="marketValue" style="height: 20px; margin-top: 1%; margin-left: 34%;">$40,000,000</div>
 					<div
 						style="height: 50px; margin-left: 34%; margin-top: 1%; width: 100px; font-size: 80%;">'player
 						name' is not transfer listed.</div>
@@ -497,7 +499,7 @@
 					<div id="yearsLeftBox"
 						style="border: 1px solid #a5b596; border-top: none; border-left: none; border-right: none; width: 100px; height: 20px; margin-left: 68%; margin-top: -32.20%;">
 						&nbsp;Years left</div>
-					<div
+					<div id="yearsLeft"
 						style="height: 74px; width: 110px; margin-top: 1%; margin-left: 68%;">3
 						years left at Arsenal FC Club</div>
 
@@ -514,23 +516,23 @@
 				<!-- START the health -->
 
 				<div id="health" class="grad-red"
-					style="height: 165px; width: 382px; margin-left: 2%; margin-top: 36px;">
+					style="display: none; height: 165px; width: 382px; margin-left: 2%; margin-top: 36px;">
 
 
 					<div id="injuryBox"
 						style="border: 1px solid #B3CC9B; border-top: none; border-left: none; border-right: none; width: 100px; height: 20px; margin-left: 4%; text-align: center; margin-top: 0px;">
 						Injury
 						<div style="height: 60px; margin-top: 8%; margin-left: 4%;">
-							<div style="height: 40px; margin-top: -8%; margin-left: 4%;">Ankle
+							<div id="injuryCause" style="height: 40px; margin-top: -8%; margin-left: 4%;">Ankle
 								injury 12 days off</div>
 
 							<div style="height: 20px; margin-top: 4%; margin-left: 20%;">
-								<button type="button"
+								<button type="button" id="hireDoctorButton"
 									style="height: 25px; font-size: 12px; padding: 0px 8px; font-weight: 0; margin-left: -20px;"
 									class="btn btn-danger">Hire Doctor</button>
 							</div>
 
-							<div
+							<div id="hireDoctorText"
 								style="height: 40px; width: 100px; margin-top: 12%; margin-left: -4%; font-size: 85%;">
 								Hire a specialist doctor to reduce the player's injury length</div>
 						</div>
@@ -542,10 +544,10 @@
 						<div style="height: 60px; margin-top: -40%; margin-left: 4%;">
 							<div style="height: 40px; margin-top: -8%; margin-left: 4%;">
 								<!-- PROGRESS BAR -->
-								<div class="loader" style="margin-left: -5%;">
-									<div class="progress-bar" data-perc="100">
-										<div class="progress-stripes"></div>
-										<div class="percentage">0%</div>
+								<div id="conditionLoader" class="loader" style="margin-left: -5%;">
+									<div id="conditionProgressBar" class="progress-bar" data-perc="100">
+										<div id="conditionProgressStripes" class="progress-stripes"></div>
+										<div id="conditionPercentage" class="percentage">0%</div>
 									</div>
 								</div>
 								
@@ -567,6 +569,50 @@
 								Hire a physical therapist to improve the player's condition</div>
 						</div>
 					</div>
+					
+					
+					
+					
+					
+					
+					<div id="moraleBox"
+						style="border: 1px solid #B3CC9B; border-top: none; border-left: none; border-right: none; width: 100px; height: 20px; margin-left: 68%; text-align: center; margin-top: -20px;">
+						Morale
+						<div style="height: 60px; margin-top: -40%; margin-left: 4%;">
+							<div style="height: 40px; margin-top: -8%; margin-left: 4%;">
+								<!-- PROGRESS BAR -->
+								<div id="moraleLoader" class="loader" style="margin-left: -5%;">
+									<div id="moraleProgressBar" class="progress-bar" data-perc="70">
+										<div id="moraleProgressStripes" class="progress-stripes"></div>
+										<div id="moralePercentage" class="percentage">0%</div>
+									</div>
+								</div>
+								
+								
+								<script>
+								
+								</script>
+								<!-- END PROGRESS BAR -->
+							</div>
+
+							<div style="height: 20px; margin-top: -8%; margin-left: 20%;">
+								<button type="button"
+									style="height: 25px; font-size: 12px; padding: 0px 8px; font-weight: 0; margin-left: -20px;"
+									class="btn btn-success">Hire Psych</button>
+							</div>
+
+							<div
+								style="height: 40px; width: 100px; margin-top: 12%; margin-left: -4%; font-size: 85%;">
+								Hire a psychologist to improve the player's morale</div>
+						</div>
+					</div>
+					
+					
+					
+					
+					
+					
+					
 
 				</div>
 

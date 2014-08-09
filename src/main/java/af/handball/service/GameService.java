@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import af.handball.entity.Contract;
 import af.handball.entity.Player;
 import af.handball.entity.Skill;
 import af.handball.repository.GameRepository;
@@ -34,6 +35,10 @@ public class GameService {
 	
 	public Player getPlayer(int playerId) {
 		return gameRepository.getPlayer(playerId);
+	}
+
+	public Contract getPlayerContract(int playerId) {
+		return gameRepository.getPlayerContract(playerId);
 	}
 	
 	

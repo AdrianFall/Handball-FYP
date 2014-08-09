@@ -12,6 +12,7 @@ import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import af.handball.entity.Contract;
 import af.handball.entity.Player;
 import af.handball.entity.Skill;
 import af.handball.repository.GameRepository;
@@ -186,6 +187,14 @@ public class GameRepositoryImpl implements GameRepository {
 	public Player getPlayer(int playerId) {
 		
 		return emgr.find(Player.class, playerId);
+	}
+
+	@Override
+	public Contract getPlayerContract(int playerId) {
+		TypedQuery<Contract> contractQuery = emgr.createNamedQuery("Contract.getContractByPlayerId", Contract.class);
+		contractQuery.setParameter("player_id", playerId);
+		
+		return contractQuery.getSingleResult();
 	}
 
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import af.handball.entity.Contract;
 import af.handball.entity.Player;
 import af.handball.entity.Skill;
 import af.handball.generator.QualityGenerator;
@@ -121,6 +122,7 @@ public class TeamController {
 
 		JSONObject jsonObj = new JSONObject();
 		String email = (String) session.getAttribute("email");
+		String teamName = (String) session.getAttribute("teamName");
 
 		if (email == null) { // Session expired
 			jsonObj.put("status", "sessionExpired");
@@ -407,9 +409,36 @@ public class TeamController {
 							.parseInt(playerId));
 					jsonObj.put("height", player.getHeight());
 					jsonObj.put("weight", player.getWeight());
+					
+					
+					int playerHand = player.getHanded();
+					String playerHandText = "";
+					// Determine which handed the player is
+					if (playerHand == player.PLAYER_HAND_LEFT)
+						playerHandText = "left";
+					else if (playerHand == player.PLAYER_HAND_RIGHT)
+						playerHandText = "right";
+					else if (playerHand == player.PLAYER_HAND_BOTH)
+						playerHandText = "both";
+					
 					jsonObj.put("handed", player.getHanded());
 					jsonObj.put("special_ability", player.getSpecial_ability());
-					// TODO
+					// Obtain the Contract of a player
+					Contract contract = gameService.getPlayerContract(Integer
+							.parseInt(playerId));
+					jsonObj.put("season_wage", contract.getSeason_wage());
+					jsonObj.put("years_left", contract.getYears_left());
+					
+					// Obtain the player entity
+					Player playerEntity = gameService.getPlayer(Integer.parseInt(playerId));
+					jsonObj.put("market_value", playerEntity.getMarket_value());
+					jsonObj.put("condition", player.getCondition());
+					jsonObj.put("morale", player.getMorale());
+					jsonObj.put("injury", player.getInjury_cause());
+					jsonObj.put("injury_days", player.getInjury_days());
+					
+					jsonObj.put("team_name", teamName);
+					
 
 					// END Fetch the data and allocate in jsonObj.
 

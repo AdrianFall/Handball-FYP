@@ -187,6 +187,35 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 
 					var parsedDataJSON = $.parseJSON(data);
 					if (parsedDataJSON.status == "OK") {
+					
+						// Set the player details
+						$('#height').html(parsedDataJSON.height);
+						$('#weight').html(parsedDataJSON.weight);
+						$('#handed').html(parsedDataJSON.handed);
+						$('#specialAbility').html(parsedDataJSON.special_ability);
+						
+						// Set the contract details
+						$('#seasonWage').html("$" + parsedDataJSON.season_wage);
+						$('#marketValue').html("$" + parsedDataJSON.market_value);
+						$('#yearsLeft').html(parsedDataJSON.years_left + " years left at " + parsedDataJSON.team_name);
+					
+						// Set the health details
+						$('#conditionProgressBar').data("perc", parsedDataJSON.condition);
+						$('#moraleProgressBar').data("perc", parsedDataJSON.morale);
+						if (parsedDataJSON.injury_days == 0) {
+							$('#injuryCause').html("The player is in good shape");
+							$('#hireDoctorButton').fadeOut(500);
+							$('#hireDoctorText').fadeOut(500);
+						} else {
+							$('#injuryCause').html(parsedDataJSON.injury + " for " + parsedDataJSON.injury_days + " days.");
+							$('#hireDoctorButton').fadeIn(500);
+							$('#hireDoctorText').fadeIn(500);
+						}
+						
+						
+
+						
+
 						// Call function to load the progress bar
 						preload();
 						
@@ -195,11 +224,7 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 						
 						if (new String(playerPosition).valueOf() != new String(
 								"GK").valueOf()) {
-							// Set the player details
-							$('#height').html(parsedDataJSON.height);
-							$('#weight').html(parsedDataJSON.weight);
-							$('#handed').html(parsedDataJSON.handed);
-							$('#specialAbility').html(parsedDataJSON.special_ability);
+							
 								
 							
 							
