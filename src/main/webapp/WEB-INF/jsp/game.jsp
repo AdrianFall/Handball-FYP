@@ -37,7 +37,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><tiles:getAsString name="title"></tiles:getAsString></title>
 </head>
-<body id="theBody">
+<body id="theBody" style="background-image: url('/hb/img/bgblue.jpg'); background-attachment: fixed; background-size: 100% 100%;">
 	<!-- Latest compiled and minified JavaScript -->
 
 	<script type="text/javascript" src="/hb/scripts/jquery-2.1.1.min.js"></script>

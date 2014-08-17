@@ -92,7 +92,7 @@
 													var parsedDataJSON = $
 															.parseJSON(data);
 													if (parsedDataJSON.status == "OK") {
-														alert('CREDENTIALS OK');
+														
 														
 														
 														
@@ -102,19 +102,19 @@
 															data : "",
 															contentType : "application/json; charset=UTF-8",
 															success : function(data) {
-																alert('Data: ' + data);
+																
 																var parsedDataJSON = $.parseJSON(data);
 																if (parsedDataJSON.status == "OK") {
-																	alert('status OK');
+																	
 																	if (parsedDataJSON.hasTeam == "true") { 
-																		alert ('User already has a team.');
+																	
 																		setTimeout(
 																				function() {
 																					window.location.href = 'game.html';
 																				}, 20);
 																	}
 																	else {
-																		alert('User does not have a team yet');
+																		
 																		
 																		/* Show a modal with team name registration and post it as ajax request  */
 																		$("#createNewTeamModal")

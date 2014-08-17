@@ -49,12 +49,20 @@ public class TeamController {
 		// Obtain the JSON message
 		JSONObject obtainedJSONObj = new JSONObject(jsonMsg);
 
+		// Obtain the array with player id list
 		JSONArray jsonArrayPlayerId = (JSONArray) obtainedJSONObj
 				.get("playerIdList");
-		System.out.println("player id list = " + jsonArrayPlayerId);
+		
+		// Obtain the array with captains list
+		JSONArray jsonArrayCaptainsList = (JSONArray) obtainedJSONObj.get("captainsList");
+		System.out.println("jsonarray captains list = " + jsonArrayCaptainsList);
+		
 		
 		// Create an array list to hold the player ids as Integer data type
 		ArrayList<Integer> playerIdList = new ArrayList<Integer>();
+		
+		// Create an array list to hold the captain roles 
+		ArrayList<Integer> captainsIdList = new ArrayList<Integer>();
 
 		// The first 7 players in the array are first squad players
 		// where the first is GK, second LW, third RW,
@@ -65,15 +73,27 @@ public class TeamController {
 				playerIdList.add(Integer.parseInt((String) jsonArrayPlayerId.get(i)));
 			}
 			
-			teamService.changeSquad(playerIdList, email);
+			for (int j = 0; j < 4; j++) {
+				if (jsonArrayCaptainsList.get(j).toString().equals("")) {
+					captainsIdList.add(-1);
+				} else {
+					captainsIdList.add(Integer.parseInt((String) jsonArrayCaptainsList.get(j)));
+				}
+			}
 			
+			System.out.println("captains id list =  " + captainsIdList);
+			
+			boolean changed = teamService.changeSquad(playerIdList, captainsIdList, email);
+			if (changed) jsonObj.put("status", "OK");
+			else jsonObj.put("status", "error");
 
 		} catch (NumberFormatException nfe) {
 			jsonObj.put("status", "error");
-			System.out.println("One of the obtained ids in jsonArrayPlayerId wasn't a number");
+			System.out.println("One of the obtained ids in jsonArrayPlayerId/captainsIdList wasn't a number");
+		} catch (Exception e) {
+			jsonObj.put("status", "error#1");
 		}
 		// The next 7 players are bench players.
-
 		// Any other is reserves
 
 		if (email == null) {

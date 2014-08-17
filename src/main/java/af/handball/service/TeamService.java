@@ -60,7 +60,7 @@ public class TeamService {
 		return teamRepository.getTeamLevel(email);
 	}
 
-	public boolean changeSquad(ArrayList<Integer> playerIdList, String email) {
-		return teamRepository.changeSquad(playerIdList, email);
+	public boolean changeSquad(ArrayList<Integer> playerIdList, ArrayList<Integer> captainsIdList, String email) {
+		return teamRepository.changeSquad(playerIdList, captainsIdList, email);
 	}
 }

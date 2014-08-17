@@ -8,13 +8,12 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import org.eclipse.persistence.exceptions.TransactionException;
-import org.eclipse.persistence.internal.libraries.antlr.runtime.EarlyExitException;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import af.handball.entity.Captains;
 import af.handball.entity.Player;
 import af.handball.entity.Team;
 import af.handball.repository.TeamRepository;
@@ -128,7 +127,7 @@ public class TeamRepositoryImpl implements TeamRepository {
 	
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public boolean changeSquad(ArrayList<Integer> playerIdList, String email) {
+	public boolean changeSquad(ArrayList<Integer> playerIdList, ArrayList<Integer> captainsIdList, String email) {
 		boolean squadChanged = false;
 		
 		// Obtain the current list of players from the persistent storage
@@ -237,15 +236,28 @@ public class TeamRepositoryImpl implements TeamRepository {
 				
 				emgr.persist(tempPlayer);
 				emgr.flush();
-				if (j == 13) {
-					System.out.println("j13, throwing exception");
-					
-						
-					
-				}
+				
 			} // END loop for the player from the server side list
 			
+	
 			
+			// Obtain the team id
+			TypedQuery<Team> teamQuery = emgr.createNamedQuery("Team.getTeamByEmail", Team.class);
+			teamQuery.setParameter("email", email);
+			Team team = teamQuery.getSingleResult();
+			int teamId = team.getTeam_id();
+			// Obtain the captains entity object
+			Captains captains = emgr.find(Captains.class, teamId);
+			captains.setCaptain_id_one(captainsIdList.get(0));
+			captains.setCaptain_id_two(captainsIdList.get(1));
+			captains.setCaptain_id_three(captainsIdList.get(2));
+			captains.setCaptain_id_four(captainsIdList.get(3));
+			// Persist the captains entity
+			emgr.persist(captains);
+			System.out.println("Persisted captains");
+			
+			//XXX might be a problem!
+			squadChanged = true;
 			
 		} else {
 			System.out.println("Seems like somebody messed up with the values.");

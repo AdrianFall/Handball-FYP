@@ -14,7 +14,7 @@ $conditionStripes.text('////////////////////////');
 $moraleProgress = $('#moraleProgressBar');
 $moralePercent = $('#moralePercentage');
 $moraleStripes = $('#moraleProgressStripes');
-$moraleStripes.text('\\\\\\\\\\\\\\\\\\\\\\\\');
+$moraleStripes.text('////////////////////////');
 
 
 /* WHEN LOADED */

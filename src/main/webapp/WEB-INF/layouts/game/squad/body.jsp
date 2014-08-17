@@ -12,6 +12,7 @@
 	ArrayList<Player> firstSquadPlayersList = new ArrayList<Player>();
 	ArrayList<Player> benchPlayersList = new ArrayList<Player>();
 	ArrayList<Player> reservesList = new ArrayList<Player>();
+	
 	private Map<String, Skill> allPlayersSkills = new HashMap<String, Skill>();%>
 
 <%
@@ -49,7 +50,7 @@
 <br>
 <div>
 	<div
-		style="width: 60%; max-width: 60%; min-width: 1%; left: 10%; float: left;">
+		style="width: 50%; max-width: 50%; min-width: 1%; left: 10%; float: left;">
 		<!-- <button class="btn-success has-spinner">
     <span class="spinner"><i class="icon-spin icon-refresh"></i></span>
     Foo
@@ -291,21 +292,23 @@
 	
 
 	<table id="pitchTable"
-		style="background-image: url('/hb/img/handball_playfield.png'); height: 10%; width: 30%; background-size: 100% 100%; background-repeat: no-repeat; border-bottom: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -o-user-select: none; user-select: none; cursor: default; position: fixed; right: 10%;">
+		style="display:none; background-image: url('/hb/img/handball-pitch-perspective-net.png'); height: 50%; width: 40%; background-size: 100% 100%; background-repeat: no-repeat; border-bottom: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -o-user-select: none; user-select: none; cursor: default; position: fixed; right: 10%;">
 
 		<tr height="45">
-			<td class="droppablePitchTable" id="LW" width="20%">
+			
+			<td width="15%"></td>
+			<td class="droppablePitchTable" id="LW" width="10%">
 				<div style="position: relative;">
-					<img style="position: absolute; top: -11px; left: 5px;"
+					<img style="position: absolute; top: -11px; left: 35%;"
 						src="/hb/img/field_player_back_shirt.png" height="30" width="28">
 
 					<% for (int n = 0; n < firstSquadPlayersList.size(); n++) { %>
-					<% if(firstSquadPlayersList.get(n).getPlay_position().equals("LW")) {
+					<% if(firstSquadPlayersList.get(n).getFirst_squad_play_position().equals("LW")) {
 									 int playerNumber = firstSquadPlayersList.get(n).getNumber();
 									 if (String.valueOf(playerNumber).length() > 1) {
-										 out.println("<h3 id='h3" + playerNumber + "' style='position: absolute; color: white; font-size: 72%; bottom: -14px; left: 13px;'>" + playerNumber + "</h3>"); 
+										 out.println("<h3 id='h3" + playerNumber + "' style='position: absolute; color: white; font-size: 72%; bottom: -14px; left: 45%;'>" + playerNumber + "</h3>"); 
 									 } else {
-										 out.println("<h3 id='h3" + playerNumber + "' style='position: absolute; color: white; font-size: 72%; bottom: -14px; left: 16px;'>" + playerNumber + "</h3>"); 
+										 out.println("<h3 id='h3" + playerNumber + "' style='position: absolute; color: white; font-size: 72%; bottom: -14px; left: 45%;'>" + playerNumber + "</h3>"); 
 									 }
 									
 								 }
@@ -315,14 +318,13 @@
 				</div>
 
 			</td>
-			<td></td>
-			<td class="droppablePitchTable" id="PV" width="15%">
+			<td class="droppablePitchTable" id="PV" width="10%">
 				<div style="position: relative;">
 					<img style="position: absolute; top: -11px; left: 7px;"
 						src="/hb/img/field_player_back_shirt.png" height="30" width="28">
 
 					<% for (int n = 0; n < firstSquadPlayersList.size(); n++) { %>
-					<% if(firstSquadPlayersList.get(n).getPlay_position().equals("PV")) {
+					<% if(firstSquadPlayersList.get(n).getFirst_squad_play_position().equals("PV")) {
 									 int playerNumber = firstSquadPlayersList.get(n).getNumber();
 									 if (String.valueOf(playerNumber).length() > 1) {
 										 out.println("<h3 id='h3" + playerNumber + "' style='position: absolute; color: white; font-size: 72%; bottom: -14px; left: 15px;'>" + playerNumber + "</h3>"); 
@@ -336,19 +338,18 @@
 
 				</div>
 			</td>
-			<td></td>
 			<td class="droppablePitchTable" id="RW" width="10%">
 				<div style="position: relative; top: -11px;">
-					<img style="position: absolute;"
+					<img style="position: absolute; left: 25%;"
 						src="/hb/img/field_player_back_shirt.png" height="30" width="28">
 
 					<% for (int n = 0; n < firstSquadPlayersList.size(); n++) { %>
-					<% if(firstSquadPlayersList.get(n).getPlay_position().equals("RW")) {
+					<% if(firstSquadPlayersList.get(n).getFirst_squad_play_position().equals("RW")) {
 									 int playerNumber = firstSquadPlayersList.get(n).getNumber();
 									 if (String.valueOf(playerNumber).length() > 1) {
-										 out.println("<h3 id='h3" + playerNumber + "' style='position: absolute; color: white; font-size: 72%; bottom: -24px; left: 8px;'>" + playerNumber + "</h3>"); 
+										 out.println("<h3 id='h3" + playerNumber + "' style='position: absolute; color: white; font-size: 72%; bottom: -24px; left: 40%;'>" + playerNumber + "</h3>"); 
 									 } else {
-										 out.println("<h3 id='h3" + playerNumber + "' style='position: absolute; color: white; font-size: 72%; bottom: -24px; left: 11px;'>" + playerNumber + "</h3>"); 
+										 out.println("<h3 id='h3" + playerNumber + "' style='position: absolute; color: white; font-size: 72%; bottom: -24px; left: 40%;'>" + playerNumber + "</h3>"); 
 									 }
 									
 								 }
@@ -357,6 +358,8 @@
 
 				</div>
 			</td>
+			<td width="15%"></td>
+			
 		</tr>
 
 
@@ -369,7 +372,7 @@
 						src="/hb/img/field_player_back_shirt.png" height="30" width="28">
 
 					<% for (int n = 0; n < firstSquadPlayersList.size(); n++) { %>
-					<% if(firstSquadPlayersList.get(n).getPlay_position().equals("LB")) {
+					<% if(firstSquadPlayersList.get(n).getFirst_squad_play_position().equals("LB")) {
 									 int playerNumber = firstSquadPlayersList.get(n).getNumber();
 									 if (String.valueOf(playerNumber).length() > 1) {
 										 out.println("<h3 id='h3" + playerNumber + "' style='position: absolute; color: white; font-size: 72%; bottom: -14px; left: 13px;'>" + playerNumber + "</h3>"); 
@@ -388,7 +391,7 @@
 						src="/hb/img/field_player_back_shirt.png" height="30" width="28">
 
 					<% for (int n = 0; n < firstSquadPlayersList.size(); n++) { %>
-					<% if(firstSquadPlayersList.get(n).getPlay_position().equals("CB")) {
+					<% if(firstSquadPlayersList.get(n).getFirst_squad_play_position().equals("CB")) {
 									 int playerNumber = firstSquadPlayersList.get(n).getNumber();
 									 if (String.valueOf(playerNumber).length() > 1) {
 										 out.println("<h3 id='h3" + playerNumber + "' style='position: absolute; color: white; font-size: 72%; bottom: -14px; left: 15px;'>" + playerNumber + "</h3>"); 
@@ -407,7 +410,7 @@
 						src="/hb/img/field_player_back_shirt.png" height="30" width="28">
 
 					<% for (int n = 0; n < firstSquadPlayersList.size(); n++) { %>
-					<% if(firstSquadPlayersList.get(n).getPlay_position().equals("RB")) {
+					<% if(firstSquadPlayersList.get(n).getFirst_squad_play_position().equals("RB")) {
 									 int playerNumber = firstSquadPlayersList.get(n).getNumber();
 									 if (String.valueOf(playerNumber).length() > 1) {
 										 out.println("<h3 id='h3" + playerNumber + "' style='position: absolute; color: white; font-size: 72%; bottom: -14px; left: 28px;'>" + playerNumber + "</h3>"); 
@@ -442,7 +445,7 @@
 						src="/hb/img/gk_back_shirt.png" height="30" width="28">
 
 					<% for (int n = 0; n < firstSquadPlayersList.size(); n++) { %>
-					<% if(firstSquadPlayersList.get(n).getPlay_position().equals("GK")) {
+					<% if(firstSquadPlayersList.get(n).getFirst_squad_play_position().equals("GK")) {
 									 int playerNumber = firstSquadPlayersList.get(n).getNumber();
 									 if (String.valueOf(playerNumber).length() > 1) {
 										 out.println("<h3 id='h3" + playerNumber + "' style='position: absolute; color: white; font-size: 72%; bottom: -18px; left: 15px;'>" + playerNumber + "</h3>"); 
@@ -468,9 +471,46 @@
 
 	</table>
 
+ 	
+</div>
+
+<div id="captainRoles" style="right: 10%; width: 40%; float: right; position: fixed;">
+	
+	<img src="/hb/img/temp/handball_captain_temp.png" style="position:fixed; float: right; height: 30%; width: 30%; margin-top: 8%; right: 25%; background-size: 100% 100%;">
+	
+	<input id="captain1" class="droppableCaptainRole" placeholder="   Primary Captain"  style=" text-align: center; border: 0; outline: 0; width: 15%; font-family: Fantasy; margin-top: 2%; color: white; float: right; position: fixed;
+	 right: 15%; height: 6%; box-shadow: 0 1px 0 rgba(255,255,255,.15), 0 2px 4px rgba(0, 0, 0, 0.2) inset, 0 0 12px rgba(211, 64, 64, 0.1);
+	 background: rgba(0,0,0,.1);" readonly>
+	 
+	 <input id="captain2" class="droppableCaptainRole" placeholder="   Secondary Captain"  style=" text-align: center; border: 0; outline: 0; width: 15%; font-family: Fantasy; margin-top: 6%; color: white; float: right; position: fixed;
+	 right: 15%; height: 6%; box-shadow: 0 1px 0 rgba(255,255,255,.15), 0 2px 4px rgba(0, 0, 0, 0.2) inset, 0 0 12px rgba(211, 64, 64, 0.1);
+	 background: rgba(0,0,0,.1);" readonly>
+	 
+	 <input id="captain3" class="droppableCaptainRole" placeholder="   Tertiary Captain"  style=" text-align: center; border: 0; outline: 0; width: 15%; font-family: Fantasy; margin-top: 10%; color: white; float: right; position: fixed;
+	 right: 15%; height: 6%; box-shadow: 0 1px 0 rgba(255,255,255,.15), 0 2px 4px rgba(0, 0, 0, 0.2) inset, 0 0 12px rgba(211, 64, 64, 0.1);
+	 background: rgba(0,0,0,.1);" readonly>
+	 
+	 <input id="captain4" class="droppableCaptainRole" placeholder="   Quaternary Captain"  style=" text-align: center; border: 0; outline: 0; width: 15%; font-family: Fantasy; margin-top: 14%; color: white; float: right; position: fixed;
+	 right: 15%; height: 6%; box-shadow: 0 1px 0 rgba(255,255,255,.15), 0 2px 4px rgba(0, 0, 0, 0.2) inset, 0 0 12px rgba(211, 64, 64, 0.1);
+	 background: rgba(0,0,0,.1);" readonly>
+	 
+	 <script src="/hb/scripts/droppableCaptainRoles.js"></script>
+	
+	</div>
 
 	
-</div>
+
+<img style="position: fixed; float:right; height:8%; width:6%; right: 3%; background-size: 100% 100%;"
+		src="/hb/img/temp/temp_tactics_icon.png" >
+
+<img style="position: fixed; float:right; height:8%; width:6%; margin-top: 4.5%; right: 3%; background-size: 100% 100%;"
+		src="/hb/img/temp/temp_captain_roles_icon.png" >
+
+<img style="position: fixed; float:right; height:8%; width:6%; margin-top: 9%; right: 3%; background-size: 100% 100%;"
+		src="/hb/img/temp/temp_auto_subs_icon.png" >
+
+<img style="position: fixed; float:right; height:8%; width:6%; margin-top: 13.5%; right: 3%; background-size: 100% 100%;"
+		src="/hb/img/temp/temp_penalty_takers_icon.png" >
 
 
 

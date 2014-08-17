@@ -13,6 +13,7 @@ import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import af.handball.entity.Captains;
 import af.handball.entity.Contract;
 import af.handball.entity.League;
 import af.handball.entity.Player;
@@ -61,6 +62,8 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 			emgr.persist(team);
 			emgr.flush();
 			teamId = team.getTeam_id();
+			
+			
 
 			// TODO Concurrency handling
 			int leagueAvailableSlots = league.getAvailable_slots() - 1;
@@ -69,6 +72,7 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 				league.setLocked(true);
 			}
 			emgr.persist(league);
+			emgr.flush();
 
 		} catch (NoResultException nre) {
 			System.out
@@ -109,6 +113,17 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 						emgr.persist(team);
 						emgr.flush();
 						teamId = team.getTeam_id();
+						
+						// Persist the captains roles
+						Captains captains = new Captains();
+						captains.setTeam_id(teamId);
+						captains.setCaptain_id_one(-1);
+						captains.setCaptain_id_two(-1);
+						captains.setCaptain_id_three(-1);
+						captains.setCaptain_id_four(-1);
+						emgr.persist(captains);
+						emgr.flush();
+						
 						System.out.println("Persisted team number " + (i + 1)
 								+ ". Now generating the players.");
 						// generate the players for the team (INCLUDES 3

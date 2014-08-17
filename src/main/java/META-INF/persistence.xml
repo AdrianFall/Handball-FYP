@@ -16,6 +16,7 @@
 		<class>af.handball.entity.GkSkills</class>
 		<class>af.handball.entity.FieldPlayerSkills</class>
 		<class>af.handball.entity.Skill</class>
+		<class>af.handball.entity.Captains</class>
 		
 		
 		<!-- <properties>

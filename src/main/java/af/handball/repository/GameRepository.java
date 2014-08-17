@@ -1,5 +1,6 @@
 package af.handball.repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,8 @@ public interface GameRepository
 	Player getPlayer(int playerId);
 
 	Contract getPlayerContract(int playerId);
+
+	Map<String, String> getCaptainsMap(String email);
 	
 
 }

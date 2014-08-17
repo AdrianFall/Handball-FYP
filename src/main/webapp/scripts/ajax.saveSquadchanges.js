@@ -1,7 +1,7 @@
 function postClientSideFormationList() {
 
 	// Set the button not clickable and add class for spinner
-	$('#saveSquadButton').css('onclick', '');
+	$('#saveSquadButton').attr('onclick', '');
 	$('#saveSquadButton').toggleClass('active');
 	
 	var squadTable = document.getElementById('squadTable');
@@ -13,9 +13,11 @@ function postClientSideFormationList() {
 	// Count reserve players
 	var countRp = 0;
 
+	// Loop for the players in squad table
 	for ( var i = 0; i < squadTable.rows.length; i++) {
 
-		if (i != 0) {
+		
+		if (i != 0) { // Skips table head
 			var trId = squadTable.rows[i].id;
 			// Split the table row ID, in order to obtain the
 			// type of the row (which designates whether the
@@ -42,18 +44,21 @@ function postClientSideFormationList() {
 				playerIdList.push(playerId);
 			}
 
-		}
+		} // END if (i != 0)
 
-	}
+	} // END Loop for players in squad table
+	
+    // Obtain the 
+	
 
 	// POST the list to the server
-	
-	$
-.ajax({
+	$.ajax({
 	type : "POST",
 	url : "updateSquad.html",
 	data : JSON.stringify({
-		"playerIdList" : playerIdList
+		"playerIdList" : playerIdList,
+		"captainsList" : captainsList
+		
 	}),
 	contentType : "application/json; charset=UTF-8",
 	success : function(data) {
@@ -61,11 +66,20 @@ function postClientSideFormationList() {
 		var parsedDataJSON = $.parseJSON(data);
 		if (parsedDataJSON.status == "OK") {
 
-			
+			alert('OK');
+			// TODO Set the button to clickable
+			$('#saveSquadButton').attr('onclick', 'postClientSideFormationList()');
+			$('#saveSquadButton').toggleClass('');
+
+
+			// TODO Animate the button to be hidden
+			$('#saveSquadButton').fadeOut(2000);
 
 			
-		} else if (parsedDataJSON.status == "sessionExpired")
+		} else if (parsedDataJSON.status == "sessionExpired") {
 			alert('Session Expired');
+		}
+			
 		else if (parsedDataJSON.status == "error")
 			alert('status error');
 			
@@ -80,9 +94,7 @@ function postClientSideFormationList() {
 
 	
 
-	// TODO Set the button to clickable
-
-	// TODO Set the button on click event back.
-
-	// TODO Animate the button to be hidden
+	
+	
+	
 }

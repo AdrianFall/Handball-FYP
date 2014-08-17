@@ -1,5 +1,6 @@
 package af.handball.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -39,6 +40,11 @@ public class GameService {
 
 	public Contract getPlayerContract(int playerId) {
 		return gameRepository.getPlayerContract(playerId);
+	}
+
+	public Map<String, String> getCaptainsMap(String email) {
+		
+		return gameRepository.getCaptainsMap(email);
 	}
 	
 	

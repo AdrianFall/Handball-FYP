@@ -20,7 +20,7 @@ public interface TeamRepository
 
 	int getTeamLevel(String email);
 
-	boolean changeSquad(ArrayList<Integer> playerIdList, String email);
+	boolean changeSquad(ArrayList<Integer> playerIdList, ArrayList<Integer> captainsIdList, String email);
 	
 	
 

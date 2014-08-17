@@ -219,8 +219,7 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 						// Call function to load the progress bar
 						preload();
 						
-						// Call function to animate stripes
-						stripesAnimate();  
+						
 						
 						if (new String(playerPosition).valueOf() != new String(
 								"GK").valueOf()) {

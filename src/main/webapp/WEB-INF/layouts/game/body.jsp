@@ -70,7 +70,7 @@
 		</div>
 	
 		
-		<div class="container-fluid" id="dynamicContainer" style="position: absolute; padding-left: 10%; padding-right: 10%;">
+		<div class="container-fluid" id="dynamicContainer" style="position: absolute; padding-left: 10%; padding-right: 10%; width: 100%;">
 			
 	
 		</div>

@@ -1,5 +1,6 @@
 package af.handball.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import af.handball.entity.Player;
-import af.handball.entity.Skill;
 import af.handball.service.GameService;
 
 
@@ -28,6 +28,8 @@ public class GameController {
 		
 		String email = (String) session.getAttribute("email");
 		List<Player> playerList = gameService.getUsersPlayers(email);
+		Map<String, String> captainsMap = gameService.getCaptainsMap(email);
+		request.setAttribute("captainsMap", captainsMap);
 		request.setAttribute("playerList", playerList);
 		/*Map<String, Skill> allPlayersSkills = gameService.getPlayersSkills(playerList);
 		request.setAttribute("allPlayersSkills", allPlayersSkills);*/

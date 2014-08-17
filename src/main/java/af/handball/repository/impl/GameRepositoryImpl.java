@@ -12,9 +12,11 @@ import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import af.handball.entity.Captains;
 import af.handball.entity.Contract;
 import af.handball.entity.Player;
 import af.handball.entity.Skill;
+import af.handball.entity.Team;
 import af.handball.repository.GameRepository;
 
 @Component("GameRepository")
@@ -40,15 +42,16 @@ public class GameRepositoryImpl implements GameRepository {
 		try {
 			playerList = userPlayersQuery.getResultList();
 			System.out.println("PLAYER LIST = " + playerList);
-			
+
 			int countReserves = 0;
 			int countBench = 0;
-			
+
 			// Sort the list of Player entities
 			for (int i = 0; i < playerList.size(); i++) {
 				Player tempPlayer = playerList.get(i);
 				String tempFormation = tempPlayer.getFormation();
-				System.out.println("tempFormation (" + (i) + ") = " + tempFormation);
+				System.out.println("tempFormation (" + (i) + ") = "
+						+ tempFormation);
 
 				// Sorting rules:
 				// The first 7 players in the array must be the first squad
@@ -58,10 +61,9 @@ public class GameRepositoryImpl implements GameRepository {
 				// and seventh is PV
 				// The following 7 players have to be a bench players
 				// FIXME currently having no sorting order
-				
+
 				// The other players are reserves and
 				// FIXME currently having no sorting order
-				
 
 				// START Sorting the player list
 				if (tempFormation.equals(Player.FORMATION_FIRST_SQUAD)) {
@@ -93,13 +95,13 @@ public class GameRepositoryImpl implements GameRepository {
 					}
 
 				} else if (tempFormation.equals(Player.FORMATION_BENCH)) {
-					playerMap.put("BP" + (countBench+1), tempPlayer);
+					playerMap.put("BP" + (countBench + 1), tempPlayer);
 					countBench += 1;
-					
+
 				} else if (tempFormation.equals(Player.FORMATION_RESERVES)) {
-					playerMap.put("RP" + (countReserves+1), tempPlayer);
+					playerMap.put("RP" + (countReserves + 1), tempPlayer);
 					countReserves += 1;
-					
+
 				}
 
 				// END Sorting the player list
@@ -108,26 +110,25 @@ public class GameRepositoryImpl implements GameRepository {
 			System.out.println("Player map = " + playerMap);
 			// Obtain the mapped players and insert into sortedPlayerList
 			for (int i = 0; i < playerMap.size(); i++) {
-				
-				System.out.println("MAP ITERATION = " + (i+1));
-				
-				
+
+				System.out.println("MAP ITERATION = " + (i + 1));
+
 				if (i >= 0 && i < 7) {
 					int d = new Integer(i);
 					switch (d) {
 					case 0:
 						sortedPlayerList.add(playerMap.get("GK"));
 						break;
-					case 1: 
+					case 1:
 						sortedPlayerList.add(playerMap.get("LW"));
 						break;
 					case 2:
 						sortedPlayerList.add(playerMap.get("RW"));
 						break;
-					case 3: 
+					case 3:
 						sortedPlayerList.add(playerMap.get("CB"));
 						break;
-					case 4: 
+					case 4:
 						sortedPlayerList.add(playerMap.get("RB"));
 						break;
 					case 5:
@@ -136,19 +137,20 @@ public class GameRepositoryImpl implements GameRepository {
 					case 6:
 						sortedPlayerList.add(playerMap.get("PV"));
 						break;
-						
+
 					}
-				}
-				else if (i > 6 && i < 14) {
-					System.out.println("BENCH PLAYER!!!!!!  " + playerMap.get("BP" + (i-6)));
-					sortedPlayerList.add(playerMap.get("BP" + (i-6)));
-				
+				} else if (i > 6 && i < 14) {
+					System.out.println("BENCH PLAYER!!!!!!  "
+							+ playerMap.get("BP" + (i - 6)));
+					sortedPlayerList.add(playerMap.get("BP" + (i - 6)));
+
 				} else if (i > 13) {
 					System.out.println("RESERVE PLAYER!!!!!");
-					System.out.println("RP .... " + playerMap.get("RP" + (i-13)));
-					sortedPlayerList.add(playerMap.get("RP" + (i-13)));
+					System.out.println("RP .... "
+							+ playerMap.get("RP" + (i - 13)));
+					sortedPlayerList.add(playerMap.get("RP" + (i - 13)));
 				}
-				
+
 			} // END loop for player map
 
 			System.out.println("player list size = " + playerList.size());
@@ -185,16 +187,57 @@ public class GameRepositoryImpl implements GameRepository {
 
 	@Override
 	public Player getPlayer(int playerId) {
-		
+
 		return emgr.find(Player.class, playerId);
 	}
 
 	@Override
 	public Contract getPlayerContract(int playerId) {
-		TypedQuery<Contract> contractQuery = emgr.createNamedQuery("Contract.getContractByPlayerId", Contract.class);
+		TypedQuery<Contract> contractQuery = emgr.createNamedQuery(
+				"Contract.getContractByPlayerId", Contract.class);
 		contractQuery.setParameter("player_id", playerId);
-		
+
 		return contractQuery.getSingleResult();
 	}
 
+	@Override
+	public Map<String, String> getCaptainsMap(String email) {
+		Map<String, String> captainsMap = new HashMap<String, String>();
+
+		TypedQuery<Team> teamQuery = emgr.createNamedQuery(
+				"Team.getTeamByEmail", Team.class);
+		teamQuery.setParameter("email", email);
+		Team team = teamQuery.getSingleResult();
+		int teamId = team.getTeam_id();
+
+		Captains captain = emgr.find(Captains.class, teamId);
+
+		
+		captainsMap.put("captain_id_one", Integer.toString(captain.getCaptain_id_one()));
+		captainsMap.put("captain_id_two", Integer.toString(captain.getCaptain_id_two()));
+		captainsMap.put("captain_id_three", Integer.toString(captain.getCaptain_id_three()));
+		captainsMap.put("captain_id_four", Integer.toString(captain.getCaptain_id_four()));
+
+		// Obtain the first player name and number
+		Player firstPlayer = emgr.find(Player.class, captain.getCaptain_id_one());
+		captainsMap.put("captain_name_one", firstPlayer.getName());
+		captainsMap.put("captain_number_one", Integer.toString(firstPlayer.getNumber()));
+		
+		// Obtain the second player name and number
+		Player secondPlayer = emgr.find(Player.class, captain.getCaptain_id_two());
+		captainsMap.put("captain_name_two", secondPlayer.getName());
+		captainsMap.put("captain_number_two", Integer.toString(secondPlayer.getNumber()));
+		
+		// Obtain the third player name and number
+		Player thirdPlayer = emgr.find(Player.class, captain.getCaptain_id_three());
+		captainsMap.put("captain_name_three", thirdPlayer.getName());
+		captainsMap.put("captain_number_three", Integer.toString(thirdPlayer.getNumber()));
+		
+		// Obtain the fourth player name and number
+		Player fourthPlayer = emgr.find(Player.class, captain.getCaptain_id_four());
+		captainsMap.put("captain_name_four", fourthPlayer.getName());
+		captainsMap.put("captain_number_four", Integer.toString(fourthPlayer.getNumber()));
+
+		return captainsMap;
+	}
 }
