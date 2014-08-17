@@ -12,7 +12,7 @@
 	ArrayList<Player> firstSquadPlayersList = new ArrayList<Player>();
 	ArrayList<Player> benchPlayersList = new ArrayList<Player>();
 	ArrayList<Player> reservesList = new ArrayList<Player>();
-	
+	Map<String,String> captainsMap = new HashMap<String,String>();
 	private Map<String, Skill> allPlayersSkills = new HashMap<String, Skill>();%>
 
 <%
@@ -31,7 +31,11 @@
 		firstSquadPlayersList = new ArrayList<Player>(); 
 		benchPlayersList = new ArrayList<Player>();
 		reservesList = new ArrayList<Player>();
+		captainsMap = (Map<String,String>) request.getAttribute("captainsMap");
+		
 %>
+
+
 
 
 <!-- Fix loading spinner on the button -->
@@ -495,6 +499,42 @@
 	 background: rgba(0,0,0,.1);" readonly>
 	 
 	 <script src="/hb/scripts/droppableCaptainRoles.js"></script>
+	 
+	 <script>
+	 
+	 var captainsList = ["","","",""];
+	
+	  <% if(!captainsMap.get("captain_id_one").equals("-1")) { %>
+	 		captainsList[0] = '<%=captainsMap.get("captain_id_one")%>';
+	 		
+	 		// Change the html to show the number and name of the captain
+	 		$('#captain1').val('<%=captainsMap.get("captain_number_one")%>' + '  ' + '<%=captainsMap.get("captain_name_one")%>');
+	 <% } %>
+	 
+	<% if(!captainsMap.get("captain_id_two").equals("-1")) { %>
+		captainsList[1] = '<%=captainsMap.get("captain_id_two")%>';
+		
+		// Change the html to show the number and name of the captain
+		$('#captain2').val('<%=captainsMap.get("captain_number_two")%>' + '  ' + '<%=captainsMap.get("captain_name_two")%>');
+	<% } %>
+	
+	<% if(!captainsMap.get("captain_id_three").equals("-1")) { %>
+	captainsList[2] = '<%=captainsMap.get("captain_id_three")%>';
+	
+	// Change the html to show the number and name of the captain
+	$('#captain3').val('<%=captainsMap.get("captain_number_three")%>' + '  ' + '<%=captainsMap.get("captain_name_three")%>');
+	<% } %>
+	
+	<% if(!captainsMap.get("captain_id_four").equals("-1")) { %>
+	captainsList[3] = '<%=captainsMap.get("captain_id_four")%>';
+	
+	// Change the html to show the number and name of the captain
+	$('#captain4').val('<%=captainsMap.get("captain_number_four")%>' + '  ' + '<%=captainsMap.get("captain_name_four")%>');
+	<% } %>
+	 
+	 </script>
+	 
+
 	
 	</div>
 

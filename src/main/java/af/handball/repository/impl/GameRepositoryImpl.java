@@ -212,31 +212,51 @@ public class GameRepositoryImpl implements GameRepository {
 
 		Captains captain = emgr.find(Captains.class, teamId);
 
-		
-		captainsMap.put("captain_id_one", Integer.toString(captain.getCaptain_id_one()));
-		captainsMap.put("captain_id_two", Integer.toString(captain.getCaptain_id_two()));
-		captainsMap.put("captain_id_three", Integer.toString(captain.getCaptain_id_three()));
-		captainsMap.put("captain_id_four", Integer.toString(captain.getCaptain_id_four()));
+		captainsMap.put("captain_id_one",
+				Integer.toString(captain.getCaptain_id_one()));
+		captainsMap.put("captain_id_two",
+				Integer.toString(captain.getCaptain_id_two()));
+		captainsMap.put("captain_id_three",
+				Integer.toString(captain.getCaptain_id_three()));
+		captainsMap.put("captain_id_four",
+				Integer.toString(captain.getCaptain_id_four()));
 
-		// Obtain the first player name and number
-		Player firstPlayer = emgr.find(Player.class, captain.getCaptain_id_one());
-		captainsMap.put("captain_name_one", firstPlayer.getName());
-		captainsMap.put("captain_number_one", Integer.toString(firstPlayer.getNumber()));
-		
-		// Obtain the second player name and number
-		Player secondPlayer = emgr.find(Player.class, captain.getCaptain_id_two());
-		captainsMap.put("captain_name_two", secondPlayer.getName());
-		captainsMap.put("captain_number_two", Integer.toString(secondPlayer.getNumber()));
-		
-		// Obtain the third player name and number
-		Player thirdPlayer = emgr.find(Player.class, captain.getCaptain_id_three());
-		captainsMap.put("captain_name_three", thirdPlayer.getName());
-		captainsMap.put("captain_number_three", Integer.toString(thirdPlayer.getNumber()));
-		
-		// Obtain the fourth player name and number
-		Player fourthPlayer = emgr.find(Player.class, captain.getCaptain_id_four());
-		captainsMap.put("captain_name_four", fourthPlayer.getName());
-		captainsMap.put("captain_number_four", Integer.toString(fourthPlayer.getNumber()));
+		if (captain.getCaptain_id_one() != -1) {
+			// Obtain the first player name and number
+			Player firstPlayer = emgr.find(Player.class,
+					captain.getCaptain_id_one());
+			captainsMap.put("captain_name_one", firstPlayer.getName());
+			captainsMap.put("captain_number_one",
+					Integer.toString(firstPlayer.getNumber()));
+
+		}
+
+		if (captain.getCaptain_id_two() != -1) {
+			// Obtain the second player name and number
+			Player secondPlayer = emgr.find(Player.class,
+					captain.getCaptain_id_two());
+			captainsMap.put("captain_name_two", secondPlayer.getName());
+			captainsMap.put("captain_number_two",
+					Integer.toString(secondPlayer.getNumber()));
+		}
+
+		if (captain.getCaptain_id_three() != -1) {
+			// Obtain the third player name and number
+			Player thirdPlayer = emgr.find(Player.class,
+					captain.getCaptain_id_three());
+			captainsMap.put("captain_name_three", thirdPlayer.getName());
+			captainsMap.put("captain_number_three",
+					Integer.toString(thirdPlayer.getNumber()));
+		}
+
+		if (captain.getCaptain_id_four() != -1) {
+			// Obtain the fourth player name and number
+			Player fourthPlayer = emgr.find(Player.class,
+					captain.getCaptain_id_four());
+			captainsMap.put("captain_name_four", fourthPlayer.getName());
+			captainsMap.put("captain_number_four",
+					Integer.toString(fourthPlayer.getNumber()));
+		}
 
 		return captainsMap;
 	}

@@ -5,7 +5,7 @@
 	
 	// initialize an array
 	// TODO populate with the TODO obtained data with current captains in the team (if any)
-	var captainsList = ["","","",""];
+	
 	
 	
 	function handleCaptainRoleUIDropEvent(event, ui) {
@@ -30,10 +30,10 @@
 	    var draggedPlayerId = $('#' + draggableAttributeType + 'id' + draggableAttributeIndex).html();
 	    
 	    
-	    // Obtain the index of the player number in the captainsList. 
-	    // Otherwise obtains -1 if the player number doesn't exist in the list.
-	   var indexInCaptainsList = $.inArray(draggedPlayerNumber, captainsList);
-	   // Check whether the player number is already in captainsList
+	    // Obtain the index of the player id in the captainsList. 
+	    // Otherwise obtains -1 if the player id doesn't exist in the list.
+	   var indexInCaptainsList = $.inArray(draggedPlayerId, captainsList);
+	   // Check whether the player id is already in captainsList
 	   if (new String(indexInCaptainsList).valueOf() == new String("-1").valueOf()) {
 		   captainsList[(droppableIndex-1)] = draggedPlayerId;
 		  
