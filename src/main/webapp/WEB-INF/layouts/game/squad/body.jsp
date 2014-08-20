@@ -26,14 +26,13 @@
 	$("#modalSessionExpired").modal('show');
 </script>
 
-<%
-	} else {
+<% } else {
 		firstSquadPlayersList = new ArrayList<Player>(); 
 		benchPlayersList = new ArrayList<Player>();
 		reservesList = new ArrayList<Player>();
-		captainsMap = (Map<String,String>) request.getAttribute("captainsMap");
-		
-%>
+		captainsMap = (Map<String,String>) request.getAttribute("captainsMap");%>
+
+
 
 
 
@@ -42,19 +41,19 @@
 <button onclick="postClientSideFormationList()" id="saveSquadButton"
 	class="btn btn-info has-spinner"
 	style="position: fixed; display: none; right: 10%; float: right; margin-top: -2%;">
-	<span id="squadLoad" class="spinner"><i
-		class="icon-spin icon-refresh"></i></span>Save Squad
-</button> 
+	<span id="squadLoad" class="spinner"><i 
+	class="icon-spin icon-refresh"></i></span>Save Squad
+</button>
 
 
 
 <!-- <script>function ttest() { $('#saveSquadButton').addClass('animated rubberBand'); setTimeout(function() {$('#saveSquadButton').removeClass('rubberBand');}, 555) }</script> -->
-<script type="text/javascript"
-		src="/hb/scripts/jquery-ui.js"></script>
+<script type="text/javascript" src="/hb/scripts/jquery-ui.js"></script>
+<script type="text/javascript" src="/hb/scripts/enscroll-0.6.0.min.js"></script>
 <br>
 <div>
 	<div
-		style="width: 50%; max-width: 50%; min-width: 1%; left: 10%; float: left;">
+		style="width: 50%; left: 10%; float: left;">
 		<!-- <button class="btn-success has-spinner">
     <span class="spinner"><i class="icon-spin icon-refresh"></i></span>
     Foo
@@ -109,7 +108,7 @@
 			for (int i = 0; i < countFirstSquadPlayers; i++) { %>
 
 			<tr class="success droppableSquadTable" id="fsqp_tr<%=i%>">
-				
+
 				<td id="fsqp_td<%=i%>" class="td"
 					style="padding-top: 4px; padding-bottom: 4px;">
 					<div id="fsqp_number<%=i%>" style='display: none;' class="center">
@@ -121,7 +120,7 @@
 				<td id="fsqp_td<%=i%>" class="td"
 					style="padding-top: 4px; padding-bottom: 4px;">
 					<div id="fsqp_position<%=i%>" style='display: none;' class="center"><%=firstSquadPlayersList.get(i).getPlay_position()%></div>
-				</td> 
+				</td>
 
 				<td id="fsqp_td<%=i%>" class="td"
 					style="padding-top: 4px; padding-bottom: 4px;">
@@ -149,20 +148,17 @@
 					<div id="fsqp_quality<%=i%>" style='display: none;' class="center"><%=firstSquadPlayersList.get(i).getPlayer_quality() %></div>
 				</td>
 
-				<td id="fsqp_td<%=i%>" class="td"
-					style="display: none;">
+				<td id="fsqp_td<%=i%>" class="td" style="display: none;">
 					<div id="fsqp_marketValue<%=i%>" style="display: none;"><%= firstSquadPlayersList.get(i).getMarket_value()%></div>
 				</td>
 
-				<td id="fsqp_td<%=i%>" class="td"
-					style="display: none;">
+				<td id="fsqp_td<%=i%>" class="td" style="display: none;">
 					<div id="fsqp_form<%=i%>" style="display: none;">
 						<% if(firstSquadPlayersList.get(i).getForm() == 0) out.print("N/A"); else out.print(firstSquadPlayersList.get(i).getForm());%>
 					</div>
 				</td>
 
-				<td id="fsqp_td<%=i%>" class="td"
-					style="display: none;">
+				<td id="fsqp_td<%=i%>" class="td" style="display: none;">
 					<div id="fsqp_id<%=i%>" style="display: none;"><%= firstSquadPlayersList.get(i).getPlayer_id()%></div>
 				</td>
 			</tr>
@@ -293,13 +289,13 @@
 
 	<!-- START Table with the pitch -->
 
-	
+
 
 	<table id="pitchTable"
-		style="display:none; background-image: url('/hb/img/handball-pitch-perspective-net.png'); height: 50%; width: 40%; background-size: 100% 100%; background-repeat: no-repeat; border-bottom: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -o-user-select: none; user-select: none; cursor: default; position: fixed; right: 10%;">
+		style="display: none; background-image: url('/hb/img/handball-pitch-perspective-net.png'); height: 50%; width: 40%; background-size: 100% 100%; background-repeat: no-repeat; border-bottom: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -o-user-select: none; user-select: none; cursor: default; position: fixed; right: 10%;">
 
 		<tr height="45">
-			
+
 			<td width="15%"></td>
 			<td class="droppablePitchTable" id="LW" width="10%">
 				<div style="position: relative;">
@@ -363,7 +359,7 @@
 				</div>
 			</td>
 			<td width="15%"></td>
-			
+
 		</tr>
 
 
@@ -474,33 +470,37 @@
 		</tr>
 
 	</table>
+	<!-- END the pitch table -->
 
- 	
+
 </div>
+<!-- END div holding the squad and pitch tables -->
 
-<div id="captainRoles" style="right: 10%; width: 40%; float: right; position: fixed;">
-	
-	<img src="/hb/img/temp/handball_captain_temp.png" style="position:fixed; float: right; height: 30%; width: 30%; margin-top: 8%; right: 25%; background-size: 100% 100%;">
-	
-	<input id="captain1" class="droppableCaptainRole" placeholder="   Primary Captain"  style=" text-align: center; border: 0; outline: 0; width: 15%; font-family: Fantasy; margin-top: 2%; color: white; float: right; position: fixed;
-	 right: 15%; height: 6%; box-shadow: 0 1px 0 rgba(255,255,255,.15), 0 2px 4px rgba(0, 0, 0, 0.2) inset, 0 0 12px rgba(211, 64, 64, 0.1);
-	 background: rgba(0,0,0,.1);" readonly>
-	 
-	 <input id="captain2" class="droppableCaptainRole" placeholder="   Secondary Captain"  style=" text-align: center; border: 0; outline: 0; width: 15%; font-family: Fantasy; margin-top: 6%; color: white; float: right; position: fixed;
-	 right: 15%; height: 6%; box-shadow: 0 1px 0 rgba(255,255,255,.15), 0 2px 4px rgba(0, 0, 0, 0.2) inset, 0 0 12px rgba(211, 64, 64, 0.1);
-	 background: rgba(0,0,0,.1);" readonly>
-	 
-	 <input id="captain3" class="droppableCaptainRole" placeholder="   Tertiary Captain"  style=" text-align: center; border: 0; outline: 0; width: 15%; font-family: Fantasy; margin-top: 10%; color: white; float: right; position: fixed;
-	 right: 15%; height: 6%; box-shadow: 0 1px 0 rgba(255,255,255,.15), 0 2px 4px rgba(0, 0, 0, 0.2) inset, 0 0 12px rgba(211, 64, 64, 0.1);
-	 background: rgba(0,0,0,.1);" readonly>
-	 
-	 <input id="captain4" class="droppableCaptainRole" placeholder="   Quaternary Captain"  style=" text-align: center; border: 0; outline: 0; width: 15%; font-family: Fantasy; margin-top: 14%; color: white; float: right; position: fixed;
-	 right: 15%; height: 6%; box-shadow: 0 1px 0 rgba(255,255,255,.15), 0 2px 4px rgba(0, 0, 0, 0.2) inset, 0 0 12px rgba(211, 64, 64, 0.1);
-	 background: rgba(0,0,0,.1);" readonly>
-	 
-	 <script src="/hb/scripts/droppableCaptainRoles.js"></script>
-	 
-	 <script>
+<div id="captainRoles"
+	style="display: none; right: 10%; width: 40%; float: right; position: fixed;">
+
+	<img src="/hb/img/temp/handball_captain_temp.png"
+		style="position: fixed; float: right; height: 30%; width: 30%; margin-top: 8%; right: 25%; background-size: 100% 100%;">
+
+	<input id="captain1" class="droppableCaptainRole"
+		placeholder="   Primary Captain"
+		style="text-align: center; border: 0; outline: 0; width: 15%; font-family: Fantasy; margin-top: 2%; color: white; float: right; position: fixed; right: 15%; height: 6%; box-shadow: 0 1px 0 rgba(255, 255, 255, .15), 0 2px 4px rgba(0, 0, 0, 0.2) inset, 0 0 12px rgba(211, 64, 64, 0.1); background: rgba(0, 0, 0, .1);"
+		readonly> <input id="captain2" class="droppableCaptainRole"
+		placeholder="   Secondary Captain"
+		style="text-align: center; border: 0; outline: 0; width: 15%; font-family: Fantasy; margin-top: 6%; color: white; float: right; position: fixed; right: 15%; height: 6%; box-shadow: 0 1px 0 rgba(255, 255, 255, .15), 0 2px 4px rgba(0, 0, 0, 0.2) inset, 0 0 12px rgba(211, 64, 64, 0.1); background: rgba(0, 0, 0, .1);"
+		readonly> <input id="captain3" class="droppableCaptainRole"
+		placeholder="   Tertiary Captain"
+		style="text-align: center; border: 0; outline: 0; width: 15%; font-family: Fantasy; margin-top: 10%; color: white; float: right; position: fixed; right: 15%; height: 6%; box-shadow: 0 1px 0 rgba(255, 255, 255, .15), 0 2px 4px rgba(0, 0, 0, 0.2) inset, 0 0 12px rgba(211, 64, 64, 0.1); background: rgba(0, 0, 0, .1);"
+		readonly> <input id="captain4" class="droppableCaptainRole"
+		placeholder="   Quaternary Captain"
+		style="text-align: center; border: 0; outline: 0; width: 15%; font-family: Fantasy; margin-top: 14%; color: white; float: right; position: fixed; right: 15%; height: 6%; box-shadow: 0 1px 0 rgba(255, 255, 255, .15), 0 2px 4px rgba(0, 0, 0, 0.2) inset, 0 0 12px rgba(211, 64, 64, 0.1); background: rgba(0, 0, 0, .1);"
+		readonly>
+
+	<script src="/hb/scripts/droppableCaptainRoles.js"></script>
+
+	<!-- START Script for displaying and holding the data about 
+	 	  the current captains list -->
+	<script>
 	 
 	 var captainsList = ["","","",""];
 	
@@ -533,24 +533,198 @@
 	<% } %>
 	 
 	 </script>
-	 
+	<!-- END Script for displaying and holding the data about 
+	 	  the current captains list -->
 
+
+</div>
+<!-- END div holding the captains roles -->
+
+
+
+
+
+
+
+
+
+
+
+<div id="autoSubs" style=" right: 10%; width: 40%; height: 50%; float: right; position: fixed;">
+<div id="scrollbox-autosubs">
+  	<input id="pv_1" class="input-box" placeholder="Primary PV" style="margin-top: 10%;" readonly>
+  	
+  	<input id="pv_2" class="input-box" placeholder="Secondary PV" style="margin-top: 2%;" readonly>
+  	
+  	<input id="lw_1" class="input-box" placeholder="Primary LW" style="margin-top: 5%;" readonly>
+  	
+  	<input id="lw_2" class="input-box" placeholder="Secondary LW" style="margin-top: 2%;" readonly>
+  	
+  	<input id="rw_1" class="input-box" placeholder="Primary RW" style="margin-top: 5%;" readonly>
+  	
+  	<input id="rw_2" class="input-box" placeholder="Secondary RW" style="margin-top: 2%;" readonly>
+  	
+  	
+  	
+  						
+  						
+
+  </div>
+</div>
+
+<script>
+$('#autoSubs, #scrollbox-autosubs').enscroll({
+    showOnHover: false,
+    verticalTrackClass: 'tracker',
+    verticalHandleClass: 'handler'
+});
+</script>
+
+
+<%-- <div id="autoSubs"
+	style="display: none; right: 10%; width: 40%; float: right; position: fixed;">
 	
+	<div id="scrollbox3">
+
+	<img src="/hb/img/temp/handball_captain_temp.png"
+		style="overflow: auto; position: fixed; float: right; height: 30%; width: 30%; margin-top: 8%; right: 25%; background-size: 100% 100%;">
+
+	<input id="captain1" class="droppableCaptainRole"
+		placeholder="   Primary Captain"
+		style="text-align: center; border: 0; outline: 0; width: 15%; font-family: Fantasy; margin-top: 2%; color: white; float: right; position: fixed; right: 15%; height: 6%; box-shadow: 0 1px 0 rgba(255, 255, 255, .15), 0 2px 4px rgba(0, 0, 0, 0.2) inset, 0 0 12px rgba(211, 64, 64, 0.1); background: rgba(0, 0, 0, .1);"
+		readonly> 
+		
+	<input id="captain2" class="droppableCaptainRole"
+		placeholder="   Secondary Captain"
+		style="text-align: center; border: 0; outline: 0; width: 15%; font-family: Fantasy; margin-top: 6%; color: white; float: right; position: fixed; right: 15%; height: 6%; box-shadow: 0 1px 0 rgba(255, 255, 255, .15), 0 2px 4px rgba(0, 0, 0, 0.2) inset, 0 0 12px rgba(211, 64, 64, 0.1); background: rgba(0, 0, 0, .1);"
+		readonly> 
+		
+	<input id="captain3" class="droppableCaptainRole"
+		placeholder="   Tertiary Captain"
+		style="text-align: center; border: 0; outline: 0; width: 15%; font-family: Fantasy; margin-top: 10%; color: white; float: right; position: fixed; right: 15%; height: 6%; box-shadow: 0 1px 0 rgba(255, 255, 255, .15), 0 2px 4px rgba(0, 0, 0, 0.2) inset, 0 0 12px rgba(211, 64, 64, 0.1); background: rgba(0, 0, 0, .1);"
+		readonly> 
+		
+	<input id="captain4" class="droppableCaptainRole"
+		placeholder="   Quaternary Captain"
+		style="text-align: center; border: 0; outline: 0; width: 15%; font-family: Fantasy; margin-top: 14%; color: white; float: right; position: fixed; right: 15%; height: 6%; box-shadow: 0 1px 0 rgba(255, 255, 255, .15), 0 2px 4px rgba(0, 0, 0, 0.2) inset, 0 0 12px rgba(211, 64, 64, 0.1); background: rgba(0, 0, 0, .1);"
+		readonly>
+		
+	<input id="captain1" class="droppableCaptainRole"
+		placeholder="   Primary Captain"
+		style="text-align: center; border: 0; outline: 0; width: 15%; font-family: Fantasy; margin-top: 18%; color: white; float: right; position: fixed; right: 15%; height: 6%; box-shadow: 0 1px 0 rgba(255, 255, 255, .15), 0 2px 4px rgba(0, 0, 0, 0.2) inset, 0 0 12px rgba(211, 64, 64, 0.1); background: rgba(0, 0, 0, .1);"
+		readonly> 
+		
+	<input id="captain2" class="droppableCaptainRole"
+		placeholder="   Secondary Captain"
+		style="text-align: center; border: 0; outline: 0; width: 15%; font-family: Fantasy; margin-top: 22%; color: white; float: right; position: fixed; right: 15%; height: 6%; box-shadow: 0 1px 0 rgba(255, 255, 255, .15), 0 2px 4px rgba(0, 0, 0, 0.2) inset, 0 0 12px rgba(211, 64, 64, 0.1); background: rgba(0, 0, 0, .1);"
+		readonly> 
+		
+	<input id="captain3" class="droppableCaptainRole"
+		placeholder="   Tertiary Captain"
+		style="text-align: center; border: 0; outline: 0; width: 15%; font-family: Fantasy; margin-top: 26%; color: white; float: right; position: fixed; right: 15%; height: 6%; box-shadow: 0 1px 0 rgba(255, 255, 255, .15), 0 2px 4px rgba(0, 0, 0, 0.2) inset, 0 0 12px rgba(211, 64, 64, 0.1); background: rgba(0, 0, 0, .1);"
+		readonly> 
+		
+	<input id="captain4" class="droppableCaptainRole"
+		placeholder="   Quaternary Captain"
+		style="text-align: center; border: 0; outline: 0; width: 15%; font-family: Fantasy; margin-top: 30%; color: white; float: right; position: fixed; right: 15%; height: 6%; box-shadow: 0 1px 0 rgba(255, 255, 255, .15), 0 2px 4px rgba(0, 0, 0, 0.2) inset, 0 0 12px rgba(211, 64, 64, 0.1); background: rgba(0, 0, 0, .1);"
+		readonly>
+		
+	<input id="captain1" class="droppableCaptainRole"
+		placeholder="   Primary Captain"
+		style="text-align: center; border: 0; outline: 0; width: 15%; font-family: Fantasy; margin-top: 34%; color: white; float: right; position: fixed; right: 15%; height: 6%; box-shadow: 0 1px 0 rgba(255, 255, 255, .15), 0 2px 4px rgba(0, 0, 0, 0.2) inset, 0 0 12px rgba(211, 64, 64, 0.1); background: rgba(0, 0, 0, .1);"
+		readonly> 
+		
+	<input id="captain2" class="droppableCaptainRole"
+		placeholder="   Secondary Captain"
+		style="text-align: center; border: 0; outline: 0; width: 15%; font-family: Fantasy; margin-top: 38%; color: white; float: right; position: fixed; right: 15%; height: 6%; box-shadow: 0 1px 0 rgba(255, 255, 255, .15), 0 2px 4px rgba(0, 0, 0, 0.2) inset, 0 0 12px rgba(211, 64, 64, 0.1); background: rgba(0, 0, 0, .1);"
+		readonly> 
+		
+	<input id="captain3" class="droppableCaptainRole"
+		placeholder="   Tertiary Captain"
+		style="text-align: center; border: 0; outline: 0; width: 15%; font-family: Fantasy; margin-top: 42%; color: white; float: right; position: fixed; right: 15%; height: 6%; box-shadow: 0 1px 0 rgba(255, 255, 255, .15), 0 2px 4px rgba(0, 0, 0, 0.2) inset, 0 0 12px rgba(211, 64, 64, 0.1); background: rgba(0, 0, 0, .1);"
+		readonly> 
+		
+	<input id="captain4" class="droppableCaptainRole"
+		placeholder="   Quaternary Captain"
+		style="text-align: center; border: 0; outline: 0; width: 15%; font-family: Fantasy; margin-top: 46%; color: white; float: right; position: fixed; right: 15%; height: 6%; box-shadow: 0 1px 0 rgba(255, 255, 255, .15), 0 2px 4px rgba(0, 0, 0, 0.2) inset, 0 0 12px rgba(211, 64, 64, 0.1); background: rgba(0, 0, 0, .1);"
+		readonly>
 	</div>
 
+	<script src="/hb/scripts/droppableCaptainRoles.js"></script>
+
+	<!-- START Script for displaying and holding the data about 
+	 	  the current captains list -->
+	<script>
+	 
+	 var captainsList = ["","","",""];
 	
+	  <% if(!captainsMap.get("captain_id_one").equals("-1")) { %>
+	 		captainsList[0] = '<%=captainsMap.get("captain_id_one")%>';
+	 		
+	 		// Change the html to show the number and name of the captain
+	 		$('#captain1').val('<%=captainsMap.get("captain_number_one")%>' + '  ' + '<%=captainsMap.get("captain_name_one")%>');
+	 <% } %>
+	 
+	<% if(!captainsMap.get("captain_id_two").equals("-1")) { %>
+		captainsList[1] = '<%=captainsMap.get("captain_id_two")%>';
+		
+		// Change the html to show the number and name of the captain
+		$('#captain2').val('<%=captainsMap.get("captain_number_two")%>' + '  ' + '<%=captainsMap.get("captain_name_two")%>');
+	<% } %>
+	
+	<% if(!captainsMap.get("captain_id_three").equals("-1")) { %>
+	captainsList[2] = '<%=captainsMap.get("captain_id_three")%>';
+	
+	// Change the html to show the number and name of the captain
+	$('#captain3').val('<%=captainsMap.get("captain_number_three")%>' + '  ' + '<%=captainsMap.get("captain_name_three")%>');
+	<% } %>
+	
+	<% if(!captainsMap.get("captain_id_four").equals("-1")) { %>
+	captainsList[3] = '<%=captainsMap.get("captain_id_four")%>';
+	
+	// Change the html to show the number and name of the captain
+	$('#captain4').val('<%=captainsMap.get("captain_number_four")%>' + '  ' + '<%=captainsMap.get("captain_name_four")%>');
+	<% } %>
+	 
+	 </script>
+	<!-- END Script for displaying and holding the data about 
+	 	  the current captains list -->
 
-<img style="position: fixed; float:right; height:8%; width:6%; right: 3%; background-size: 100% 100%;"
-		src="/hb/img/temp/temp_tactics_icon.png" >
 
-<img style="position: fixed; float:right; height:8%; width:6%; margin-top: 4.5%; right: 3%; background-size: 100% 100%;"
-		src="/hb/img/temp/temp_captain_roles_icon.png" >
+</div> --%>
+<!-- END div holding the captains roles -->
 
-<img style="position: fixed; float:right; height:8%; width:6%; margin-top: 9%; right: 3%; background-size: 100% 100%;"
-		src="/hb/img/temp/temp_auto_subs_icon.png" >
 
-<img style="position: fixed; float:right; height:8%; width:6%; margin-top: 13.5%; right: 3%; background-size: 100% 100%;"
-		src="/hb/img/temp/temp_penalty_takers_icon.png" >
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<img
+	style="position: fixed; float: right; height: 8%; width: 6%; right: 3%; background-size: 100% 100%;"
+	src="/hb/img/temp/temp_tactics_icon.png">
+
+<img
+	style="position: fixed; float: right; height: 8%; width: 6%; margin-top: 4.5%; right: 3%; background-size: 100% 100%;"
+	src="/hb/img/temp/temp_captain_roles_icon.png">
+
+<img
+	style="position: fixed; float: right; height: 8%; width: 6%; margin-top: 9%; right: 3%; background-size: 100% 100%;"
+	src="/hb/img/temp/temp_auto_subs_icon.png">
+
+<img
+	style="position: fixed; float: right; height: 8%; width: 6%; margin-top: 13.5%; right: 3%; background-size: 100% 100%;"
+	src="/hb/img/temp/temp_penalty_takers_icon.png">
 
 
 
@@ -766,35 +940,23 @@ $('#fsqp_td<%=i%> div').slideUp(
 		            playerMarketValue: $('#rp_marketValue<%=i%>').text(),
 		            playerForm: $('#rp_form<%=i%>').text(),
 		            playerId: $('#rp_id<%=i%>').text()
-		        };
-			  
-			 
-			  $("#modalPlayerDetails")
-				.modal(
-						'show');
-			  
-			  
-		    	$('#clubName').text(rp_player.teamName);
-			  	$('#playerName').text(rp_player.playerName);
-			  	$('#playerQuality').text(rp_player.playerQuality);
-			  	$('#playerPosition').text(rp_player.playerPosition);
-			  	$('#playerAge').text(rp_player.playerAge);
-			  	$('#playerMarketValue').text('$' + rp_player.playerMarketValue);
-			  	$('#playerForm').text(rp_player.playerForm);
-			  
-			  	
-				showPlayerDetailsOnModal(rp_player.playerId, rp_player.playerPosition);
-			  		
-			
-			
-		  
-		});
-  <% } %>
+		};
 
-/* END Animate the bench squad players */
+		$("#modalPlayerDetails").modal('show');
 
+		$('#clubName').text(rp_player.teamName);
+		$('#playerName').text(rp_player.playerName);
+		$('#playerQuality').text(rp_player.playerQuality);
+		$('#playerPosition').text(rp_player.playerPosition);
+		$('#playerAge').text(rp_player.playerAge);
+		$('#playerMarketValue').text('$' + rp_player.playerMarketValue);
+		$('#playerForm').text(rp_player.playerForm);
 
+		showPlayerDetailsOnModal(rp_player.playerId, rp_player.playerPosition);
 
+	});
+<% } %>
+	/* END Animate the bench squad players */
 </script>
 <!-- END Scripts animating the slide down of the player list -->
 
@@ -808,14 +970,14 @@ $('#fsqp_td<%=i%> div').slideUp(
 <!-- END Player Details Modal -->
 
 
-<script type="text/javascript" src="/hb/scripts/ajax.saveSquadchanges.js"></script>
+<script type="text/javascript"
+	src="/hb/scripts/ajax.saveSquadchanges.js"></script>
 
-		<script type="text/javascript" src="/hb/scripts/ajax.getPlayerSkills.js"></script>
+<script type="text/javascript" src="/hb/scripts/ajax.getPlayerSkills.js"></script>
 
 
 
-<%
-	} // END Else (user is logged in)
-%>
+<% } // END Else (user is logged in) %>
+
 
 
