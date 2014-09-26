@@ -44,12 +44,12 @@
 	<script type="text/javascript" src="/hb/scripts/jquery-2.1.1.min.js"></script>
 	
 	<script type="text/javascript" src="/hb/scripts/jquery.color.2.1.2.js"></script>
-<script type="text/javascript" src="/hb/scripts/jquery-ui.js"></script>
+
 	<script
 		src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.js"></script>
 	<script src="/hb/scripts/jquery.animateDialog.js"></script>
-	
+	<script type="text/javascript" src="/hb/scripts/jquery.ui-min.js"></script>
 
 
 	<%! /* Session attributes */

@@ -1,3 +1,11 @@
+#autoSubs {
+	 right: 10%;
+	width: 40%;
+	height: 45%;
+	float: right;
+	position: fixed;	
+}
+
 .input-box {
 	text-align: center;
 	border: 0;
@@ -5,7 +13,6 @@
 	width: 35%;
 	font-family: Fantasy;
 	margin-left: 55%;
-	
 	color: white;
 	height: 10%;
 	box-shadow: 0 1px 0 rgba(255, 255, 255, .15), 0 2px 4px
@@ -20,9 +27,10 @@
 	padding: 0 5px;
 	border: 1px solid #b7b7b7;
 	float: right;
+	position: absolute;
 }
 
-.tracker {
+/* .tracker {
 	width: 10px;
 	background: rgba(0, 0, 0, 0);
 	margin-right: 2px;
@@ -43,11 +51,11 @@
 	background: rgba(0, 0, 0, 0.4);
 	border-radius: 7px;
 	-webkit-transition: width 250ms;
-	/*  -moz-transition: width 250ms;
-    -o-transition: width 250ms; */
+	 -moz-transition: width 250ms;
+    -o-transition: width 250ms;
 	transition: width 250ms;
 }
 
 .tracker:hover .handler,.tracker.dragging .handler {
 	width: 10px;
-}
+} */

@@ -131,22 +131,22 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 						// and season wage depending on the generated players:
 						// age, skills, etc.
 
-						// 2 out of 14 players will be randomly generated with a
+						// 2 out of 17 players will be randomly generated with a
 						// "very good" quality (i.e. good quality) and the other
 						// 12
 						// players will be generated with "good" quality
 						// P.S. actually it can happen that only 1 player will
 						// be "very good" due to the randomness of Random class
-						int firstVeryGoodPlayer = (randomGenerator.nextInt(12));
-						int secondVeryGoodPlayer = (randomGenerator.nextInt(12));
-						// 2 out of 14 players will be randomly generated as
+						int firstVeryGoodPlayer = (randomGenerator.nextInt(17));
+						int secondVeryGoodPlayer = (randomGenerator.nextInt(17));
+						// 2 out of 17 players will be randomly generated as
 						// very young
-						int firstYoungPlayer = randomGenerator.nextInt(12);
-						int secondYoungPlayer = randomGenerator.nextInt(12);
-						// 2 out of 14 players will be randomly generated as
+						int firstYoungPlayer = randomGenerator.nextInt(17);
+						int secondYoungPlayer = randomGenerator.nextInt(17);
+						// 2 out of 17 players will be randomly generated as
 						// "old".
-						int firstOldPlayer = randomGenerator.nextInt(12);
-						int secondOldPlayer = randomGenerator.nextInt(12);
+						int firstOldPlayer = randomGenerator.nextInt(17);
+						int secondOldPlayer = randomGenerator.nextInt(17);
 
 						int countOfPlayersCreated = 0;
 

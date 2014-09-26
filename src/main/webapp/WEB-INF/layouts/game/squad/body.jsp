@@ -33,10 +33,6 @@
 		captainsMap = (Map<String,String>) request.getAttribute("captainsMap");%>
 
 
-
-
-
-
 <!-- Fix loading spinner on the button -->
 <button onclick="postClientSideFormationList()" id="saveSquadButton"
 	class="btn btn-info has-spinner"
@@ -48,12 +44,12 @@
 
 
 <!-- <script>function ttest() { $('#saveSquadButton').addClass('animated rubberBand'); setTimeout(function() {$('#saveSquadButton').removeClass('rubberBand');}, 555) }</script> -->
-<script type="text/javascript" src="/hb/scripts/jquery-ui.js"></script>
-<script type="text/javascript" src="/hb/scripts/enscroll-0.6.0.min.js"></script>
+<script type="text/javascript" src="/hb/scripts/jquery.ui-min.js"></script>
+<script type="text/javascript" src="/hb/scripts/squadSettingsNavigation.js"></script>
 <br>
 <div>
 	<div
-		style="width: 50%; left: 10%; float: left;">
+		style="position: absolute; width: 40%; left: 8%; float: left;">
 		<!-- <button class="btn-success has-spinner">
     <span class="spinner"><i class="icon-spin icon-refresh"></i></span>
     Foo
@@ -479,7 +475,7 @@
 <div id="captainRoles"
 	style="display: none; right: 10%; width: 40%; float: right; position: fixed;">
 
-	<img src="/hb/img/temp/handball_captain_temp.png"
+	<img id="captainImage" src="/hb/img/temp/handball_captain_temp.png"
 		style="position: fixed; float: right; height: 30%; width: 30%; margin-top: 8%; right: 25%; background-size: 100% 100%;">
 
 	<input id="captain1" class="droppableCaptainRole"
@@ -550,9 +546,9 @@
 
 
 
-<div id="autoSubs" style=" right: 10%; width: 40%; height: 50%; float: right; position: fixed;">
-<div id="scrollbox-autosubs">
-  	<input id="pv_1" class="input-box" placeholder="Primary PV" style="margin-top: 10%;" readonly>
+<div id="autoSubs">
+ <div id="scrollbox-autosubs">
+   	<input id="pv_1" class="input-box" placeholder="Primary PV" style="margin-top: 10%;" readonly>
   	
   	<input id="pv_2" class="input-box" placeholder="Secondary PV" style="margin-top: 2%;" readonly>
   	
@@ -564,20 +560,32 @@
   	
   	<input id="rw_2" class="input-box" placeholder="Secondary RW" style="margin-top: 2%;" readonly>
   	
+  	<input id="gk_1" class="input-box" placeholder="Primary GK" style="margin-top: 5%;" readonly>
   	
+  	<input id="gk_2" class="input-box" placeholder="Secondary GK" style="margin-top: 2%;" readonly>
   	
-  						
-  						
-
-  </div>
+  	<input id="lb_1" class="input-box" placeholder="Primary LB" style="margin-top: 5%;" readonly>
+  	
+  	<input id="lb_2" class="input-box" placeholder="Secondary LB" style="margin-top: 2%;" readonly>
+  	
+  	<input id="cb_1" class="input-box" placeholder="Primary CB" style="margin-top: 5%;" readonly>
+  	
+  	<input id="cb_2" class="input-box" placeholder="Secondary CB" style="margin-top: 2%;" readonly>
+  	
+  	<input id="rb_1" class="input-box" placeholder="Primary RB" style="margin-top: 5%;" readonly>
+  	
+  	<input id="rb_2" class="input-box" placeholder="Secondary RB" style="margin-top: 2%;" readonly>
+  	
+  
+  </div> 
 </div>
 
 <script>
-$('#autoSubs, #scrollbox-autosubs').enscroll({
+/* $('#autoSubs, #scrollbox-autosubs').enscroll({
     showOnHover: false,
     verticalTrackClass: 'tracker',
     verticalHandleClass: 'handler'
-});
+}); */
 </script>
 
 
@@ -710,19 +718,19 @@ $('#autoSubs, #scrollbox-autosubs').enscroll({
 
 
 
-<img
+<img onclick="showPitchTable()"
 	style="position: fixed; float: right; height: 8%; width: 6%; right: 3%; background-size: 100% 100%;"
 	src="/hb/img/temp/temp_tactics_icon.png">
 
-<img
+<img onclick="showCaptainTable()"
 	style="position: fixed; float: right; height: 8%; width: 6%; margin-top: 4.5%; right: 3%; background-size: 100% 100%;"
 	src="/hb/img/temp/temp_captain_roles_icon.png">
 
-<img
+<img onclick="showAutoSubsTable()"
 	style="position: fixed; float: right; height: 8%; width: 6%; margin-top: 9%; right: 3%; background-size: 100% 100%;"
 	src="/hb/img/temp/temp_auto_subs_icon.png">
 
-<img
+<img onclick="showPenaltyTakersTable()"
 	style="position: fixed; float: right; height: 8%; width: 6%; margin-top: 13.5%; right: 3%; background-size: 100% 100%;"
 	src="/hb/img/temp/temp_penalty_takers_icon.png">
 
