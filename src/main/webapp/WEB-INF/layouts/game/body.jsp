@@ -6,15 +6,51 @@
 
 <% email = (String) session.getAttribute("email"); 
    teamName = (String) session.getAttribute("teamName"); 
-   if (email == null) { %>
-		   
-	<script>
-	$("#modalSessionExpired").modal('show');
-	</script>
+   if (email == null) { %>  
+	<script>$("#modalSessionExpired").modal('show');</script>
  	<%} else {%>
    
+	<!-- Load the page  -->
 
+<div id="loadingAnimation" align="center" class="fond">
+	<div class="contener_general">
+		<div class="contener_mixte">
+			<div class="ballcolor ball_1">&nbsp;</div>
+		</div>
+		<div class="contener_mixte">
+			<div class="ballcolor ball_2">&nbsp;</div>
+		</div>
+		<div class="contener_mixte">
+			<div class="ballcolor ball_3">&nbsp;</div>
+		</div>
+		<div class="contener_mixte">
+			<div class="ballcolor ball_4">&nbsp;</div>
+		</div>
+	</div>
 
+	<div style="padding-top: 35px;">
+	
+		
+	</div>
+</div>
+
+<script>
+	
+		$(document).ready(function loadPage() {
+			$('#container').hide();
+			$('#infoTable').hide();
+			$.get('squad.html').success(function(data) {
+				$('#dynamicContainer').html('');
+				$('#dynamicContainer').html(data);
+				$('#dynamicContainer').hide();
+				$('#loadingAnimation').html('');
+				$('#container').slideDown(600);
+				$('#infoTable').slideDown(1200);
+			});
+
+		});
+
+	</script>
 	
 	<div style="padding-left: 10%; padding-right: 10%; position: relative;" id="container">
 		<!-- NAVIGATION ROW -->
@@ -39,7 +75,7 @@
 		</div>
 
 		<!-- TABLE ROW -->
-		<div class="row">
+		<div class="row" id="infoTable">
 
 			<table class="table">
 				<thead>
@@ -125,13 +161,9 @@
 		
 		  $('#squadHref').click( function() {
 			
-			 $(document).ready(function() {
-				    $.get('squad.html')
-				             .success(function(data) {
-				            	 $('#dynamicContainer').html('');
-				                 $('#dynamicContainer').html(data);
-				             });
-				    });
+				          
+			 $('#dynamicContainer').show();
+				
 		 });  
 		
 		</script>

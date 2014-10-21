@@ -7,11 +7,14 @@
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
-	href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	href="/hb/css/bootstrap.min.css">
 
 <!-- Optional theme -->
 <link rel="stylesheet"
-	href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+	href="/hb/css/bootstrap-theme.min.css">
+<!-- Text Animation stylesheet -->
+<link rel="stylesheet" href="/hb/css/animationText.css">
+
 
 
 
@@ -37,8 +40,8 @@
 	<tiles:insertAttribute name="body" />
 
 
-	<div class="container">
-		<!-- Example row of columns -->
+	<!-- <div class="container">
+		Example row of columns
 		<div class="row">
 			<div class="col-md-4">
 				<h2>Heading</h2>
@@ -76,7 +79,7 @@
 		</div>
 
 		<hr>
-	</div>
+	</div> -->
 	<!-- /container -->
 
 	<!-- <form class="navbar-form navbar-left">
@@ -88,7 +91,7 @@
 	<br>
 	<br>
 
-	<tiles:insertAttribute name="footer" />
+	<%-- <tiles:insertAttribute name="footer" /> --%>
 
 
 

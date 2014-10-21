@@ -27,6 +27,7 @@
 <link rel="stylesheet" href="/hb/css/spinner.css" />
 <link rel="stylesheet" href="/hb/css/font-awesome.css" />
 <link rel="stylesheet" href="/hb/css/autosubs.css">
+<link rel="stylesheet" href="/hb/css/animationLoader.css">
 
 
 
@@ -45,12 +46,16 @@
 	
 	<script type="text/javascript" src="/hb/scripts/jquery.color.2.1.2.js"></script>
 
-	<script
-		src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.js"></script>
+<!-- 	<script
+		src="/hb/scripts/bootstrap.min.js"></script> -->
+	
 	<script src="/hb/scripts/jquery.animateDialog.js"></script>
 	<script type="text/javascript" src="/hb/scripts/jquery.ui-min.js"></script>
 
+
+
+	
+</div>
 
 	<%! /* Session attributes */
 		private String email;%>

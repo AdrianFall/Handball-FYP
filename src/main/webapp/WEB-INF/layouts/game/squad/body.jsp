@@ -44,7 +44,7 @@
 
 
 <!-- <script>function ttest() { $('#saveSquadButton').addClass('animated rubberBand'); setTimeout(function() {$('#saveSquadButton').removeClass('rubberBand');}, 555) }</script> -->
-<script type="text/javascript" src="/hb/scripts/jquery.ui-min.js"></script>
+<!-- <script type="text/javascript" src="/hb/scripts/jquery.ui-min.js"></script> -->
 <script type="text/javascript" src="/hb/scripts/squadSettingsNavigation.js"></script>
 <br>
 <div>
@@ -739,7 +739,7 @@
 
 <!-- Scripts animating the slide down of the table with player list -->
 <script>
-
+$(document).ready(function loadTable() {
 /* Animate the first squad players and register draggable and mouse clicks events */
 <% for (int i = 0; i < firstSquadPlayersList.size(); i++)  { %>
 
@@ -965,6 +965,7 @@ $('#fsqp_td<%=i%> div').slideUp(
 	});
 <% } %>
 	/* END Animate the bench squad players */
+});
 </script>
 <!-- END Scripts animating the slide down of the player list -->
 
