@@ -14,6 +14,9 @@
 	<jee:jndi-lookup jndi-name="jdbc/postgresql" id="dataSource"
 		expected-type="javax.sql.DataSource"></jee:jndi-lookup>
 
+
+
+
 	<bean
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
 		id="emf">
@@ -26,39 +29,205 @@
 			</map>
 		</property>
 
-		<!-- TRIAL1 -->
+	</bean>
 
-		<!-- <property name="jpaProperties">
+		<!-- Start Scheduling -->
+<!-- 
+ 	<bean id="scheduler" name="scheduler"
+	
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean"
+	
+		scope="singleton">
+	
+		<property name="quartzProperties">
+	
 			<props>
-				<prop key="hibernate.show_sql">false</prop>
-				<prop key="hibernate.hbm2ddl.auto">update</prop>
+	
+				<prop key="org.quartz.scheduler.instanceId">AUTO</prop>
+	
+				<prop key="org.quartz.scheduler.instanceName">quartzScheduler</prop>
+	
+				<prop key="org.quartz.jobStore.class">org.quartz.impl.jdbcjobstore.JobStoreTX</prop>
+	
+				<prop key="org.quartz.jobStore.driverDelegateClass">org.quartz.impl.jdbcjobstore.PostgreSQLDelegate</prop>
+				
+				<prop key="org.quartz.jobStore.useProperties">true</prop>
+	
+				<prop key="org.quartz.jobStore.tablePrefix">qrtz_</prop>
+	
+				<prop key="org.quartz.jobStore.isClustered">false</prop>
+	
+				<prop key="org.quartz.jobStore.clusterCheckinInterval">20000</prop>
+	
+				<prop key="org.quartz.jobStore.misfireThreshold">60000</prop>
+	
 			</props>
-		</property> -->
+	
+		</property>
+	
+		<property name="dataSource">
+	
+			<ref bean="dataSource" />
+	
+		</property>
+	
+		<property name="triggers"> <list> <ref bean="trigger" /> </list> </property>
+	
+	</bean> 
+ -->
 
-		<!-- END OF TRIAL 1 -->
+
+
+
+
+
+
+<!-- 
+	<bean name="myJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="jobClass" value="af.handball.scheduler.job.PrintJob" />
+		<property name="requestsRecovery" value="true" />
+		<property name="durability" value="true" />
+	</bean>
+
+
+
+	<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="myJob" />
+
+		<property name="cronExpression" value="0 0/5 * * * ?" />
 
 	</bean>
 
-	<!-- NEW APPROACH -->
-	<!-- <jee:jndi-lookup jndi-name="jdbc/postgresql" id ="dataSource" expected-type="javax.sql.DataSource"></jee:jndi-lookup> 
-		<jpa:repositories base-package="af.handball.repository" /> <bean class="org.springframework.orm.jpa.JpaTransactionManager" 
-		id="transactionManager"> <property name="dataSource" ref="dataSource" /> 
-		</bean> <bean class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" 
-		id="emf"> Entities location <property name="packagesToScan" value="af.handball.entity"></property> 
-		<property name="dataSource" ref="dataSource" /> <property name="jpaProperties"> 
-		<props> <prop key="hibernate.show_sql">false</prop> <prop key="hibernate.hbm2ddl.auto">update</prop> 
-		<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop> 
-		</props> </property> <property name="jtaTransactionManager" ref="transactionManager" 
-		/> <property name="hibernateProperties"> <props> <prop key="hibernate.transaction.jta.platform">org.hibernate.service.jta.platform.internal.WeblogicJtaPlatform 
-		</prop> <prop key="hibernate.hbm2ddl.auto">update</prop> <prop key="hibernate.dialect">org.hibernate.dialect.Oracle12cDialect</prop> 
-		<prop key="hibernate.driverClassName">javax.sql.DataSource</prop> <prop key="hibernate.show_sql">true</prop> 
-		<prop key="hibernate.format_sql">true</prop> <prop key="hibernate.use_sql_comments">true</prop> 
-		</props> </property> <property name="persistenceProvider"> <bean class="org.hibernate.jpa.HibernatePersistenceProvider" 
-		/> </property> </bean> -->
+	<bean id="simpleTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="myJob" />
+		<property name="repeatInterval" value="1000"/>
+		<property name="repeatCount" value="0"/>
 
-	<!-- END OF NEW APPROACH -->
+	</bean>
 
+	<bean id="quartzScheduler"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="jobDetails">
+			<list>
+				<ref bean="myJob" />
+			</list>
+		</property>
+		<property name="triggers">
+			<list>
+				<ref bean="simpleTrigger" />
+			</list>
+		</property>
+		<property name="dataSource"><ref bean="dataSource" /></property> 
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="schedulerName" value="quartzScheduler" />
+		<property name="configLocation" value="file:///quartz.properties" />
+		<property name="applicationContextSchedulerContextKey" value="applicationContext" />
+		<property name="overwriteExistingJobs" value="true" />
+		<property name="autoStartup" value="true" />
+		<property name="quartzProperties">
+	
+			<props>
+	
+				<prop key="org.quartz.scheduler.instanceId">AUTO</prop>
+	
+				<prop key="org.quartz.scheduler.instanceName">quartzScheduler</prop>
+	
+				<prop key="org.quartz.jobStore.class">org.quartz.impl.jdbcjobstore.JobStoreTX</prop>
+	
+				<prop key="org.quartz.jobStore.driverDelegateClass">org.quartz.impl.jdbcjobstore.PostgreSQLDelegate</prop>
+				
+				<prop key="org.quartz.jobStore.useProperties">true</prop>
+	
+				<prop key="org.quartz.jobStore.tablePrefix">qrtz_</prop>
+	
+				<prop key="org.quartz.jobStore.isClustered">false</prop>
+	
+				<prop key="org.quartz.jobStore.clusterCheckinInterval">20000</prop>
+	
+				<prop key="org.quartz.jobStore.misfireThreshold">60000</prop>
+	
+			</props>
+	
+		</property>
+	
+		<property name="jobFactory">
+			<bean class="it.myproject.scheduler.AutowiringSpringBeanJobFactory" />
+		</property>
+	</bean> 
+	
+	 -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- <bean name="printJobDetail"    class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+	    <property name="jobClass" value="af.handball.scheduler.job.PrintJob" />
+	    <property name="jobDataMap">
+	        <map>
+	            <entry key="anotherBean" value-ref="anotherBean" />
+	        </map>
+	    </property>
+	    nondurable jobs have a life span bounded by the existence of its triggers.
+	    <property name="durability" value="true" />
+	</bean> -->
+	
+	    <!-- End Scheduling -->
 
+	<!-- Job Detail -->
+<!-- 	
+	<bean name="printJobDetail"    class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+	    <property name="jobClass" value="af.handball.scheduler.job.PrintJob" />
+	    <property name="jobDataMap">
+	        <map>
+	            <entry key="anotherBean" value-ref="anotherBean" />
+	        </map>
+	    </property>
+	    nondurable jobs have a life span bounded by the existence of its triggers.
+	    <property name="durability" value="true" />
+	</bean>
+	
+	
+	Run the job every 2 seconds with initial delay of 1 second
+	<bean id="printTrigger"  class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+	    <property name="jobDetail" ref="printJobDetail" />
+	    <property name="startDelay" value="1000" />
+	    <property name="repeatInterval" value="8000" />
+	</bean>
+	
+	
+	Scheduler factory bean to glue together jobDetails and triggers to Configure Quartz Scheduler
+	<bean  class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+	    <property name="jobDetails">
+	        <list>
+	            <ref bean="simpleJobDetail" />
+	            <ref bean="printJobDetail" />
+	        </list>
+	    </property>
+	 
+	    <property name="triggers">
+	        <list>
+	            <ref bean="printTrigger" />
+	            <ref bean="cronTrigger" />
+	        </list>
+	    </property>
+	</bean>
+	
+	
+	 -->
+	
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	<bean class="org.springframework.orm.jpa.JpaTransactionManager"

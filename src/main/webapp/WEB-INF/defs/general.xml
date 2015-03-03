@@ -15,15 +15,25 @@
 
 
 	</definition>
+	
+	<definition name="matchPanel" template="/WEB-INF/layouts/game/matchPanel.jsp"></definition>
+	
+	<definition name="modalMatch" template="/WEB-INF/layouts/modalMatch.jsp"></definition>
+	
 
 	<definition name="game" template="/WEB-INF/jsp/game.jsp">
 		<put-attribute name="title" value="Handball Manager" />
 		<put-attribute name="header" value="/WEB-INF/layouts/game/header.jsp" />
-		<put-attribute name="body" value="/WEB-INF/layouts/game/body.jsp" />
+		<put-attribute name="body" value="/WEB-INF/layouts/game/body.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/layouts/game/footer.jsp" />
 		<put-attribute name="modalSessionExpired" value="/WEB-INF/layouts/modalSessionExpired.jsp"/>
 		<put-attribute name="modalPlayerDetails" value="/WEB-INF/layouts/modalPlayerDetails.jsp"></put-attribute>
 		
+	</definition>
+	
+	<definition name="schedule" template="/WEB-INF/jsp/schedule.jsp">
+		<put-attribute name="body" value="/WEB-INF/layouts/game/schedule/body.jsp"/>
+		<put-attribute name="modalSessionExpired" value="/WEB-INF/layouts/modalSessionExpired.jsp"/>
 	</definition>
 	
 	<definition name="squad" template="/WEB-INF/jsp/squad.jsp">

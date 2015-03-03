@@ -302,7 +302,7 @@
 					<% if(firstSquadPlayersList.get(n).getFirst_squad_play_position().equals("LW")) {
 									 int playerNumber = firstSquadPlayersList.get(n).getNumber();
 									 if (String.valueOf(playerNumber).length() > 1) {
-										 out.println("<h3 id='h3" + playerNumber + "' style='position: absolute; color: white; font-size: 72%; bottom: -14px; left: 45%;'>" + playerNumber + "</h3>"); 
+										 out.println("<h3 id='h3" + playerNumber + "' style='position: absolute; color: white; font-size: 72%; bottom: -14px; left: 43%;'>" + playerNumber + "</h3>"); 
 									 } else {
 										 out.println("<h3 id='h3" + playerNumber + "' style='position: absolute; color: white; font-size: 72%; bottom: -14px; left: 45%;'>" + playerNumber + "</h3>"); 
 									 }
@@ -343,9 +343,9 @@
 					<% if(firstSquadPlayersList.get(n).getFirst_squad_play_position().equals("RW")) {
 									 int playerNumber = firstSquadPlayersList.get(n).getNumber();
 									 if (String.valueOf(playerNumber).length() > 1) {
-										 out.println("<h3 id='h3" + playerNumber + "' style='position: absolute; color: white; font-size: 72%; bottom: -24px; left: 40%;'>" + playerNumber + "</h3>"); 
+										 out.println("<h3 id='h3" + playerNumber + "' style='position: absolute; color: white; font-size: 72%; bottom: -24px; left: 33%;'>" + playerNumber + "</h3>"); 
 									 } else {
-										 out.println("<h3 id='h3" + playerNumber + "' style='position: absolute; color: white; font-size: 72%; bottom: -24px; left: 40%;'>" + playerNumber + "</h3>"); 
+										 out.println("<h3 id='h3" + playerNumber + "' style='position: absolute; color: white; font-size: 72%; bottom: -24px; left: 36%;'>" + playerNumber + "</h3>"); 
 									 }
 									
 								 }

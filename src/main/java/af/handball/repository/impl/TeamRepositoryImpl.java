@@ -47,6 +47,28 @@ public class TeamRepositoryImpl implements TeamRepository {
 
 		return teamCreated;
 	}
+	
+	@Override
+	public int getTeamLeagueId(String email) {
+		TypedQuery<Team> teamExistsQuery = emgr.createNamedQuery(
+				"Team.getTeamByEmail", Team.class);
+		teamExistsQuery.setParameter("email", email);
+		int leagueId = -1;
+		try {
+			Team team = (Team) teamExistsQuery.getSingleResult();
+
+			if (team != null) {
+				System.out.println("Team exists for user " + email);
+				leagueId = team.getLeague_id();
+			}
+
+		} catch (NoResultException nre) {
+			// User doesn't have a team yet.
+			System.out.println("Team does not exist for user " + email);
+		}
+		
+		return leagueId;
+	}
 
 	@Override
 	public boolean teamExists(String email) {
@@ -69,6 +91,23 @@ public class TeamRepositoryImpl implements TeamRepository {
 		}
 
 		return hasTeam;
+	}
+	
+
+	@Override
+	public int getTeamId(String email) {
+		int teamId = -1;
+		TypedQuery<Team> teamQuery = emgr.createNamedQuery(
+				"Team.getTeamByEmail", Team.class);
+		teamQuery.setParameter("email", email);
+		try {
+		Team team = teamQuery.getSingleResult();
+		teamId = team.getTeam_id();
+		} catch (NoResultException nre) {
+			System.out.println("No result exception - probably user has not created a team yet.");
+		}
+		
+		return teamId;
 	}
 
 	@Override
@@ -270,5 +309,8 @@ public class TeamRepositoryImpl implements TeamRepository {
 
 		return squadChanged;
 	}
+
+	
+
 
 }

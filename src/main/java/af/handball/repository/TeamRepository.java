@@ -19,6 +19,10 @@ public interface TeamRepository
 	String getTeam(String email);
 
 	int getTeamLevel(String email);
+	
+	int getTeamId(String email);
+	
+	int getTeamLeagueId(String email);
 
 	boolean changeSquad(ArrayList<Integer> playerIdList, ArrayList<Integer> captainsIdList, String email);
 	

@@ -48,7 +48,7 @@ public class RegistrationController {
 		boolean passwordValidated = passwordValidator.validate(password);
 		System.out.println(email + " validated = " + emailValidated);
 		if (emailValidated && passwordValidated) {
-			postValidationRegistration(email, password);
+			postValidationRegistration(email, password, session);
 			
 		} else if (!emailValidated) {
 			success = "fail";
@@ -67,7 +67,7 @@ public class RegistrationController {
 		try {
 			PrintWriter out = response.getWriter();
 			jsonObj.put("success", success);
-			session.setAttribute("email", email);
+			
 			request.setAttribute("forwardedFrom", "registration");
 			
 			if (failReason != null) jsonObj.put("failReason", failReason);
@@ -83,13 +83,14 @@ public class RegistrationController {
 	
 	
 
-	private void postValidationRegistration(final String email, final String password) {
+	private void postValidationRegistration(final String email, final String password, HttpSession session) {
 		boolean emailExists = registrationService.emailExists(email);
 		if (!emailExists) {
 			// Create a new user
 			boolean userCreated = registrationService.newUser(email, password);
 			if (userCreated) {
 				System.out.println("NEW USER CREATED!!!!!!");
+				session.setAttribute("email", email);
 				success = "success";
 				
 			} else {

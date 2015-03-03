@@ -17,6 +17,10 @@
 		<class>af.handball.entity.FieldPlayerSkills</class>
 		<class>af.handball.entity.Skill</class>
 		<class>af.handball.entity.Captains</class>
+		<class>af.handball.entity.MatchDay</class>
+		<class>af.handball.entity.Match</class>
+		<class>af.handball.entity.MatchOutcome</class>
+		<class>af.handball.entity.MatchHighlight</class>
 		
 		
 		<!-- <properties>

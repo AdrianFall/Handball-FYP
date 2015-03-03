@@ -1,13 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"
+    import="af.handball.entity.Match,af.handball.entity.MatchOutcome, java.util.Map, java.util.List,java.util.ArrayList"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%! private String teamName; 
-	private String email;%>
+	private String email;
+	private List<Match> matchList;
+	private List<MatchOutcome> matchOutcomeList;
+	private Map<String, Object> nextMatchMap;
+	private String nextMatchHomeTeamName;
+	private String nextMatchAwayTeamName;%>
 
 <% email = (String) session.getAttribute("email"); 
    teamName = (String) session.getAttribute("teamName"); 
    if (email == null) { %>  
-	<script>$("#modalSessionExpired").modal('show');</script>
+	<script>$("#modalSessionExpired").modal('show');</script> 
  	<%} else {%>
    
 	<!-- Load the page  -->
@@ -34,19 +40,47 @@
 	</div>
 </div>
 
+<div id="sidebar" class="ui left vertical inverted labeled icon uncover visible sidebar menu">
+   
+		<a class="item"> <i class="home icon"></i> Home
+		</a> <a id="squadHref" class="item"> <i class="edit icon"></i> Formation
+		</a> <a class="item"> <i class="smile icon"></i> Friends
+		</a> <a id="scheduleHref" class="item"> <i class="calendar icon"></i> Schedule
+		</a> <a class="item"> <i class="mail icon"></i> Messages
+		</a> <a class="item"> <i class="chat icon"></i> Discussions
+		</a> <a class="item"> <i class="trophy icon"></i> Achievements
+		</a> <a class="item"> <i class="shop icon"></i> Store
+		</a> <a href="logout.html" class="item"> <i class="sign out icon"></i> Logout
+		</a>
+	</div>
+
 <script>
 	
 		$(document).ready(function loadPage() {
 			$('#container').hide();
 			$('#infoTable').hide();
 			$.get('squad.html').success(function(data) {
-				$('#dynamicContainer').html('');
-				$('#dynamicContainer').html(data);
-				$('#dynamicContainer').hide();
-				$('#loadingAnimation').html('');
-				$('#container').slideDown(600);
-				$('#infoTable').slideDown(1200);
+				$('#squadSettings').html('');
+				$('#squadSettings').html(data);
+				$('#squadSettings').hide();
+				
+				 $.get('schedule.html').success(function(data) {
+						$('#schedule').html('');
+						$('#schedule').html(data);
+						$('#schedule').hide();
+						$('#loadingAnimation').html('');
+						$('#container').slideDown(600);
+						$('#infoTable').slideDown(1200);
+					$.get('matchPanel.html').success(function(data) {
+						$('#match').html(data);
+						$('#match').slideDown(1400);
+					});
+				}); 
 			});
+			
+			
+			
+			
 
 		});
 
@@ -54,117 +88,82 @@
 	
 	<div style="padding-left: 10%; padding-right: 10%; position: relative;" id="container">
 		<!-- NAVIGATION ROW -->
-		<div class="row">
+		<!-- <div class="row">
 
-			<a href="#"> <img class="img-fix" alt="manager"
-				src="/hb/img/manager.png">
+			<a href="#"> <img class="img-fix" alt="manager" src="/hb/img/manager.png"></a>
 			
-			<a href="#" id="squadHref"> <img class="img-fix" alt="squad"
-				src="/hb/img/player.png">
+			<a href="#" id="squadHref"> <img class="img-fix" alt="squad" src="/hb/img/player.png"></a>
+			<a href="#" id="scheduleHref"><img class="img-fix" alt="schedule" src="/hb/img/schedule.png"></a>
 			
 
-			</a> <a href="#"><img class="img-fix" alt="transfer"
-				src="/hb/img/transfer.png"> </a> <a href="#"> <img
-				class="img-fix" alt="training" src="/hb/img/training.png">
+			 <a href="#"><img class="img-fix" alt="transfer" src="/hb/img/transfer.png"> </a> 
+			<a href="#"> <img class="img-fix" alt="training" src="/hb/img/training.png"></a> 
+			<a href="#"> <img class="img-fix" src="/hb/img/inbox.png" alt="inbox"></a>
 
-			</a> <a href="#"> <img class="img-fix" src="/hb/img/inbox.png"
-				alt="inbox">
-			</a>
+			END OF NAVIGATION ROW
+		</div> -->
 
-			<!-- END OF NAVIGATION ROW -->
-		</div>
+	<div id="match">
+	</div>
 
-		<!-- TABLE ROW -->
-		<div class="row" id="infoTable">
+	<!-- TABLE ROW -->
+	<div class="row" id="infoTable">
 
-			<table class="table">
+			<table class="table" style="background-color: #D95C5C;" >
 				<thead>
-					<tr class="warning">
+					<tr style="background-color: #B74D4D;">
 						<th>Team: <% if (teamName != null) out.print(teamName); %></th>
-						<th>Next Match</th>
+						<th width="30%;">&nbsp;</th>
 						<th>League</th>
-					</tr>
+					</tr> 
 				</thead>
 				<tbody>
-					<tr class="active">
-						<td>$ 1.9M</td>
-						<td>Arsenal FC vs PagadiniMaestro220</td>
-						<td>Level: 5</td>
+					<tr >
+						<td><div class="popup" data-content="Transfer Funds"><i class="large dollar icon"></i><strike>15,496,290</strike></div></td>
+						<td>&nbsp;</td>
+						<td><div class="ui icon button" >
+    <i class="add icon"></i>
+  </div></td>
 					</tr>
 					
-					<tr class="danger">
-					<td>Fans: 200K</td>
-					<td>Tommorow 20:10</td>
+					<tr>
+					<td><div class="popup" data-content="Fans"><i class="large child icon"></i> <strike>12,906</strike></div></td>
+					<td>&nbsp;</td>
 					<td>Position: 10</td>
 					</tr>
 					
 				</tbody>
 			</table>
-
+<script>$('.popup')
+  .popup({
+    inline: true
+  })
+;</script>
 		<!-- END OF TABLE ROW  -->
 		</div>
-		</div>
+				</div>
 	
 		
-		<div class="container-fluid" id="dynamicContainer" style="position: absolute; height:70%; padding-left: 10%; padding-right: 10%; width: 100%;">
-			
+		<div class="container-fluid" id="squadSettings" style="position: absolute; height:70%; padding-left: 10%; padding-right: 10%; width: 100%;"></div>
+		<div class="container-fluid" id="schedule" style="position: absolute; height:70%; padding-left: 10%; padding-right: 10%; width: 100%;"></div>
+
 	
-		</div>
-		<!--  -->
+<!--  -->
 		<script>
-		/* Deprecated */
-		/* $('#dynamicContainer').load("squad.html"); */
-		
-		/* function load_home() {
-			alert('loadhome');
-    var mygetrequest = new ajaxRequest()
-    if (mygetrequest.overrideMimeType) mygetrequest.overrideMimeType('text/html')
-    mygetrequest.onreadystatechange = function () {
-        if (mygetrequest.readyState == 4) {
-            if (mygetrequest.status == 200 || window.location.href.indexOf("http") == -1) {
-                var data = mygetrequest.responseText;
-                document.getElementById("dynamicContainer").innerHTML = data;
-            } else {
-                alert("An error has occured making the request");
-            }
-        }
-    }
-
-    mygetrequest.open("GET", "squad.html", true);
-    mygetrequest.send(null);
-    return false;
-}
-		
-		function ajaxRequest() {
-		    var activexmodes = ["Msxml2.XMLHTTP", "Microsoft.XMLHTTP"]
-		    if (window.ActiveXObject) {
-		        for (var i = 0; i < activexmodes.length; i++) {
-		            try {
-		                return new ActiveXObject(activexmodes[i])
-		            } catch (e) {
-
-		            }
-		        }
-		    } else if (window.XMLHttpRequest) return new XMLHttpRequest()
-		    else return false;
-		} */
-		
-		/* function test() {
-			alert('test');
-			$(document).ready(function() {
-			    $.get('squad.html')
-			             .success(function(data) {
-			                 $('#dynamicContainer').html(data);
-			             });
-			    });
-		} */
+		/* Register the navigation click event handlers  */
 		
 		  $('#squadHref').click( function() {
 			
-				          
-			 $('#dynamicContainer').show();
+			 $('#schedule').hide();      
+			 $('#squadSettings').show();
+
 				
 		 });  
+		
+	 	$('#scheduleHref').click(function() {
+	 		$('#squadSettings').hide();
+			$('#schedule').show();
+		}); 
 		
 		</script>
 		<!-- End of container -->

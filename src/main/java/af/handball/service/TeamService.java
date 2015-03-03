@@ -50,6 +50,14 @@ public class TeamService {
 		return hasTeam;
 	}
 	
+	public int getTeamId(final String email) {
+		return teamRepository.getTeamId(email);
+	}
+	
+	public int getTeamLeagueId(final String email) {
+		return teamRepository.getTeamLeagueId(email);
+	}
+	
 	public String getTeamName(final String email) {
 		
 		String teamName = teamRepository.getTeam(email);

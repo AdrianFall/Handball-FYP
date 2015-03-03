@@ -22,10 +22,10 @@ public class LeagueService {
 	public int allocateTeamInLeague(String email, String teamName, int teamLevel) {
 		// TODO Auto-generated method stub
 		int teamId = -1;
-		teamId = leagueRepository.allocateTeamInLeague(email, teamName, teamLevel);
-		
+		teamId = leagueRepository.allocateTeamInLeague(email, teamName, teamLevel);		
 		return teamId;
 	}
+	
 	
 	/*public List<User> findAll() {
 		return userRepository.findAll();

@@ -570,11 +570,6 @@
 						</div>
 					</div>
 					
-					
-					
-					
-					
-					
 					<div id="moraleBox"
 						style="border: 1px solid #B3CC9B; border-top: none; border-left: none; border-right: none; width: 100px; height: 20px; margin-left: 68%; text-align: center; margin-top: -20px;">
 						Morale

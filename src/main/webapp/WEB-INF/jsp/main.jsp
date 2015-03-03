@@ -8,6 +8,8 @@
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
 	href="/hb/css/bootstrap.min.css">
+	
+<link rel="stylesheet" href="/hb/css/reset.css">
 
 <!-- Optional theme -->
 <link rel="stylesheet"
@@ -25,11 +27,10 @@
 <body>
 	<!-- Latest compiled and minified JavaScript -->
 
-	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-	<script
-		src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.js"></script>
-
+	<!-- <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
+	<script type="text/javascript" src="/hb/scripts/jquery-2.1.1.min.js"></script>
+	<script src="/hb/scripts/bootstrap/3.1.1/bootstrap.js"></script>
+	
 	<tiles:insertAttribute name="modalRegistration"></tiles:insertAttribute>
 	
 	<tiles:insertAttribute name="createNewTeamModal"/>

@@ -50,6 +50,9 @@ public class LoginController {
 
 				// Set the session attributes
 				session.setAttribute("teamName", teamService.getTeamName(email));
+				session.setAttribute("teamId", teamService.getTeamId(email));
+				session.setAttribute("leagueId", teamService.getTeamLeagueId(email));
+				System.out.println("Session teamId = " + session.getAttribute("teamId"));
 				
 				try {
 				session.setAttribute("teamLevel", teamService.getTeamLevel(email));

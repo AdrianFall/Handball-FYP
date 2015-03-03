@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import af.handball.entity.Contract;
+import af.handball.entity.Match;
+import af.handball.entity.MatchHighlight;
 import af.handball.entity.Player;
 import af.handball.entity.Skill;
 import af.handball.repository.GameRepository;
@@ -21,11 +23,17 @@ public class GameService {
 	@Autowired
 	private GameRepository gameRepository;
 	
-	public List<Player> getUsersPlayers(String email) {
+	public List<MatchHighlight> getMatchHighlights(int matchId) {
+		return gameRepository.getMatchHighlights(matchId);
+	}
+	
+ 	public List<Player> getUsersPlayers(String email) {
 		return gameRepository.getUserTeam(email);
 	}
 	
-	public Map<String, Skill> getAllPlayersSkills(List<Player> listOfPlayers) {
+
+	
+	public List<Skill> getAllPlayersSkills(List<Player> listOfPlayers) {
 		
 		return gameRepository.getAllPlayersSkills(listOfPlayers);
 	}
@@ -45,6 +53,16 @@ public class GameService {
 	public Map<String, String> getCaptainsMap(String email) {
 		
 		return gameRepository.getCaptainsMap(email);
+	}
+
+	public Map<String, Object> getUsersSchedule(int teamId, int leagueId) {
+		return gameRepository.getUserSchedule(teamId, leagueId);
+	}
+
+
+
+	public Match getMatchById(int matchId) {
+		return gameRepository.getMatchById(matchId);
 	}
 	
 	

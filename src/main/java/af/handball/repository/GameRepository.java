@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import af.handball.entity.Contract;
+import af.handball.entity.Match;
+import af.handball.entity.MatchHighlight;
 import af.handball.entity.Player;
 import af.handball.entity.Skill;
 
@@ -13,7 +15,9 @@ public interface GameRepository
 	
 	List<Player> getUserTeam(String email);
 
-	Map<String, Skill> getAllPlayersSkills(List<Player> listOfPlayers);
+	List<Skill> getAllPlayersSkills(List<Player> listOfPlayers);
+	
+	Map<String, Object> getUserSchedule(int teamId, int leagueId);
 
 	Skill getPlayerSkills(int playerId);
 
@@ -22,6 +26,17 @@ public interface GameRepository
 	Contract getPlayerContract(int playerId);
 
 	Map<String, String> getCaptainsMap(String email);
+
+	List<Player> getTeamPlayers(int teamId);
+
+	boolean setMatchIsPlayed(boolean isPlayed, int matchId);
+
+	Match getMatchById(int matchId);
+
+	List<MatchHighlight> getMatchHighlights(int matchId);
+
+	void deleteMatchHighlights(int matchId);
+
 	
 
 }

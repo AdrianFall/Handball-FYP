@@ -1,6 +1,8 @@
 package af.handball.controller;
 
-import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,11 +10,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import af.handball.entity.Match;
+import af.handball.entity.MatchHighlight;
+import af.handball.entity.MatchOutcome;
 import af.handball.entity.Player;
+import af.handball.entity.Team;
 import af.handball.service.GameService;
 
 
@@ -21,8 +30,72 @@ public class GameController {
 	
 	@Autowired
 	private GameService gameService;
-	
 
+	
+	@RequestMapping("/getUpdate")
+	@ResponseBody
+	public String getUpdate(@RequestBody String json, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		JSONObject requestJson = new JSONObject(json);
+		int matchId = (Integer) requestJson.get("matchId");
+		int updateNumber = (Integer) requestJson.get("updateNumber");
+		System.out.println("Get update for match id = " + matchId + ". Update number: " + updateNumber);
+		 
+		JSONObject returnJson = new JSONObject();
+		
+		returnJson.put("status", "OK");
+		
+		return returnJson.toString();
+	}
+
+	@RequestMapping("/matchPanel")
+	public String matchPanel(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		return "matchPanel";
+	}
+	
+	@RequestMapping("/modalMatch")
+	public String modalMatch(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		
+		String matchIdParamter = (String) request.getParameter("matchId");
+		System.out.println("Match id para: " + matchIdParamter);
+		
+		// Obtain the match
+		Match match = gameService.getMatchById(Integer.parseInt(matchIdParamter));
+		
+		// Update the names of team in the match
+		List<Match> matchList = (List<Match>) session.getAttribute("matchList");
+		for (Match m : matchList) {
+			System.out.println("Current m id = " + m.getMatch_id() + ". Match id = " + match.getMatch_id());
+
+			if (m.getMatch_id().intValue() == match.getMatch_id().intValue()) {
+								System.out.println("Found match with the same id");
+				match.setHome_team_name(m.getHome_team_name());
+				match.setAway_team_name(m.getAway_team_name());
+				
+				break;
+			} else System.out.println("Doesn't match");
+		}
+		
+		List<MatchHighlight> matchHighlightList = gameService.getMatchHighlights(match.getMatch_id());
+		if (!matchHighlightList.isEmpty())
+			session.setAttribute("matchHighlightList", matchHighlightList);
+		/*Map<String, Object> nextMatchMap = (Map<String, Object>) session.getAttribute("nextMatchMap");
+		int matchId = (Integer) nextMatchMap.get("matchId");
+		Match match = gameService.getMatchById(matchId);*/
+		Date date = new Date(match.getMatch_date().getTime());
+		System.out.println("Match date: " + date.toString());
+		// Set the time left to match
+		long timeLeftInMs = match.getMatch_date().getTime() - Calendar.getInstance().getTime().getTime();
+		if (timeLeftInMs < 0)
+			timeLeftInMs = 0;
+		System.out.println(timeLeftInMs);
+		session.setAttribute("timeLeftInMs", timeLeftInMs);
+		
+		session.setAttribute("currentMatch", match);
+		System.out.println("/modalMatch isMatchStarted = " + match.isMatch_started());
+		return "modalMatch";
+	}
+	
+	
 	@RequestMapping("/squad")
 	public String squad(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		
@@ -35,6 +108,79 @@ public class GameController {
 		request.setAttribute("allPlayersSkills", allPlayersSkills);*/
 		return "squad";
 	}
+	
+	@RequestMapping("/schedule")
+	public String schedule(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		
+		String email = (String) session.getAttribute("email");
+		int teamId = (Integer) session.getAttribute("teamId");
+		int leagueId = (Integer) session.getAttribute("leagueId");
+		
+		// home team, away team, year, month, day, hour, minutes, seconds + LATER ON; for matches that happend the score
+		
+		Map<String, Object> scheduleMap = gameService.getUsersSchedule(teamId, leagueId);
+		
+		List<Match> matchList = (List<Match>) scheduleMap.get("matchList");
+		List<Team> teamList = (List<Team>) scheduleMap.get("teamList");
+		List<MatchOutcome> matchOutcomeList = (List<MatchOutcome>) scheduleMap.get("matchOutcomeList");
+		Map<String, Object> nextMatchMap = new HashMap<String, Object>();
+		boolean nextMatchMapped = false;
+		// update the names of teams in matchList
+		for (int i = 0; i < matchList.size(); i++) {
+			int homeTeamId = matchList.get(i).getHome_team();
+			int awayTeamId = matchList.get(i).getAway_team();
+			
+			
+			
+			for (int j = 0; j < teamList.size(); j++) {
+				boolean homeTeamDone = false;
+				boolean awayTeamDone = false;
+				
+				if (homeTeamId == teamList.get(j).getTeam_id()) {
+					matchList.get(i).setHome_team_name(teamList.get(j).getTeam_name());
+					homeTeamDone = true;
+				} else if (awayTeamId == teamList.get(j).getTeam_id()) {
+					matchList.get(i).setAway_team_name(teamList.get(j).getTeam_name());
+					awayTeamDone = true;
+				} else if (homeTeamDone && awayTeamDone)
+					break;
+			}
+			
+			if (!nextMatchMapped && !matchList.get(i).isMatch_finished()) {
+				nextMatchMap.put("matchId", matchList.get(i).getMatch_id());
+				nextMatchMap.put("homeTeamId", matchList.get(i).getHome_team());
+				nextMatchMap.put("awayTeamId", matchList.get(i).getAway_team());
+				nextMatchMap.put("homeTeamName", matchList.get(i).getHome_team_name());
+				nextMatchMap.put("awayTeamName", matchList.get(i).getAway_team_name());
+				long timeLeftInMs = matchList.get(i).getMatch_date().getTime() - Calendar.getInstance().getTime().getTime();
+				if (timeLeftInMs < 0)
+					timeLeftInMs = 0;
+				nextMatchMap.put("timeLeftInMs",timeLeftInMs);
+				
+				nextMatchMapped = true;
+			}
+			
+		}
+		
+		
+		session.setAttribute("matchList", matchList);
+		session.setAttribute("matchOutcomeList", matchOutcomeList);
+		System.out.println("setting nextMatchMap as session attribute");
+		session.setAttribute("nextMatchMap", nextMatchMap);
+		
+		
+		/*List<Match> matchList = gameService.getUsersSchedule(teamId, leagueId);
+		session.setAttribute("matchList", matchList);
+		for (int i = 0; i < matchList.size(); i++) {
+			String home_team = matchList.get(i).getHome_team_name();
+			String away_team = matchList.get(i).getAway_team_name();
+			
+			System.out.println("i = " + i + " home: " + home_team + " vs away: " + away_team);
+		}*/
+		
+		
+		return "schedule";
+	} 
 
 	
 

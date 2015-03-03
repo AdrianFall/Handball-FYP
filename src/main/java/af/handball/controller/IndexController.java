@@ -1,5 +1,9 @@
 package af.handball.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,6 +42,13 @@ public class IndexController {
 	public String game() {
 		System.out.println("@IndexController... Forwarding to game");
 		return "game";
+	}
+	
+	@RequestMapping("/logout")
+	public String logout(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		System.out.println("logout()");
+		session.invalidate();
+		return "main";
 	}
 
 	

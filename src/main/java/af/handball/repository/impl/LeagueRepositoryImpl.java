@@ -1,8 +1,12 @@
 package af.handball.repository.impl;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Random;
 
 import javax.persistence.EntityManager;
@@ -10,12 +14,23 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import org.omg.CORBA.portable.InputStream;
+import org.quartz.JobBuilder;
+import org.quartz.JobDataMap;
+import org.quartz.JobDetail;
+import org.quartz.JobKey;
+import org.quartz.Scheduler;
+import org.quartz.Trigger;
+import org.quartz.TriggerBuilder;
+import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import af.handball.entity.Captains;
 import af.handball.entity.Contract;
 import af.handball.entity.League;
+import af.handball.entity.Match;
+import af.handball.entity.MatchDay;
 import af.handball.entity.Player;
 import af.handball.entity.Skill;
 import af.handball.entity.Team;
@@ -25,16 +40,22 @@ import af.handball.generator.PivotGenerator;
 import af.handball.generator.PlayerNumberGenerator;
 import af.handball.generator.QualityGenerator;
 import af.handball.generator.RandomTeamNameGenerator;
+import af.handball.generator.ScheduleGenerator;
 import af.handball.generator.WingGenerator;
 import af.handball.repository.LeagueRepository;
+import af.handball.repository.MatchRepository;
+import af.handball.scheduler.job.MatchJob;
 
 @Component("LeagueRepository")
 @Repository
 public class LeagueRepositoryImpl implements LeagueRepository {
 
+	private static final int DEFAULT_MATCH_DURATION_IN_SECONDS = 300;
 	private int league_id;
 	private int teamId = -1;
 
+	
+	
 	@PersistenceContext
 	EntityManager emgr;
 
@@ -943,6 +964,136 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 					// Decrement the league available slots
 					league.setAvailable_slots(11);
 					emgr.persist(league);
+					System.out.println("League persisted.");
+					emgr.flush();
+					try {
+						// TODO Schedule the matches
+						TypedQuery<Team> userPlayersQuery = emgr.createNamedQuery(
+								"Team.getLeagueTeams", Team.class);
+						userPlayersQuery.setParameter("league_id", league.getLeague_id());
+						
+						List<Team> teamList = userPlayersQuery.getResultList();
+						System.out.println("TEAM LIST = " + teamList);
+						ArrayList<String> teamListId = new ArrayList<String>(); 
+						System.out.println("Returning team id = " + teamId);
+						int userTeamId = 0;
+						
+						for (int n = 0; n < teamList.size(); n++) {
+							teamListId.add(Integer.toString(teamList.get(n).getTeam_id()));
+							if (teamList.get(n).getTeam_id()== teamId) {
+								System.out.println("Team id match.");
+								userTeamId = teamList.get(n).getTeam_id();
+							} else {
+								
+							}
+						}
+						ScheduleGenerator sg = new ScheduleGenerator();
+						Map<String, Map<String, Map<String, String>>> mappedMatchSchedule = sg.generateAllMatchesCombinationList(teamListId, userTeamId);
+						
+						for (int i = 0; i < mappedMatchSchedule.size(); i++) { // each day
+							MatchDay matchDay = new MatchDay();
+							matchDay.setDay_number(i+1);
+							matchDay.setLeague_id(league.getLeague_id());
+							emgr.persist(matchDay);
+							emgr.flush();
+							
+							ArrayList<Integer> listOfAlreadyPersistedTeams = new ArrayList<Integer>(); // List to avoid the repetition caused by the schedule generator (i.e. it's architectural model) 
+							
+							// key = "day1"
+							for (int j = 0; j < mappedMatchSchedule.get("day" + Integer.toString(i+1)).size(); j++) { // each team
+								// Map of the match in the particular (currently iterated) day
+								Map<String, String> matchMap = mappedMatchSchedule.get("day" + Integer.toString(i+1)).get(teamListId.get(j));
+								int homeId = Integer.parseInt(matchMap.get("home"));
+								int awayId = Integer.parseInt(matchMap.get("away"));
+								
+								if (!listOfAlreadyPersistedTeams.contains(homeId) || !listOfAlreadyPersistedTeams.contains(awayId)) {
+									if ((listOfAlreadyPersistedTeams.contains(homeId) && !listOfAlreadyPersistedTeams.contains(awayId)) || (!listOfAlreadyPersistedTeams.contains(homeId) && listOfAlreadyPersistedTeams.contains(awayId))) {
+										System.err.println("Houston we got a problem");
+									}
+									listOfAlreadyPersistedTeams.add(homeId);
+									listOfAlreadyPersistedTeams.add(awayId);
+									Match match = new Match();
+									match.setMatch_day_id(matchDay.getMatch_day_id());
+									match.setAway_team(awayId);
+									match.setHome_team(homeId);
+									match.setMatch_duration_in_seconds(DEFAULT_MATCH_DURATION_IN_SECONDS);
+									match.setUpdates_per_minute(MatchRepositoryImpl.UPDATES_PER_MINUTE);
+									
+									for (int n = 0; n < teamList.size(); n++) {
+										if (teamList.get(n).getTeam_id() == homeId)
+											match.setHome_team_name(teamList.get(n).getTeam_name());
+										else if (teamList.get(n).getTeam_id() == awayId)
+											match.setAway_team_name(teamList.get(n).getTeam_name());
+									}
+									
+									// Set the date
+									GregorianCalendar gc = (GregorianCalendar) Calendar.getInstance();
+									gc.clear();
+									gc.set(Calendar.YEAR, Integer.parseInt(matchMap.get("year")));
+									gc.set(Calendar.MONTH, Integer.parseInt(matchMap.get("month")));
+									gc.set(Calendar.DAY_OF_MONTH, Integer.parseInt(matchMap.get("day")));
+									gc.set(Calendar.HOUR_OF_DAY, Integer.parseInt(matchMap.get("hour")));
+									gc.set(Calendar.MINUTE, Integer.parseInt(matchMap.get("minute")));
+									
+									match.setMatch_date(new java.sql.Timestamp(gc.getTimeInMillis()));
+									//java.sql.Date date = new java.sql.Date(gc.getTimeInMillis());
+									
+									// Persist the match
+									emgr.persist(match);
+									emgr.flush();
+									
+									// Schedule the jobs
+							
+									 try {
+										 	Scheduler scheduler=new StdSchedulerFactory().getScheduler("MatchScheduler");
+										 	System.out.println("Obtained scheduler: " + scheduler.getSchedulerName());
+										    
+										    final String jobName="SolrWatcher";
+										    final String jobGroup="Solr";
+										  /*  JobDetail existingJob=scheduler.getJobDetail(jobName);
+										    if (existingJob != null) {
+										      scheduler.deleteJob(jobName,jobGroup);
+										    }
+										    JobDetail job=new JobDetail(jobName,jobGroup,PrintJob.class);
+										    JobDataMap jobDataMap=new JobDataMap();
+										    jobDataMap.put("SOLR_TRACKER",this);
+										    job.setJobDataMap(jobDataMap);
+										    trigger=new CronTrigger("SolrWatcherTrigger",jobGroup,solrPingCronExpression);*/
+										  
+										    System.out.println("Match time: " + match.getMatch_date().toString());
+										    
+										    JobKey jobKey = new JobKey("job:" + Integer.toString(homeId) + ":" + Integer.toString(awayId), "schedule:league:" + Integer.toString(league_id));
+										    JobDetail jobA = JobBuilder.newJob(MatchJob.class)
+												.withIdentity(jobKey)
+												.requestRecovery(true)
+												.usingJobData("matchTime", match.getMatch_date().getTime())
+												.usingJobData("matchId", match.getMatch_id())
+												.build();
+										    
+										    Trigger trigger1 = TriggerBuilder
+										    		.newTrigger()
+										    		.withIdentity("trigger:" + Integer.toString(homeId) + ":" + Integer.toString(awayId), "group1")
+										    		.startAt(gc.getTime())
+										    		.forJob(jobA)
+										    		.build();
+										    
+										    scheduler.scheduleJob(jobA,trigger1);
+										  }
+									 catch (  Exception e) {
+										    System.err.println("Couldn't schedule a job. Exception: " + e.getLocalizedMessage());
+									 }
+									
+								}
+							}
+							
+							
+						}
+						
+						
+					} catch (Exception e) {
+						System.out.println("Error when scheduling matches " + e.getLocalizedMessage());
+					}
+					
 				} catch (Exception e) {
 					System.out
 							.println("Error when persisting (updating) league lock. Exception - "
@@ -956,7 +1107,7 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 				e.printStackTrace();
 			}
 		}
-
+		
 		return teamId;
 	}
 

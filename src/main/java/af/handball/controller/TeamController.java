@@ -524,6 +524,8 @@ public class TeamController {
 						session.setAttribute("teamLevel",
 								teamService.getTeamLevel(email));
 						jsonObj.put("teamCreated", "true");
+						session.setAttribute("teamId", teamId);
+						session.setAttribute("leagueId", teamService.getTeamLeagueId(email));
 					} else
 						jsonObj.put("teamCreated", "false");
 				} else

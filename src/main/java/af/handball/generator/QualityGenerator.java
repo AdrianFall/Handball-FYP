@@ -42,9 +42,9 @@ public class QualityGenerator {
 	public static int getQualityAsPercentage(double quality, int level) {
 	
 		int worldClassMax = generateMaxQuality(QUALITY_TYPE_WORLD_STAR, level);
-		System.out.println("world class max = " + worldClassMax);
+		/*System.out.println("world class max = " + worldClassMax);*/
 		int qualityInt = (int) quality;
-		System.out.println("quality int = " + qualityInt);
+		/*System.out.println("quality int = " + qualityInt);*/
 		double percentageDouble = (quality / worldClassMax) * 100;
 		int percentage = (int) percentageDouble;
 		return percentage;
