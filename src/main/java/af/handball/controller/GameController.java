@@ -41,8 +41,14 @@ public class GameController {
 		System.out.println("Get update for match id = " + matchId + ". Update number: " + updateNumber);
 		 
 		JSONObject returnJson = new JSONObject();
+		MatchHighlight matchHighlight = gameService.getMatchHighlightByUpdateNumber(matchId, updateNumber);
+		if (matchHighlight != null) {
+			returnJson.put("status", "OK");
+			returnJson.put("highlight", matchHighlight.getHighlight_text());
+		} else {
+			returnJson.put("status", "ERROR");
+		}
 		
-		returnJson.put("status", "OK");
 		
 		return returnJson.toString();
 	}
@@ -93,6 +99,49 @@ public class GameController {
 		session.setAttribute("currentMatch", match);
 		System.out.println("/modalMatch isMatchStarted = " + match.isMatch_started());
 		return "modalMatch";
+	}
+	
+	@RequestMapping("/modalLiveMatch")
+	public String modalLiveMatch(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		
+		String matchIdParamter = (String) request.getParameter("matchId");
+		System.out.println("Match id para: " + matchIdParamter);
+		
+		// Obtain the match
+		Match match = gameService.getMatchById(Integer.parseInt(matchIdParamter));
+		
+		// Update the names of team in the match
+		List<Match> matchList = (List<Match>) session.getAttribute("matchList");
+		for (Match m : matchList) {
+			System.out.println("Current m id = " + m.getMatch_id() + ". Match id = " + match.getMatch_id());
+
+			if (m.getMatch_id().intValue() == match.getMatch_id().intValue()) {
+								System.out.println("Found match with the same id");
+				match.setHome_team_name(m.getHome_team_name());
+				match.setAway_team_name(m.getAway_team_name());
+				
+				break;
+			} else System.out.println("Doesn't match");
+		}
+		
+		List<MatchHighlight> matchHighlightList = gameService.getMatchHighlights(match.getMatch_id());
+		if (!matchHighlightList.isEmpty())
+			session.setAttribute("matchHighlightList", matchHighlightList);
+		/*Map<String, Object> nextMatchMap = (Map<String, Object>) session.getAttribute("nextMatchMap");
+		int matchId = (Integer) nextMatchMap.get("matchId");
+		Match match = gameService.getMatchById(matchId);*/
+		Date date = new Date(match.getMatch_date().getTime());
+		System.out.println("Match date: " + date.toString());
+		// Set the time left to match
+		long timeLeftInMs = match.getMatch_date().getTime() - Calendar.getInstance().getTime().getTime();
+		if (timeLeftInMs < 0)
+			timeLeftInMs = 0;
+		System.out.println(timeLeftInMs);
+		session.setAttribute("timeLeftInMs", timeLeftInMs);
+		
+		session.setAttribute("currentMatch", match);
+		System.out.println("/modalLiveMatch isMatchStarted = " + match.isMatch_started());
+		return "modalLiveMatch";
 	}
 	
 	

@@ -106,7 +106,7 @@
 	//   I'd suggest using the calculated static value instead of doing inline math
 	//   I did it this way to simply show where the number came from
 	var timeLeftInMs = <%= nextMatchMap.get("timeLeftInMs") %>;
-	dateObj += 5000;
+	dateObj += timeLeftInMs;
 
 	// create a new Date object, using the adjusted time
 	dateObj = new Date(dateObj);
@@ -128,23 +128,24 @@
 		   $(this).html(event.strftime(format));
 		 })
 		 .on('finish.countdown', function(event) {
-		   $(this).html("<a href='#' onclick='startMatch()' >Match Started!</a>");
-	
-		     
-
-	});
+		   	$(this).html("<a href='#' onclick='startMatch()' >Match Started!</a>");
+			/* Obtain the initial html data */
+		     $.ajax({
+				url: 'modalLiveMatch.html',
+				data: {matchId: "<%=nextMatchMap.get("matchId")%>"},
+				
+			}).done(function (data) {
+				$('#modalLiveMatchSpace').html(data);
+		
+			}); /* END ajax post */
+		}); /* END on('finish.countdown') */
 	
  	function startMatch() {
 		alert('startMatch function');
 		
-		$.ajax({
-			url: 'modalMatch.html',
-			data: {matchId: "<%=nextMatchMap.get("matchId")%>"},
-			
-		}).done(function (data) {
-			$('#modalSpace').html(data);
-			$('#modalMatch').modal('show'); 
-		});
+		
+			$('#modalLiveMatch').modal('show'); 
+		
 	} /* END function startMatch() */
 	
 </script>

@@ -138,7 +138,7 @@ public class ScheduleGenerator {
 				
 				
 				if (i == 0 && (userTeamId == Integer.parseInt(home) || userTeamId == Integer.parseInt(away))) { // ONLY IF day = 1 && real user (i.e. if the league is created by the user team creation)
-					gc.add(Calendar.SECOND, 15);
+					gc.add(Calendar.MINUTE, 2);
 					
 					matchRecordMap.put("day", Integer.toString(gc.get(Calendar.DAY_OF_MONTH)));
 					matchRecordMap.put("month", Integer.toString(gc.get(Calendar.MONTH)));
@@ -151,7 +151,7 @@ public class ScheduleGenerator {
 					Random random = new Random();
 					/*gc.add(Calendar.MINUTE, random.nextInt((30 - 12) + 1) + 12);*/
 					// FIXME change back
-					gc.add(Calendar.MINUTE, random.nextInt((8 - 6) + 1) + 6);
+					gc.add(Calendar.MINUTE, random.nextInt((10 - 8) + 1) + 8);
 					matchRecordMap.put("day", Integer.toString(gc.get(Calendar.DAY_OF_MONTH)));
 					matchRecordMap.put("month", Integer.toString(gc.get(Calendar.MONTH)));
 					matchRecordMap.put("year", Integer.toString(gc.get(Calendar.YEAR)));

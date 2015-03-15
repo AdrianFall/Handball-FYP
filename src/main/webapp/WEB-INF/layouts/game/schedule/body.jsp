@@ -112,7 +112,7 @@
 		
 	}).done(function (data) {
 		alert('done');
-		$('#modalSpace').html(data);
+		$('#modalMatchSpace').html(data);
 		$('#modalMatch').modal('show');  
 	});
 } /* END function startMatch() */

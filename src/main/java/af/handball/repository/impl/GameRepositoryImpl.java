@@ -42,6 +42,23 @@ public class GameRepositoryImpl implements GameRepository {
 	}
 	
 	@Override
+	public MatchHighlight getMatchHighlightByUpdateNumber(int matchId, int updateNumber) {
+		MatchHighlight matchHighlight = null;
+		
+		TypedQuery<MatchHighlight> matchHighlightByUpdateNumberQuery = emgr.createNamedQuery("MatchHighlight.getHighlightByUpdateNumber", MatchHighlight.class);
+		matchHighlightByUpdateNumberQuery.setParameter("update_number", updateNumber);
+		matchHighlightByUpdateNumberQuery.setParameter("match_id", matchId);
+		try {
+			matchHighlight = matchHighlightByUpdateNumberQuery.getSingleResult();
+		} catch (NoResultException nre) {
+			
+		}
+		
+		
+		return matchHighlight;
+	}
+	
+	@Override
 	public List<MatchHighlight> getMatchHighlights(int matchId) {
 		List<MatchHighlight> matchHighlightList = new ArrayList<MatchHighlight>();
 		TypedQuery<MatchHighlight> matchScheduleQuery = emgr.createNamedQuery("MatchHighlight.getHighlightsOfMatch", MatchHighlight.class);

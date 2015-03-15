@@ -28,7 +28,9 @@
 		      </div>
 		      
 		      <div style="width: 95%; height:10%;">
-    		  <img style="height: 120px; width: 80%; margin-left: auto; margin-right: auto; display: block; " src="/hb/img/handball_v3.png">
+    		  	<img style="height: 120px; width: 80%; margin-left: 10%; display: block; z-index:1; position:absolute;" src="/hb/img/handball-pitchv4.png">
+     		 	<img id="overlay-from-left" style="height: 120px; width: 80%; margin-left: 10%; display: none; z-index:2; position:absolute;" src="/hb/img/handball-pitchv4-overlay-from-left.png">
+     		 	<img id="overlay-from-right" style="height: 120px; width: 80%; margin-left: 10%; display: none; z-index:2; position:absolute;" src="/hb/img/handball-pitchv4-overlay-from-right.png">
      		 </div>
      		 
      		 <div id="highlights" style="width: 100%;">
@@ -65,9 +67,10 @@
 		</div>
 <!-- END Player Details Modal -->
 <%	} // END else (match != null) %>
-
+<script src="/hb/scripts/match-highlight.js"></script>
 <script>
 $('#modalMatch').on('hide.bs.modal', function () {
+	/* Clear all timeouts for highlights  */
 	while (typeof timeoutId !== 'undefined' && timeoutId--) {
 	    window.clearTimeout(timeoutId); // will do nothing if no timeout with id is present
 	}
@@ -81,133 +84,115 @@ $('#modalMatch').on('hide.bs.modal', function () {
 			String[] matchHighlightsTextSplit = mh.getHighlight_text().split(";");
 			for (String s : matchHighlightsTextSplit) {
 				String[] splitHighlight =  s.split(":");
-				 if (s.contains("goal=home")) {
+				
 					String[] splitMinuteTime = splitHighlight[0].split("=");
 					String minute = splitMinuteTime[1];
-					//setTimeout(function(){ alert("Hello"); }, 3000);
-					out.println("var timeoutId = setTimeout(function() { addLeft('" + minute + "', 'goal', 'incredible goal by...'); }," + (countAddedElements * 2000) + ");");
-					countAddedElements++;
-				 }  else if (s.contains("goal=away")) {
-					String[] splitMinuteTime = splitHighlight[0].split("=");
-					String minute = splitMinuteTime[1];
-					out.println("var timeoutId = setTimeout(function() { addRight('" + minute + "', 'goal', 'incredible goal by...'); }," + (countAddedElements * 2000) + ");");
-					countAddedElements++;
-				 }  
+					 if (s.contains("goal=home")) {
+						String[] splitScorer = splitHighlight[2].split("=");
+						String scorer = splitScorer[1];
+						out.println("var timeoutId = setTimeout(function() { addLeft('" + minute + "', 'Goal', 'incredible goal by " + scorer + "', 'goal'); }," + (countAddedElements * 2000) + ");");
+						countAddedElements++;
+					 } else if (s.contains("goal=away")) {
+						 String[] splitScorer = splitHighlight[2].split("=");
+						 String scorer = splitScorer[1];
+					  	 out.println("var timeoutId = setTimeout(function() { addRight('" + minute + "', 'Goal', 'incredible goal by " + scorer + "', 'goal'); }," + (countAddedElements * 2000) + ");");
+					  	 countAddedElements++;
+					 } else if (s.contains("penalty=home")) {
+						 String[] splitPenaltyTaker = splitHighlight[4].split("=");
+						 String penaltyTaker = splitPenaltyTaker[1];
+						 String[] splitIsGoal = splitHighlight[6].split("=");
+						 String isGoal = splitIsGoal[1];
+						 
+						 String highlight = "";
+						 if (isGoal.equals("true")) {
+							 highlight = penaltyTaker + " has converted the penalty into a GOAL!";
+						 } else {
+							 // TODO obtain the goal keeper from other side
+							 
+							 highlight = "Ohh.. what a SAVE!";
+						 }
+						 out.println("var timeoutId = setTimeout(function() { addLeft('" + minute + "', 'Penalty', '" + highlight + "', 'penalty'); }," + (countAddedElements * 2000) + ");");
+						 countAddedElements++;
+					 } else if (s.contains("penalty=away")) {
+						 String[] splitPenaltyTaker = splitHighlight[4].split("=");
+						 String penaltyTaker = splitPenaltyTaker[1];
+						 String[] splitIsGoal = splitHighlight[6].split("=");
+						 String isGoal = splitIsGoal[1];
+						 
+						 String highlight = "";
+						 if (isGoal.equals("true")) {
+							 highlight = penaltyTaker + " has converted the penalty into a GOAL!";
+						 } else {
+							 // TODO obtain the goal keeper from other side
+							 
+							 highlight = "Ohh.. what a SAVE!";
+						 }
+						 out.println("var timeoutId = setTimeout(function() { addRight('" + minute + "', 'Penalty', '" + highlight + "', 'penalty'); }," + (countAddedElements * 2000) + ");");
+						 countAddedElements++;
+					 } else if (s.contains("free-kick=home")) {
+						 String[] splitFreeKickTaker = splitHighlight[4].split("=");
+						 String freeKickTaker = splitFreeKickTaker[1];
+						 String[] splitIsGoal = splitHighlight[6].split("=");
+						 String isGoal = splitIsGoal[1];
+						 
+						 String highlight = "";
+						 if (isGoal.equals("true")) {
+							 highlight = freeKickTaker + " was clinical and SCORED!";
+						 } else {
+							 // TODO obtain the goal keeper from other side
+							 
+							 highlight = "What a reflex from the keeper, it is a SAVE!";
+						 }
+						 out.println("var timeoutId = setTimeout(function() { addLeft('" + minute + "', 'Free-Kick', '" + highlight + "', 'free-kick'); }," + (countAddedElements * 2000) + ");");
+						 countAddedElements++;
+						 
+					 } else if (s.contains("free-kick=away")) {
+						 String[] splitFreeKickTaker = splitHighlight[4].split("=");
+						 String freeKickTaker = splitFreeKickTaker[1];
+						 String[] splitIsGoal = splitHighlight[6].split("=");
+						 String isGoal = splitIsGoal[1];
+						 
+						 String highlight = "";
+						 if (isGoal.equals("true")) {
+							 highlight = freeKickTaker + " was clinical and SCORED!";
+						 } else {
+							 // TODO obtain the goal keeper from other side
+							 
+							 highlight = "What a reflex from the keeper, it is a SAVE!";
+						 }
+						 out.println("var timeoutId = setTimeout(function() { addRight('" + minute + "', 'Free-Kick', '" + highlight + "', 'free-kick'); }," + (countAddedElements * 2000) + ");");
+						 countAddedElements++;
+					 } else if (s.contains("save=home")) {
+						 
+					 } else if (s.contains("save=away")) {
+						 
+					 }
+					
+				
+					// Example of highlight text
+					// "possession=away:minute=1;
+					//  goal=away:minute=2:scorer=J.Lozano:scorerId=104283;
+					//  possession=home:minute=2;
+					//  penalty=home:minute=4:causedBy=R.Cavalehro:causedById=102345:taker=C.Rodrigo:takerId=10321:isGoal=false;
+					//  suspension=away:minute=4:suspensionFor=R.Cavalehro:suspensionForId=102345:causedFoulOn=M.Miyaichi:causedFoulOnId=15435;
+					//  possession=away:minute=5;
+					//  free-kick=away:minute=6:causedBy=R.Cavalehro:causedById=102345:taker=A.Fall:takerId=1337:isGoal=true;
+					//  possession=home:minute=7;"
+				 
 				/* s += "<br>"; */
 				/* out.println("$('#highlights').append('" + s + "')"); */
 				
-			}
+			} // END for(each string in matchHighlightsTextSplit)
 			
 			
-		} %>
+		} // END for (each string in matchHighlightsList) %>
 		
 		/* alert('game over'); */
 		// pass all the highlights to an animation queue or smthg like that
-<%	} else {  
-		if (matchHighlightsList.isEmpty()) {%>
-			var updateNumber = 1;
-		<%} else {%>
-			var updateNumber = <%=matchHighlightsList.size()%>;
-		<%} // END else (matchHighlightList is not empty)%>
-	
-	/* alert('match started'); */
-	<%-- alert('<%=matchHighlightsList.size()%>'); --%>
-	$.ajax({
-		type : "POST",
-		url : "getUpdate.html",
-		data : JSON.stringify({
-			"matchId" : <%=match.getMatch_id()%>,
-			"updateNumber" : updateNumber
-		}),
-		contentType : "application/json; charset=UTF-8",
-		success : function(data) {
-			
-			var parsedDataJSON = $.parseJSON(data);
-			if (parsedDataJSON.status == "OK") {
-				alert("OK");
-			} else if (parsedDataJSON.status == "sessionExpired")
-				alert('Session Expired');
-		},
-		error : function() {
-			alert('Error occured when calling POST!');
-		}
-		
-	
-	});
-
-			
-
-<% 	} // END else (matchHighlightList.size() != numberOfTotalUpdates)
+<%	} 
 } // END if match is started %>
 
-var isLastLeft = true;
-function addLeft(minute, title, highlight) {
-	
-	var html = "<div class='cd-timeline-block'>" +
-			"<div class='cd-timeline-img cd-picture'>" +
-			"<img src='img/handball-ball.png' style='width: auto; height:auto; margin-left: -50%; margin-top: -50%;' alt='Picture'>"+
-			"</div> <!-- cd-timeline-img -->" +
 
-			"<div class='cd-timeline-content bounce-in'>"+
-				"<h2>" + title + "</h2>"+
-				"<p>" + highlight + "</p>" +
-				"<span class='cd-date'>" + minute + " minute</span>"+
-			"</div> <!-- cd-timeline-content -->"+
-		"</div> <!-- cd-timeline-block -->";
-		if (isLastLeft) {
-			newHiddenContent();
-		}
-		$('#cd-timeline div:first').before( $(html) );
-		
-		/*$(".cd-timeline-block").before( html );*/
-		/*$("#cd-timeline-text").before(html);*/
-	/*document.getElementById('cd-timeline').innerHTML = html + document.getElementById('cd-timeline').innerHTML;*/
-}
-
-function addRight(minute, title, highlight) {
-	var html = "<div class='cd-timeline-block'>" +
-	"<div class='cd-timeline-img cd-picture'>" +
-	"<img src='img/handball-ball.png' style='width: auto; height:auto; margin-left: -50%; margin-top: -50%;' alt='Picture'>"+
-	"</div> <!-- cd-timeline-img -->" +
-
-	"<div class='cd-timeline-content bounce-in'>"+
-		"<h2>" + title + "</h2>"+
-		"<p>" + highlight + "</p>" +
-		"<span class='cd-date'>" + minute + " minute</span>"+
-	"</div> <!-- cd-timeline-content -->"+
-"</div> <!-- cd-timeline-block -->";
-		
-		if (!isLastLeft) {
-			newHiddenContent();	
-			$('#cd-timeline div:first').before( $(html) );
-			newHiddenContent();	
-		} else {
-			
-			$('#cd-timeline div:first').before( $(html) );
-			newHiddenContent();
-		}
-}
-
-function newHiddenContent() {
-
-
-		
-			var html = "<div class='cd-timeline-block' style='display:none;'>" +
-			"<div class='cd-timeline-img cd-picture is-hidden'>" +
-				"<img src='img/cd-icon-picture.svg' alt='Picture'>"+
-			"</div> <!-- cd-timeline-img -->" +
-
-			"<div class='cd-timeline-content is-hidden'>"+
-				"<h2>Title of section 1</h2>"+
-				"<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto, optio, dolorum provident rerum aut hic quasi placeat iure tempora laudantium ipsa ad debitis unde? Iste voluptatibus minus veritatis qui ut.</p>" +
-				"<a href='#0' class='cd-read-more'>Read more</a>"+
-				"<span class='cd-date'>Jan 14 </span>"+
-			"</div> <!-- cd-timeline-content -->"+
-		"</div> <!-- cd-timeline-block -->";
-		$('#cd-timeline div:first').before( $(html) );
-
-
-}
 
 
 

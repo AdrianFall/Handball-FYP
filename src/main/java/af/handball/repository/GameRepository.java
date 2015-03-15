@@ -37,6 +37,8 @@ public interface GameRepository
 
 	void deleteMatchHighlights(int matchId);
 
+	MatchHighlight getMatchHighlightByUpdateNumber(int matchId, int updateNumber);
+
 	
 
 }

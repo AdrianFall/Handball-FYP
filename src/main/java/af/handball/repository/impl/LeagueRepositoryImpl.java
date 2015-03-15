@@ -50,7 +50,7 @@ import af.handball.scheduler.job.MatchJob;
 @Repository
 public class LeagueRepositoryImpl implements LeagueRepository {
 
-	private static final int DEFAULT_MATCH_DURATION_IN_SECONDS = 300;
+	private static final int DEFAULT_MATCH_DURATION_IN_SECONDS = 420;
 	private int league_id;
 	private int teamId = -1;
 

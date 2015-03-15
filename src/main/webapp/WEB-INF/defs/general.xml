@@ -20,6 +20,8 @@
 	
 	<definition name="modalMatch" template="/WEB-INF/layouts/modalMatch.jsp"></definition>
 	
+	<definition name="modalLiveMatch" template ="/WEB-INF/layouts/modalLiveMatch.jsp"></definition>
+	
 
 	<definition name="game" template="/WEB-INF/jsp/game.jsp">
 		<put-attribute name="title" value="Handball Manager" />

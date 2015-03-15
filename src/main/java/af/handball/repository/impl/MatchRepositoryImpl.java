@@ -41,11 +41,16 @@ public class MatchRepositoryImpl implements MatchRepository {
 	private static final int AVERAGE_NUMBER_OF_GOALS_PER_MATCH = 50;
 	private static final int AVERAGE_NUMBER_OF_ACTIONS_PER_MATCH = 70;
 	
-	private static final int MINIMUM_NUMBER_OF_ACTIONS_PER_MATCH = 50;
-	private static final int MAXIMUM_NUMBER_OF_ACTIONS_PER_MATCH = 70;
+	private static final int MINIMUM_NUMBER_OF_ACTIONS_PER_MATCH = 45;
+	private static final int MAXIMUM_NUMBER_OF_ACTIONS_PER_MATCH = 60;
+	
+	private static final int MINIMUM_NUMBER_OF_PENALTIES_PER_MATCH = 2;
+	private static final int MAXIMUM_NUMBER_OF_PENALTIES_PER_MATCH = 5;
 	
 	public static final int UPDATES_PER_MINUTE = 2;
 	
+	private int numberOfPenalties = 0;
+	private int penaltiesSoFar = 0;
 	private int homeScore = 0;
 	private int awayScore = 0;
 	private int matchDurationInSeconds;
@@ -74,6 +79,8 @@ public class MatchRepositoryImpl implements MatchRepository {
 	
 	
 	
+	
+	
 	private Match match;
 	
 	@Override
@@ -85,9 +92,6 @@ public class MatchRepositoryImpl implements MatchRepository {
 			Match match = emgr.find(Match.class, matchId);
 			// TODO Obtain the match duration from the match entity
 			final int MATCH_DURATION_IN_MINUTES = match.getMatch_duration_in_seconds() / 60;
-			
-			
-			
 			
 			
 			matchDurationInSeconds = MATCH_DURATION_IN_MINUTES * 60;
@@ -105,6 +109,8 @@ public class MatchRepositoryImpl implements MatchRepository {
 			numberOfActionsPerUpdate = actionsPerMatch / numberOfUpdates;
 			System.out.println("numberOfActionsPerUpdate = " + numberOfActionsPerUpdate);
 			
+			// roll for number of penalties
+			numberOfPenalties = random.nextInt((MAXIMUM_NUMBER_OF_PENALTIES_PER_MATCH - MINIMUM_NUMBER_OF_PENALTIES_PER_MATCH) + 1) + MINIMUM_NUMBER_OF_PENALTIES_PER_MATCH;
 			
 			
 			if (match != null) {
@@ -221,7 +227,7 @@ public class MatchRepositoryImpl implements MatchRepository {
 		// Main generation of match
 		for (int i = 0; i < numberOfActionsPerUpdate; i++) {
 			countNumberOfActions++;
-			double actionCalc = ((double) countNumberOfActions / (double) actionsPerMatch);
+			double actionCalc = ((double) countNumberOfActions / ((double) numberOfActionsPerUpdate * (double) numberOfUpdates));
 			double actionTime = (actionCalc * (double) REAL_MATCH_TIME_IN_MINUTES); 
 			int actionTimeInt = (int) actionTime;
 			Random random = new Random();
@@ -230,10 +236,21 @@ public class MatchRepositoryImpl implements MatchRepository {
 				if (random.nextInt(100) < awayTeamGoingForwardSuccessionPercentage) { // action
 					// Assess the home team defending - 100% means they have 10% chance to make a block
 					if (random.nextInt(100) <= homeTeamDefendingSuccessionPercentage / 10) {
+						
+						
+						
+						/* between penalty and others, such that penalty chance is numberOfPenaltiesLeftr*20 (i.e. 5 left = 100% chance, 4 left = 80% chance)*/
+						int penaltyChance = 100-(penaltiesSoFar*20);
+						
+						
+						
+						
 						int rollRandom = random.nextInt(100);
-						if (rollRandom < 3) {
+						
+						if (rollRandom < penaltyChance) {
+							// Penalty
 							System.out.println("PENALTY!!!!!!!!!");
-							// penalty 3% chance -> follows that there is  40% chance of 2 minute suspension (i.e. 1 action defense and going forward goes down drastically) from opposing team player
+							// penalty 8% chance -> follows that there is  40% chance of 2 minute suspension (i.e. 1 action defense and going forward goes down drastically) from opposing team player
 							Player penaltyTakerPlayer = checkTheBestPenaltyTakerInTeam(awayTeamPlayers, awayPlayerSkillsList);
 							Player causedByPlayer = randomlySelectCauserOfPenalty(homeTeamPlayers);
 									
@@ -254,39 +271,46 @@ public class MatchRepositoryImpl implements MatchRepository {
 																							+":isGoal=" 
 																							+isGoal
 																							+";");
-							// TODO Chance of suspension && injury
-
-						} else if (rollRandom >= 3 && rollRandom < 10) {
-							// 7% free kick chance -> follows that there is 5% chance of 2 minute suspension.
-							System.out.println("FREE-KICK!!!!!!");
-							// XXX Get pivot as the free kick taker
-							Player freeKickTaker = awayTeamPlayers.get(6);
-							Player causedByPlayer = randomlySelectCauserOfPenalty(homeTeamPlayers);
-							
-							boolean isGoal = false;
-							if (random.nextInt(100) < 33) {
-								isGoal = true;
-								awayScore++;
-							}
-							
-							highlight = appendMatchHighlightText(highlight, actionTimeInt, "free-kick=away:causedBy="
-																							+causedByPlayer.getName()
-																							+":causedById="
-																							+causedByPlayer.getPlayer_id()
-																							+":taker="+freeKickTaker.getName()
-																							+":takerId="+freeKickTaker.getPlayer_id()
-																							+":isGoal="
-																							+isGoal
-																							+";");
+							penaltiesSoFar++;
 							// TODO Chance of suspension && injury
 							
-						} else if (rollRandom >= 10 && rollRandom < 40) {
-							// 30% save by defence
-							highlight = appendMatchHighlightText(highlight, actionTimeInt, "save=away:from=defense;");
 						} else {
-							// 60 % save by gk
-							highlight = appendMatchHighlightText(highlight, actionTimeInt, "save=away:from=gk;");
+							// Another types
+							rollRandom = random.nextInt(100);
+							if (rollRandom < 16) {
+								// 8% free kick chance -> follows that there is 5% chance of 2 minute suspension.
+								System.out.println("FREE-KICK!!!!!!");
+								// XXX Get pivot as the free kick taker
+								Player freeKickTaker = awayTeamPlayers.get(6);
+								Player causedByPlayer = randomlySelectCauserOfPenalty(homeTeamPlayers);
+								
+								boolean isGoal = false;
+								if (random.nextInt(100) < 33) {
+									isGoal = true;
+									awayScore++;
+								}
+								
+								highlight = appendMatchHighlightText(highlight, actionTimeInt, "free-kick=away:causedBy="
+																								+causedByPlayer.getName()
+																								+":causedById="
+																								+causedByPlayer.getPlayer_id()
+																								+":taker="+freeKickTaker.getName()
+																								+":takerId="+freeKickTaker.getPlayer_id()
+																								+":isGoal="
+																								+isGoal
+																								+";");
+								// TODO Chance of suspension && injury
+								
+							} else if (rollRandom >= 16 && rollRandom < 46) {
+								// 30% save by defence
+								highlight = appendMatchHighlightText(highlight, actionTimeInt, "save=away:from=defense;");
+							} else {
+								// 54 % save by gk
+								highlight = appendMatchHighlightText(highlight, actionTimeInt, "save=away:from=gk;");
+							}
 						}
+						
+						
 						teamInPosessionOfBall = "home"; 
 						highlight = appendMatchHighlightText(highlight, actionTimeInt, "possession=home;");
 					} else { // goal
@@ -336,11 +360,15 @@ public class MatchRepositoryImpl implements MatchRepository {
 					// Assess the away team defending - 100% means they have 10% chance to make a block
 					if (random.nextInt(100) <= awayTeamDefendingSucessionPercentage / 10) {
 						
-						int rollRandom = random.nextInt(100);
+						/* between penalty and others, such that penalty chance is numberOfPenaltiesLeftr*20 (i.e. 5 left = 100% chance, 4 left = 80% chance)*/
+						int penaltyChance = 100-(penaltiesSoFar*20);
+						//XXX
 						
-						if (rollRandom < 3) {
+						int rollRandom = random.nextInt(100);
+						// FIXME BACK to 8
+						if (rollRandom < penaltyChance) {
 							System.out.println("PENALTY!!!!!!!!!");
-							// penalty 3% chance -> follows that there is  40% chance of 2 minute suspension (i.e. 1 action defense and going forward goes down drastically) from opposing team player
+							// penalty 8% chance -> follows that there is  40% chance of 2 minute suspension (i.e. 1 action defense and going forward goes down drastically) from opposing team player
 							Player penaltyTakerPlayer = checkTheBestPenaltyTakerInTeam(homeTeamPlayers, homePlayerSkillsList);
 							Player causedByPlayer = randomlySelectCauserOfPenalty(awayTeamPlayers);
 									
@@ -361,10 +389,13 @@ public class MatchRepositoryImpl implements MatchRepository {
 																							+":isGoal=" 
 																							+isGoal
 																							+";");
+							penaltiesSoFar++;
 							// TODO Chance of suspension && injury
-						
-						} else if (rollRandom >= 3 && rollRandom < 10) {
-							// 7% free kick chance -> follows that there is 5% chance of 2 minute suspension.
+							
+						} else { 
+							rollRandom = random.nextInt(100);
+							if (rollRandom < 16) {
+							// 16% free kick chance -> follows that there is 5% chance of 2 minute suspension.
 							System.out.println("FREE-KICK!!!!!!");
 							// XXX Get pivot as the free kick taker
 							Player freeKickTaker = homeTeamPlayers.get(6);
@@ -387,13 +418,14 @@ public class MatchRepositoryImpl implements MatchRepository {
 																							+";");
 							// TODO Chance of suspension && injury
 							
-						} else if (rollRandom >= 10 && rollRandom < 40) {
+						} else if (rollRandom >= 16 && rollRandom < 46) {
 							// 30% save by defence
 							highlight = appendMatchHighlightText(highlight, actionTimeInt, "save=home:from=defense;");
 						} else {
-							// 60 % save by gk
+							// 54 % save by gk
 							highlight = appendMatchHighlightText(highlight, actionTimeInt, "save=home:from=gk;");
 						}
+					}
 						
 						teamInPosessionOfBall = "away";
 						highlight = appendMatchHighlightText(highlight, actionTimeInt, "possession=away;");

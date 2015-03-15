@@ -166,6 +166,7 @@
 			dnLeftCanvas : false
 		});
 	</script> -->
-<div id="modalSpace"></div>
+<div id="modalMatchSpace"></div>
+<div id="modalLiveMatchSpace"></div>
 </body>
 </html>

@@ -27,6 +27,10 @@ public class GameService {
 		return gameRepository.getMatchHighlights(matchId);
 	}
 	
+	public MatchHighlight getMatchHighlightByUpdateNumber(int matchId, int updateNumber) {
+		return gameRepository.getMatchHighlightByUpdateNumber(matchId, updateNumber);
+	}
+	
  	public List<Player> getUsersPlayers(String email) {
 		return gameRepository.getUserTeam(email);
 	}
