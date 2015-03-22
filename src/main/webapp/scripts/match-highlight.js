@@ -87,6 +87,8 @@ function processHighlight(highlights) {
 							// Animation complete
 							$('#overlay-from-left').fadeIn(delayInDisplaying-200);
 							$('#overlay-team-name-left').fadeIn(delayInDisplaying-250);
+							// Change the highlight
+							$('#overlay-highlight-left').text('POSSESSION');
 							$('#overlay-highlight-left').fadeIn(delayInDisplaying-180);
 						}); 
 					}, (countAddedElements * delayInDisplaying));
@@ -99,6 +101,8 @@ function processHighlight(highlights) {
 							// Animation complete
 							$('#overlay-from-right').fadeIn(delayInDisplaying-200);
 							$('#overlay-team-name-right').fadeIn(delayInDisplaying-250);
+							// Change the highlight
+							$('#overlay-highlight-right').text('POSSESSION');
 							$('#overlay-highlight-right').fadeIn(delayInDisplaying-180);
 						}); 
 					}, (countAddedElements * delayInDisplaying));
@@ -112,50 +116,25 @@ function processHighlight(highlights) {
 	}
 }
 
-function displayPenaltyOnLeftSide(timeLeftInMs, isGoal, minute) {
-	$('#overlay-white-line-left').fadeIn(20, function() {
-		// Animation complete
-		$('#overlay-zero-line-left').fadeIn(200, function() {
-			$('#overlay-first-line-left').fadeIn(200, function() {
-				$('#overlay-second-line-left').fadeIn(200, function() {
-					$('#overlay-zero-line-left').fadeOut(200);
-					$('#overlay-third-line-left').fadeIn(200, function() {
-						$('#overlay-first-line-left').fadeOut(200);
-						$('#overlay-fourth-line-left').fadeIn(200, function() {
-							$('#overlay-second-line-left').fadeOut(200);
-							$('#overlay-arrow-line-left').fadeIn(200, function() {
-								$('#overlay-third-line-left').fadeOut(200);
-								$('#overlay-fourth-line-left').fadeOut(200);
-								$('#overlay-arrow-line-left').fadeOut(200, function () {
-									// total =  6 elements * 200ms 
-									var timeTakenInMs = 1200;
-									
-									if ((timeLeftInMs - timeTakenInMs) < 0) {
-										
-										if (isGoal == "true") {
-											addGoalRightWithAnimation();
-											highlight = "OH DAMN IT'S A GOAL (test)";
-										
-										} else {
-											highlight = "THAT SCUMBAG HAS SAVED IT (test)";
-										}
-										addRight(minute, 'Penalty', highlight, 'penalty');
-									} else {
-										
-										//Recursively call the method
-										displayPenaltyOnLeftSide(timeLeftInMs-timeTakenInMs, isGoal, minute);
-									}
-								});
-								
-								
-							});
-						});
-					});
-				});
-			});
-		});
+function finishGame() {
+	// cancel possession
+	$('#overlay-from-left').fadeOut(400);
+	$('#overlay-highlight-left').fadeOut(200);
+	$('#overlay-team-name-left').fadeOut(200);
+	
+	$('#overlay-from-right').fadeOut(400);
+	$('#overlay-highlight-right').fadeOut(200);
+	$('#overlay-team-name-right').fadeOut(200);
+	
+	$('#overlay-box').fadeIn(2300, function() {
+		$('#overlay-box-text').fadeIn(1100);
 	}); 
+	// show box
+
+	// show text in box
 }
+
+
 
 function addGoalLeft() {
 	var currentNumberOfGoalsText = $('#scoreHome').text();
@@ -216,9 +195,62 @@ function addGoalRightWithAnimation() {
 	});
 }
 
-
+function displayPenaltyOnLeftSide(timeLeftInMs, isGoal, minute) {
+	// Change the highlight
+	$('#overlay-highlight-right').fadeOut(50, function() {
+		$('#overlay-highlight-right').text('PENALTY');
+		$('#overlay-highlight-right').fadeIn(200);
+	});
+	$('#overlay-white-line-left').fadeIn(20, function() {
+		// Animation complete
+		$('#overlay-zero-line-left').fadeIn(200, function() {
+			$('#overlay-first-line-left').fadeIn(200, function() {
+				$('#overlay-second-line-left').fadeIn(200, function() {
+					$('#overlay-zero-line-left').fadeOut(200);
+					$('#overlay-third-line-left').fadeIn(200, function() {
+						$('#overlay-first-line-left').fadeOut(200);
+						$('#overlay-fourth-line-left').fadeIn(200, function() {
+							$('#overlay-second-line-left').fadeOut(200);
+							$('#overlay-arrow-line-left').fadeIn(200, function() {
+								$('#overlay-third-line-left').fadeOut(200);
+								$('#overlay-fourth-line-left').fadeOut(200);
+								$('#overlay-arrow-line-left').fadeOut(200, function () {
+									// total =  6 elements * 200ms 
+									var timeTakenInMs = 1200;
+									
+									if ((timeLeftInMs - timeTakenInMs) < 0) {
+										
+										if (isGoal == "true") {
+											addGoalRightWithAnimation();
+											highlight = "OH DAMN IT'S A GOAL (test)";
+										
+										} else {
+											highlight = "THAT SCUMBAG HAS SAVED IT (test)";
+										}
+										addRight(minute, 'Penalty', highlight, 'penalty');
+									} else {
+										
+										//Recursively call the method
+										displayPenaltyOnLeftSide(timeLeftInMs-timeTakenInMs, isGoal, minute);
+									}
+								});
+								
+								
+							});
+						});
+					});
+				});
+			});
+		});
+	}); 
+}
 
 function displayPenaltyOnRightSide(timeLeftInMs, isGoal, minute) {
+	// Change the highlight
+	$('#overlay-highlight-left').fadeOut(50, function() {
+		$('#overlay-highlight-left').text('PENALTY');
+		$('#overlay-highlight-left').fadeIn(200);
+	});
 	$('#overlay-white-line-right').fadeIn(20, function() {
 		// Animation complete
 		$('#overlay-zero-line-right').fadeIn(200, function() {

@@ -157,7 +157,7 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 						// 12
 						// players will be generated with "good" quality
 						// P.S. actually it can happen that only 1 player will
-						// be "very good" due to the randomness of Random class
+						// be "very good" due to the randomness
 						int firstVeryGoodPlayer = (randomGenerator.nextInt(17));
 						int secondVeryGoodPlayer = (randomGenerator.nextInt(17));
 						// 2 out of 17 players will be randomly generated as
@@ -171,10 +171,7 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 
 						int countOfPlayersCreated = 0;
 
-						boolean generateAsVeryGood = (firstVeryGoodPlayer == countOfPlayersCreated || secondVeryGoodPlayer == countOfPlayersCreated);
-						boolean generateAsYoung = (countOfPlayersCreated == firstYoungPlayer || countOfPlayersCreated == secondYoungPlayer);
-						boolean generateAsOld = (countOfPlayersCreated == firstOldPlayer || countOfPlayersCreated == secondOldPlayer);
-
+						
 						Map<String, Object> playerNumberMap = PlayerNumberGenerator
 								.generateRandomNumbers();
 						System.out.println("Player Number Map = "
@@ -182,6 +179,10 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 						// GENERATE 2 goal keepers
 						GkGenerator gkGenerator = new GkGenerator(teamLevel);
 						for (int j = 0; j < 2; j++) {
+							boolean generateAsVeryGood = (firstVeryGoodPlayer == countOfPlayersCreated || secondVeryGoodPlayer == countOfPlayersCreated);
+							boolean generateAsYoung = (countOfPlayersCreated == firstYoungPlayer || countOfPlayersCreated == secondYoungPlayer);
+							boolean generateAsOld = (countOfPlayersCreated == firstOldPlayer || countOfPlayersCreated == secondOldPlayer);
+
 							int gkNumber = -1;
 							if (j == 0)
 								gkNumber = (Integer) playerNumberMap
@@ -280,6 +281,10 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 						WingGenerator rwGenerator = new WingGenerator(
 								teamLevel, WingGenerator.POSITION_RW_LABEL);
 						for (int rw = 0; rw < 2; rw++) {
+							boolean generateAsVeryGood = (firstVeryGoodPlayer == countOfPlayersCreated || secondVeryGoodPlayer == countOfPlayersCreated);
+							boolean generateAsYoung = (countOfPlayersCreated == firstYoungPlayer || countOfPlayersCreated == secondYoungPlayer);
+							boolean generateAsOld = (countOfPlayersCreated == firstOldPlayer || countOfPlayersCreated == secondOldPlayer);
+
 							int rwNumber = -1;
 							if (rw == 0)
 								rwNumber = (Integer) playerNumberMap
@@ -388,6 +393,10 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 						WingGenerator lwGenerator = new WingGenerator(
 								teamLevel, WingGenerator.POSITION_LW_LABEL);
 						for (int lw = 0; lw < 2; lw++) {
+							boolean generateAsVeryGood = (firstVeryGoodPlayer == countOfPlayersCreated || secondVeryGoodPlayer == countOfPlayersCreated);
+							boolean generateAsYoung = (countOfPlayersCreated == firstYoungPlayer || countOfPlayersCreated == secondYoungPlayer);
+							boolean generateAsOld = (countOfPlayersCreated == firstOldPlayer || countOfPlayersCreated == secondOldPlayer);
+
 							int lwNumber = -1;
 							if (lw == 0)
 								lwNumber = (Integer) playerNumberMap
@@ -497,6 +506,11 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 						BackGenerator centralBackGenerator = new BackGenerator(
 								teamLevel, BackGenerator.POSITION_CB_LABEL);
 						for (int cb = 0; cb < 3; cb++) {
+							boolean generateAsVeryGood = (firstVeryGoodPlayer == countOfPlayersCreated || secondVeryGoodPlayer == countOfPlayersCreated);
+							boolean generateAsYoung = (countOfPlayersCreated == firstYoungPlayer || countOfPlayersCreated == secondYoungPlayer);
+							boolean generateAsOld = (countOfPlayersCreated == firstOldPlayer || countOfPlayersCreated == secondOldPlayer);
+
+							
 							int cbNumber = -1;
 							if (cb == 0)
 								cbNumber = (Integer) playerNumberMap
@@ -616,6 +630,10 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 						BackGenerator rightBackGenerator = new BackGenerator(
 								teamLevel, BackGenerator.POSITION_RB_LABEL);
 						for (int rb = 0; rb < 3; rb++) {
+							boolean generateAsVeryGood = (firstVeryGoodPlayer == countOfPlayersCreated || secondVeryGoodPlayer == countOfPlayersCreated);
+							boolean generateAsYoung = (countOfPlayersCreated == firstYoungPlayer || countOfPlayersCreated == secondYoungPlayer);
+							boolean generateAsOld = (countOfPlayersCreated == firstOldPlayer || countOfPlayersCreated == secondOldPlayer);
+
 							int rbNumber = -1;
 							if (rb == 0)
 								rbNumber = (Integer) playerNumberMap
@@ -734,6 +752,10 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 						BackGenerator leftBackGenerator = new BackGenerator(
 								teamLevel, BackGenerator.POSITION_LB_LABEL);
 						for (int lb = 0; lb < 3; lb++) {
+							boolean generateAsVeryGood = (firstVeryGoodPlayer == countOfPlayersCreated || secondVeryGoodPlayer == countOfPlayersCreated);
+							boolean generateAsYoung = (countOfPlayersCreated == firstYoungPlayer || countOfPlayersCreated == secondYoungPlayer);
+							boolean generateAsOld = (countOfPlayersCreated == firstOldPlayer || countOfPlayersCreated == secondOldPlayer);
+
 							int lbNumber = -1;
 							if (lb == 0)
 								lbNumber = (Integer) playerNumberMap
@@ -852,6 +874,10 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 						PivotGenerator pivotGenerator = new PivotGenerator(
 								teamLevel);
 						for (int pv = 0; pv < 2; pv++) {
+							boolean generateAsVeryGood = (firstVeryGoodPlayer == countOfPlayersCreated || secondVeryGoodPlayer == countOfPlayersCreated);
+							boolean generateAsYoung = (countOfPlayersCreated == firstYoungPlayer || countOfPlayersCreated == secondYoungPlayer);
+							boolean generateAsOld = (countOfPlayersCreated == firstOldPlayer || countOfPlayersCreated == secondOldPlayer);
+
 							int pvNumber = -1;
 							if (pv == 0)
 								pvNumber = (Integer) playerNumberMap

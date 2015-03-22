@@ -60,9 +60,10 @@
      		 	<img id="overlay-arrow-line-left" style="height: 120px; width: 90%; margin-left: 5%; margin-top:2%; display: none; z-index:2; position:absolute;" src="/hb/img/live_match/handball-pitchv4-penalty-arrow-line-left.png">
      		 	<img id="overlay-arrow-line-right" style="height: 120px; width: 90%; margin-left: 5%; margin-top:2%; display: none; z-index:2; position:absolute;" src="/hb/img/live_match/handball-pitchv4-penalty-arrow-line-right.png">
      		 	
-     		 	<img id="overlay-box" style="height: 120px; width: 90%; margin-left: 5%; margin-top:2%; display: none; z-index:2; position:absolute;" src="/hb/img/live_match/handball-pitchv4-box.png">
+     		 	<img id="overlay-box" style="height: 180px; width: 90%; margin-left: 5%; margin-top:-1%; display: none; z-index:2; position:absolute;" src="/hb/img/live_match/handball-pitchv4-box.png">
      		 	<img id="overlay-ball-center" style="height: 120px; width: 90%; margin-left: 5%; margin-top:2%; display: none; z-index:2; position:absolute;" src="/hb/img/live_match/handball-pitchv4-ball-center.png">
-     	
+     			<p id="overlay-box-text" style="height: 15px; width: 28%; text-align:right; margin-left: 29%; margin-top: 50px; display: none; z-index:3; position:absolute; font-size:16px; color: #6EA8E2; font-family: Impact, Charcoal, sans-serif;">Game Finished.</p>
+     			
      		 </div>
      		 <div id="scorebar" style="width:95%; height: 8%;">
      		 	<img style="height: 60px; width: 90%; margin-left: 5%; margin-top:137px; display: block; z-index:3; position:absolute;" src="/hb/img/live_match/scorebar.png">
@@ -348,7 +349,8 @@ function getAllUpdates(currentUpdateNo, numberOfTotalUpdates, attemptNumber) {
 	if (updateNumber == (numberOfTotalUpdates+1)) {
 		/* Finished */
 		/* TODO - cancel the overlays and overlay something to indicate the match has finished  */
-		alert('finished on update number: ' + updateNumber + '. Number of total updates: ' + numberOfTotalUpdates + '.');
+		/* alert('finished on update number: ' + updateNumber + '. Number of total updates: ' + numberOfTotalUpdates + '.'); */
+		finishGame();
 	} else {
 		var updated = getUpdate(updateNumber);
 		if (updated == "OK") {

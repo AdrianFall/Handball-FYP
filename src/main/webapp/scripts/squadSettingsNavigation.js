@@ -1,7 +1,6 @@
 
 
 function showPitchTable() {
-	// pitchTable, autoSubs, captainRoles 
 	$('#autoSubs').slideUp(200);
 	$('#captainImage').slideUp(100);
 	$('#captain1').slideUp(100);
@@ -9,9 +8,7 @@ function showPitchTable() {
 	$('#captain3').slideUp(100);
 	$('#captain4').slideUp(100);
 	$('#penaltyTakers').slideUp(200);
-	
 	$('#pitchTable').slideDown(750);
-	
 }
 
 function showCaptainTable() {
@@ -19,7 +16,6 @@ function showCaptainTable() {
 	$('#autoSubs').slideUp(200);
 	$('#pitchTable').slideUp(200);
 	$('#penaltyTakers').slideUp(200);
-	
 	$('#captainRoles').slideDown(500);
 	$('#captainImage').slideDown(600);
 	$('#captain1').slideDown(650);
@@ -40,7 +36,6 @@ function showAutoSubsTable() {
 	$('#captain4').slideUp(400);
 	$('#penaltyTakers').slideUp(200);
 	$('#autoSubs').slideDown(800);
-	
 }
 
 function showPenaltyTakersTable() {
@@ -51,7 +46,6 @@ function showPenaltyTakersTable() {
 	$('#captain3').slideUp(350);
 	$('#captain4').slideUp(400);
 	$('#autoSubs').slideUp(200);
-
 	$('#penaltyTakers').slideDown(800);
 }
 

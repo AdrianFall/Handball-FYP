@@ -1,0 +1,5 @@
+body {
+    -moz-transform: scale(1.25, 1.25); /* Moz-browsers */
+    zoom: 1.25; /* Other non-webkit browsers */
+    zoom: 125%; /* Webkit browsers */
+}

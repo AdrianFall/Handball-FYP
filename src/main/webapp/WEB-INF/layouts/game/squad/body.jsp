@@ -703,21 +703,6 @@
 <!-- END div holding the captains roles -->
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <img onclick="showPitchTable()"
 	style="position: fixed; float: right; height: 8%; width: 6%; right: 3%; background-size: 100% 100%;"
 	src="/hb/img/temp/temp_tactics_icon.png">
