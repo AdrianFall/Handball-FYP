@@ -45,7 +45,7 @@
 <br>
 <div>
 	<div
-		style="position: absolute; width: 40%; left: 8%; float: left;">
+		style="position: absolute; width: 40%; left: 8.8%; float: left;">
 		<!-- TABLE ROW -->
 
 		<table id="squadTable" class="table table-bordered table-hover"
