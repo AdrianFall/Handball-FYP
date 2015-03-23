@@ -1,176 +1,179 @@
+$('#modalPlayerDetails').on('hidden.bs.modal', function(e) {
+		// Clean the animation queue
+		$('#physicalSectionLabel').stop().fadeOut(1);
+		$('#physicalLine').stop().fadeOut(1);
+
+	
+
+		$('#sprintSpeedLabel').stop().fadeOut(1);
+		$('#sprintSpeedText').stop().fadeOut(1);
+		$('#sprintSpeedBlock').stop().fadeOut(1);
+
+		$('#jumpingLabel').stop().fadeOut(1);
+		$('#jumpingText').stop().fadeOut(1);
+		$('#jumpingBlock').stop().fadeOut(1);
+		
+		$('#balanceLabel').stop().fadeOut(1);
+		$('#balanceText').stop().fadeOut(1);
+		$('#balanceBlock').stop().fadeOut(1);
+		
+		$('#agilityLabel').stop().fadeOut(1);
+		$('#agilityText').stop().fadeOut(1);
+		$('#agilityBlock').stop().fadeOut(1);
+		
+		$('#staminaLabel').stop().fadeOut(1);
+		$('#staminaText').stop().fadeOut(1);
+		$('#staminaBlock').stop().fadeOut(1);
+		
+		$('#strengthLabel').stop().fadeOut(1);
+		$('#strengthText').stop().fadeOut(1);
+		$('#strengthBlock').stop().fadeOut(1);
+		
+		
+		
+		$('#blockingLabel').stop().fadeOut(1);
+		$('#blockingText').stop().fadeOut(1);
+		$('#blockingBlock').stop().fadeOut(1);
+		
+		$('#mentalSectionLabel').stop().fadeOut(1);
+		$('#mentalLine').stop().fadeOut(1);
+		
+		$('#aggressionLabel').stop().fadeOut(1);
+		$('#aggressionText').stop().fadeOut(1);
+		$('#aggressionBlock').stop().fadeOut(1);
+		
+		$('#interceptionsLabel').stop().fadeOut(1);
+		$('#interceptionsText').stop().fadeOut(1);
+		$('#interceptionsBlock').stop().fadeOut(1);
+		
+		$('#attack_positionLabel').stop().fadeOut(1);
+		$('#attack_positionText').stop().fadeOut(1);
+		$('#attack_positionBlock').stop().fadeOut(1);
+		
+		$('#visionLabel').stop().fadeOut(1);
+		$('#visionText').stop().fadeOut(1);
+		$('#visionBlock').stop().fadeOut(1);
+		
+		$('#creativityLabel').stop().fadeOut(1);
+		$('#creativityText').stop().fadeOut(1);
+		$('#creativityBlock').stop().fadeOut(1);
+		
+		$('#technicalSectionLabel').stop().fadeOut(1);
+		$('#technicalLine').stop().fadeOut(1);
+		
+		$('#ball_controlLabel').stop().fadeOut(1);
+		$('#ball_controlText').stop().fadeOut(1);
+		$('#ball_controlBlock').stop().fadeOut(1);
+		
+		$('#long_shotsLabel').stop().fadeOut(1);
+		$('#long_shotsText').stop().fadeOut(1);
+		$('#long_shotsBlock').stop().fadeOut(1);
+		
+		$('#fk_accuracyLabel').stop().fadeOut(1);
+		$('#fk_accuracyText').stop().fadeOut(1);
+		$('#fk_accuracyBlock').stop().fadeOut(1);
+		
+		$('#shot_powerLabel').stop().fadeOut(1);
+		$('#shot_powerText').stop().fadeOut(1);
+		$('#shot_powerBlock').stop().fadeOut(1);
+		
+		$('#dribblingLabel').stop().fadeOut(1);
+		$('#dribblingText').stop().fadeOut(1);
+		$('#dribblingBlock').stop().fadeOut(1);
+		
+		$('#short_passingLabel').stop().fadeOut(1);
+		$('#short_passingText').stop().fadeOut(1);
+		$('#short_passingBlock').stop().fadeOut(1);
+		
+		$('#long_passingLabel').stop().fadeOut(1);
+		$('#long_passingText').stop().fadeOut(1);
+		$('#long_passingBlock').stop().fadeOut(1);
+		
+		$('#stand_tacklesLabel').stop().fadeOut(1);
+		$('#stand_tacklesText').stop().fadeOut(1);
+		$('#stand_tacklesBlock').stop().fadeOut(1);
+		
+		$('#markingLabel').stop().fadeOut(1);
+		$('#markingText').stop().fadeOut(1);
+		$('#markingBlock').stop().fadeOut(1);
+		
+		$('#penaltiesLabel').stop().fadeOut(1);
+		$('#penaltiesText').stop().fadeOut(1);
+		$('#penaltiesBlock').stop().fadeOut(1);
+		
+		$('#curveLabel').stop().fadeOut(1);
+		$('#curveText').stop().fadeOut(1);
+		$('#curveBlock').stop().fadeOut(1);
+		
+		$('#finishingLabel').stop().fadeOut(1);
+		$('#finishingText').stop().fadeOut(1);
+		$('#finishingBlock').stop().fadeOut(1);
+		
+		$('#six_m_shotsLabel').stop().fadeOut(1);
+		$('#six_m_shotsText').stop().fadeOut(1);
+		$('#six_m_shotsBlock').stop().fadeOut(1);
+		
+		$('#lob_shotsLabel').stop().fadeOut(1);
+		$('#lob_shotsText').stop().fadeOut(1);
+		$('#lob_shotsBlock').stop().fadeOut(1);
+		  
+		$('#nine_m_shotsLabel').stop().fadeOut(1);
+		$('#nine_m_shotsText').stop().fadeOut(1);
+		$('#nine_m_shotsBlock').stop().fadeOut(1);
+		
+		$('#goalKeepingSectionLabel').stop().fadeOut(1);
+		$('#goalKeepingLine').stop().fadeOut(1);
+
+		$('#reflexesLabel').stop().fadeOut(1);
+		$('#reflexesText').stop().fadeOut(1);
+		$('#reflexesBlock').stop().fadeOut(1);
+		
+		$('#handlingLabel').stop().fadeOut(1);
+		$('#handlingText').stop().fadeOut(1);
+		$('#handlingBlock').stop().fadeOut(1);
+		
+		$('#positioningLabel').stop().fadeOut(1);
+		$('#positioningText').stop().fadeOut(1);
+		$('#positioningBlock').stop().fadeOut(1);
+		
+		$('#leg_savesLabel').stop().fadeOut(1);
+		$('#leg_savesText').stop().fadeOut(1);
+		$('#leg_savesBlock').stop().fadeOut(1);
+		
+		$('#penalty_savesLabel').stop().fadeOut(1);
+		$('#penalty_savesText').stop().fadeOut(1);
+		$('#penalty_savesBlock').stop().fadeOut(1);
+		
+		$('#six_m_savesLabel').stop().fadeOut(1);
+		$('#six_m_savesText').stop().fadeOut(1);
+		$('#six_m_savesBlock').stop().fadeOut(1);
+		
+		$('#nine_m_savesLabel').stop().fadeOut(1);
+		$('#nine_m_savesText').stop().fadeOut(1);
+		$('#nine_m_savesBlock').stop().fadeOut(1);
+		
+		$('#communicationLabel').stop().fadeOut(1);
+		$('#communicationText').stop().fadeOut(1);
+		$('#communicationBlock').stop().fadeOut(1);
+		
+		$('#anglesLabel').stop().fadeOut(1);
+		$('#anglesText').stop().fadeOut(1);
+		$('#anglesBlock').stop().fadeOut(1);
+		
+		$('#catchingLabel').stop().fadeOut(1);
+		$('#catchingText').stop().fadeOut(1);
+		$('#catchingBlock').stop().fadeOut(1);
+
+		$('#passingLabel').stop().fadeOut(1);
+		$('#passingText').stop().fadeOut(1);
+		$('#passingBlock').stop().fadeOut(1);
+	});
+
 // Obtain and display the player details on the modal
 function showPlayerDetailsOnModal(playerId, playerPosition) {
 	
-	// Serialize the form and post it to the server
-	$('#modalPlayerDetails').on('hidden.bs.modal', function(e) {
-		$('#physicalSectionLabel').css('display', 'none');
-		$('#physicalLine').css('display', 'none');
-
 	
-
-		$('#sprintSpeedLabel').css('display', 'none');
-		$('#sprintSpeedText').css('display', 'none');
-		$('#sprintSpeedBlock').css('display', 'none');
-
-		$('#jumpingLabel').css('display', 'none');
-		$('#jumpingText').css('display', 'none');
-		$('#jumpingBlock').css('display', 'none');
-		
-		$('#balanceLabel').css('display', 'none');
-		$('#balanceText').css('display', 'none');
-		$('#balanceBlock').css('display', 'none');
-		
-		$('#agilityLabel').css('display', 'none');
-		$('#agilityText').css('display', 'none');
-		$('#agilityBlock').css('display', 'none');
-		
-		$('#staminaLabel').css('display', 'none');
-		$('#staminaText').css('display', 'none');
-		$('#staminaBlock').css('display', 'none');
-		
-		$('#strengthLabel').css('display', 'none');
-		$('#strengthText').css('display', 'none');
-		$('#strengthBlock').css('display', 'none');
-		
-		
-		
-		$('#blockingLabel').css('display', 'none');
-		$('#blockingText').css('display', 'none');
-		$('#blockingBlock').css('display', 'none');
-		
-		$('#mentalSectionLabel').css('display', 'none');
-		$('#mentalLine').css('display', 'none');
-		
-		$('#aggressionLabel').css('display', 'none');
-		$('#aggressionText').css('display', 'none');
-		$('#aggressionBlock').css('display', 'none');
-		
-		$('#interceptionsLabel').css('display', 'none');
-		$('#interceptionsText').css('display', 'none');
-		$('#interceptionsBlock').css('display', 'none');
-		
-		$('#attack_positionLabel').css('display', 'none');
-		$('#attack_positionText').css('display', 'none');
-		$('#attack_positionBlock').css('display', 'none');
-		
-		$('#visionLabel').css('display', 'none');
-		$('#visionText').css('display', 'none');
-		$('#visionBlock').css('display', 'none');
-		
-		$('#creativityLabel').css('display', 'none');
-		$('#creativityText').css('display', 'none');
-		$('#creativityBlock').css('display', 'none');
-		
-		$('#technicalSectionLabel').css('display', 'none');
-		$('#technicalLine').css('display', 'none');
-		
-		$('#ball_controlLabel').css('display', 'none');
-		$('#ball_controlText').css('display', 'none');
-		$('#ball_controlBlock').css('display', 'none');
-		
-		$('#long_shotsLabel').css('display', 'none');
-		$('#long_shotsText').css('display', 'none');
-		$('#long_shotsBlock').css('display', 'none');
-		
-		$('#fk_accuracyLabel').css('display', 'none');
-		$('#fk_accuracyText').css('display', 'none');
-		$('#fk_accuracyBlock').css('display', 'none');
-		
-		$('#shot_powerLabel').css('display', 'none');
-		$('#shot_powerText').css('display', 'none');
-		$('#shot_powerBlock').css('display', 'none');
-		
-		$('#dribblingLabel').css('display', 'none');
-		$('#dribblingText').css('display', 'none');
-		$('#dribblingBlock').css('display', 'none');
-		
-		$('#short_passingLabel').css('display', 'none');
-		$('#short_passingText').css('display', 'none');
-		$('#short_passingBlock').css('display', 'none');
-		
-		$('#long_passingLabel').css('display', 'none');
-		$('#long_passingText').css('display', 'none');
-		$('#long_passingBlock').css('display', 'none');
-		
-		$('#stand_tacklesLabel').css('display', 'none');
-		$('#stand_tacklesText').css('display', 'none');
-		$('#stand_tacklesBlock').css('display', 'none');
-		
-		$('#markingLabel').css('display', 'none');
-		$('#markingText').css('display', 'none');
-		$('#markingBlock').css('display', 'none');
-		
-		$('#penaltiesLabel').css('display', 'none');
-		$('#penaltiesText').css('display', 'none');
-		$('#penaltiesBlock').css('display', 'none');
-		
-		$('#curveLabel').css('display', 'none');
-		$('#curveText').css('display', 'none');
-		$('#curveBlock').css('display', 'none');
-		
-		$('#finishingLabel').css('display', 'none');
-		$('#finishingText').css('display', 'none');
-		$('#finishingBlock').css('display', 'none');
-		
-		$('#six_m_shotsLabel').css('display', 'none');
-		$('#six_m_shotsText').css('display', 'none');
-		$('#six_m_shotsBlock').css('display', 'none');
-		
-		$('#lob_shotsLabel').css('display', 'none');
-		$('#lob_shotsText').css('display', 'none');
-		$('#lob_shotsBlock').css('display', 'none');
-		  
-		$('#nine_m_shotsLabel').css('display', 'none');
-		$('#nine_m_shotsText').css('display', 'none');
-		$('#nine_m_shotsBlock').css('display', 'none');
-		
-		$('#goalKeepingSectionLabel').css('display', 'none');
-		$('#goalKeepingLine').css('display', 'none');
-
-		$('#reflexesLabel').css('display', 'none');
-		$('#reflexesText').css('display', 'none');
-		$('#reflexesBlock').css('display', 'none');
-		
-		$('#handlingLabel').css('display', 'none');
-		$('#handlingText').css('display', 'none');
-		$('#handlingBlock').css('display', 'none');
-		
-		$('#positioningLabel').css('display', 'none');
-		$('#positioningText').css('display', 'none');
-		$('#positioningBlock').css('display', 'none');
-		
-		$('#leg_savesLabel').css('display', 'none');
-		$('#leg_savesText').css('display', 'none');
-		$('#leg_savesBlock').css('display', 'none');
-		
-		$('#penalty_savesLabel').css('display', 'none');
-		$('#penalty_savesText').css('display', 'none');
-		$('#penalty_savesBlock').css('display', 'none');
-		
-		$('#six_m_savesLabel').css('display', 'none');
-		$('#six_m_savesText').css('display', 'none');
-		$('#six_m_savesBlock').css('display', 'none');
-		
-		$('#nine_m_savesLabel').css('display', 'none');
-		$('#nine_m_savesText').css('display', 'none');
-		$('#nine_m_savesBlock').css('display', 'none');
-		
-		$('#communicationLabel').css('display', 'none');
-		$('#communicationText').css('display', 'none');
-		$('#communicationBlock').css('display', 'none');
-		
-		$('#anglesLabel').css('display', 'none');
-		$('#anglesText').css('display', 'none');
-		$('#anglesBlock').css('display', 'none');
-		
-		$('#catchingLabel').css('display', 'none');
-		$('#catchingText').css('display', 'none');
-		$('#catchingBlock').css('display', 'none');
-
-		$('#passingLabel').css('display', 'none');
-		$('#passingText').css('display', 'none');
-		$('#passingBlock').css('display', 'none');
-	});
+	
 
 
 	
