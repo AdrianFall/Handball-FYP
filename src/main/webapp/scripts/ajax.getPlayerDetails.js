@@ -167,6 +167,18 @@ $('#modalPlayerDetails').on('hidden.bs.modal', function(e) {
 		$('#passingLabel').stop().fadeOut(1);
 		$('#passingText').stop().fadeOut(1);
 		$('#passingBlock').stop().fadeOut(1);
+		
+		$('#physicalSectionLabel').removeClass('animated bounceIn');
+		
+		$('#mentalSectionLabel').removeClass('animated bounceIn');
+		
+		
+		$('#technicalSectionLabel').removeClass('animated bounceIn');
+		
+		
+		$('#goalKeepingSectionLabel').removeClass('animated bounceIn');
+		
+
 	});
 
 // Obtain and display the player details on the modal
@@ -284,7 +296,7 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 									obtainColor(sprintSpeedPercentage));
 							$('#sprintSpeedText').html(sprintSpeedQuality);
 							$('#sprintSpeedText').fadeIn(2400);
-							fade('#sprintSpeedBlock', 2400);
+							$('#sprintSpeedBlock').fadeIn(2400);
 
 							var jumpingQuality = parsedDataJSON.jumping;
 							var jumpingPercentage = parsedDataJSON.jumping_quality_perc;
@@ -293,7 +305,7 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 									obtainColor(jumpingPercentage));
 							$('#jumpingText').html(jumpingQuality);
 							$('#jumpingText').fadeIn(2800);
-							fade('#jumpingBlock', 2800);
+							$('#jumpingBlock').fadeIn(2800);
 
 							var balanceQuality = parsedDataJSON.balance;
 							var balancePercentage = parsedDataJSON.balance_quality_perc;
@@ -302,7 +314,7 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 									obtainColor(balancePercentage));
 							$('#balanceText').html(balanceQuality);
 							$('#balanceText').fadeIn(2800);
-							fade('#balanceBlock', 3000);
+							$('#balanceBlock').fadeIn(3000);
 
 							
 
@@ -313,7 +325,7 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 									obtainColor(staminaPercentage));
 							$('#staminaText').html(staminaQuality);
 							$('#staminaText').fadeIn(3200);
-							fade('#staminaBlock', 3400);
+							$('#staminaBlock').fadeIn(3400);
 
 							var strengthQuality = parsedDataJSON.strength;
 							var strengthPercentage = parsedDataJSON.strength_quality_perc;
@@ -322,7 +334,7 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 									obtainColor(strengthPercentage));
 							$('#strengthText').html(strengthQuality);
 							$('#strengthText').fadeIn(3400);
-							fade('#strengthBlock', 3600);
+							$('#strengthBlock').fadeIn(3600);
 
 						
 
@@ -333,7 +345,7 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 									obtainColor(blockingPercentage));
 							$('#blockingText').html(blockingQuality);
 							$('#blockingText').fadeIn(4000);
-							fade('#blockingBlock', 4000);
+							$('#blockingBlock').fadeIn(4000);
 
 						
 
@@ -348,7 +360,7 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 									obtainColor(aggressionPercentage));
 							$('#aggressionText').html(aggressionQuality);
 							$('#aggressionText').fadeIn(4400);
-							fade('#aggressionBlock', 4600);
+							$('#aggressionBlock').fadeIn(4600);
 							
 							
 							var attack_positionQuality = parsedDataJSON.attack_position;
@@ -358,7 +370,7 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 									obtainColor(attack_positionPercentage));
 							$('#attack_positionText').html(attack_positionQuality);
 							$('#attack_positionText').fadeIn(4800);
-							fade('#attack_positionBlock', 5000);
+							$('#attack_positionBlock').fadeIn(5000);
 							
 							var visionQuality = parsedDataJSON.vision;
 							var visionPercentage = parsedDataJSON.vision_quality_perc;
@@ -367,7 +379,7 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 									obtainColor(visionPercentage));
 							$('#visionText').html(visionQuality);
 							$('#visionText').fadeIn(5000);
-							fade('#visionBlock', 5200);
+							$('#visionBlock').fadeIn(5200);
 							
 							var creativityQuality = parsedDataJSON.creativity;
 							var creativityPercentage = parsedDataJSON.creativity_quality_perc;
@@ -376,7 +388,7 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 									obtainColor(creativityPercentage));
 							$('#creativityText').html(creativityQuality);
 							$('#creativityText').fadeIn(5200);
-							fade('#creativityBlock', 5400);
+							$('#creativityBlock').fadeIn(5400);
 							
 							$('#technicalSectionLabel').fadeIn(5400);
 							$('#technicalLine').fadeIn(5600);
@@ -389,7 +401,7 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 									obtainColor(catchingPercentage));
 							$('#catchingText').html(catchingQuality);
 							$('#catchingText').fadeIn(5400);
-							fade('#catchingBlock', 5600);
+							$('#catchingBlock').fadeIn(5600);
 							
 							
 							var shot_powerQuality = parsedDataJSON.shot_power;
@@ -399,7 +411,7 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 									obtainColor(shot_powerPercentage));
 							$('#shot_powerText').html(shot_powerQuality);
 							$('#shot_powerText').fadeIn(6000);
-							fade('#shot_powerBlock', 6200);
+							$('#shot_powerBlock').fadeIn(6200);
 							
 							var dribblingQuality = parsedDataJSON.dribbling;
 							var dribblingPercentage = parsedDataJSON.dribbling_quality_perc;
@@ -408,7 +420,7 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 									obtainColor(dribblingPercentage));
 							$('#dribblingText').html(dribblingQuality);
 							$('#dribblingText').fadeIn(6200);
-							fade('#dribblingBlock', 6400);
+							$('#dribblingBlock').fadeIn(6400);
 							
 							var passingQuality = parsedDataJSON.passing;
 							var passingPercentage = parsedDataJSON.passing_quality_perc;
@@ -417,7 +429,7 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 									obtainColor(passingPercentage));
 							$('#passingText').html(passingQuality);
 							$('#passingText').fadeIn(6400);
-							fade('#passingBlock', 6600);
+							$('#passingBlock').fadeIn(6600);
 							
 							var penaltiesQuality = parsedDataJSON.penalties;
 							var penaltiesPercentage = parsedDataJSON.penalties_quality_perc;
@@ -426,7 +438,7 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 									obtainColor(penaltiesPercentage));
 							$('#penaltiesText').html(penaltiesQuality);
 							$('#penaltiesText').fadeIn(6800);
-							fade('#penaltiesBlock', 7000);
+							$('#penaltiesBlock').fadeIn(7000);
 							
 							var curveQuality = parsedDataJSON.curve;
 							var curvePercentage = parsedDataJSON.curve_quality_perc;
@@ -435,7 +447,7 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 									obtainColor(curvePercentage));
 							$('#curveText').html(curveQuality);
 							$('#curveText').fadeIn(6800);
-							fade('#curveBlock', 7000);
+							$('#curveBlock').fadeIn(7000);
 							
 							var finishingQuality = parsedDataJSON.finishing;
 							var finishingPercentage = parsedDataJSON.finishing_quality_perc;
@@ -444,7 +456,7 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 									obtainColor(finishingPercentage));
 							$('#finishingText').html(finishingQuality);
 							$('#finishingText').fadeIn(6800);
-							fade('#finishingBlock', 7000);
+							$('#finishingBlock').fadeIn(7000);
 							
 							var six_m_shotsQuality = parsedDataJSON.six_m_shots;
 							var six_m_shotsPercentage = parsedDataJSON.six_m_shots_quality_perc;
@@ -453,7 +465,7 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 									obtainColor(six_m_shotsPercentage));
 							$('#six_m_shotsText').html(six_m_shotsQuality);
 							$('#six_m_shotsText').fadeIn(6800);
-							fade('#six_m_shotsBlock', 7000);
+							$('#six_m_shotsBlock').fadeIn(7000);
 							
 							
 							
@@ -464,7 +476,7 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 									obtainColor(nine_m_shotsPercentage));
 							$('#nine_m_shotsText').html(nine_m_shotsQuality);
 							$('#nine_m_shotsText').fadeIn(6800);
-							fade('#nine_m_shotsBlock', 7000);
+							$('#nine_m_shotsBlock').fadeIn(7000);
 
 						} else { // playerPosition == GK
 							$('#goalKeepingSectionLabel').fadeIn(850);
@@ -478,7 +490,7 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 									obtainColor(reflexesPercentage));
 							$('#reflexesText').html(reflexesQuality);
 							$('#reflexesText').fadeIn(1800);
-							fade('#reflexesBlock', 2200)
+							$('#reflexesBlock').fadeIn(2200);
 
 
 							var positioningQuality = parsedDataJSON.positioning;
@@ -488,7 +500,7 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 									obtainColor(positioningPercentage));
 							$('#positioningText').html(positioningQuality);
 							$('#positioningText').fadeIn(2800);
-							fade('#positioningBlock', 2800);
+							$('#positioningBlock').fadeIn(2800);
 
 							var leg_savesQuality = parsedDataJSON.leg_saves;
 							var leg_savesPercentage = parsedDataJSON.leg_saves_quality_perc;
@@ -497,7 +509,7 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 									obtainColor(leg_savesPercentage));
 							$('#leg_savesText').html(leg_savesQuality);
 							$('#leg_savesText').fadeIn(2800);
-							fade('#leg_savesBlock', 3000);
+							$('#leg_savesBlock').fadeIn(3000);
 
 							var penalty_savesQuality = parsedDataJSON.penalty_saves;
 							var penalty_savesPercentage = parsedDataJSON.penalty_saves_quality_perc;
@@ -506,7 +518,7 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 									obtainColor(penalty_savesPercentage));
 							$('#penalty_savesText').html(penalty_savesQuality);
 							$('#penalty_savesText').fadeIn(3000);
-							fade('#penalty_savesBlock', 3200);
+							$('#penalty_savesBlock').fadeIn(3200);
 
 							var six_m_savesQuality = parsedDataJSON.six_m_saves;
 							var six_m_savesPercentage = parsedDataJSON.six_m_saves_quality_perc;
@@ -515,7 +527,7 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 									obtainColor(six_m_savesPercentage));
 							$('#six_m_savesText').html(six_m_savesQuality);
 							$('#six_m_savesText').fadeIn(3200);
-							fade('#six_m_savesBlock', 3400);
+							$('#six_m_savesBlock').fadeIn(3400);
 
 							var nine_m_savesQuality = parsedDataJSON.nine_m_saves;
 							var nine_m_savesPercentage = parsedDataJSON.nine_m_saves_quality_perc;
@@ -524,7 +536,7 @@ function showPlayerDetailsOnModal(playerId, playerPosition) {
 									obtainColor(nine_m_savesPercentage));
 							$('#nine_m_savesText').html(nine_m_savesQuality);
 							$('#nine_m_savesText').fadeIn(3400);
-							fade('#nine_m_savesBlock', 3600);
+							$('#nine_m_savesBlock').fadeIn(3600);
 
 							
 							
