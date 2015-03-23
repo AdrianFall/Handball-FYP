@@ -22,10 +22,6 @@
 		<div class="modal fade" id="modalLiveMatch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		  <div class="modal-dialog" style="width: 95%; height: 100%;">
 		    <div class="modal-content" style="background-color: #EDAF61;">
-		     <%--  <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-		        <h4 class="modal-title">Match <%=match.getHome_team_name()%> VS <%=match.getAway_team_name()%></h4>
-		      </div> --%>
 		      <button type="button" class="close" style="margin-right: 1%;" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 		      <div style="width: 95%; height:10%;">
     		  	<img style="height: 120px; width: 90%; margin-left: 5%; margin-top:2%; display: block; z-index:1; position:absolute;" src="/hb/img/handball-pitchv4.png">
@@ -85,13 +81,6 @@
 
 						<div class="cd-timeline-content">
 							<h2>Match due to start..</h2>
-							<!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-								Iusto, optio, dolorum provident rerum aut hic quasi placeat iure
-								tempora laudantium ipsa ad debitis unde? Iste voluptatibus minus
-								veritatis qui ut.</p> -->
-							<!-- <a href="#0" class="cd-read-more">Read more</a> --> 
-							<!-- <span
-								class="cd-date">Jan 14</span> -->
 						</div>
 						<!-- cd-timeline-content -->
 					</div>

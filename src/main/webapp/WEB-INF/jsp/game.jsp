@@ -13,8 +13,6 @@
 
 <!-- Optional theme -->
 <link rel="stylesheet" href="/hb/css/bootstrap-theme.min.css">
-<!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css"> -->
-<!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css"> -->
 
 <link rel="stylesheet" href="/hb/css/img-fix.css" />
 <link rel="stylesheet" href="/hb/css/metro-title.css" />

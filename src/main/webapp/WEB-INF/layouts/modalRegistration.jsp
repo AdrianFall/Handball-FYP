@@ -39,14 +39,6 @@
 									id="passwordErrorSpan"></span>
 							</div>
 						</div>
-
-
-
-
-						<!-- <div class="form-group has-error has-feedback">
-						<input type="text" class="form-control" id="inputError2">
-						<span class="glyphicon glyphicon-remove form-control-feedback"></span>
-					</div> -->
 					</form>
 				</div>
 
@@ -184,111 +176,13 @@
 																	});
 															
 																	$("#createNewTeamModal").modal('show');
-																	
-																	/*  setTimeout(
-																				function() {
-																					var url = "game.html"; 
-																					window.location.href = url;
-																				}, 20);  */
-															
-														/* 	$
-															.post(
-																	"userRegistration.html",
-																	$(this).serialize(),  {
-																		
-																	}); */
-				
-															/*  $
-																	.ajax({
-																		type : "POST",
-																		url : "createNewTeam.html",
-																		data : JSON
-																		.stringify({
-																			"email" : email,
-																			"forwardedFrom" : "registration"
-																		}),
-																		contentType: "application/json; charset=UTF-8",
-																		success : function(
-																				data) {
-																			alert('Data: ' + data);
-																			var parsedDataJSON = $
-																			.parseJSON(data);
-																			if (parsedDataJSON.status == "OK")
-																				alert('Person has been added');
-																			else
-																				alert('Failed adding person: '
-																						+ parsedDataJSON.status
-																						+ ', '
-																						+ parsedDataJSON.errorMessage);
-																		},
-																		error : function() {
-																			alert('Error occurs!');
-																		}
-																	});  */
-
-															/* $
-															.post("game.html",
-																	$(jsonObj).serialize(),
-																	function(text) {
-																 setTimeout(
-																			function() {
-																				var url = "game.html"; 
-																				window.location.href = url;
-																			}, 200); 
-																
-															}); */
-
-														}
-
-														/* document
-																.getElementById("email").value = parsedJSON.text; */
-
-														// When this executes, we know the form was submitted
-														// To give some time for the animation, 
-														// let's add a delay of 200 ms before the redirect
-														/* var delay = 200;
-														setTimeout(
-																function() {
-																	window.location.href = 'successUrl.html';
-																}, delay); */
-
-														// Hide the modal
-														/* $("#my-modal").modal(
-																'hide'); */
-
-													});
+														} // END else (success)
+													}); // END $.post
 
 									// Stop the normal form submission
 									return false;
 								});
 			</script>
-
-			<!-- <script>
-			$(#'submitRegistration').on('click', function(e) {
-				e.preventDefault();
-				
-				// Submit the form
-				$('#registrationForm').submit();
-			});
-			</script>
-
-
-			<script>
-				$(function() {
-					$('#registrationForm').on('submit', function(e) {
-						e.preventDefault();
-						$.ajax({
-							url : 'notifications/subscribe/',
-							type : 'POST',
-							data : $('#registrationForm').serialize(),
-							success : function(data) {
-								$('#responsestatus').val(data);
-								$('#subscription-confirm').modal('show');
-							}
-						});
-					});
-				});
-			</script> -->
 		</div>
 		<!-- /.modal-content -->
 	</div>

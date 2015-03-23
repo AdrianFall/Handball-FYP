@@ -27,15 +27,6 @@
 
 </head>
 <body id="theBody">
-	<!-- Latest compiled and minified JavaScript -->
-
-<!-- 	<script src="https://code.jquery.com/jquery-2.1.0.min.js"></script>
-	<script
-		src="/hb//bootstrap.min.js"></script>
-	<script src="/hb/scripts/bootstrap/3.1.1/bootstrap.js"></script> -->
-
-	
-
 	<%! /* Session attributes */
 		private String email;%>
 
@@ -45,11 +36,5 @@
 	  	<% }%>
 	 
 	<tiles:insertAttribute name="body" />
-
-
-	
-
-
-
 </body>
 </html>

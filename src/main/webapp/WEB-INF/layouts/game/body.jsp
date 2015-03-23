@@ -87,22 +87,7 @@
 	</script>
 	
 	<div style="padding-left: 10%; padding-right: 10%; position: relative;" id="container">
-		<!-- NAVIGATION ROW -->
-		<!-- <div class="row">
-
-			<a href="#"> <img class="img-fix" alt="manager" src="/hb/img/manager.png"></a>
-			
-			<a href="#" id="squadHref"> <img class="img-fix" alt="squad" src="/hb/img/player.png"></a>
-			<a href="#" id="scheduleHref"><img class="img-fix" alt="schedule" src="/hb/img/schedule.png"></a>
-			
-
-			 <a href="#"><img class="img-fix" alt="transfer" src="/hb/img/transfer.png"> </a> 
-			<a href="#"> <img class="img-fix" alt="training" src="/hb/img/training.png"></a> 
-			<a href="#"> <img class="img-fix" src="/hb/img/inbox.png" alt="inbox"></a>
-
-			END OF NAVIGATION ROW
-		</div> -->
-
+	
 	<div id="match">
 	</div>
 

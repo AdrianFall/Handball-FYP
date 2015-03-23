@@ -31,17 +31,6 @@
 
 			</div>
 
-			<!-- <div class='modal-body'>
-				<form id="modal-form" accept-charset="UTF-8" action="/tagging"
-					data-remote="true" method="post">
-					<input name="something" value="Some value" />
-				</form>
-			</div>
-
-			<div class='modal-footer'>
-				<a id="modal-form-submit" class='btn btn-primary' href="#">Submit</a>
-			</div> -->
-
 			<script>
 			
 			setTimeout(
@@ -62,33 +51,6 @@
 
 				
 			</script>
-
-			<!-- <script>
-			$(#'submitRegistration').on('click', function(e) {
-				e.preventDefault();
-				
-				// Submit the form
-				$('#registrationForm').submit();
-			});
-			</script>
-
-
-			<script>
-				$(function() {
-					$('#registrationForm').on('submit', function(e) {
-						e.preventDefault();
-						$.ajax({
-							url : 'notifications/subscribe/',
-							type : 'POST',
-							data : $('#registrationForm').serialize(),
-							success : function(data) {
-								$('#responsestatus').val(data);
-								$('#subscription-confirm').modal('show');
-							}
-						});
-					});
-				});
-			</script> -->
 		</div>
 		<!-- /.modal-content -->
 	</div>

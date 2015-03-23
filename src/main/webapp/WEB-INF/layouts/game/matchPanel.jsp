@@ -52,51 +52,6 @@
 
 </div>
 
-
-<%-- <script>
-	//get the current date & time
-	var dateObj = Date.now();
-	
-	// Add 3 days to the current date & time
-	//   I'd suggest using the calculated static value instead of doing inline math
-	//   I did it this way to simply show where the number came from
-	dateObj += <%= nextMatchMap.get("timeLeftInMs") %>;
-	
-	// create a new Date object, using the adjusted time
-	dateObj = new Date(dateObj);
-
-	var timeLeftInMs = <%= nextMatchMap.get("timeLeftInMs") %>;
-	alert(timeLeftInMs);
-	
-	
-	  var d, h, m, s;
-	  s = Math.floor(timeLeftInMs / 1000);
-	  m = Math.floor(s / 60);
-	  s = s % 60;
-	  h = Math.floor(m / 60);
-	  m = m % 60;
-	  d = Math.floor(h / 24);
-	  h = h % 24;
-	  
-	  alert('days: ' + d + ' hours: ' + h + ' minutes: ' + m + 'seconds ' + s);
-	  
-	var mins = 10;  //Set the number of minutes you need
-    var secs = 10;
-    var currentSeconds = 0;
-    var currentMinutes = 0;
-    setTimeout('Decrement()',1000);
-
-    function Decrement() {
-        currentMinutes = Math.floor(secs / 60);
-        currentSeconds = secs % 60;
-        if(currentSeconds <= 9) currentSeconds = "0" + currentSeconds;
-        secs--;
-        /* document.getElementById("timerText").innerHTML = currentMinutes + ":" + currentSeconds; */ //Set the element id you need the time put into.
-        if(secs !== -1) { setTimeout('Decrement()',1000); }
-        else if (secs == -1) alert('finished');
-    }
-</script> --%>
-
 <script type="text/javascript" src="/hb/scripts/jquery.countdown.js"></script>
 <script>
 	//get the current date & time

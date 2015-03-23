@@ -41,19 +41,11 @@
 	class="icon-spin icon-refresh"></i></span>Save Squad
 </button>
 
-
-
-<!-- <script>function ttest() { $('#saveSquadButton').addClass('animated rubberBand'); setTimeout(function() {$('#saveSquadButton').removeClass('rubberBand');}, 555) }</script> -->
-<!-- <script type="text/javascript" src="/hb/scripts/jquery.ui-min.js"></script> -->
 <script type="text/javascript" src="/hb/scripts/squadSettingsNavigation.js"></script>
 <br>
 <div>
 	<div
 		style="position: absolute; width: 40%; left: 8%; float: left;">
-		<!-- <button class="btn-success has-spinner">
-    <span class="spinner"><i class="icon-spin icon-refresh"></i></span>
-    Foo
-  </button> -->
 		<!-- TABLE ROW -->
 
 		<table id="squadTable" class="table table-bordered table-hover"
@@ -452,14 +444,7 @@
 								 }
 								 
 							} %>
-					<%-- <h3
-							style="position: absolute; color: white; font-size: 72%; bottom: -24px; left: 11px;">
-							<% for (int n = 0; n < firstSquadPlayersList.size(); n++) { %>
-								 <% if(firstSquadPlayersList.get(n).getPlay_position().equals("GK")) 
-									out.println(firstSquadPlayersList.get(n).getNumber()); 
-								 
-							} %>
-						</h3> --%>
+					
 				</div></td>
 			<td></td>
 			<td></td>
@@ -537,15 +522,6 @@
 <!-- END div holding the captains roles -->
 
 
-
-
-
-
-
-
-
-
-
 <div id="autoSubs">
  <div id="scrollbox-autosubs">
    	<input id="pv_1" class="input-box" placeholder="Primary PV" style="margin-top: 10%;" readonly>
@@ -579,129 +555,6 @@
   
   </div> 
 </div>
-
-<script>
-/* $('#autoSubs, #scrollbox-autosubs').enscroll({
-    showOnHover: false,
-    verticalTrackClass: 'tracker',
-    verticalHandleClass: 'handler'
-}); */
-</script>
-
-
-<%-- <div id="autoSubs"
-	style="display: none; right: 10%; width: 40%; float: right; position: fixed;">
-	
-	<div id="scrollbox3">
-
-	<img src="/hb/img/temp/handball_captain_temp.png"
-		style="overflow: auto; position: fixed; float: right; height: 30%; width: 30%; margin-top: 8%; right: 25%; background-size: 100% 100%;">
-
-	<input id="captain1" class="droppableCaptainRole"
-		placeholder="   Primary Captain"
-		style="text-align: center; border: 0; outline: 0; width: 15%; font-family: Fantasy; margin-top: 2%; color: white; float: right; position: fixed; right: 15%; height: 6%; box-shadow: 0 1px 0 rgba(255, 255, 255, .15), 0 2px 4px rgba(0, 0, 0, 0.2) inset, 0 0 12px rgba(211, 64, 64, 0.1); background: rgba(0, 0, 0, .1);"
-		readonly> 
-		
-	<input id="captain2" class="droppableCaptainRole"
-		placeholder="   Secondary Captain"
-		style="text-align: center; border: 0; outline: 0; width: 15%; font-family: Fantasy; margin-top: 6%; color: white; float: right; position: fixed; right: 15%; height: 6%; box-shadow: 0 1px 0 rgba(255, 255, 255, .15), 0 2px 4px rgba(0, 0, 0, 0.2) inset, 0 0 12px rgba(211, 64, 64, 0.1); background: rgba(0, 0, 0, .1);"
-		readonly> 
-		
-	<input id="captain3" class="droppableCaptainRole"
-		placeholder="   Tertiary Captain"
-		style="text-align: center; border: 0; outline: 0; width: 15%; font-family: Fantasy; margin-top: 10%; color: white; float: right; position: fixed; right: 15%; height: 6%; box-shadow: 0 1px 0 rgba(255, 255, 255, .15), 0 2px 4px rgba(0, 0, 0, 0.2) inset, 0 0 12px rgba(211, 64, 64, 0.1); background: rgba(0, 0, 0, .1);"
-		readonly> 
-		
-	<input id="captain4" class="droppableCaptainRole"
-		placeholder="   Quaternary Captain"
-		style="text-align: center; border: 0; outline: 0; width: 15%; font-family: Fantasy; margin-top: 14%; color: white; float: right; position: fixed; right: 15%; height: 6%; box-shadow: 0 1px 0 rgba(255, 255, 255, .15), 0 2px 4px rgba(0, 0, 0, 0.2) inset, 0 0 12px rgba(211, 64, 64, 0.1); background: rgba(0, 0, 0, .1);"
-		readonly>
-		
-	<input id="captain1" class="droppableCaptainRole"
-		placeholder="   Primary Captain"
-		style="text-align: center; border: 0; outline: 0; width: 15%; font-family: Fantasy; margin-top: 18%; color: white; float: right; position: fixed; right: 15%; height: 6%; box-shadow: 0 1px 0 rgba(255, 255, 255, .15), 0 2px 4px rgba(0, 0, 0, 0.2) inset, 0 0 12px rgba(211, 64, 64, 0.1); background: rgba(0, 0, 0, .1);"
-		readonly> 
-		
-	<input id="captain2" class="droppableCaptainRole"
-		placeholder="   Secondary Captain"
-		style="text-align: center; border: 0; outline: 0; width: 15%; font-family: Fantasy; margin-top: 22%; color: white; float: right; position: fixed; right: 15%; height: 6%; box-shadow: 0 1px 0 rgba(255, 255, 255, .15), 0 2px 4px rgba(0, 0, 0, 0.2) inset, 0 0 12px rgba(211, 64, 64, 0.1); background: rgba(0, 0, 0, .1);"
-		readonly> 
-		
-	<input id="captain3" class="droppableCaptainRole"
-		placeholder="   Tertiary Captain"
-		style="text-align: center; border: 0; outline: 0; width: 15%; font-family: Fantasy; margin-top: 26%; color: white; float: right; position: fixed; right: 15%; height: 6%; box-shadow: 0 1px 0 rgba(255, 255, 255, .15), 0 2px 4px rgba(0, 0, 0, 0.2) inset, 0 0 12px rgba(211, 64, 64, 0.1); background: rgba(0, 0, 0, .1);"
-		readonly> 
-		
-	<input id="captain4" class="droppableCaptainRole"
-		placeholder="   Quaternary Captain"
-		style="text-align: center; border: 0; outline: 0; width: 15%; font-family: Fantasy; margin-top: 30%; color: white; float: right; position: fixed; right: 15%; height: 6%; box-shadow: 0 1px 0 rgba(255, 255, 255, .15), 0 2px 4px rgba(0, 0, 0, 0.2) inset, 0 0 12px rgba(211, 64, 64, 0.1); background: rgba(0, 0, 0, .1);"
-		readonly>
-		
-	<input id="captain1" class="droppableCaptainRole"
-		placeholder="   Primary Captain"
-		style="text-align: center; border: 0; outline: 0; width: 15%; font-family: Fantasy; margin-top: 34%; color: white; float: right; position: fixed; right: 15%; height: 6%; box-shadow: 0 1px 0 rgba(255, 255, 255, .15), 0 2px 4px rgba(0, 0, 0, 0.2) inset, 0 0 12px rgba(211, 64, 64, 0.1); background: rgba(0, 0, 0, .1);"
-		readonly> 
-		
-	<input id="captain2" class="droppableCaptainRole"
-		placeholder="   Secondary Captain"
-		style="text-align: center; border: 0; outline: 0; width: 15%; font-family: Fantasy; margin-top: 38%; color: white; float: right; position: fixed; right: 15%; height: 6%; box-shadow: 0 1px 0 rgba(255, 255, 255, .15), 0 2px 4px rgba(0, 0, 0, 0.2) inset, 0 0 12px rgba(211, 64, 64, 0.1); background: rgba(0, 0, 0, .1);"
-		readonly> 
-		
-	<input id="captain3" class="droppableCaptainRole"
-		placeholder="   Tertiary Captain"
-		style="text-align: center; border: 0; outline: 0; width: 15%; font-family: Fantasy; margin-top: 42%; color: white; float: right; position: fixed; right: 15%; height: 6%; box-shadow: 0 1px 0 rgba(255, 255, 255, .15), 0 2px 4px rgba(0, 0, 0, 0.2) inset, 0 0 12px rgba(211, 64, 64, 0.1); background: rgba(0, 0, 0, .1);"
-		readonly> 
-		
-	<input id="captain4" class="droppableCaptainRole"
-		placeholder="   Quaternary Captain"
-		style="text-align: center; border: 0; outline: 0; width: 15%; font-family: Fantasy; margin-top: 46%; color: white; float: right; position: fixed; right: 15%; height: 6%; box-shadow: 0 1px 0 rgba(255, 255, 255, .15), 0 2px 4px rgba(0, 0, 0, 0.2) inset, 0 0 12px rgba(211, 64, 64, 0.1); background: rgba(0, 0, 0, .1);"
-		readonly>
-	</div>
-
-	<script src="/hb/scripts/droppableCaptainRoles.js"></script>
-
-	<!-- START Script for displaying and holding the data about 
-	 	  the current captains list -->
-	<script>
-	 
-	 var captainsList = ["","","",""];
-	
-	  <% if(!captainsMap.get("captain_id_one").equals("-1")) { %>
-	 		captainsList[0] = '<%=captainsMap.get("captain_id_one")%>';
-	 		
-	 		// Change the html to show the number and name of the captain
-	 		$('#captain1').val('<%=captainsMap.get("captain_number_one")%>' + '  ' + '<%=captainsMap.get("captain_name_one")%>');
-	 <% } %>
-	 
-	<% if(!captainsMap.get("captain_id_two").equals("-1")) { %>
-		captainsList[1] = '<%=captainsMap.get("captain_id_two")%>';
-		
-		// Change the html to show the number and name of the captain
-		$('#captain2').val('<%=captainsMap.get("captain_number_two")%>' + '  ' + '<%=captainsMap.get("captain_name_two")%>');
-	<% } %>
-	
-	<% if(!captainsMap.get("captain_id_three").equals("-1")) { %>
-	captainsList[2] = '<%=captainsMap.get("captain_id_three")%>';
-	
-	// Change the html to show the number and name of the captain
-	$('#captain3').val('<%=captainsMap.get("captain_number_three")%>' + '  ' + '<%=captainsMap.get("captain_name_three")%>');
-	<% } %>
-	
-	<% if(!captainsMap.get("captain_id_four").equals("-1")) { %>
-	captainsList[3] = '<%=captainsMap.get("captain_id_four")%>';
-	
-	// Change the html to show the number and name of the captain
-	$('#captain4').val('<%=captainsMap.get("captain_number_four")%>' + '  ' + '<%=captainsMap.get("captain_name_four")%>');
-	<% } %>
-	 
-	 </script>
-	<!-- END Script for displaying and holding the data about 
-	 	  the current captains list -->
-
-
-</div> --%>
-<!-- END div holding the captains roles -->
-
 
 <img onclick="showPitchTable()"
 	style="position: fixed; float: right; height: 8%; width: 6%; right: 3%; background-size: 100% 100%;"
@@ -749,9 +602,6 @@ $('#fsqp_td<%=i%> div').slideUp(
 		             if (new String("GK").valueOf() == new String(fsqp_position).valueOf()) shirtStyle = $('<div style="position: absolute; margin: 0;">' + '<img src="/hb/img/gk_back_shirt.png" height="38" width="42" style="position:relative; margin: 0px; z-index:1;">' + '<h3 style="position:relative; margin-top: -30px; margin-left: 8px; font-size:16px; color:white; z-index:2;">' + dragged_number + '</h3></img></div>');
 		             
 		            	 return shirtStyle
-		             /* return $('<div class="drag-row"><table></table></div>') */
-		             /* return $('<img src="/hb/img/field_player_back_shirt.png" height="35" width="35" style="position:fixed; top: 0px; left:0; right:0; z-index:100;width:50px;">') */
-		
 		          },
 			 
 			 cursorAt: {
@@ -768,12 +618,6 @@ $('#fsqp_td<%=i%> div').slideUp(
 	
 		// Register the click listener on each row of first squad players
 		  $("#fsqp_tr<%=i%>").click(function() {
-			  
-			  // AJAX post, to obtain the Player entity
-			  
-			  
-			  // AJAX post, to obtain the Contract entity
-			  
 			  var player = {
   		            teamName: "<%=teamName%>",
   		            playerName: $("#fsqp_name<%=i%>").text(),
