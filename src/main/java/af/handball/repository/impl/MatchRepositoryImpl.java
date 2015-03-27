@@ -6,7 +6,9 @@ import java.util.Map;
 import java.util.Random;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -14,6 +16,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import af.handball.entity.Leaderboard;
+import af.handball.entity.LeaderboardTeam;
 import af.handball.entity.Match;
 import af.handball.entity.MatchHighlight;
 import af.handball.entity.MatchOutcome;
@@ -582,32 +586,158 @@ public class MatchRepositoryImpl implements MatchRepository {
 	public boolean generateMatchOutcome() {
 		boolean matchGenerated = false;
 		
-		System.out.println("TEST!!!!!:  homeScore: " + homeScore + " awayScore: " + awayScore);
-		
-		System.out.println("Generating match outcome.");
-		
+		// Generate new match outcome
 		MatchOutcome matchOutcome = new MatchOutcome();
-		
 		matchOutcome.setMatch_id(match.getMatch_id());
-		
-		
-		
 		matchOutcome.setMatch_score(homeScore + ":" + awayScore);
-		System.out.println("Final score = " + matchOutcome.getMatch_score());
+		System.out.println("Finishing match (" + match.getMatch_id() + ") final score = " + matchOutcome.getMatch_score());
 		try {
+			
+			// Finish the match
 			match.setMatch_finished(true);
-	
 			emgr.merge(match);
 			emgr.flush();
+			// Persist the match outcome
 			emgr.persist(matchOutcome);
 			emgr.flush();
-			matchGenerated = true;
+			if (generateLeaderboardRecord(homeTeam, awayTeam)) {
+				matchGenerated = true;
+			}
 		} catch (Exception e) {
 			System.err.println("Couldn't generate match outcome for matchId: " + match.getMatch_id() + ". Exception: " + e.getLocalizedMessage());
 		}
 		
 		
 		return matchGenerated;
+	}
+
+	private boolean generateLeaderboardRecord(Team homeTeam, Team awayTeam) {
+		boolean generated = false;
+		
+		// Obtain the leaderboard entity
+		int leagueId = homeTeam.getLeague_id();
+		
+		
+		TypedQuery<Leaderboard> leaderboardQuery = emgr.createNamedQuery("Leaderboard.getByLeagueId", Leaderboard.class);
+		leaderboardQuery.setParameter("league_id", leagueId);
+
+		try {
+			Leaderboard leaderboard = leaderboardQuery.getSingleResult();
+			int leaderboardId = leaderboard.getLeaderboard_id();
+			// Obtain the leaderboard team entity
+			TypedQuery<LeaderboardTeam> leaderboardHomeTeamQuery = emgr.createNamedQuery("LeaderboardTeam.getByLeaderboardIdAndTeamId", LeaderboardTeam.class);
+			leaderboardHomeTeamQuery.setParameter("leaderboard_id", leaderboardId);
+			leaderboardHomeTeamQuery.setParameter("team_id", homeTeam.getTeam_id());
+			TypedQuery<LeaderboardTeam> leaderboardAwayTeamQuery = emgr.createNamedQuery("LeaderboardTeam.getByLeaderboardIdAndTeamId", LeaderboardTeam.class);
+			leaderboardAwayTeamQuery.setParameter("leaderboard_id", leaderboardId);
+			leaderboardAwayTeamQuery.setParameter("team_id", awayTeam.getTeam_id());
+			try {
+				LeaderboardTeam leaderboardHomeTeam = leaderboardHomeTeamQuery.getSingleResult();
+				LeaderboardTeam leaderboardAwayTeam = leaderboardAwayTeamQuery.getSingleResult();
+				//TODO Modify the leaderboardTeam record
+				leaderboardHomeTeam.setMatches_played(leaderboardHomeTeam.getMatches_played()+1);
+				leaderboardAwayTeam.setMatches_played(leaderboardAwayTeam.getMatches_played()+1);
+				
+				// Determine the outcome of match for both teams
+				if (homeScore == awayScore) {
+					leaderboardHomeTeam.setDraws(leaderboardHomeTeam.getDraws()+1);
+					leaderboardAwayTeam.setDraws(leaderboardAwayTeam.getDraws()+1);
+					// Add 1 point for each team
+					leaderboardHomeTeam.setPoints(leaderboardHomeTeam.getPoints()+1);
+					leaderboardAwayTeam.setPoints(leaderboardAwayTeam.getPoints()+1);
+					// form
+					String currentHomeForm = leaderboardHomeTeam.getForm();
+					String currentAwayForm = leaderboardAwayTeam.getForm();
+					String newHomeForm = generateNewForm(currentHomeForm, "D");
+					String newAwayForm = generateNewForm(currentAwayForm, "D");
+					
+					leaderboardHomeTeam.setForm(newHomeForm);
+					leaderboardAwayTeam.setForm(newAwayForm);
+				} else if (homeScore > awayScore) {
+					leaderboardHomeTeam.setWins(leaderboardHomeTeam.getWins()+1);
+					leaderboardAwayTeam.setLoses(leaderboardAwayTeam.getLoses()+1);
+					// Add 3 points to home and none to away team
+					leaderboardHomeTeam.setPoints(leaderboardHomeTeam.getPoints()+3);
+					// form
+					String currentHomeForm = leaderboardHomeTeam.getForm();
+					String currentAwayForm = leaderboardAwayTeam.getForm();
+					String newHomeForm = generateNewForm(currentHomeForm, "W");
+					String newAwayForm = generateNewForm(currentAwayForm, "L");
+					
+					leaderboardHomeTeam.setForm(newHomeForm);
+					leaderboardAwayTeam.setForm(newAwayForm);
+					
+				} else if (awayScore > homeScore) {
+					leaderboardHomeTeam.setLoses(leaderboardHomeTeam.getLoses()+1);
+					leaderboardAwayTeam.setWins(leaderboardAwayTeam.getWins()+1);
+					// Add 3 points to away team and none to home
+					leaderboardAwayTeam.setPoints(leaderboardAwayTeam.getPoints()+3);
+					// form
+					String currentHomeForm = leaderboardHomeTeam.getForm();
+					String currentAwayForm = leaderboardAwayTeam.getForm();
+					String newHomeForm = generateNewForm(currentHomeForm, "L");
+					String newAwayForm = generateNewForm(currentAwayForm, "W");
+					
+					leaderboardHomeTeam.setForm(newHomeForm);
+					leaderboardAwayTeam.setForm(newAwayForm);
+					
+				} else {
+					System.err.println("ERROR: When generating leaderboard for home & away team. The match was neither drawn or lost (?!)");
+				}
+				// END Determine the outcome of match for both teams
+				
+				// goals_scored
+				leaderboardHomeTeam.setGoals_scored(leaderboardHomeTeam.getGoals_scored() + homeScore);
+				leaderboardAwayTeam.setGoals_scored(leaderboardAwayTeam.getGoals_scored() + awayScore);
+				// goals_conceded
+				leaderboardHomeTeam.setGoals_conceded(leaderboardHomeTeam.getGoals_conceded() + awayScore);
+				leaderboardAwayTeam.setGoals_conceded(leaderboardAwayTeam.getGoals_conceded() + homeScore);
+				// goal_difference
+				leaderboardHomeTeam.setGoals_difference(leaderboardHomeTeam.getGoals_scored() - leaderboardHomeTeam.getGoals_conceded());
+				leaderboardAwayTeam.setGoals_difference(leaderboardAwayTeam.getGoals_scored() - leaderboardAwayTeam.getGoals_conceded());
+				
+				
+				// END Modify the leaderboardTeam record
+				
+				// Merge the leaderboardTeam record
+				emgr.merge(leaderboardHomeTeam);
+				emgr.flush();
+				emgr.merge(leaderboardAwayTeam);
+				emgr.flush();
+				generated = true;
+			} catch (NoResultException nre) {
+				System.err.println("ERROR: Couldn't obtain the leaderboard team object for leaderboard id: " + leaderboardId + " and leagueId: " + leagueId);
+			}
+		} catch (NoResultException nre) {
+			System.err.println("ERROR: Couldn't obtain the leaderboard object for league id: " + leagueId);
+		}
+		return generated;
+	}
+
+	private String generateNewForm(String currentForm, String outcome) {
+		String newForm = "";
+		if (currentForm.equals("0")) {
+			// Overwrite the form, and start without '-' at the beginning 
+			newForm = outcome;
+		} else if (currentForm.contains("-")) { // Contains at least 2 records
+			// split the current form to see how many records there are
+			String[] splitCurrentForm = currentForm.split("-");
+			int length = splitCurrentForm.length;
+			if (length == 5) {
+				// Swap the oldest record with the newest one
+				newForm = outcome + "-" + splitCurrentForm[0] + splitCurrentForm[1] + splitCurrentForm[2] + splitCurrentForm[3];
+			} else {
+				// Keep appending
+				newForm = outcome + "-" + currentForm;
+			}
+			
+			
+		} else {
+			// Cases where there is only 1 record
+			newForm = outcome + "-"  + currentForm;
+			
+		}
+		return newForm;
 	}
 	
 

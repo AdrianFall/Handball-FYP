@@ -6,7 +6,6 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Random;
 
 import javax.persistence.EntityManager;
@@ -14,9 +13,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import org.omg.CORBA.portable.InputStream;
 import org.quartz.JobBuilder;
-import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
 import org.quartz.JobKey;
 import org.quartz.Scheduler;
@@ -28,6 +25,8 @@ import org.springframework.stereotype.Repository;
 
 import af.handball.entity.Captains;
 import af.handball.entity.Contract;
+import af.handball.entity.Leaderboard;
+import af.handball.entity.LeaderboardTeam;
 import af.handball.entity.League;
 import af.handball.entity.Match;
 import af.handball.entity.MatchDay;
@@ -43,7 +42,6 @@ import af.handball.generator.RandomTeamNameGenerator;
 import af.handball.generator.ScheduleGenerator;
 import af.handball.generator.WingGenerator;
 import af.handball.repository.LeagueRepository;
-import af.handball.repository.MatchRepository;
 import af.handball.scheduler.job.MatchJob;
 
 @Component("LeagueRepository")
@@ -99,17 +97,24 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 			System.out
 					.println("No League available was found.. Generating new league with level: "
 							+ teamLevel);
-			// generate a new league, teams and players..
+			// Generate a new league, leaderboard teams and players..
 			League league = new League();
 			league.setAvailable_slots(12);
 			league.setLeague_level(teamLevel);
 			league.setLocked(true);
-
+			
 			try {
 				emgr.persist(league);
 				emgr.flush();
 				league_id = league.getLeague_id();
 				System.out.println("New league persisted with id " + league_id);
+				// XXX generate a new leaderboard
+				Leaderboard leaderboard = new Leaderboard();
+				leaderboard.setLeague_id(league_id);
+				emgr.persist(leaderboard);
+				emgr.flush();
+				System.out.println("CREATED LEADERBOARD WITH ID : " + leaderboard.getLeaderboard_id());
+				
 				// Create 12 new bot teams
 				RandomTeamNameGenerator randomTeamNameGenerator = new RandomTeamNameGenerator(
 						teamLevel);
@@ -134,6 +139,23 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 						emgr.persist(team);
 						emgr.flush();
 						teamId = team.getTeam_id();
+						
+						// XXX Persist the default leaderboard team record
+						LeaderboardTeam leaderboardTeam = new LeaderboardTeam();
+						leaderboardTeam.setLeaderboard_id(leaderboard.getLeaderboard_id());
+						leaderboardTeam.setTeam_id(teamId);
+						leaderboardTeam.setMatches_played(0);
+						leaderboardTeam.setWins(0);
+						leaderboardTeam.setDraws(0);
+						leaderboardTeam.setLoses(0);
+						leaderboardTeam.setGoals_scored(0);
+						leaderboardTeam.setGoals_conceded(0);
+						leaderboardTeam.setGoals_difference(0);
+						leaderboardTeam.setPoints(0);
+						leaderboardTeam.setForm("0");
+						emgr.persist(leaderboardTeam);
+						emgr.flush();
+						System.out.println("LEADERBOARD TEAM ID = " + leaderboardTeam.getLeaderboard_team_id());
 						
 						// Persist the captains roles
 						Captains captains = new Captains();

@@ -21,6 +21,8 @@
 		<class>af.handball.entity.Match</class>
 		<class>af.handball.entity.MatchOutcome</class>
 		<class>af.handball.entity.MatchHighlight</class>
+		<class>af.handball.entity.Leaderboard</class>
+		<class>af.handball.entity.LeaderboardTeam</class>
 		
 		
 		<!-- <properties>
