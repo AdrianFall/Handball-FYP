@@ -36,9 +36,9 @@
 <!-- Fix loading spinner on the button -->
 <button onclick="postClientSideFormationList()" id="saveSquadButton"
 	class="btn btn-info has-spinner"
-	style="position: fixed; display: none; right: 10%; float: right; margin-top: -2%;">
+	style="position: fixed; display: none; right: 10%; float: right; margin-top: -15px">
 	<span id="squadLoad" class="spinner"><i 
-	class="icon-spin icon-refresh"></i></span>Save Squad
+	class="icon-spin refresh icon"></i></span> Save Squad
 </button>
 
 <script type="text/javascript" src="/hb/scripts/squadSettingsNavigation.js"></script>
