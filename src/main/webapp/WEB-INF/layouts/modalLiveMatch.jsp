@@ -336,7 +336,7 @@ function getAllUpdates(currentUpdateNo, numberOfTotalUpdates, attemptNumber) {
 	var updateNumber = currentUpdateNo;
 	/* START FETCHING THE UPDATES till updateNumber+1 == numberOfTotalUpdates */
 	if (updateNumber == (numberOfTotalUpdates+1)) {
-		/* Finished */
+		/* Finished - Match Over */
 		/* TODO - cancel the overlays and overlay something to indicate the match has finished  */
 		/* alert('finished on update number: ' + updateNumber + '. Number of total updates: ' + numberOfTotalUpdates + '.'); */
 		finishGame();

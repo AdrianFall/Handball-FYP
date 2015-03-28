@@ -21,7 +21,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 </head>
-<body id="theBody">
+<body>
 	<script src="/hb/scripts/bootstrap/3.1.1/bootstrap.js"></script>
 
 	<%! /* Session attributes */

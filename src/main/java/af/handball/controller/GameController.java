@@ -144,6 +144,11 @@ public class GameController {
 		return "modalLiveMatch";
 	}
 	
+	@RequestMapping("/leaderboard")
+	public String leaderboard(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		
+		return "leaderboard";
+	}
 	
 	@RequestMapping("/squad")
 	public String squad(HttpServletRequest request, HttpServletResponse response, HttpSession session) {

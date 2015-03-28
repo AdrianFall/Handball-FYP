@@ -46,10 +46,10 @@
 <div id="sidebar" class="ui left vertical inverted labeled icon uncover visible sidebar menu">
    
 	<a class="item"> <i class="home icon"></i> Home</a>
-	<a id="squadHref" class="item"> <i class="edit icon"></i> Formation</a> 
+	<a id="squadHref" class="item"><i id="squadIcon" class="edit icon"></i> Formation</a> 
 	<!-- <a class="item"> <i class="smile icon"></i> Friends</a>  -->
-	<a id="scheduleHref" class="item"> <i class="calendar icon"></i> Schedule</a> 
-	<a class="item"> <i class="trophy icon"></i> Leaderboards</a>
+	<a id="scheduleHref" class="item"> <i id="scheduleIcon" class="calendar icon"></i> Schedule</a> 
+	<a id="leaderboardHref" class="item"> <i id="leaderboardIcon" class="trophy icon"></i> Leaderboards</a>
 	<a class="item"> <i class="mail icon"></i> Inbox TBD</a> 
 	<!-- <a class="item"> <i class="chat icon"></i> Discussions</a>  -->
 	<a class="item"> <i class="shop icon"></i> Auction TBD</a>
@@ -94,12 +94,12 @@
 	</div>
 </div>
 	
-		
-		<div class="container-fluid" id="squadSettings" style="position: absolute; height:70%; padding-left: 10%; padding-right: 10%; width: 100%;"></div>
-		<div class="container-fluid" id="schedule" style="position: absolute; height:70%; padding-left: 10%; padding-right: 10%; width: 100%;"></div>
+<div class="container-fluid" id="squadSettings" style="position: absolute; height:70%; padding-left: 10%; padding-right: 10%; width: 100%;"></div>
+<div class="container-fluid" id="schedule" style="position: absolute; height:70%; padding-left: 10%; padding-right: 10%; width: 100%;"></div>
+<div class="container-fluid" id="leaderboard" style="position: absolute; height:70%; padding-left: 10%; padding-right: 10%; width: 100%;"></div>
 
-	
-	
-		<!-- Register the navigation click event handlers  -->
-		<script src="/hb/scripts/game/gameNavigation.js"></script>
+
+
+<!-- Register the navigation click event handlers  -->
+<script src="/hb/scripts/game/gameNavigation.js"></script>
 <% } %>

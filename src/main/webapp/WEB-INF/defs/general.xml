@@ -42,5 +42,10 @@
 		<put-attribute name="body" value="/WEB-INF/layouts/game/squad/body.jsp"/>
 		<put-attribute name="modalSessionExpired" value="/WEB-INF/layouts/modalSessionExpired.jsp"/>
 	</definition>
+	
+	<definition name="leaderboard" template="/WEB-INF/jsp/leaderboard.jsp">
+		<put-attribute name="body" value="/WEB-INF/layouts/game/leaderboard/body.jsp"/>
+		<put-attribute name="modalSessionExpired" value="/WEB-INF/layouts/modalSessionExpired.jsp"/>
+	</definition>
 
 </tiles-definitions>

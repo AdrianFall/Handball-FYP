@@ -126,12 +126,19 @@ function finishGame() {
 	$('#overlay-highlight-right').fadeOut(200);
 	$('#overlay-team-name-right').fadeOut(200);
 	
+	// show box
 	$('#overlay-box').fadeIn(2300, function() {
+		// show text in box
 		$('#overlay-box-text').fadeIn(1100);
 	}); 
-	// show box
+	
+	// Reload the schedule site
+	$.get('schedule.html').success(function(data) {
+			$('#schedule').html('');
+			$('#schedule').html(data);
+	});
+	
 
-	// show text in box
 }
 
 
