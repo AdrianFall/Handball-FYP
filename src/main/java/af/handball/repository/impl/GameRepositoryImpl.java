@@ -380,11 +380,13 @@ public class GameRepositoryImpl implements GameRepository {
 		do {
 			LeaderboardTeam lt = selectionList.get(i);
 			int index = i;
+			int goalDiff = selectionList.get(i).getGoals_difference();
 			// compare the elements ahead
 			for (int j = i+1; j < selectionList.size(); j++) {
-				if (selectionList.get(j).getGoals_difference() > selectionList.get(i).getGoals_difference()) {
+				if (selectionList.get(j).getGoals_difference() > goalDiff) {
 					lt = selectionList.get(j);
 					index = j;
+					goalDiff = selectionList.get(j).getGoals_difference();
 				}
 			}
 			
