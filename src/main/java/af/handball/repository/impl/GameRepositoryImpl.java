@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import af.handball.entity.Captains;
 import af.handball.entity.Contract;
+import af.handball.entity.LeaderboardTeam;
 import af.handball.entity.Match;
 import af.handball.entity.MatchHighlight;
 import af.handball.entity.MatchOutcome;
@@ -299,4 +300,117 @@ public class GameRepositoryImpl implements GameRepository {
 
 		return captainsMap;
 	}
+
+	@Override
+	public Map<String, Object> getLeaderboardTeamMap(int leagueId) {
+		
+		Map<String,Object> leaderboardMap = new HashMap<String,Object>();
+		List<LeaderboardTeam> leaderboardTeamList = new ArrayList<LeaderboardTeam>();
+		
+		
+		TypedQuery<LeaderboardTeam> leaderboardTeamQuery = emgr.createNamedQuery("LeaderboardTeam.getByLeagueId", LeaderboardTeam.class);
+		leaderboardTeamQuery.setParameter("league_id", leagueId);
+		try {
+			// Obtain all leaderboardTeam records
+			leaderboardTeamList = leaderboardTeamQuery.getResultList();
+			System.out.println("Pre-sorting.....................");
+			for (int i = 0; i < leaderboardTeamList.size(); i++)
+				System.out.println("Position (index): " + (i+1) + ". Points: " + leaderboardTeamList.get(i).getPoints() + " Goal Diff: " + leaderboardTeamList.get(i).getGoals_difference());
+			System.out.println("END Pre-sorting.................");
+			// Sort the leaderboard by position
+			leaderboardTeamList = (List<LeaderboardTeam>) sortLeaderboardList(leaderboardTeamList).get("leaderboardList");
+			System.out.println(leaderboardTeamList);
+		} catch (NoResultException nre) {
+			System.err.println("Couldn't obtain leaderboard for league id: " + leagueId);
+		} finally {
+			leaderboardMap.put("leaderboardTeamList", leaderboardTeamList);
+		}
+		
+		
+		
+		return leaderboardMap;
+	}
+
+	private Map<String,Object> sortLeaderboardList(
+			List<LeaderboardTeam> leaderboardTeamList) {
+		Map<String,Object> leaderboardMap = new HashMap<String,Object>();
+		
+		List<LeaderboardTeam> sortedList = new ArrayList<LeaderboardTeam>();
+		List<LeaderboardTeam> positionList = new ArrayList<LeaderboardTeam>(leaderboardTeamList);
+		
+		
+		if (!isLeaderboardTeamListEmpty(leaderboardTeamList)) {
+			int lastPoint = -1;
+			for (int i=0; i<leaderboardTeamList.size(); i++) {
+				int countOccurencesOfSamePointAmount = 0;
+				while (i+countOccurencesOfSamePointAmount < leaderboardTeamList.size() && leaderboardTeamList.get(i).getPoints() == leaderboardTeamList.get(i+countOccurencesOfSamePointAmount).getPoints())  // current iteration ltl has the same points as the next + count record
+					countOccurencesOfSamePointAmount++;
+				if (countOccurencesOfSamePointAmount > 1) {
+					System.out.println(countOccurencesOfSamePointAmount);
+					// compare the goal difference and sort the selection
+					// Obtain the selection
+					List<LeaderboardTeam> selectionList = new ArrayList<LeaderboardTeam>();
+					for (int j = 0; j < countOccurencesOfSamePointAmount; j++) {
+						selectionList.add(leaderboardTeamList.get(i+j));
+					}
+					
+					// END Obtain the selection
+					List<LeaderboardTeam> sortedSelectionList = sortLeaderboardTeamSelection(selectionList);
+					System.out.println("Sorted selection list : " + sortedSelectionList);
+					for (int n = 0;n<sortedSelectionList.size(); n++)
+						sortedList.add(sortedSelectionList.get(n));
+					// increment i (the selection should be added to the sortedList by now)
+					i += countOccurencesOfSamePointAmount-1;
+				} else {
+					sortedList.add(leaderboardTeamList.get(i));
+				}
+				
+					/*if (leaderboardTeamList.get(i).getPoints() == )*/ // next record contains the same point
+			}
+		} else {
+			sortedList = leaderboardTeamList;
+		}
+		leaderboardMap.put("leaderboardList", sortedList);
+		return leaderboardMap;
+	}
+	
+	private List<LeaderboardTeam> sortLeaderboardTeamSelection(List<LeaderboardTeam> selectionList) {
+		List<LeaderboardTeam> newList = new ArrayList<LeaderboardTeam>();
+		int i = 0;
+		do {
+			LeaderboardTeam lt = selectionList.get(i);
+			int index = i;
+			// compare the elements ahead
+			for (int j = i+1; j < selectionList.size(); j++) {
+				if (selectionList.get(j).getGoals_difference() > selectionList.get(i).getGoals_difference()) {
+					lt = selectionList.get(j);
+					index = j;
+				}
+			}
+			
+			// remove
+			newList.add(lt);
+			selectionList.remove(index);
+			
+			
+		} while (!selectionList.isEmpty());
+		
+		return newList;
+	}
+
+	
+
+	// Empty - meaning all records contain no entry yet
+	private boolean isLeaderboardTeamListEmpty(List<LeaderboardTeam> leaderboardTeamList) {
+		boolean isEmpty = true;
+		
+		for (LeaderboardTeam lt : leaderboardTeamList) {
+			if (lt.getPoints() != 0) 
+				isEmpty = false;
+		}
+		
+		return isEmpty;
+	}
+	
+	
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import af.handball.entity.Contract;
+import af.handball.entity.LeaderboardTeam;
 import af.handball.entity.Match;
 import af.handball.entity.MatchHighlight;
 import af.handball.entity.Player;
@@ -38,6 +39,8 @@ public interface GameRepository
 	void deleteMatchHighlights(int matchId);
 
 	MatchHighlight getMatchHighlightByUpdateNumber(int matchId, int updateNumber);
+
+	Map<String,Object> getLeaderboardTeamMap(int leagueId);
 
 	
 

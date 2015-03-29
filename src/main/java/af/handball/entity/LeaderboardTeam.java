@@ -14,7 +14,8 @@ import javax.persistence.Table;
 @Table(name = "leaderboard_team")
 @NamedQueries({
 
-  @NamedQuery(name = "LeaderboardTeam.getByLeaderboardIdAndTeamId", query = "SELECT lt FROM LeaderboardTeam lt WHERE lt.leaderboard_id = :leaderboard_id AND lt.team_id = :team_id")
+  @NamedQuery(name = "LeaderboardTeam.getByLeaderboardIdAndTeamId", query = "SELECT lt FROM LeaderboardTeam lt WHERE lt.leaderboard_id = :leaderboard_id AND lt.team_id = :team_id"),
+  @NamedQuery(name = "LeaderboardTeam.getByLeagueId", query = "SELECT lt FROM LeaderboardTeam lt, Leaderboard l WHERE l.leaderboard_id = lt.leaderboard_id AND l.league_id = :league_id ORDER BY lt.points DESC")
  
  
 

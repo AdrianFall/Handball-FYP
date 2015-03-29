@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import af.handball.entity.LeaderboardTeam;
 import af.handball.entity.Match;
 import af.handball.entity.MatchHighlight;
 import af.handball.entity.MatchOutcome;
@@ -146,6 +147,15 @@ public class GameController {
 	
 	@RequestMapping("/leaderboard")
 	public String leaderboard(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		int leagueId = (Integer) session.getAttribute("leagueId");
+		
+		// Obtain the leaderboard list
+		Map<String,Object> leaderboardMap = gameService.getLeaderboardTeamMap(leagueId);
+		// get the leaderboardTeamList
+		List<LeaderboardTeam> leaderboardTeamList = (List<LeaderboardTeam>) leaderboardMap.get("leaderboardTeamList");
+		for (int i = 0; i < leaderboardTeamList.size(); i++) 
+			System.out.println("Position (index): " + (i+1) + ". Points: " + leaderboardTeamList.get(i).getPoints() + " Goal Diff: " + leaderboardTeamList.get(i).getGoals_difference());
+		
 		
 		return "leaderboard";
 	}

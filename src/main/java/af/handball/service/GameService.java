@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import af.handball.entity.Contract;
+import af.handball.entity.LeaderboardTeam;
 import af.handball.entity.Match;
 import af.handball.entity.MatchHighlight;
 import af.handball.entity.Player;
@@ -67,6 +68,10 @@ public class GameService {
 
 	public Match getMatchById(int matchId) {
 		return gameRepository.getMatchById(matchId);
+	}
+
+	public Map<String,Object> getLeaderboardTeamMap(int leagueId) {
+		return gameRepository.getLeaderboardTeamMap(leagueId);
 	}
 	
 	
