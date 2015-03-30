@@ -6,6 +6,7 @@
 <%!private String email;
    private String teamName;
    private List<LeaderboardTeam> leaderboardTeamList;
+   private List<String> teamNameList;
    %>
 	
 
@@ -21,9 +22,10 @@
 </script>
 
 <% } else { %>
-	<% leaderboardTeamList = (List<LeaderboardTeam>) request.getAttribute("leaderboardTeamList");%>
+	<% leaderboardTeamList = (List<LeaderboardTeam>) request.getAttribute("leaderboardTeamList");
+	   teamNameList = (List<String>) request.getAttribute("teamNameList");%>
 	<% for (int i = 0; i < leaderboardTeamList.size(); i++) {
-		out.println("Position " + (i+1) + " team id: " + leaderboardTeamList.get(i).getTeam_name() + " <br>");
+		out.println("Position " + (i+1) + " team name: " + teamNameList.get(i) + " <br>");
 	}%>
 	
 <% } // END else (email != null) %>

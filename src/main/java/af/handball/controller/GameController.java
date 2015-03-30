@@ -165,10 +165,12 @@ public class GameController {
 			Map<String,Object> leaderboardMap = gameService.getLeaderboardTeamMap(leagueId);
 			// get the leaderboardTeamList
 			List<LeaderboardTeam> leaderboardTeamList = (List<LeaderboardTeam>) leaderboardMap.get("leaderboardTeamList");
+			List<String> teamNameList = (List<String>) leaderboardMap.get("teamNameList");
 			for (int i = 0; i < leaderboardTeamList.size(); i++) 
 				System.out.println("Position (index): " + (i+1) + ". Points: " + leaderboardTeamList.get(i).getPoints() + " Goal Diff: " + leaderboardTeamList.get(i).getGoals_difference());
 			
 			request.setAttribute("leaderboardTeamList", leaderboardTeamList);
+			request.setAttribute("teamNameList", teamNameList);
 		} catch (Exception e) {
 			returnPage = "sessionExpired";
 		}

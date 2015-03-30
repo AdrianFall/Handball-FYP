@@ -317,9 +317,15 @@ public class GameRepositoryImpl implements GameRepository {
 			for (int i = 0; i < leaderboardTeamList.size(); i++)
 				System.out.println("Position (index): " + (i+1) + ". Points: " + leaderboardTeamList.get(i).getPoints() + " Goal Diff: " + leaderboardTeamList.get(i).getGoals_difference());
 			System.out.println("END Pre-sorting.................");
-			// Sort the leaderboard by position
+			// Sorts the leaderboard by position
 			leaderboardTeamList = (List<LeaderboardTeam>) sortLeaderboardList(leaderboardTeamList).get("leaderboardList");
-			System.out.println(leaderboardTeamList);
+			// Create team name list
+			List<String> teamNameList = new ArrayList<String>();
+			for (int j = 0; j < leaderboardTeamList.size(); j++) {
+				Team team = emgr.find(Team.class, leaderboardTeamList.get(j).getTeam_id());
+				teamNameList.add(team.getTeam_name());
+			}
+			leaderboardMap.put("teamNameList", teamNameList);
 		} catch (NoResultException nre) {
 			System.err.println("Couldn't obtain leaderboard for league id: " + leagueId);
 		} finally {
