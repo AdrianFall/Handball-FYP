@@ -96,9 +96,6 @@
 		}); /* END on('finish.countdown') */
 	
  	function startMatch() {
-		alert('startMatch function');
-		
-		
 			$('#modalLiveMatch').modal('show'); 
 		
 	} /* END function startMatch() */

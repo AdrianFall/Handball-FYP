@@ -132,10 +132,29 @@ function finishGame() {
 		$('#overlay-box-text').fadeIn(1100);
 	}); 
 	
-	// Reload the schedule site
+	var loadingAnimationClass = 'icon-spin refresh icon';
+	
+	var scheduleIconClass = $('#scheduleIcon').attr('class');
+	var leaderboardIconClass = $('#leaderboardIcon').attr('class');
+	
+	// Swap the current icon classes with loading animation
+	$('#scheduleIcon').removeClass(scheduleIconClass).addClass(loadingAnimationClass);
+	$('#leaderboardIcon').removeClass(leaderboardIconClass).addClass(loadingAnimationClass);
+	
+	// Reload the pages
 	$.get('schedule.html').success(function(data) {
-			$('#schedule').html('');
-			$('#schedule').html(data);
+			// Swap the loading animation of scheduleIcon with its previous class
+			$('#scheduleIcon').removeClass(loadingAnimationClass).addClass(scheduleIconClass);
+	
+			$('#schedule').html('').html(data);
+			
+			// Reload the leaderboards site
+			$.get('leaderboard.html').success(function(data) {
+				// Swap the loading animation of leaderboardIcon with its previous class
+				$('#leaderboardIcon').removeClass(loadingAnimationClass).addClass(leaderboardIconClass);
+			
+				$('#leaderboard').html('').html(data);
+			});
 	});
 	
 
