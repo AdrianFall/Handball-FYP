@@ -3,6 +3,7 @@ function postClientSideFormationList() {
 	// Set the button not clickable and add class for spinner
 	$('#saveSquadButton').attr('onclick', '');
 	$('#saveSquadButton').toggleClass('active');
+	$('#saveSquadButtonIcon').addClass('icon-spin refresh icon');
 	
 	var squadTable = document.getElementById('squadTable');
 	var playerIdList = [];
@@ -66,14 +67,16 @@ function postClientSideFormationList() {
 		var parsedDataJSON = $.parseJSON(data);
 		if (parsedDataJSON.status == "OK") {
 
-			alert('OK');
 			// TODO Set the button to clickable
 			$('#saveSquadButton').attr('onclick', 'postClientSideFormationList()');
 			$('#saveSquadButton').toggleClass('');
 
 
-			// TODO Animate the button to be hidden
-			$('#saveSquadButton').fadeOut(2000);
+			//  Animate the button to be hidden
+			$('#saveSquadButton').fadeOut(2000, function() {
+				$('#saveSquadButtonIcon').removeClass('icon-spin refresh icon');
+			});
+			
 
 			
 		} else if (parsedDataJSON.status == "sessionExpired") {
