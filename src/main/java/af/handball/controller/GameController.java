@@ -106,6 +106,11 @@ public class GameController {
 		return returnPage;
 	}
 	
+	@RequestMapping("/sessionExpired") 
+	public String sessionExpired(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		return "sessionExpired";
+	}
+	
 	@RequestMapping("/modalLiveMatch")
 	public String modalLiveMatch(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		String returnPage = "modalLiveMatch";

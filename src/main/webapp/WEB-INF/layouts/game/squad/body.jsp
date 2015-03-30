@@ -23,7 +23,7 @@
 %>
 
 <script>
-	$("#modalSessionExpired").modal('show');
+	$("#modalSessionExpired").bsModal('show');
 </script>
 
 <% } else {
@@ -42,6 +42,36 @@
 
 <script type="text/javascript" src="/hb/scripts/squadSettingsNavigation.js"></script>
 <br>
+<!-- Modal Semantic-UI -->
+        <div id="modal_semantic" class="ui basic test modal transition hidden" style="margin-top: -20px;">
+    <div class="header">
+      Swap Player
+    </div>
+    <div class="content">
+      <div class="image">
+        <i class="retweet icon"></i>
+      </div>
+      <div class="description">
+      	<p>You are about to swap the following players:</p>
+      	
+      	<b id="dragged_player"></b> with <b id="dropped_player"></b> 
+      	
+        <p>Are you sure you want to swap the player?</p>
+      </div>
+    </div>
+    <div class="actions">
+      <div class="two fluid ui inverted buttons">
+        <div class="ui red basic cancel inverted button">
+          <i class="remove icon"></i>
+          No
+        </div>
+        <div class="ui green ok basic inverted button">
+          <i class="checkmark icon"></i>
+          Yes
+        </div>
+      </div>
+    </div>
+  </div>
 <div>
 	<div
 		style="position: absolute; width: 40%; left: 8.8%; float: left;">
@@ -630,7 +660,7 @@ $('#fsqp_td<%=i%> div').slideUp(
 			  
 			 
 			  $("#modalPlayerDetails")
-				.modal(
+				.bsModal(
 						'show');
 			  
 			  
@@ -703,7 +733,7 @@ $('#fsqp_td<%=i%> div').slideUp(
 			  
 			 
 			  $("#modalPlayerDetails")
-				.modal(
+				.bsModal(
 						'show');
 			  
 				
@@ -778,7 +808,7 @@ $('#fsqp_td<%=i%> div').slideUp(
 		            playerId: $('#rp_id<%=i%>').text()
 		};
 
-		$("#modalPlayerDetails").modal('show');
+		$("#modalPlayerDetails").bsModal('show');
 
 		$('#clubName').text(rp_player.teamName);
 		$('#playerName').text(rp_player.playerName);

@@ -1,4 +1,5 @@
-
+	
+	
 	/* START droppable */
 	$('.droppablePitchTable').droppable({
 		drop : handlePitchTableUIDropEvent
@@ -11,13 +12,55 @@
 	
 	
 	function handleSquadTableUIDropEvent(event, ui) {
-		alert(this.id);
-		var splitDroppableId = this.id.split("tr");
+		var trId = this.id;
+		
+		var splitDroppableId = trId.split("tr");
 		var droppableAttributeType = splitDroppableId[0];
 		var droppableAttributeIndex = splitDroppableId[1];
 		
 		var draggable = ui.draggable;
 		var draggableAttribute = draggable.attr('id');
+		alert(draggableAttribute);
+		var splitDraggableAttribute = draggableAttribute.split("tr");
+		var draggableAttributeType = splitDraggableAttribute[0];
+		var draggableAttributeIndex = splitDraggableAttribute[1];
+		
+		
+		// obtain the dragged player name
+		var dragged_player_name = $('#' + $.trim(draggableAttributeType)  + 'name' + $.trim(draggableAttributeIndex)).html();
+		$('#dragged_player').html(dragged_player_name);
+		// obtain the dropped swapped name
+		var dropped_player_name = $('#' + $.trim(droppableAttributeType) + 'name' + $.trim(droppableAttributeIndex)).html();
+		$('#dropped_player').html(dropped_player_name)
+
+		
+		$('#modal_semantic')
+		  .modal({
+		    closable  : false,
+		    onDeny    : function(){
+		      //do nothing
+		    },
+		    onApprove : function() {
+		    	performSwapOnSquadTable(trId, event,ui);
+		    }
+		  })
+		  .modal('show')
+		;
+		
+		
+		
+	}
+	
+	function performSwapOnSquadTable(id, event, ui) {
+		
+		
+		var splitDroppableId = id.split("tr");
+		var droppableAttributeType = splitDroppableId[0];
+		var droppableAttributeIndex = splitDroppableId[1];
+		
+		var draggable = ui.draggable;
+		var draggableAttribute = draggable.attr('id');
+		alert(draggableAttribute);
 		var splitDraggableAttribute = draggableAttribute.split("tr");
 		var draggableAttributeType = splitDraggableAttribute[0];
 		var draggableAttributeIndex = splitDraggableAttribute[1];
@@ -45,6 +88,7 @@
 		$('#' + draggableAttributeType + 'td' + draggableAttributeIndex + ' div').slideDown('slow');
 		 $('#' + droppableAttributeType + 'td' + droppableAttributeIndex + ' div').slideDown('slow'); 
 	}
+	
 	
 	// Performs (if needed) a swap in the shirt numbers on the pitch table
 	function performPitchTableChangeOnShirtNumbers(textElementIdentifier, draggableAttributeType, draggableAttributeIndex, droppableAttributeType, droppableAttributeIndex) {
@@ -123,7 +167,7 @@
 	}
 
 	function handlePitchTableUIDropEvent(event, ui) {
-		
+
 		alert(this.id);
 		var draggable = ui.draggable;
 		var draggableAttribute = draggable.attr('id');

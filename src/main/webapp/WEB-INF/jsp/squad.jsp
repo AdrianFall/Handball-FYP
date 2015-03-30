@@ -23,7 +23,7 @@
 </head>
 <body>
 	<script src="/hb/scripts/bootstrap/3.1.1/bootstrap.js"></script>
-
+	<script src="/hb/scripts/conflict.js"></script>
 	<%! /* Session attributes */
 		private String email;%>
 
