@@ -16,10 +16,8 @@
 	teamName = (String) session.getAttribute("teamName");
 	if (email == null) {
 %>
-
-<script>
-	$("#modalSessionExpired").modal('show');
-</script>
+<script src="/hb/scripts/conflict.js"></script>
+<script>$("#modalSessionExpired").hbModal('show');</script>
 
 <% } else { %>
 	<% leaderboardTeamList = (List<LeaderboardTeam>) request.getAttribute("leaderboardTeamList");

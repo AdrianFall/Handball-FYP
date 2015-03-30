@@ -20,7 +20,7 @@
 		
 		var draggable = ui.draggable;
 		var draggableAttribute = draggable.attr('id');
-		alert(draggableAttribute);
+		
 		var splitDraggableAttribute = draggableAttribute.split("tr");
 		var draggableAttributeType = splitDraggableAttribute[0];
 		var draggableAttributeIndex = splitDraggableAttribute[1];
@@ -36,16 +36,14 @@
 		
 		$('#modal_semantic')
 		  .modal({
-		    closable  : false,
+		    closable  : true,
 		    onDeny    : function(){
 		      //do nothing
 		    },
 		    onApprove : function() {
 		    	performSwapOnSquadTable(trId, event,ui);
 		    }
-		  })
-		  .modal('show')
-		;
+		  }).modal('show');
 		
 		
 		
@@ -60,7 +58,7 @@
 		
 		var draggable = ui.draggable;
 		var draggableAttribute = draggable.attr('id');
-		alert(draggableAttribute);
+		
 		var splitDraggableAttribute = draggableAttribute.split("tr");
 		var draggableAttributeType = splitDraggableAttribute[0];
 		var draggableAttributeIndex = splitDraggableAttribute[1];
@@ -168,66 +166,76 @@
 
 	function handlePitchTableUIDropEvent(event, ui) {
 
-		alert(this.id);
-		var draggable = ui.draggable;
-		var draggableAttribute = draggable.attr('id');
-		var splitDraggableAttribute = draggableAttribute.split("tr");
-		var draggableAttributeType = splitDraggableAttribute[0];
-		var draggableAttributeIndex = splitDraggableAttribute[1];
-		
-		var fieldPlayerNumber = $('#' + this.id).text();
-		
-		// Obtain the player number and figure out which table tr/td holds the player number record
-		
-		var trNode;
-		var splitTrNode;
-		
-		try {
-			// Try obtaining the trNode from first squad player row
-			trNode = $('#fsqp_pn' + $.trim(fieldPlayerNumber)).parent().parent().parent();
-			splitTrNode = trNode.attr('id').split("tr");
-		} catch (e) {
-			
-			try {
-				trNode = $('#bp_pn' + $.trim(fieldPlayerNumber)).parent().parent().parent();
-				splitTrNode = trNode.attr('id').split("tr");
-			} catch (e) {
+		var trId = this.id;
+		$('#modal_semantic')
+		  .modal({
+		    closable  : true,
+		    onDeny    : function(){
+		      //do nothing
+		    },
+		    onApprove : function() {
+		    	var draggable = ui.draggable;
+				var draggableAttribute = draggable.attr('id');
+				var splitDraggableAttribute = draggableAttribute.split("tr");
+				var draggableAttributeType = splitDraggableAttribute[0];
+				var draggableAttributeIndex = splitDraggableAttribute[1];
 				
-				trNode = $('#rp_pn' + $.trim(fieldPlayerNumber)).parent().parent().parent();
-				splitTrNode = trNode.attr('id').split("tr");
-			}
-		}
-		/* var trNode = $('#fsqp_pn' + $.trim(fieldPlayerNumber)).parent().parent().parent(); */
-		
-		/* var fsqp = document.getElementById('fsqp_pn' + fieldPlayerNumber); */
-		
-		
-		 /* var splitTrNode = trNode.attr('id').split("tr");  */
-		 var trType = splitTrNode[0];
-		var trIndex = splitTrNode[1];
-		
+				var fieldPlayerNumber = $('#' + trId).text();
+				
+				// Obtain the player number and figure out which table tr/td holds the player number record
+				
+				var trNode;
+				var splitTrNode;
+				
+				try {
+					// Try obtaining the trNode from first squad player row
+					trNode = $('#fsqp_pn' + $.trim(fieldPlayerNumber)).parent().parent().parent();
+					splitTrNode = trNode.attr('id').split("tr");
+				} catch (e) {
+					
+					try {
+						trNode = $('#bp_pn' + $.trim(fieldPlayerNumber)).parent().parent().parent();
+						splitTrNode = trNode.attr('id').split("tr");
+					} catch (e) {
+						
+						trNode = $('#rp_pn' + $.trim(fieldPlayerNumber)).parent().parent().parent();
+						splitTrNode = trNode.attr('id').split("tr");
+					}
+				}
+				/* var trNode = $('#fsqp_pn' + $.trim(fieldPlayerNumber)).parent().parent().parent(); */
+				
+				/* var fsqp = document.getElementById('fsqp_pn' + fieldPlayerNumber); */
+				
+				
+				 /* var splitTrNode = trNode.attr('id').split("tr");  */
+				 var trType = splitTrNode[0];
+				var trIndex = splitTrNode[1];
+				
 
-		
-		// Animate the slide up of the interchanged rows
-		 $('#' + draggableAttributeType + 'td' + draggableAttributeIndex + ' div').slideUp('slow');
-		 $('#' + trType + 'td' + trIndex + ' div').slideUp('slow');
-	
-		 swapPlayerDetailsOnSquadTableCells('number', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
-			swapPlayerDetailsOnSquadTableCells('position', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
-			swapPlayerDetailsOnSquadTableCells('name', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
-			swapPlayerDetailsOnSquadTableCells('marketValue', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
-			swapPlayerDetailsOnSquadTableCells('age', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
-			swapPlayerDetailsOnSquadTableCells('form', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
-			swapPlayerDetailsOnSquadTableCells('id', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
-			swapPlayerDetailsOnSquadTableCells('quality', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
-
+				
+				// Animate the slide up of the interchanged rows
+				 $('#' + draggableAttributeType + 'td' + draggableAttributeIndex + ' div').slideUp('slow');
+				 $('#' + trType + 'td' + trIndex + ' div').slideUp('slow');
 			
-		
-	 	
-			performPitchTableChangeOnShirtNumbers('h3', draggableAttributeType, draggableAttributeIndex, trType, trIndex);
-		
-		$('#' + draggableAttributeType + 'td' + draggableAttributeIndex + ' div').slideDown('slow');
-		$('#' + trType + 'td' + trIndex + ' div').slideDown('fast');
+				 swapPlayerDetailsOnSquadTableCells('number', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
+					swapPlayerDetailsOnSquadTableCells('position', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
+					swapPlayerDetailsOnSquadTableCells('name', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
+					swapPlayerDetailsOnSquadTableCells('marketValue', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
+					swapPlayerDetailsOnSquadTableCells('age', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
+					swapPlayerDetailsOnSquadTableCells('form', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
+					swapPlayerDetailsOnSquadTableCells('id', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
+					swapPlayerDetailsOnSquadTableCells('quality', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
+
+					
+				
+			 	
+					performPitchTableChangeOnShirtNumbers('h3', draggableAttributeType, draggableAttributeIndex, trType, trIndex);
+				
+				$('#' + draggableAttributeType + 'td' + draggableAttributeIndex + ' div').slideDown('slow');
+				$('#' + trType + 'td' + trIndex + ' div').slideDown('fast');
+				
+		    }
+		  }).modal('show');
 		
 		
 		 

@@ -12,7 +12,7 @@
 	matchOutcomeList = (List<MatchOutcome>) session.getAttribute("matchOutcomeList");
    teamId = (Integer) session.getAttribute("teamId");
    teamName = (String) session.getAttribute("teamName");%>
-
+<script src="/hb/scripts/conflict.js"></script>
 
 <% for (int i = 0; i < matchList.size(); i++) { 
 	if (matchList.get(i).getHome_team() == teamId) { %>
@@ -113,7 +113,7 @@
 	}).done(function (data) {
 		alert('done');
 		$('#modalMatchSpace').html(data);
-		$('#modalMatch').modal('show');  
+		$('#modalMatch').bsModal('show');  
 	});
 } /* END function startMatch() */
 </script>

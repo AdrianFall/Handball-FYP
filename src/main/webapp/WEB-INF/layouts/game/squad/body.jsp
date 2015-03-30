@@ -309,7 +309,7 @@
 
 
 	<table id="pitchTable"
-		style="display: none; background-image: url('/hb/img/handball-pitch-perspective-net.png'); height: 50%; width: 40%; background-size: 100% 100%; background-repeat: no-repeat; border-bottom: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -o-user-select: none; user-select: none; cursor: default; position: fixed; right: 10%;">
+		style="background-image: url('/hb/img/handball-pitch-perspective-net.png'); height: 50%; width: 40%; background-size: 100% 100%; background-repeat: no-repeat; border-bottom: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -o-user-select: none; user-select: none; cursor: default; position: fixed; right: 10%;">
 
 		<tr height="45">
 
@@ -551,7 +551,7 @@
 <!-- END div holding the captains roles -->
 
 
-<div id="autoSubs">
+<div id="autoSubs" style="display:none;">
  <div id="scrollbox-autosubs">
    	<input id="pv_1" class="input-box" placeholder="Primary PV" style="margin-top: 10%;" readonly>
   	

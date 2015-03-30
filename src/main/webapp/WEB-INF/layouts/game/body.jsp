@@ -13,7 +13,8 @@
 <% email = (String) session.getAttribute("email"); 
    teamName = (String) session.getAttribute("teamName"); 
    if (email == null) { %>  
-	<script>$("#modalSessionExpired").modal('show');</script> 
+   	<script src="/hb/scripts/conflict.js"></script>
+	<script>$("#modalSessionExpired").bsModal('show');</script> 
  	<%} else {%>
    
 <!-- Load the page  -->

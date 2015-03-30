@@ -52,6 +52,7 @@
 
 </div>
 
+<script src="/hb/scripts/conflict.js"></script>
 <script type="text/javascript" src="/hb/scripts/jquery.countdown.js"></script>
 <script>
 	//get the current date & time
@@ -96,7 +97,7 @@
 		}); /* END on('finish.countdown') */
 	
  	function startMatch() {
-			$('#modalLiveMatch').modal('show'); 
+			$('#modalLiveMatch').bsModal('show'); 
 		
 	} /* END function startMatch() */
 	
