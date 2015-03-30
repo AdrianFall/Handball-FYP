@@ -22,6 +22,8 @@
 	
 	<definition name="modalLiveMatch" template ="/WEB-INF/layouts/modalLiveMatch.jsp"></definition>
 	
+	<definition name ="sessionExpired" template="/WEB-INF/jsp/sessionExpired.jsp"></definition>
+	
 
 	<definition name="game" template="/WEB-INF/jsp/game.jsp">
 		<put-attribute name="title" value="Handball Manager" />

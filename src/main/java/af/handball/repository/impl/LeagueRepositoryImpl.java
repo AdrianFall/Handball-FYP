@@ -144,6 +144,7 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 						LeaderboardTeam leaderboardTeam = new LeaderboardTeam();
 						leaderboardTeam.setLeaderboard_id(leaderboard.getLeaderboard_id());
 						leaderboardTeam.setTeam_id(teamId);
+						leaderboardTeam.setTeam_name(team.getTeam_name());
 						leaderboardTeam.setMatches_played(0);
 						leaderboardTeam.setWins(0);
 						leaderboardTeam.setDraws(0);

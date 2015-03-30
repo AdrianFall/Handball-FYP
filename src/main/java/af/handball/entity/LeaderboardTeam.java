@@ -44,6 +44,15 @@ public class LeaderboardTeam implements Serializable {
 	private int goals_difference;
 	private int points;
 	private String form;
+	private String team_name;
+	
+	
+	public String getTeam_name() {
+		return team_name;
+	}
+	public void setTeam_name(String team_name) {
+		this.team_name = team_name;
+	}
 	public int getLeaderboard_team_id() {
 		return leaderboard_team_id;
 	}
