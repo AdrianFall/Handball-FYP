@@ -237,13 +237,15 @@ public class MatchRepositoryImpl implements MatchRepository {
 			int actionTimeInt = (int) actionTime;
 			Random random = new Random();
 			if (teamInPosessionOfBall.equals("away")) {
-				// TODO add possession percentage
-				highlight = appendMatchHighlightText(highlight, actionTimeInt, "possession=away;");
+				//  add possession percentage
+				highlight = appendMatchHighlightText(highlight, actionTimeInt, "possession=away:possessionPerc=" + possessionAwayPercentage + ";");
 				if (random.nextInt(100) < awayTeamGoingForwardSuccessionPercentage) { // action
 					// Assess the home team defending - 100% means they have 10% chance to make a block
 					if (random.nextInt(100) <= homeTeamDefendingSuccessionPercentage / 10) { // block types
 						
-						//TODO change possession percentage (for all types of blocks).. decreasing away's and increasing home's by 1
+						// change possession percentage (for all types of blocks).. decreasing away's and increasing home's by 1
+						possessionAwayPercentage -= 1;
+						possessionHomePercentage += 1;
 						
 						/* between penalty and others, such that penalty chance is numberOfPenaltiesLeftr*20 (i.e. 5 left = 100% chance, 4 left = 80% chance)*/
 						int penaltyChance = 100-(penaltiesSoFar*20);
@@ -320,11 +322,13 @@ public class MatchRepositoryImpl implements MatchRepository {
 						
 						
 						teamInPosessionOfBall = "home"; 
-						//TODO add percentage
-						highlight = appendMatchHighlightText(highlight, actionTimeInt, "possession=home;");
+						// add percentage
+						highlight = appendMatchHighlightText(highlight, actionTimeInt, "possession=home:possessionPerc=" + possessionHomePercentage + ";");
 					} else { // goal
 						
-						//TODO change possession percentage. increasing away's and decreasing home's by 1
+						// change possession percentage. increasing away's and decreasing home's by 1
+						possessionAwayPercentage += 1;
+						possessionHomePercentage -= 1;
 						int randomRoll = random.nextInt(100);
 						
 						if (randomRoll < 40) {
@@ -356,25 +360,28 @@ public class MatchRepositoryImpl implements MatchRepository {
 						awayScore++;
 						System.out.println("AWAY TEAM SCORE time: " + actionTime + " minute.");
 						teamInPosessionOfBall = "home";
-						// TODO add percentage
-						highlight = appendMatchHighlightText(highlight, actionTimeInt, "possession=home;");
+						// add percentage
+						highlight = appendMatchHighlightText(highlight, actionTimeInt, "possession=home:possessionPerc=" + possessionHomePercentage + ";");
 					}
 					
 				} else { // No action
-					//TODO change possession percentage.. decreasing away's and increasing home's by 1
+					// change possession percentage.. decreasing away's and increasing home's by 1
+					possessionAwayPercentage -= 1;
+					possessionHomePercentage += 1;
 					teamInPosessionOfBall = "home";
-					// TODO add percentage
-					highlight = appendMatchHighlightText(highlight, actionTimeInt, "possession=home;");
+					// add percentage
+					highlight = appendMatchHighlightText(highlight, actionTimeInt, "possession=home:possessionPerc=" + possessionHomePercentage + ";");
 				}
 			} else if (teamInPosessionOfBall.equals("home")) {
-				// TODO add percentage
-				highlight = appendMatchHighlightText(highlight, actionTimeInt, "possession=home;");
+				// add percentage
+				highlight = appendMatchHighlightText(highlight, actionTimeInt, "possession=home:possessionPerc=" + possessionHomePercentage + ";");
 				if (random.nextInt(100) < homeTeamGoingForwardSuccessionPercentage) { // action
 					// Assess the away team defending - 100% means they have 10% chance to make a block
 					if (random.nextInt(100) <= awayTeamDefendingSucessionPercentage / 10) { // block types
 						
-						//TODO change possession percentage (for all types of blocks).. decreasing home's and increasing away's by 1
-						
+						// change possession percentage (for all types of blocks).. decreasing home's and increasing away's by 1
+						possessionHomePercentage -= 1;
+						possessionAwayPercentage += 1;
 						/* between penalty and others, such that penalty chance is numberOfPenaltiesLeftr*20 (i.e. 5 left = 100% chance, 4 left = 80% chance)*/
 						int penaltyChance = 100-(penaltiesSoFar*20);
 					
@@ -444,11 +451,13 @@ public class MatchRepositoryImpl implements MatchRepository {
 					}
 						
 						teamInPosessionOfBall = "away";
-						// TODO add percentage
-						highlight = appendMatchHighlightText(highlight, actionTimeInt, "possession=away;");
+						//  add percentage
+						highlight = appendMatchHighlightText(highlight, actionTimeInt, "possession=away:possessionPerc=" + possessionAwayPercentage + ";");
 					} else { // goal
 						
-						//TODO change possession percentage.. decreasing away's and increasing home's by 1
+						// change possession percentage.. decreasing away's and increasing home's by 1
+						possessionAwayPercentage -= 1;
+						possessionHomePercentage += 1;
 						
 						int randomRoll = random.nextInt(100);
 						
@@ -480,14 +489,16 @@ public class MatchRepositoryImpl implements MatchRepository {
 						homeScore++;
 						System.out.println("HOME TEAM SCORE time: " + actionTime + " minute.");
 						teamInPosessionOfBall = "away";
-						// TODO add percentage
-						highlight = appendMatchHighlightText(highlight, actionTimeInt, "possession=away;");
+						// add percentage
+						highlight = appendMatchHighlightText(highlight, actionTimeInt, "possession=away:possessionPerc=" + possessionAwayPercentage + ";");
 					}
 				} else { // no action
-					//TODO change possession percentage.. decreasing home's and increasing away's by 1
+					// change possession percentage.. decreasing home's and increasing away's by 1
+					possessionHomePercentage -= 1;
+					possessionAwayPercentage += 1;
 					teamInPosessionOfBall = "away";
-					// TODO add percentage
-					highlight = appendMatchHighlightText(highlight, actionTimeInt, "possession=away;");
+					// add percentage
+					highlight = appendMatchHighlightText(highlight, actionTimeInt, "possession=away:possessionPerc=" + possessionAwayPercentage + ";");
 				}
 			}
 			
