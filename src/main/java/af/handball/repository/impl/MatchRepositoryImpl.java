@@ -81,7 +81,8 @@ public class MatchRepositoryImpl implements MatchRepository {
 	private int actionsPerMatch = 0;
 	private int countNumberOfActions = 0;
 	
-	
+	private int possessionHomePercentage = 50;
+	private int possessionAwayPercentage = 50;
 	
 	
 	
@@ -94,7 +95,7 @@ public class MatchRepositoryImpl implements MatchRepository {
 		try {
 			// Obtain the Match entity
 			Match match = emgr.find(Match.class, matchId);
-			// TODO Obtain the match duration from the match entity
+			// Obtain the match duration from the match entity
 			final int MATCH_DURATION_IN_MINUTES = match.getMatch_duration_in_seconds() / 60;
 			
 			
@@ -236,12 +237,13 @@ public class MatchRepositoryImpl implements MatchRepository {
 			int actionTimeInt = (int) actionTime;
 			Random random = new Random();
 			if (teamInPosessionOfBall.equals("away")) {
+				// TODO add possession percentage
 				highlight = appendMatchHighlightText(highlight, actionTimeInt, "possession=away;");
 				if (random.nextInt(100) < awayTeamGoingForwardSuccessionPercentage) { // action
 					// Assess the home team defending - 100% means they have 10% chance to make a block
-					if (random.nextInt(100) <= homeTeamDefendingSuccessionPercentage / 10) {
+					if (random.nextInt(100) <= homeTeamDefendingSuccessionPercentage / 10) { // block types
 						
-						
+						//TODO change possession percentage (for all types of blocks).. decreasing away's and increasing home's by 1
 						
 						/* between penalty and others, such that penalty chance is numberOfPenaltiesLeftr*20 (i.e. 5 left = 100% chance, 4 left = 80% chance)*/
 						int penaltyChance = 100-(penaltiesSoFar*20);
@@ -252,6 +254,7 @@ public class MatchRepositoryImpl implements MatchRepository {
 						int rollRandom = random.nextInt(100);
 						
 						if (rollRandom < penaltyChance) {
+							
 							// Penalty
 							System.out.println("PENALTY!!!!!!!!!");
 							// penalty 8% chance -> follows that there is  40% chance of 2 minute suspension (i.e. 1 action defense and going forward goes down drastically) from opposing team player
@@ -282,9 +285,9 @@ public class MatchRepositoryImpl implements MatchRepository {
 							// Another types
 							rollRandom = random.nextInt(100);
 							if (rollRandom < 16) {
+							
 								// 8% free kick chance -> follows that there is 5% chance of 2 minute suspension.
 								System.out.println("FREE-KICK!!!!!!");
-								// XXX Get pivot as the free kick taker
 								Player freeKickTaker = awayTeamPlayers.get(6);
 								Player causedByPlayer = randomlySelectCauserOfPenalty(homeTeamPlayers);
 								
@@ -309,6 +312,7 @@ public class MatchRepositoryImpl implements MatchRepository {
 								// 30% save by defence
 								highlight = appendMatchHighlightText(highlight, actionTimeInt, "save=away:from=defense;");
 							} else {
+								//TODO obtain gk name
 								// 54 % save by gk
 								highlight = appendMatchHighlightText(highlight, actionTimeInt, "save=away:from=gk;");
 							}
@@ -316,10 +320,11 @@ public class MatchRepositoryImpl implements MatchRepository {
 						
 						
 						teamInPosessionOfBall = "home"; 
+						//TODO add percentage
 						highlight = appendMatchHighlightText(highlight, actionTimeInt, "possession=home;");
 					} else { // goal
 						
-						
+						//TODO change possession percentage. increasing away's and decreasing home's by 1
 						int randomRoll = random.nextInt(100);
 						
 						if (randomRoll < 40) {
@@ -351,25 +356,31 @@ public class MatchRepositoryImpl implements MatchRepository {
 						awayScore++;
 						System.out.println("AWAY TEAM SCORE time: " + actionTime + " minute.");
 						teamInPosessionOfBall = "home";
+						// TODO add percentage
 						highlight = appendMatchHighlightText(highlight, actionTimeInt, "possession=home;");
 					}
 					
 				} else { // No action
+					//TODO change possession percentage.. decreasing away's and increasing home's by 1
 					teamInPosessionOfBall = "home";
+					// TODO add percentage
 					highlight = appendMatchHighlightText(highlight, actionTimeInt, "possession=home;");
 				}
 			} else if (teamInPosessionOfBall.equals("home")) {
+				// TODO add percentage
 				highlight = appendMatchHighlightText(highlight, actionTimeInt, "possession=home;");
 				if (random.nextInt(100) < homeTeamGoingForwardSuccessionPercentage) { // action
 					// Assess the away team defending - 100% means they have 10% chance to make a block
-					if (random.nextInt(100) <= awayTeamDefendingSucessionPercentage / 10) {
+					if (random.nextInt(100) <= awayTeamDefendingSucessionPercentage / 10) { // block types
+						
+						//TODO change possession percentage (for all types of blocks).. decreasing home's and increasing away's by 1
 						
 						/* between penalty and others, such that penalty chance is numberOfPenaltiesLeftr*20 (i.e. 5 left = 100% chance, 4 left = 80% chance)*/
 						int penaltyChance = 100-(penaltiesSoFar*20);
-						//XXX
+					
 						
 						int rollRandom = random.nextInt(100);
-						// FIXME BACK to 8
+						
 						if (rollRandom < penaltyChance) {
 							System.out.println("PENALTY!!!!!!!!!");
 							// penalty 8% chance -> follows that there is  40% chance of 2 minute suspension (i.e. 1 action defense and going forward goes down drastically) from opposing team player
@@ -401,7 +412,7 @@ public class MatchRepositoryImpl implements MatchRepository {
 							if (rollRandom < 16) {
 							// 16% free kick chance -> follows that there is 5% chance of 2 minute suspension.
 							System.out.println("FREE-KICK!!!!!!");
-							// XXX Get pivot as the free kick taker
+							// Get pivot as the free kick taker
 							Player freeKickTaker = homeTeamPlayers.get(6);
 							Player causedByPlayer = randomlySelectCauserOfPenalty(awayTeamPlayers);
 							
@@ -426,14 +437,19 @@ public class MatchRepositoryImpl implements MatchRepository {
 							// 30% save by defence
 							highlight = appendMatchHighlightText(highlight, actionTimeInt, "save=home:from=defense;");
 						} else {
+							//TODO obtain gk name
 							// 54 % save by gk
 							highlight = appendMatchHighlightText(highlight, actionTimeInt, "save=home:from=gk;");
 						}
 					}
 						
 						teamInPosessionOfBall = "away";
+						// TODO add percentage
 						highlight = appendMatchHighlightText(highlight, actionTimeInt, "possession=away;");
 					} else { // goal
+						
+						//TODO change possession percentage.. decreasing away's and increasing home's by 1
+						
 						int randomRoll = random.nextInt(100);
 						
 						if (randomRoll < 40) {
@@ -464,10 +480,13 @@ public class MatchRepositoryImpl implements MatchRepository {
 						homeScore++;
 						System.out.println("HOME TEAM SCORE time: " + actionTime + " minute.");
 						teamInPosessionOfBall = "away";
+						// TODO add percentage
 						highlight = appendMatchHighlightText(highlight, actionTimeInt, "possession=away;");
 					}
 				} else { // no action
+					//TODO change possession percentage.. decreasing home's and increasing away's by 1
 					teamInPosessionOfBall = "away";
+					// TODO add percentage
 					highlight = appendMatchHighlightText(highlight, actionTimeInt, "possession=away;");
 				}
 			}
@@ -634,7 +653,7 @@ public class MatchRepositoryImpl implements MatchRepository {
 			try {
 				LeaderboardTeam leaderboardHomeTeam = leaderboardHomeTeamQuery.getSingleResult();
 				LeaderboardTeam leaderboardAwayTeam = leaderboardAwayTeamQuery.getSingleResult();
-				//TODO Modify the leaderboardTeam record
+				// Modify the leaderboardTeam record
 				leaderboardHomeTeam.setMatches_played(leaderboardHomeTeam.getMatches_played()+1);
 				leaderboardAwayTeam.setMatches_played(leaderboardAwayTeam.getMatches_played()+1);
 				
