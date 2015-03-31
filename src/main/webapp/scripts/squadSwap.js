@@ -31,7 +31,7 @@
 		$('#dragged_player').html(dragged_player_name);
 		// obtain the dropped swapped name
 		var dropped_player_name = $('#' + $.trim(droppableAttributeType) + 'name' + $.trim(droppableAttributeIndex)).html();
-		$('#dropped_player').html(dropped_player_name)
+		$('#dropped_player').html(dropped_player_name);
 
 		
 		$('#modal_semantic')
@@ -167,6 +167,55 @@
 	function handlePitchTableUIDropEvent(event, ui) {
 
 		var trId = this.id;
+		
+		var dropped_player_name = 'error';
+		if (trId == 'PV') {
+			// fsqp_name6
+			dropped_player_name = $('#fsqp_name6').html();
+		} else if (trId == 'LW') {
+			// fsqp_name1
+			dropped_player_name = $('#fsqp_name1').html();
+		} else if (trId == 'RW') {
+			// fsqp_name2
+			dropped_player_name = $('#fsqp_name2').html();
+		} else if (trId == 'LB') {
+			// fsqp_name5
+			dropped_player_name = $('#fsqp_name5').html();
+		} else if (trId == 'CB') {
+			// fsqp_name3
+			dropped_player_name = $('#fsqp_name3').html();
+		} else if (trId == 'RB') {
+			// fsqp_name4
+			dropped_player_name = $('#fsqp_name4').html();
+		} else if (trId == 'GK') {
+			// fsqp_name0
+			dropped_player_name = $('#fsqp_name0').html();
+		}
+		
+		
+		
+		
+		
+		
+		
+
+//		var splitDroppableId = trId.split("tr");
+//		var droppableAttributeType = splitDroppableId[0];
+//		var droppableAttributeIndex = splitDroppableId[1];
+		
+		var draggable = ui.draggable;
+		var draggableAttribute = draggable.attr('id');
+		
+		var splitDraggableAttribute = draggableAttribute.split("tr");
+		var draggableAttributeType = splitDraggableAttribute[0];
+		var draggableAttributeIndex = splitDraggableAttribute[1];
+		// obtain the dragged player name
+		var dragged_player_name = $('#' + $.trim(draggableAttributeType)  + 'name' + $.trim(draggableAttributeIndex)).html();
+		$('#dragged_player').html(dragged_player_name);
+		// obtain the dropped swapped name
+//		var dropped_player_name = $('#' + $.trim(droppableAttributeType) + 'name' + $.trim(droppableAttributeIndex)).html();
+		$('#dropped_player').html(dropped_player_name);
+
 		$('#modal_semantic')
 		  .modal({
 		    closable  : true,

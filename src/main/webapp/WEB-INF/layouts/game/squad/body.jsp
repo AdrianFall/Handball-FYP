@@ -49,7 +49,7 @@
     </div>
     <div class="content">
       <div class="image">
-        <i class="retweet icon"></i>
+        <i class="retweet icon" style="margin-left: 20px;"></i>
       </div>
       <div class="description">
       	<p>You are about to swap the following players:</p>
