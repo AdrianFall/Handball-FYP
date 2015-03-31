@@ -111,7 +111,7 @@ public class MatchJob implements Job {
 		
 		  Trigger newTrigger = TriggerBuilder
 		    		.newTrigger()
-		    		.withIdentity(trigger.getKey().toString(), "group1")
+		    		/*.withIdentity(trigger.getKey().toString(), "group1")*/
 		    		.startAt(calendar.getTime())
 		    		.forJob(cntxt.getJobDetail().getKey())
 		    		.build();
