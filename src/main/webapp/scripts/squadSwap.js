@@ -42,6 +42,8 @@
 		    },
 		    onApprove : function() {
 		    	performSwapOnSquadTable(trId, event,ui);
+		    	// automatically save the squad changes
+				postClientSideFormationList();
 		    }
 		  }).modal('show');
 		
@@ -267,22 +269,24 @@
 				 $('#' + trType + 'td' + trIndex + ' div').slideUp('slow');
 			
 				 swapPlayerDetailsOnSquadTableCells('number', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
-					swapPlayerDetailsOnSquadTableCells('position', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
-					swapPlayerDetailsOnSquadTableCells('name', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
-					swapPlayerDetailsOnSquadTableCells('marketValue', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
-					swapPlayerDetailsOnSquadTableCells('age', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
-					swapPlayerDetailsOnSquadTableCells('form', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
-					swapPlayerDetailsOnSquadTableCells('id', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
-					swapPlayerDetailsOnSquadTableCells('quality', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
+				swapPlayerDetailsOnSquadTableCells('position', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
+				swapPlayerDetailsOnSquadTableCells('name', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
+				swapPlayerDetailsOnSquadTableCells('marketValue', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
+				swapPlayerDetailsOnSquadTableCells('age', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
+				swapPlayerDetailsOnSquadTableCells('form', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
+				swapPlayerDetailsOnSquadTableCells('id', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
+				swapPlayerDetailsOnSquadTableCells('quality', trType, trIndex, draggableAttributeType, draggableAttributeIndex);
 
 					
 				
 			 	
-					performPitchTableChangeOnShirtNumbers('h3', draggableAttributeType, draggableAttributeIndex, trType, trIndex);
+				performPitchTableChangeOnShirtNumbers('h3', draggableAttributeType, draggableAttributeIndex, trType, trIndex);
 				
 				$('#' + draggableAttributeType + 'td' + draggableAttributeIndex + ' div').slideDown('slow');
 				$('#' + trType + 'td' + trIndex + ' div').slideDown('fast');
 				
+				// automatically save the squad changes
+				postClientSideFormationList();
 		    }
 		  }).modal('show');
 		
