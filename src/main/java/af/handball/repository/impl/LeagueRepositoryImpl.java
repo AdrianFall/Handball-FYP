@@ -121,8 +121,8 @@ public class LeagueRepositoryImpl implements LeagueRepository {
 				String[] teamNames = randomTeamNameGenerator.generateTeams();
 				int moneyMin = 2000000;
 				int moneyMax = 3000000;
-				int fansMin = 100;
-				int fansMax = 160;
+				int fansMin = 10000;
+				int fansMax = 16000;
 				Random randomGenerator = new Random();
 				// Loop to create 12 teams
 				for (int i = 0; i < 12; i++) {

@@ -29,7 +29,7 @@
 <link rel="stylesheet" href="/hb/css/animationLoader.css">
 <link rel="stylesheet" href="/hb/semantic-ui/semantic.css">
 <link rel="stylesheet" href="/hb/css/vertical_timeline_style.css">
-
+<link rel="stylesheet" href="/hb/css/leaderboards/table.css">
 
 
 

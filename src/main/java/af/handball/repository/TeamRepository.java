@@ -2,10 +2,7 @@ package af.handball.repository;
 
 import java.util.ArrayList;
 
-import af.handball.entity.User;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import af.handball.entity.Team;
 
 public interface TeamRepository
 {
@@ -16,7 +13,9 @@ public interface TeamRepository
 	
 	boolean teamExists(String email);
 
-	String getTeam(String email);
+	String getTeamName(String email);
+	
+	Team getTeam(String email);
 
 	int getTeamLevel(String email);
 	

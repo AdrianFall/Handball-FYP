@@ -1,0 +1,47 @@
+.leagueTable {
+	background: none repeat scroll 0 0;
+	font-weight: bold;
+    margin-bottom: 20px;
+    position: relative;
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.leagueTable th {
+	background: none repeat scroll 0 0 #8b95a5;
+    border-bottom: 1px solid #fff;
+    border-right: 1px solid #dfebf2;
+    color: #fff;
+    font-size: 13px;
+    text-align: center;
+    text-transform: uppercase;
+    width: 42px;
+    vertical-align: middle;
+}
+
+.leagueTable tr {
+	height: 30px;
+}
+
+.leagueTable td {
+	font-size: 12px;
+}
+
+.leagueTable tr td {
+	text-align: center;
+	border-bottom: 1px solid #fff;
+    border-right: 1px solid #fff;
+}
+
+.leagueTable tr.accent0 td {
+	background-color: #E6EBF0;
+}
+
+.leagueTable tr.accent1 td {
+	background-color: #c8dceb;
+}
+
+.leagueTable tr.accent2 td {
+	background-color: #edf5fa;
+}

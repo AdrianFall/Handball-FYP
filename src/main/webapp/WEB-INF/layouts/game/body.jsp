@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
-    import="af.handball.entity.Match,af.handball.entity.MatchOutcome, java.util.Map, java.util.List,java.util.ArrayList"%>
+    import="af.handball.entity.Match,af.handball.entity.MatchOutcome,af.handball.entity.Team,java.util.Map, java.util.List,java.util.ArrayList"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%! private String teamName; 
 	private String email;
@@ -8,9 +8,11 @@
 	private List<MatchOutcome> matchOutcomeList;
 	private Map<String, Object> nextMatchMap;
 	private String nextMatchHomeTeamName;
-	private String nextMatchAwayTeamName;%>
+	private String nextMatchAwayTeamName;
+	private Team team;%>
 
 <% email = (String) session.getAttribute("email"); 
+	team = (Team) session.getAttribute("team");
    teamName = (String) session.getAttribute("teamName"); 
    if (email == null) { %>  
    	<script src="/hb/scripts/conflict.js"></script>
@@ -77,15 +79,15 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td><div class="popup" data-content="Transfer Funds"><i class="large dollar icon"></i><strike>15,496,290</strike></div></td>
+							<td><div class="popup" data-content="Transfer Funds"><i class="large dollar icon"></i><%=team.getMoney()%></div></td>
 							<td>&nbsp;</td>
-							<td><div class="ui icon button"><i class="add icon"></i></div></td>
+							<td id="leaguePosition">Position: ...</td>
 						</tr>
 						
 						<tr>
-							<td><div class="popup" data-content="Fans"><i class="large child icon"></i> <strike>12,906</strike></div></td>
+							<td><div class="popup" data-content="Fans"><i class="large child icon"></i><%=team.getFans()%></div></td>
 							<td>&nbsp;</td>
-							<td>Position: 10</td>
+							<td>&nbsp;</td>
 						</tr>
 						
 					</tbody>

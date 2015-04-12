@@ -109,9 +109,30 @@ public class TeamRepositoryImpl implements TeamRepository {
 		
 		return teamId;
 	}
-
+	
 	@Override
-	public String getTeam(String email) {
+	public Team getTeam(String email) {
+		Team team = new Team();
+		TypedQuery<Team> teamQuery = emgr.createNamedQuery(
+				"Team.getTeamByEmail", Team.class);
+		teamQuery.setParameter("email", email);
+		try {
+			team = (Team) teamQuery.getSingleResult();
+
+			if (team != null) {
+				System.out.println("Team exists for user " + email);
+			}
+
+		} catch (NoResultException nre) {
+			// User doesn't have a team yet.
+			System.out.println("Team does not exist for user " + email);
+		}
+		
+		return team;
+	}
+ 
+	@Override
+	public String getTeamName(String email) {
 
 		String teamName = "default";
 

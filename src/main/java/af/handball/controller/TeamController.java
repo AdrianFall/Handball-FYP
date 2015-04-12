@@ -520,9 +520,12 @@ public class TeamController {
 					boolean assigned = teamService.assignTeam(teamId, email,
 							teamName);
 					if (assigned) {
+						session.setAttribute("team", teamService.getTeam(email));
 						session.setAttribute("teamName", teamName);
 						session.setAttribute("teamLevel",
 								teamService.getTeamLevel(email));
+						
+						teamService.getTeam(email);
 						jsonObj.put("teamCreated", "true");
 						session.setAttribute("teamId", teamId);
 						session.setAttribute("leagueId", teamService.getTeamLeagueId(email));

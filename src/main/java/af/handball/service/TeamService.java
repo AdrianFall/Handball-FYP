@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import af.handball.entity.Team;
 import af.handball.repository.LeagueRepository;
 import af.handball.repository.TeamRepository;
 
@@ -54,13 +55,17 @@ public class TeamService {
 		return teamRepository.getTeamId(email);
 	}
 	
+	public Team getTeam(final String email) {
+		return teamRepository.getTeam(email);
+	}
+	
 	public int getTeamLeagueId(final String email) {
 		return teamRepository.getTeamLeagueId(email);
 	}
 	
 	public String getTeamName(final String email) {
 		
-		String teamName = teamRepository.getTeam(email);
+		String teamName = teamRepository.getTeamName(email);
 		return teamName;
 	}
 	
