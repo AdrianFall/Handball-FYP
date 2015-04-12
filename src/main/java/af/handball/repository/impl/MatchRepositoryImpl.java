@@ -366,8 +366,8 @@ public class MatchRepositoryImpl implements MatchRepository {
 					
 				} else { // No action
 					// change possession percentage.. decreasing away's and increasing home's by 1
-					possessionAwayPercentage -= 1;
-					possessionHomePercentage += 1;
+					possessionAwayPercentage -= 2;
+					possessionHomePercentage += 2;
 					teamInPosessionOfBall = "home";
 					// add percentage
 					highlight = appendMatchHighlightText(highlight, actionTimeInt, "possession=home:possessionPerc=" + possessionHomePercentage + ";");
@@ -494,8 +494,8 @@ public class MatchRepositoryImpl implements MatchRepository {
 					}
 				} else { // no action
 					// change possession percentage.. decreasing home's and increasing away's by 1
-					possessionHomePercentage -= 1;
-					possessionAwayPercentage += 1;
+					possessionHomePercentage -= 2;
+					possessionAwayPercentage += 2;
 					teamInPosessionOfBall = "away";
 					// add percentage
 					highlight = appendMatchHighlightText(highlight, actionTimeInt, "possession=away:possessionPerc=" + possessionAwayPercentage + ";");

@@ -74,14 +74,13 @@
 												}),
 												contentType : "application/json; charset=UTF-8",
 												success : function(data) {
-													alert('Data: ' + data);
 													var parsedDataJSON = $
 															.parseJSON(data);
 													if (parsedDataJSON.status == "OK") {
-														alert('status OK');
+														
 														
 														if (parsedDataJSON.teamCreated == "true") {
-															alert ('TEAM PERSISTED');
+															alert ('Team Created');
 															// Hide the modal
 															$("#createNewTeamModal")
 																	.modal(

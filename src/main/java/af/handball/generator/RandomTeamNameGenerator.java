@@ -13,7 +13,7 @@ public class RandomTeamNameGenerator {
 
 	private int leagueLevel;
 	private BufferedReader br;
-	private ArrayList<String> generatedRandomNumbersList;
+	private ArrayList<Integer> generatedRandomNumbersList;
 
 	public RandomTeamNameGenerator(int leagueLevel) {
 		this.leagueLevel = leagueLevel;
@@ -32,7 +32,6 @@ public class RandomTeamNameGenerator {
 	}
 	
 	public String[] generateTeams() {
-		boolean generated = false;
 		String[] generatedTeamNames = new String[12]; 
 		if (br != null) {
 			String allTeamNames;
@@ -46,7 +45,7 @@ public class RandomTeamNameGenerator {
 				
 				
 				// Array list to keep track of generated random numbers
-				generatedRandomNumbersList = new ArrayList<String>();
+				generatedRandomNumbersList = new ArrayList<Integer>();
 				
 				Random randomGenerator = new Random();
 				for (int i = 0; i < 12; i++) {
@@ -62,6 +61,8 @@ public class RandomTeamNameGenerator {
 						teamNameAlreadyExists = checkTeamNameRepetition(randomInt);
 					}
 					generatedTeamNames[i] = splitTeamNames[randomInt];
+					generatedRandomNumbersList.add(randomInt);
+					//generatedRandomNumbersList.add(randomInt);
 					
 				}
 				
