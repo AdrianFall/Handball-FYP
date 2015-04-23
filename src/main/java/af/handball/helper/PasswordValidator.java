@@ -19,6 +19,12 @@ public class PasswordValidator {
 	
 	private Pattern pattern;
 	private Matcher matcher;
+
+	private boolean isAtLeastSixChars;
+	private boolean containsAtLeastOneDigit = false;
+	private boolean containsAtLeastOneLowerAlphaChar = false;
+	private boolean containsBlankSpace = false;
+	
 	
 	public PasswordValidator() {
 		pattern = Pattern.compile(PASS_PATTERN);
@@ -27,6 +33,47 @@ public class PasswordValidator {
 	public boolean validate(final String pass) {
 		
 		matcher = pattern.matcher(pass);
-		return matcher.matches();
+		boolean matches = matcher.matches();
+		
+		// Upon invalid password, call a method to figure out which specific parts of the regex have set the password to invalid.
+		if (!matches)
+			processValidationError(pass);
+		
+		return matches;
+	}
+
+	/**
+	 * a method to figure out which specific parts of the regex have set the password to invalid.
+	 * @param pass - the password
+	 */
+	private void processValidationError(String pass) {
+		// Is at least 6 chars
+		if (pass.length() >= 6)
+			isAtLeastSixChars = true;
+		// At least one digit
+		if (Pattern.compile(("[0-9]")).matcher(pass).find())
+			containsAtLeastOneDigit = true;
+		// At least one lower alpha char
+		if (Pattern.compile("[a-z]").matcher(pass).find())
+			containsAtLeastOneLowerAlphaChar = true;
+		// Does not contain a blank space
+		if (pass.contains(" "))
+			containsBlankSpace = true;
+	}
+
+	public boolean isAtLeastSixChars() {
+		return isAtLeastSixChars;
+	}
+
+	public boolean isContainsAtLeastOneDigit() {
+		return containsAtLeastOneDigit;
+	}
+
+	public boolean isContainsAtLeastOneLowerAlphaChar() {
+		return containsAtLeastOneLowerAlphaChar;
+	}
+
+	public boolean isContainsBlankSpace() {
+		return containsBlankSpace;
 	}
 }

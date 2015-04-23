@@ -53,13 +53,18 @@ public class RegistrationController {
 		} else if (!emailValidated) {
 			success = "fail";
 			failReason = "emailRegex";
-			/*jsonObj.put("success", "fail");
-			jsonObj.put("failReason", "emailRegex");*/
 		} else if (!passwordValidated) {
-			/*jsonObj.put("success", "fail");
-			jsonObj.put("failReason", "passwordRegex");*/
 			success = "fail";
 			failReason = "passwordRegex";
+			// obtain the first specific error in the validation of password
+			if (!passwordValidator.isAtLeastSixChars())
+				jsonObj.put("passwordRegexFailReason", "doesNotContainSixChars");
+			else if (!passwordValidator.isContainsAtLeastOneDigit())
+				jsonObj.put("passwordRegexFailReason", "doesNotContainAtLeastOneDigit");
+			else if (!passwordValidator.isContainsAtLeastOneLowerAlphaChar())
+				jsonObj.put("passwordRegexFailReason", "doesNotContainAtLeastOneLowerAlphaChar");
+			else if (passwordValidator.isContainsBlankSpace())
+				jsonObj.put("passwordRegexFailReason", "doesContainBlankSpace");
 		}
 		
 		
