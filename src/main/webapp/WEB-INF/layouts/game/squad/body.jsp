@@ -77,21 +77,16 @@
 		style="position: absolute; width: 40%; left: 8.8%; float: left;">
 		<!-- TABLE ROW -->
 
-		<table id="squadTable" class="table table-bordered table-hover"
-			style="-webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -o-user-select: none; user-select: none; cursor: default;">
+		<table id="squadTable" class="table table-bordered table-hover table-squad">
 			<thead>
 				<tr class="info">
-					<th class="th" style="text-align: center" title="Player Number">No</th>
-					<th class="th" title="Main position of player"
-						style="text-align: center">Main Position</th>
-					<th class="th" title="Player Name" style="text-align: center">Name</th>
-					<th class="th" title="Player status (injured, red card, etc.)"
-						style="text-align: center">Status</th>
-					<th class="th" title="Special Ability of a player"
-						style="text-align: center">Spec.</th>
-					<th class="th" title="Player Age" style="text-align: center">Age</th>
-					<th class="th" title="Overall quality of a player"
-						style="text-align: center">Qlty</th>
+					<th class="th" title="Player Number">No</th>
+					<th class="th" title="Main position of player">Main Position</th>
+					<th class="th" title="Player Name">Name</th>
+					<th class="th" title="Player status (injured, red card, etc.)">Status</th>
+					<th class="th" title="Special Ability of a player">Spec.</th>
+					<th class="th" title="Player Age">Age</th>
+					<th class="th" title="Overall quality of a player">Qlty</th>
 				</tr>
 			</thead>
 

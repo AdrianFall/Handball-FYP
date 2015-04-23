@@ -66,7 +66,7 @@ public class StartupSettings{
     
     
     properties.setProperty("org.quartz.threadPool.class","org.quartz.simpl.SimpleThreadPool");
-    properties.setProperty("org.quartz.threadPool.threadCount","3");
+    properties.setProperty("org.quartz.threadPool.threadCount","10");
    /* A daemon thread is a thread, that does not prevent the JVM from exiting when the program finishes but the thread is still running. An example for a daemon thread is the garbage collection.*/
    
     /* properties.setProperty("org.quartz.threadPool.makeThreadsDaemons","true");

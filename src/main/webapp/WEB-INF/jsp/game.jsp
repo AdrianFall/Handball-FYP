@@ -16,7 +16,7 @@
 
 <link rel="stylesheet" href="/hb/css/img-fix.css" />
 <link rel="stylesheet" href="/hb/css/metro-title.css" />
-<link rel="stylesheet" href="/hb/css/fonts.css" />
+<link rel="stylesheet" href="/hb/css/squad/table.css" />
 <link rel="stylesheet" href="/hb/css/tables.css" />
 <link rel="stylesheet" href="/hb/css/jquery.animateDialog.css" />
 <link rel="stylesheet" href="/hb/css/jquery.animateDialog.junk.css" />

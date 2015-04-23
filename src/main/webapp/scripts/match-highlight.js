@@ -43,10 +43,10 @@ function processHighlight(highlights) {
 				if (splitHighlights[key].indexOf("penalty=home") > -1) {
 					// For decrementing the time left for displaying the penalty animation
 					
-					setTimeout(displayPenaltyOnRightSide, (countAddedElements * delayInDisplaying), timeRemainingInMs, isGoal, minute);	
+					setTimeout(displayPenaltyOnRightSide, (countAddedElements * delayInDisplaying), timeRemainingInMs, isGoal, minute, penaltyTaker);	
 				} else if (splitHighlights[key].indexOf("penalty=away") > -1) {
 					
-					setTimeout(displayPenaltyOnLeftSide, (countAddedElements * delayInDisplaying), timeRemainingInMs, isGoal, minute);
+					setTimeout(displayPenaltyOnLeftSide, (countAddedElements * delayInDisplaying), timeRemainingInMs, isGoal, minute, penaltyTaker);
 				}
 				countAddedElements += 2;
 			} else if ((splitHighlights[key].indexOf("free-kick=home") > -1) || (splitHighlights[key].indexOf("free-kick=away") > -1)) { /* Free-Kick for home OR away */
@@ -221,7 +221,7 @@ function addGoalRightWithAnimation() {
 	});
 }
 
-function displayPenaltyOnLeftSide(timeLeftInMs, isGoal, minute) {
+function displayPenaltyOnLeftSide(timeLeftInMs, isGoal, minute, penaltyTaker) {
 	// Change the highlight
 	$('#overlay-highlight-right').fadeOut(50, function() {
 		$('#overlay-highlight-right').text('PENALTY');
@@ -248,16 +248,16 @@ function displayPenaltyOnLeftSide(timeLeftInMs, isGoal, minute) {
 										
 										if (isGoal == "true") {
 											addGoalRightWithAnimation();
-											highlight = "OH DAMN IT'S A GOAL (test)";
+											highlight = "It is a goal by " + penaltyTaker + "!!";
 										
 										} else {
-											highlight = "THAT SCUMBAG HAS SAVED IT (test)";
+											highlight = "Incredible save by the goal keeper!";
 										}
 										addRight(minute, 'Penalty', highlight, 'penalty');
 									} else {
 										
 										//Recursively call the method
-										displayPenaltyOnLeftSide(timeLeftInMs-timeTakenInMs, isGoal, minute);
+										displayPenaltyOnLeftSide(timeLeftInMs-timeTakenInMs, isGoal, minute, penaltyTaker);
 									}
 								});
 								
@@ -271,7 +271,7 @@ function displayPenaltyOnLeftSide(timeLeftInMs, isGoal, minute) {
 	}); 
 }
 
-function displayPenaltyOnRightSide(timeLeftInMs, isGoal, minute) {
+function displayPenaltyOnRightSide(timeLeftInMs, isGoal, minute, penaltyTaker) {
 	// Change the highlight
 	$('#overlay-highlight-left').fadeOut(50, function() {
 		$('#overlay-highlight-left').text('PENALTY');
@@ -298,16 +298,16 @@ function displayPenaltyOnRightSide(timeLeftInMs, isGoal, minute) {
 										
 										if (isGoal == "true") {
 											addGoalLeftWithAnimation();
-											highlight = "OH DAMN IT'S A GOAL (test)";
+											highlight = "It is a goal by " + penaltyTaker + "!!";
 										
 										} else {
-											highlight = "THAT SCUMBAG HAS SAVED IT (test)";
+											highlight = "Incredible save by the goal keeper!";
 										}
 										addLeft(minute, 'Penalty', highlight, 'penalty');
 									} else {
 										
 										//Recursively call the method
-										displayPenaltyOnRightSide(timeLeftInMs-timeTakenInMs, isGoal, minute);
+										displayPenaltyOnRightSide(timeLeftInMs-timeTakenInMs, isGoal, minute, penaltyTaker);
 									}
 								});
 								
