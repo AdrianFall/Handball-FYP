@@ -8,13 +8,19 @@
 		<welcome-file>main.html</welcome-file>
 	</welcome-file-list>
 
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:**/src/main/java/META-INF/applicationContext.xml</param-value>
+	</context-param>
 
 	<servlet>
 		<servlet-name>dispatcher</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-
+	
+	
+	
 	<servlet-mapping>
 		<servlet-name>dispatcher</servlet-name>
 		<url-pattern>*.html</url-pattern>

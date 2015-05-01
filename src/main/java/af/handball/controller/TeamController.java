@@ -502,8 +502,10 @@ public class TeamController {
 				jsonObj.put("status", "error");
 			} else if (teamName.trim().length() <= 3) {
 				jsonObj.put("status", "error");
-				jsonObj.put("teamNameError",
-						"The team name must be longer than 3 characters.");
+				jsonObj.put("teamNameError", "The team name must be longer than 3 characters.");
+			} else if (teamName.length() > 35) {
+				jsonObj.put("status", "error");
+				jsonObj.put("teamNameError", "The team name must be no longer than 35 characters.");
 			} else {
 				jsonObj.put("status", "OK");
 				// Create the new team
