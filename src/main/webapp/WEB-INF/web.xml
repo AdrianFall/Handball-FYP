@@ -8,10 +8,10 @@
 		<welcome-file>main.html</welcome-file>
 	</welcome-file-list>
 
-	<context-param>
+	<!-- <context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:**/src/main/java/META-INF/applicationContext.xml</param-value>
-	</context-param>
+	</context-param> -->
 
 	<servlet>
 		<servlet-name>dispatcher</servlet-name>

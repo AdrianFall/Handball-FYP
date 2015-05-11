@@ -4,8 +4,10 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
-	<!-- <context:component-scan base-package="af.handball.controller"></context:component-scan> -->
-	<import resource="classpath:*/applicationContext.xml" />
+	<!-- <import resource="classpath:*/applicationContext.xml" /> -->
+	
+	<context:component-scan base-package="af.handball.controller"></context:component-scan>
+	
 	<bean id="tilesConfigurer"
 		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<property name="definitions">

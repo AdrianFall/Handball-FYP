@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jee="http://www.springframework.org/schema/jee"
 	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xsi:schemaLocation="http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -10,11 +12,22 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
 	
-
+	<context:component-scan base-package="af.handball.*"></context:component-scan>
+	
+	<bean id="testServiceMock" class="af.handball.springmock.MockitoFactoryBean">
+        <constructor-arg value="af.handball.service.TestService" />
+    </bean>
+<!-- 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="url"
+			value="#{ 'jdbc:postgresql://' + 'localhost' + ':' + '5432' + '/handball' }" />
+		<property name="username" value="'#{ 'postgres' }" />
+		<property name="password" value="#{ '003343adaja' }" />
+		<property name="validationQuery" value="SELECT 1"/>
+	</bean> -->
 	<jee:jndi-lookup jndi-name="jdbc/postgresql" id="dataSource"
 		expected-type="javax.sql.DataSource"></jee:jndi-lookup>
-
-
+ 
+	
 
 
 	<bean
@@ -42,7 +55,7 @@
 
 	<!-- <beans profile="prod"> <import resource="database-prod.xml"/> </beans> -->
 
-	<context:component-scan base-package="af.handball"></context:component-scan>
-
-
+	
+	
+	
 </beans>
